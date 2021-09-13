@@ -22,6 +22,7 @@
 * Docker
 * AWS(EC2,S3)
 * MySQL or AWS RDS
+* PHPUnit
 
 ## 機能要件
 * ログイン機能
