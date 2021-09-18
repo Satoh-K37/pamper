@@ -29,7 +29,7 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
 
 - インフラ
   - CircleCi
-  - Docker/docker-compose
+  - Docker 20.10.8/docker-compose 1.29.2
   - nginx
   - MySQL
   - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM)
