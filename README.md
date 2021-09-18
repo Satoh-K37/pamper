@@ -23,15 +23,15 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
   - jQuery
 
 - バックエンド
-  - PHP
+  - PHP 7.4.1-fpm
   - Laravel
   - PHPUnit
 
 - インフラ
   - CircleCi
   - Docker 20.10.8/docker-compose 1.29.2
-  - nginx
-  - MySQL
+  - nginx 1.18-alpine
+  - MySQL 8.0
   - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM)
 
 
