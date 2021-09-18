@@ -19,6 +19,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
 
   web:
+    image: nginx:1.18
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
@@ -30,6 +31,7 @@ services:
       - ./src/:/var/www/html
 
   db:
+    image: mysql:5.7
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
@@ -43,3 +45,14 @@ services:
       TZ: 'Asia/Tokyo'
     volumes:
       - mysql-volume:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=db
+      - PMA_USER=${DB_USERNAME}
+      - PMA_PASSWORD=${DB_PASSWORD}
+    
