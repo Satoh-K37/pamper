@@ -25,6 +25,7 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
 - バックエンド
   - PHP 7.4.1-fpm
   - Laravel
+  - Composer 2.0.14
   - PHPUnit
 
 - インフラ
