@@ -19,12 +19,12 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
 ### 使用技術
 - フロントエンド
   - HTML / CSS / Sass / MDBootstrap
-  - Vue.js
+  - Vue.js 2.6.14
   - jQuery
 
 - バックエンド
   - PHP 7.4.1-fpm
-  - Laravel
+  - Laravel 6.20.1
   - Composer 2.0.14
   - PHPUnit
 
