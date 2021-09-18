@@ -17,25 +17,22 @@
 自分だけのご褒美ご飯を共有するサイトを使うことで新しいご褒美ご飯を知り、食べることができる
 
 ## 使用技術
-* PHP/Laravel
-* HTML/CSS
-* javascript/jQuery/Vue.js
-* Docker
-* AWS(EC2,S3)
-<<<<<<< HEAD
-* MySQL
-=======
-* MySQL or AWS RDS
-* PHPUnit
->>>>>>> 117bf4fae0119977f72754422e3d963619f99785
+- フロントエンド
+  - HTML / CSS / Sass / MDBootstrap
+  - Vue.js
+  - jQuery
 
-## 機能要件
-* ログイン機能
-* CRUD機能
-* 部分検索
-* レスポンシブ対応（Bootstrp）
-* Dockerを使っての環境構築
-* AWSにデプロイ
+- バックエンド
+  - PHP
+  - Laravel
+  - PHPUnit
+
+- インフラ
+  - CircleCi
+  - Docker/docker-compose
+  - nginx
+  - MySQL
+  - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM)
 
 ## 詳細機能
 **アカウント**
