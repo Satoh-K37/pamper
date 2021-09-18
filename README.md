@@ -22,7 +22,12 @@
 * javascript/jQuery/Vue.js
 * Docker
 * AWS(EC2,S3)
+<<<<<<< HEAD
 * MySQL
+=======
+* MySQL or AWS RDS
+* PHPUnit
+>>>>>>> 117bf4fae0119977f72754422e3d963619f99785
 
 ## 機能要件
 * ログイン機能
