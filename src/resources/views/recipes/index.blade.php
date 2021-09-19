@@ -76,6 +76,39 @@
         <div class="card-text">
           {!! nl2br(e( $recipe->content )) !!}
         </div>
+        <div class="card-text">
+          {{ $recipe->serving }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->ingredient }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->seasoning }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->step_content }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->step_content2 }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->step_content3 }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->step_content4 }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->step_content5 }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->step_content6 }}
+        </div>
+        <div class="card-text">
+          {{ $recipe->cooking_point }}
+        </div>
+
+        
+        
       </div>
     </div>
     @endforeach

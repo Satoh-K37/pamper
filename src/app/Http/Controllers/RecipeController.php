@@ -58,4 +58,9 @@ class RecipeController extends Controller
       return redirect()->route('recipes.index');
   }
 
+  public function show(Recipe $recipe)
+  {
+      return view('recipes.show', ['recipe' => $recipe]);
+  }   
+
 }
