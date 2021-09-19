@@ -41,4 +41,15 @@ class RecipeController extends Controller
       return redirect()->route('recipes.index');
   }
 
+  public function edit(Recipe $recipe)
+  {
+      return view('recipes.edit', ['recipe' => $recipe]);    
+  }
+
+  public function update(RecipeRequest $request, Recipe $recipe)
+  {
+      $recipe->fill($request->all())->save();
+      return redirect()->route('recipes.index');
+  }
+
 }
