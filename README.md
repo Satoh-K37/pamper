@@ -80,9 +80,13 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
 |:-:|:-:|
 | users  | 一般ユーザー情報  |
 | admins  | 管理者ユーザー情報  |
-|  relationship | フォロー中/フォロワーのユーザー情報  |
-| articles  | ユーザー投稿の情報  |
+| relationship | フォロー中/フォロワーのユーザー情報  |
+| recipes  | ユーザー投稿の情報  |
 | tags  | ユーザー投稿のタグ情報  |
-| article_tags  | articleとtagsの中間テーブル  |
+| recipes_tags  | recipeとtagsの中間テーブル  |
+| category  | ユーザー投稿のcategory情報  |
+| recipes_category  | recipeとcategoryの中間テーブル  |
 | likes  | 投稿への、いいねの情報  |
 | comments  | ユーザー投稿への、コメントの情報  |
+| notifications  | 投稿やフォローされた際の通知情報を管理する  |
+
