@@ -95,13 +95,13 @@
     </div>
     <div class="card-body pt-0 pb-2 pl-3">
       <div class="card-text">
-        <article-like
+        <recipe-like
           :initial-is-liked-by='@json($recipe->isLikedBy(Auth::user()))'
           :initial-count-likes='@json($recipe->count_likes)'
           :authorized='@json(Auth::check())'
           endpoint="{{ route('recipes.like', ['recipe' => $recipe]) }}"
         >
-        </article-like>
+        </recipe-like>
       </div>
     </div>
 
