@@ -56,7 +56,8 @@ services:
       - PMA_USER=${DB_USERNAME}
       - PMA_PASSWORD=${DB_PASSWORD}
       
-  mail:
+  mailhog:
     image: mailhog/mailhog
     ports:
+      - 1025:1025
       - 8025:8025
