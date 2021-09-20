@@ -46,3 +46,8 @@
   <label>コツ・ポイント</label>
   <input type="text" name="cooking_point" class="form-control" required value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
 </div>
+<div class="form-group">
+  <recipe-tags-input
+  >
+  </recipe-tags-input>
+</div>
