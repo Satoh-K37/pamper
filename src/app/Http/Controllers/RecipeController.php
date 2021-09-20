@@ -53,6 +53,30 @@ class RecipeController extends Controller
   public function show(Recipe $recipe)
   {
       return view('recipes.show', ['recipe' => $recipe]);
-  }   
+  }
+
+  public function like(Request $request, Recipe $recipe)
+  {
+      // レシピモデルと、リクエストを送信したユーザーのユーザーモデルの両者を紐づけるlikesテーブルのレコードが削除される
+      // 先にdetachする理由は重複していいねをしてしまうことを回避するために先に削除してから新規登録を行います。
+      $recipe->likes()->detach($request->user()->id);
+      // レシピモデルと、リクエストを送信したユーザーのユーザーモデルの両者を紐づけるlikesテーブルのレコードが新規登録される
+      $recipe->likes()->attach($request->user()->id);
+
+      return [
+          'id' => $recipe->id,
+          'countLikes' => $recipe->count_likes,
+      ];
+  }
+
+  public function unlike(Request $request, Recipe $recipe)
+  {
+      $recipe->likes()->detach($request->user()->id);
+
+      return [
+          'id' => $recipe->id,
+          'countLikes' => $recipe->count_likes,
+      ];
+  }
 
 }

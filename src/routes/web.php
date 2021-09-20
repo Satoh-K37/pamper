@@ -19,3 +19,7 @@ Auth::routes();
 Route::get('/', 'RecipeController@index')->name('recipes.index'); 
 Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
 Route::resource('/recipes', 'RecipeController')->only(['show']);
+Route::prefix('recipes')->name('recipes.')->group(function () {
+  Route::put('/{recipe}/like', 'RecipeController@like')->name('like')->middleware('auth');
+  Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
+});
