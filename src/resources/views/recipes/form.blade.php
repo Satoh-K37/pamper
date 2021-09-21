@@ -49,6 +49,7 @@
 <div class="form-group">
   <recipe-tags-input
   :initial-tags='@json($tagNames ?? [])'
+  :autocomplete-items='@json($allTagNames ?? [])'
   >
   </recipe-tags-input>
 </div>
