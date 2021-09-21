@@ -35,6 +35,12 @@ class Recipe extends Model
       return $this->belongsToMany('App\User', 'likes')->withTimestamps();
   }
 
+  // タグモデルとのリレーション
+  public function tags(): BelongsToMany
+  {
+      return $this->belongsToMany('App\Tag')->withTimestamps();
+  }
+
   // あるユーザーがいいね済みかどうかを判定するメソッド
   public function isLikedBy(?User $user): bool
   {
@@ -50,6 +56,7 @@ class Recipe extends Model
   {
       return $this->likes->count();
   }
+  
 
 
 }
