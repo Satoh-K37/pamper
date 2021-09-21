@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Recipe;
+use App\Tag;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 
@@ -30,17 +31,37 @@ class RecipeController extends Controller
       $recipe->fill($request->all());
       $recipe->user_id = $request->user()->id;
       $recipe->save();
+
+      $request->tags->each(function ($tagName) use ($recipe) {
+        $tag = Tag::firstOrCreate(['name' => $tagName]);
+        $recipe->tags()->attach($tag);
+      });
+      
       return redirect()->route('recipes.index');
   }
 
   public function edit(Recipe $recipe)
   {
-      return view('recipes.edit', ['recipe' => $recipe]);    
+      $tagNames = $recipe->tags->map(function ($tag) {
+          return ['text' => $tag->name];
+      });
+
+      return view('recipes.edit', [
+        'recipe' => $recipe,
+        'tagNames' => $tagNames,
+      ]);
   }
 
   public function update(RecipeRequest $request, Recipe $recipe)
   {
       $recipe->fill($request->all())->save();
+
+      $recipe->tags()->detach();
+      $request->tags->each(function ($tagName) use ($recipe) {
+          $tag = Tag::firstOrCreate(['name' => $tagName]);
+          $recipe->tags()->attach($tag);
+      });
+
       return redirect()->route('recipes.index');
   }
 

@@ -35,7 +35,8 @@ class RecipeRequest extends FormRequest
           'step_content5' => 'required|max:200',
           'step_content6' => 'required|max:200',
           'cooking_point' => 'required|max:200',
-          
+          // 半角スペースと「/」がないかをチェックする正規表現
+          'tags' => 'json|regex:/^(?!.*\s).+$/u|regex:/^(?!.*\/).*$/u',
         ];
     }
 
@@ -53,7 +54,17 @@ class RecipeRequest extends FormRequest
             'step_content5' => 'Step5',
             'step_content6' => 'Step6',
             'cooking_point' => 'コツ・ポイント',
+            'tags' => 'タグ',
         ];
+    }
+
+    public function passedValidation()
+    {
+        $this->tags = collect(json_decode($this->tags))
+            ->slice(0, 3)
+            ->map(function ($requestTag) {
+                return $requestTag->text;
+            });
     }
 
 }

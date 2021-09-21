@@ -48,6 +48,7 @@
 </div>
 <div class="form-group">
   <recipe-tags-input
+  :initial-tags='@json($tagNames ?? [])'
   >
   </recipe-tags-input>
 </div>
