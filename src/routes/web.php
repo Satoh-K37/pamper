@@ -23,3 +23,4 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::put('/{recipe}/like', 'RecipeController@like')->name('like')->middleware('auth');
   Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
 });
+Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
