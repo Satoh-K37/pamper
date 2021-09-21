@@ -23,7 +23,13 @@ class RecipeController extends Controller
 
   public function create()
   {
-      return view('recipes.create');    
+      $allTagNames = Tag::all()->map(function ($tag) {
+          return ['text' => $tag->name];
+      });
+
+      return view('recipes.create', [
+          'allTagNames' => $allTagNames,
+      ]);
   }
 
   public function store(RecipeRequest $request, Recipe $recipe)
@@ -46,9 +52,14 @@ class RecipeController extends Controller
           return ['text' => $tag->name];
       });
 
+      $allTagNames = Tag::all()->map(function ($tag) {
+        return ['text' => $tag->name];
+      });
+
       return view('recipes.edit', [
         'recipe' => $recipe,
         'tagNames' => $tagNames,
+        'allTagNames' => $allTagNames,
       ]);
   }
 
