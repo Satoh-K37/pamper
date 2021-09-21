@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', $user->name)
+@section('title', $user->name . 'のいいねしたレシピ')
 
 @section('content')
   @include('nav')
@@ -11,6 +11,5 @@
     @foreach($recipes as $recipe)
       @include('recipes.card')
     @endforeach
-
   </div>
 @endsection
