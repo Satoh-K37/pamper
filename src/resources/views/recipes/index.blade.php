@@ -1,7 +1,7 @@
 <!-- app.blade.phpをベースとして使うことを宣言 -->
 @extends('app')
 
-@section('title', '記事一覧')
+@section('title', 'レシピ一覧')
 
 @section('content')
   @include('nav')
