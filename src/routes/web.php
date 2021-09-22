@@ -16,6 +16,14 @@
 // });
 
 Auth::routes();
+Route::prefix('login')->name('login.')->group(function () {
+  Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('{provider}');
+  Route::get('/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('{provider}.callback');  
+});
+Route::prefix('register')->name('register.')->group(function () {
+  Route::get('/{provider}', 'Auth\RegisterController@showProviderUserRegistrationForm')->name('{provider}');
+  Route::post('/{provider}', 'Auth\RegisterController@registerProviderUser')->name('{provider}');
+});
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index'); 
 Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
