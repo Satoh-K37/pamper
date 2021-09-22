@@ -16,6 +16,10 @@
 // });
 
 Auth::routes();
+Route::prefix('login')->name('login.')->group(function () {
+  Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('{provider}');
+  Route::get('/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('{provider}.callback');
+});
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index'); 
 Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
