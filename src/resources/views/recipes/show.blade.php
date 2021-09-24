@@ -4,8 +4,9 @@
 
 @section('content')
   @include('nav')
-
-  <div class="container">
+  <div class="container"> 
     @include('recipes.card')
-  </div>
+    @include('comments.comment_list')
+    @include('comments.form')
+    
 @endsection
