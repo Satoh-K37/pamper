@@ -40,6 +40,14 @@ class Recipe extends Model
   {
       return $this->belongsToMany('App\Tag')->withTimestamps();
   }
+  
+  // コメント機能のためのリレーション  
+  public function comments()
+  {
+    //一つの投稿は複数のコメントを持つことができる
+    // コメントAに関して、コメントAに紐づく投稿は一つしかない
+    return $this->hasMany('App\Comment');
+  }
 
   // あるユーザーがいいね済みかどうかを判定するメソッド
   public function isLikedBy(?User $user): bool

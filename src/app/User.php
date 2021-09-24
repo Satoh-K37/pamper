@@ -70,6 +70,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Recipe', 'likes')->withTimestamps();
     }
 
+    // コメント機能のリレーション
+    // ユーザーは複数のコメントをするコトができるが、コメントAをしたユーザーは一人しかいないので１対多の関係になる
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
     // あるユーザーをフォロー中かどうか判定するメソッド
     public function isFollowedBy(?User $user): bool
     {

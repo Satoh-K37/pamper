@@ -32,6 +32,14 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::put('/{recipe}/like', 'RecipeController@like')->name('like')->middleware('auth');
   Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
 });
+
+// コメント
+// Route::resource('comments', 'CommentController', ['only' => ['destroy']]);
+Route::post('/recipe/{comment_id}/comments','CommentController@store');
+Route::get('/comments/{comment_id}', 'CommentController@destroy');
+
+
+
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 Route::prefix('users')->name('users.')->group(function () {
   Route::get('/{name}', 'UserController@show')->name('show');
@@ -46,4 +54,6 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::put('/{name}/follow', 'UserController@follow')->name('follow');
     Route::delete('/{name}/follow', 'UserController@unfollow')->name('unfollow');
   });
+
+
 });
