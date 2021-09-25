@@ -33,10 +33,11 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
 });
 
+// Route::resource('/comments', 'CommentController');
 // コメント
 // Route::resource('comments', 'CommentController', ['only' => ['destroy']]);
 Route::post('/recipe/{comment_id}/comments','CommentController@store');
-Route::get('/comments/{comment_id}', 'CommentController@destroy');
+// Route::delete('/comments/{comment_id}', 'CommentController@destroy');
 
 
 

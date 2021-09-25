@@ -46,7 +46,9 @@ class Recipe extends Model
   {
     //一つの投稿は複数のコメントを持つことができる
     // コメントAに関して、コメントAに紐づく投稿は一つしかない
+    
     return $this->hasMany('App\Comment');
+    
   }
 
   // あるユーザーがいいね済みかどうかを判定するメソッド
