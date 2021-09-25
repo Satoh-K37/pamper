@@ -1,24 +1,6 @@
-@foreach ($recipe->comments as $comment) 
+@foreach ($recipe->comments as $comment)
   <div class="mb-2">
-    @if ($comment->user->id == Auth::user()->id)
-      <!-- <a class="delete-comment" data-remote="true" value="削除" rel="nofollow" data-method="delete" href="/comments/{{ $comment->id }}"></a> -->
-      <form method="DELETE" href="/comments/{{ $comment->id }}">
-      {{ csrf_field() }}
-      <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("君は本当に削除するつもりかい？");'>
-      </form>
-    @endif
-    <!-- <span>
-      <strong>
-        <a class="no-text-decoration black-color" href="/users/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
-      </strong>
-    </span>
-    <span>{{ $comment->comment }}</span>
-  </div> -->
-
     <div>
-      <!-- @if ($comment->user->id == Auth::user()->id)
-        <a class="delete-comment" data-remote="true" rel="nofollow" data-method="delete" href="/comments/{{ $comment->id }}"></a>
-      @endif -->
       <div class="font-weight-bold">
         <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
           {{ $comment->user->name  }}
@@ -32,7 +14,15 @@
         {{ $comment->comment }}
       </div>
     </div>
-
+    <!-- 削除できるけどコメントごと消える -->
+    <!-- @if ($comment->user->id == Auth::user()->id)
+      <!-- <form method="POST"  href="/comments/{{ $comment->id }}" >
+      @csrf
+      {{ method_field('delete') }}
+      <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("君は本当に削除するつもりかい？");'>
+      </form> -->
+    <!-- @endif -->
   </div>
+
 
 @endforeach

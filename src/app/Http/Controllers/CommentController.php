@@ -35,13 +35,16 @@ class CommentController extends Controller
       return redirect()->back();
   }  
 
-  public function destroy(Request $request)
-  {
-      $comment = Comment::find($request->comment_id);
-      $comment->delete();
+  // public function destroy(Comment $comment)
+  // // public function destroy(Request $request)
+  // {
+  //     $comment = Comment::find($comment->id);
+  //     $comment->delete();
 
-      return redirect()->back();
-  }
+  //     // return redirect()->route('comment', $user->id);
+  //     return redirect()->back();
+  //     // return view('recipes.show', ['recipe' => $recipe]);
+  // }
 
 }
 
