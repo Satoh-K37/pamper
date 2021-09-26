@@ -38,10 +38,15 @@ class RecipeController extends Controller
       $recipe->user_id = $request->user()->id;
       $recipe->save();
 
+      // $recipe->categories()->sync([]);
+
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);
         $recipe->tags()->attach($tag);
       });
+
+      
+
       
       return redirect()->route('recipes.index');
   }
