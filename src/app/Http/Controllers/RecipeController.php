@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Recipe;
 use App\Tag;
+use App\Category;
+
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 
@@ -27,18 +29,26 @@ class RecipeController extends Controller
           return ['text' => $tag->name];
       });
 
+      $allCategoryNames = Category::pluck('name', 'id');
+
+
       return view('recipes.create', [
           'allTagNames' => $allTagNames,
+          'allCategoryNames' => $allCategoryNames
       ]);
+
   }
 
   public function store(RecipeRequest $request, Recipe $recipe)
   {
       $recipe->fill($request->all());
       $recipe->user_id = $request->user()->id;
+      $recipe->categories()->sync($request->get('category_id', id));
       $recipe->save();
 
       // $recipe->categories()->sync([]);
+      
+
 
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);
