@@ -54,14 +54,21 @@
   </recipe-tags-input>
 </div>
 
+
+
 <div class="form-group col-sm-6">
   <label for="category">カテゴリ</label>
-  <select class="form-control" name="category_id" id="main">
+  <select class="form-control" name="category_id" id="main" required value="{{ $recipe->category_id ?? old('category_id') }}" >
     <option value="" style="display: none;">選択してください</option>
     @foreach ($allCategoryNames as $category => $name)
       <option value="{{ $category }}">{{ $name }}</option>
     @endforeach
   </select>
 </div>
+
+<!-- <div class="form-group col-sm-6">
+    {!! Form::label('カテゴリー：') !!}
+    {!! Form::select('category', $allCategoryNames, NULL, ['id' => 'category'] ) !!}  
+</div> -->
 
   
