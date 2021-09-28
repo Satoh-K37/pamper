@@ -40,18 +40,18 @@ class Recipe extends Model
   {
       return $this->belongsToMany('App\Tag')->withTimestamps();
   }
-
+  
+  // カテゴリモデルとのリレーション
   public function categories(): BelongsToMany
   {
-    return $this->belongsToMany('App\Category');
+    return $this->belongsToMany('App\Category')->withTimestamps();
   }
   
   // コメント機能のためのリレーション  
-  public function comments(): hasMany
+  public function comments()
   {
     //一つの投稿は複数のコメントを持つことができる
     // コメントAに関して、コメントAに紐づく投稿は一つしかない
-    
     return $this->hasMany('App\Comment');
     
   }

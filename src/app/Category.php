@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
+  protected $fillable = [
+    'name',
+  ];
+
   public function recipes(): BelongsToMany
   {
-      return $this->belongsToMany('App\Recipe')->withTimestamps();
+      return $this->belongsToMany('App\Recipe');
+      
   }
 }

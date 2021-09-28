@@ -125,5 +125,19 @@
         </div>
       @endif
     @endforeach
+
+
+    @foreach($recipe->categories as $category)
+      @if($loop->first)
+        <div class="card-body pt-0 pb-4 pl-3">
+          <div class="card-text line-height">
+      @endif
+          {{ $category->name }}
+      @if($loop->last)
+          </div>
+        </div>
+      @endif
+    @endforeach
+
   </div>
 </div>

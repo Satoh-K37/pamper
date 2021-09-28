@@ -28,6 +28,10 @@ class RecipeController extends Controller
       $allTagNames = Tag::all()->map(function ($tag) {
           return ['text' => $tag->name];
       });
+      
+      // $allCategoryNames = Category::all()->map(function ($category) {
+      //   return ['text' => $category->name];
+      // });
 
       $allCategoryNames = Category::pluck('name', 'id');
 
@@ -42,12 +46,12 @@ class RecipeController extends Controller
   public function store(RecipeRequest $request, Recipe $recipe)
   {
       $recipe->fill($request->all());
+      // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
-      $recipe->categories()->sync($request->get('category_id', id));
       $recipe->save();
 
-      // $recipe->categories()->sync([]);
-      
+      // カテゴリーを追加
+      $recipe->categories()->attach($request->category_id);
 
 
       $request->tags->each(function ($tagName) use ($recipe) {
@@ -55,7 +59,10 @@ class RecipeController extends Controller
         $recipe->tags()->attach($tag);
       });
 
-      
+      // $request->categories->each(function ($categoryName) use ($recipe) {
+      //   $category = Category::firstOrCreate(['name' => $categoryName]);
+      //   $recipe->categories()->attach($category);
+      // });
 
       
       return redirect()->route('recipes.index');
@@ -71,16 +78,20 @@ class RecipeController extends Controller
         return ['text' => $tag->name];
       });
 
+      $allCategoryNames = Category::pluck('name', 'id');
+
       return view('recipes.edit', [
         'recipe' => $recipe,
         'tagNames' => $tagNames,
         'allTagNames' => $allTagNames,
+        'allCategoryNames' => $allCategoryNames,
       ]);
   }
 
   public function update(RecipeRequest $request, Recipe $recipe)
   {
       $recipe->fill($request->all())->save();
+      $recipe->categories()->sync($request->category_id);
 
       $recipe->tags()->detach();
       $request->tags->each(function ($tagName) use ($recipe) {

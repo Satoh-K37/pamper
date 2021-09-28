@@ -28,15 +28,16 @@ class RecipeRequest extends FormRequest
           'content' => 'required|max:200',
           'ingredient' => 'required|max:200',
           'seasoning' => 'required|max:200',
-          'step_content' => 'required|max:200',
-          'step_content2' => 'required|max:200',
-          'step_content3' => 'required|max:200',
-          'step_content4' => 'required|max:200',
-          'step_content5' => 'required|max:200',
-          'step_content6' => 'required|max:200',
-          'cooking_point' => 'required|max:200',
+          'step_content' => 'max:200',
+          'step_content2' => 'max:200',
+          'step_content3' => 'max:200',
+          'step_content4' => 'max:200',
+          'step_content5' => 'max:200',
+          'step_content6' => 'max:200',
+          'cooking_point' => 'max:200',
           // 半角スペースと「/」がないかをチェックする正規表現
           'tags' => 'json|regex:/^(?!.*\s).+$/u|regex:/^(?!.*\/).*$/u',
+          'category_id' => 'required',
         ];
     }
 
@@ -55,6 +56,7 @@ class RecipeRequest extends FormRequest
             'step_content6' => 'Step6',
             'cooking_point' => 'コツ・ポイント',
             'tags' => 'タグ',
+            // 'categories' => 'カテゴリー',
         ];
     }
 
@@ -65,6 +67,12 @@ class RecipeRequest extends FormRequest
             ->map(function ($requestTag) {
                 return $requestTag->text;
             });
+
+        $this->categories = collect(json_decode($this->categories))
+        ->slice(0, 1)
+        ->map(function ($requestCategory) {
+            return $requestCategory->text;
+        });
     }
 
 }
