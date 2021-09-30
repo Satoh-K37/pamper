@@ -33,7 +33,8 @@ class RecipeController extends Controller
       //   return ['text' => $category->name];
       // });
 
-      $allCategoryNames = Category::pluck('name', 'id');
+      // $allCategoryNames = Category::pluck('name', 'id');
+      $allCategoryNames = Category::all();
 
 
       return view('recipes.create', [
@@ -45,6 +46,7 @@ class RecipeController extends Controller
 
   public function store(RecipeRequest $request, Recipe $recipe)
   {
+      // dd($request);
       $recipe->fill($request->all());
       // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
@@ -52,6 +54,7 @@ class RecipeController extends Controller
 
       // カテゴリーを追加
       $recipe->categories()->attach($request->category_id);
+      // dd($recipe);
 
 
       $request->tags->each(function ($tagName) use ($recipe) {
@@ -64,7 +67,7 @@ class RecipeController extends Controller
       //   $recipe->categories()->attach($category);
       // });
 
-      
+      // dd($recipe);
       return redirect()->route('recipes.index');
   }
 
@@ -78,18 +81,25 @@ class RecipeController extends Controller
         return ['text' => $tag->name];
       });
 
-      $allCategoryNames = Category::pluck('name', 'id');
-
+      // $allCategoryNames = Category::pluck('name', 'id');
+      $allCategoryNames = Category::all();
+      // $inputCategory = $recipe->category_id;
+      
       return view('recipes.edit', [
         'recipe' => $recipe,
         'tagNames' => $tagNames,
         'allTagNames' => $allTagNames,
         'allCategoryNames' => $allCategoryNames,
+        // 'inputCategory' => $inputCategory,
       ]);
   }
 
   public function update(RecipeRequest $request, Recipe $recipe)
   {
+      // dd($request);
+      // $inputCategory = $request->category;
+      $inputCategory = $request->category_id;
+
       $recipe->fill($request->all())->save();
       $recipe->categories()->sync($request->category_id);
 
@@ -98,8 +108,9 @@ class RecipeController extends Controller
           $tag = Tag::firstOrCreate(['name' => $tagName]);
           $recipe->tags()->attach($tag);
       });
-
-      return redirect()->route('recipes.index');
+      
+      // dd($recipe);
+      return redirect()->route('recipes.index', compact('inputCategory'));
   }
 
   public function destroy(Recipe $recipe)
@@ -116,7 +127,7 @@ class RecipeController extends Controller
   public function like(Request $request, Recipe $recipe)
   {
       // レシピモデルと、リクエストを送信したユーザーのユーザーモデルの両者を紐づけるlikesテーブルのレコードが削除される
-      // 先にdetachする理由は重複していいねをしてしまうことを回避するために先に削除してから新規登録を行います。
+      // 先にdetachする理由は重複していいねをしてしまうことを回避するために先に削除してから新規登録を行う。
       $recipe->likes()->detach($request->user()->id);
       // レシピモデルと、リクエストを送信したユーザーのユーザーモデルの両者を紐づけるlikesテーブルのレコードが新規登録される
       $recipe->likes()->attach($request->user()->id);

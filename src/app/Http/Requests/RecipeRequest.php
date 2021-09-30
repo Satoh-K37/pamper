@@ -56,7 +56,7 @@ class RecipeRequest extends FormRequest
             'step_content6' => 'Step6',
             'cooking_point' => 'コツ・ポイント',
             'tags' => 'タグ',
-            // 'categories' => 'カテゴリー',
+            'category_id' => 'カテゴリー',
         ];
     }
 

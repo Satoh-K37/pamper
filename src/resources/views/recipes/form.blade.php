@@ -54,15 +54,24 @@
   </recipe-tags-input>
 </div>
 
-
-
 <div class="form-group col-sm-6">
-  <label for="category">カテゴリ</label>
-  <select class="form-control" name="category_id" id="main" required value="{{ $recipe->category_id ?? old('category_id') }}" >
-    <option value="" style="display: none;">選択してください</option>
-    @foreach ($allCategoryNames as $category => $name)
-      <option value="{{ $category }}">{{ $name }}</option>
+  <label for="category_id">カテゴリ</label>
+  <select class="form-control" name="category_id" >
+    @foreach ($allCategoryNames as $category)
+    <!-- 変数＄recipeがある時に入る -->
+      @if(isset($recipe))
+          <!-- <option value="{{ $category->id }}" {{ old('category', $recipe->category_id ?? '') == $category->id ? 'selected' : ''}}> -->
+          <option value="{{ $category->id }}" @if(old('category_id', $inputCategory->id ?? '') == $category->id) selected : '' @endif >
+            {{ $category->name }}
+          </option>
+      @else
+        <option value="" style="display: none;">選択してください</option>
+          <option value="{{ $category->id }}" >
+            {{ $category->name }}
+          </option>
+      @endif
     @endforeach
+
   </select>
 </div>
 
