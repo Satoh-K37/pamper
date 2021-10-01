@@ -68,11 +68,11 @@ class RecipeRequest extends FormRequest
                 return $requestTag->text;
             });
 
-        $this->categories = collect(json_decode($this->categories))
-        ->slice(0, 1)
-        ->map(function ($requestCategory) {
-            return $requestCategory->text;
-        });
+        // $this->categories = collect(json_decode($this->categories))
+        // ->slice(0, 1)
+        // ->map(function ($requestCategory) {
+        //     return $requestCategory->text;
+        // });
     }
 
 }
