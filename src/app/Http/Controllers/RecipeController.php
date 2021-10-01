@@ -35,11 +35,15 @@ class RecipeController extends Controller
 
       // $allCategoryNames = Category::pluck('name', 'id');
       $allCategoryNames = Category::all();
+      $category = new Category;
+      $categories = $category->getCategories();
+
 
 
       return view('recipes.create', [
           'allTagNames' => $allTagNames,
-          'allCategoryNames' => $allCategoryNames
+          'allCategoryNames' => $allCategoryNames,
+          'categories' => $categories,
       ]);
 
   }
@@ -84,13 +88,21 @@ class RecipeController extends Controller
       // $allCategoryNames = Category::pluck('name', 'id');
       $allCategoryNames = Category::all();
       // $inputCategory = $recipe->category_id;
-      
+      $category = new Category;
+      $categories = $category->getCategories()->prepend('選択してください', '');
+
+      // $categoryId = [
+      //   'category_id' => $recipe->category_id,
+      // ];
+
       return view('recipes.edit', [
         'recipe' => $recipe,
         'tagNames' => $tagNames,
         'allTagNames' => $allTagNames,
         'allCategoryNames' => $allCategoryNames,
         // 'inputCategory' => $inputCategory,
+        'categories' => $categories,
+        // 'categoryId' => $categoryId,
       ]);
   }
 
@@ -98,7 +110,6 @@ class RecipeController extends Controller
   {
       // dd($request);
       // $inputCategory = $request->category;
-      $inputCategory = $request->category_id;
 
       $recipe->fill($request->all())->save();
       $recipe->categories()->sync($request->category_id);
@@ -110,7 +121,7 @@ class RecipeController extends Controller
       });
       
       // dd($recipe);
-      return redirect()->route('recipes.index', compact('inputCategory'));
+      return redirect()->route('recipes.index');
   }
 
   public function destroy(Recipe $recipe)
