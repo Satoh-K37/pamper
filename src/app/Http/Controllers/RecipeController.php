@@ -58,6 +58,7 @@ class RecipeController extends Controller
 
       // カテゴリーを追加
       $recipe->categories()->attach($request->category_id);
+      // $recipe->save();
       // dd($recipe);
 
 
@@ -89,11 +90,21 @@ class RecipeController extends Controller
       $allCategoryNames = Category::all();
       // $inputCategory = $recipe->category_id;
       $category = new Category;
+      
       $categories = $category->getCategories()->prepend('選択してください', '');
+      $recipeId = Recipe::find($recipe->id)->categories()->where('recipe_id', '=', $recipe->id)->get();
+      // $category_id = $recipeId->id;
+    
+      // $category_id = Recipe::find($recipe->id)->categories('category_id')->where('category_recipe.recipe_id', '=', $recipe->id)->get();
+      // $categoryId = App\Recipe::find($recipe->id)->categories()->where('category_recipe.recipe_id', '=', $recipe->id)->get();
+      // var_dump($category_id);
+      // $query = Recipe::query();
+      
+      print_r($recipeId);
+      // 受け取った$recipeに入ってるrecipe_idを使ってcategory_recipeテーブルに検索をかけて、レシピに紐づいてるcategory_idを取得し、変数に代入
+      // 変数に保存されているcategory_idとcategoriesのデータを照らし合わせる
+      // $category_id = DB::table('category_recipe')->select(DB::raw('SELECT * FROM `categories` WHERE `recipe_id` = $recipe->id'));
 
-      // $categoryId = [
-      //   'category_id' => $recipe->category_id,
-      // ];
 
       return view('recipes.edit', [
         'recipe' => $recipe,
@@ -102,7 +113,7 @@ class RecipeController extends Controller
         'allCategoryNames' => $allCategoryNames,
         // 'inputCategory' => $inputCategory,
         'categories' => $categories,
-        // 'categoryId' => $categoryId,
+        // 'category_id' => $category_id,
       ]);
   }
 
@@ -160,3 +171,5 @@ class RecipeController extends Controller
   }
 
 }
+
+

@@ -57,10 +57,11 @@
 <div class="form-group col-sm-6">
   <label for="category_id">カテゴリ</label>
   <select class="form-control" name="category_id" >
+    
     @foreach ($categories as $id => $name)
     <!-- 変数＄recipeがある時に入る -->
       @if(isset($recipe))
-          <option value="{{ $id }}" @if ($recipe->category_id == $id ) selected @endif >
+          <option value="{{ $id }}" {{ old('category', $recipe->category_id ?? '') == $id ? 'selected' : ''}}>
               {{ $name }}
           </option>
       @else

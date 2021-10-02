@@ -21,6 +21,8 @@ class Recipe extends Model
       'step_content5',
       'step_content6',
       'cooking_point',
+      // 'category_id',
+      
     ];
 
   // usersテーブルとのリレーション
@@ -44,7 +46,8 @@ class Recipe extends Model
   // カテゴリモデルとのリレーション
   public function categories(): BelongsToMany
   {
-    return $this->belongsToMany('App\Category')->withTimestamps();
+    return $this->belongsToMany('App\Category')->withPivot('category_id');
+    // ->withTimestamps();
   }
   
   // コメント機能のためのリレーション  
