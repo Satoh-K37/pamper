@@ -61,7 +61,7 @@
     @foreach ($categories as $id => $name)
     <!-- 変数＄recipeがある時に入る -->
       @if(isset($recipe))
-          <option value="{{ $id }}" {{ old('category', $recipe->category_id ?? '') == $id ? 'selected' : ''}}>
+          <option value="{{ $id }}" {{ old('category', $category_id->id ?? '') == $id ? 'selected' : ''}}>
               {{ $name }}
           </option>
       @else

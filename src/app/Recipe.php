@@ -46,8 +46,9 @@ class Recipe extends Model
   // カテゴリモデルとのリレーション
   public function categories(): BelongsToMany
   {
-    return $this->belongsToMany('App\Category')->withPivot('category_id');
-    // ->withTimestamps();
+    return $this->belongsToMany('App\Category')
+    // ->withPivot('category_id');
+    ->withTimestamps();
   }
   
   // コメント機能のためのリレーション  
