@@ -36,7 +36,7 @@ class RecipeController extends Controller
       // $allCategoryNames = Category::pluck('name', 'id');
       $allCategoryNames = Category::all();
       $category = new Category;
-      $categories = $category->getCategories();
+      $categories = $category->getCategories()->prepend('選択してください', '');
 
 
 
@@ -58,6 +58,7 @@ class RecipeController extends Controller
 
       // カテゴリーを追加
       $recipe->categories()->attach($request->category_id);
+      // $recipe->save();
       // dd($recipe);
 
 
@@ -85,15 +86,16 @@ class RecipeController extends Controller
         return ['text' => $tag->name];
       });
 
-      // $allCategoryNames = Category::pluck('name', 'id');
       $allCategoryNames = Category::all();
-      // $inputCategory = $recipe->category_id;
+      
       $category = new Category;
-      $categories = $category->getCategories()->prepend('選択してください', '');
-
-      // $categoryId = [
-      //   'category_id' => $recipe->category_id,
-      // ];
+      $categories = $category->getCategories();
+      // category_id取れたあああああ！！！！
+      // category_idを取得する
+      $category_id = Recipe::find($recipe->id)->categories()->where('recipe_id', '=', $recipe->id)->first();
+      
+      print_r($category_id->id); 
+      // dd($recipeId->id);
 
       return view('recipes.edit', [
         'recipe' => $recipe,
@@ -102,7 +104,7 @@ class RecipeController extends Controller
         'allCategoryNames' => $allCategoryNames,
         // 'inputCategory' => $inputCategory,
         'categories' => $categories,
-        // 'categoryId' => $categoryId,
+        'category_id' => $category_id,
       ]);
   }
 
@@ -160,3 +162,5 @@ class RecipeController extends Controller
   }
 
 }
+
+

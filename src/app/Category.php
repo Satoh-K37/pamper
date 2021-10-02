@@ -16,7 +16,7 @@ class Category extends Model
 
   public function recipes(): BelongsToMany
   {
-      return $this->belongsToMany('App\Recipe');
+      return $this->belongsToMany('App\Recipe', 'category_recipe', 'recipe_id', 'category_id')->withTimestamps();
   }
 
   // カテゴリーの一覧を取得するメソッド
