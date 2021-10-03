@@ -92,9 +92,9 @@ class RecipeController extends Controller
       $categories = $category->getCategories();
       // category_id取れたあああああ！！！！
       // category_idを取得する
-      $category_id = Recipe::find($recipe->id)->categories()->where('recipe_id', '=', $recipe->id)->first();
+      $old_category_id = Recipe::find($recipe->id)->categories()->where('recipe_id', '=', $recipe->id)->first();
       
-      print_r($category_id->id); 
+      // print_r($old_category_id->id); 
       // dd($recipeId->id);
 
       return view('recipes.edit', [
@@ -104,7 +104,7 @@ class RecipeController extends Controller
         'allCategoryNames' => $allCategoryNames,
         // 'inputCategory' => $inputCategory,
         'categories' => $categories,
-        'category_id' => $category_id,
+        'old_category_id' => $old_category_id,
       ]);
   }
 
