@@ -38,12 +38,15 @@ class RecipeController extends Controller
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
 
+      
+      $servings = config('serving');
 
 
       return view('recipes.create', [
           'allTagNames' => $allTagNames,
           'allCategoryNames' => $allCategoryNames,
           'categories' => $categories,
+          'servings' => $servings,
       ]);
 
   }

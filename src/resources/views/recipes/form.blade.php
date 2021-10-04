@@ -1,50 +1,68 @@
 @csrf
 <div class="md-form">
-  <label>レシピタイトル</label>
+  <label>レシピタイトル *</label>
   <input type="text" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
 </div>
 <div class="form-group">
   <label></label>
-  <textarea name="content" required class="form-control" rows="16" placeholder="本文">{{ $recipe->content ?? old('content') }}</textarea>
+  <textarea name="content" required class="form-control" rows="10" placeholder="今日は何を食べた？">{{ $recipe->content ?? old('content') }}</textarea>
+</div>
+
+<div class="form-group">
+  <select class="form-control" name="serving">
+    @foreach ($servings as $key => $serving)
+      @if(isset($recipe))
+          <option value="{{ $recipe->serving ?? old('serving') }}">>
+              {{ $serving }}人前
+              
+          </option>
+      @else
+          <option value="{{ $serving }}" >
+            {{ $serving }}人前
+          </option>
+      @endif
+    @endforeach
+  </select>
 </div>
 
 <div class="md-form">
-  <p>材料:</p>
-  
-  <input placeholder="数値を入力してください" type="text" name="serving" class="form-control" required value="{{ $recipe->serving ?? old('serving') }}">
+  <!-- <p>材料:</p> -->
+  <label>材料</label>
+  <!-- <input placeholder="何人前かを入力させます。セレクトボックスでやる。" type="text" name="serving" class="form-control" required value="{{ $recipe->serving ?? old('serving') }}"> -->
   <input type="text" name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}">
 </div>
+
 <div class="md-form">
   <label>調味料</label>
   <input type="text" name="seasoning" class="form-control" required value="{{ $recipe->seasoning ?? old('seasoning') }}">
 </div>
 <div class="md-form">
   <label>Step1</label>
-  <input type="text" name="step_content" class="form-control" required value="{{ $recipe->step_content ?? old('step_content') }}">
+  <input type="text" name="step_content" class="form-control" value="{{ $recipe->step_content ?? old('step_content') }}">
 </div>
 <div class="md-form">
   <label>Step2</label>
-  <input type="text" name="step_content2" class="form-control" required value="{{ $recipe->step_content2 ?? old('step_content2') }}">
+  <input type="text" name="step_content2" class="form-control" value="{{ $recipe->step_content2 ?? old('step_content2') }}">
 </div>
 <div class="md-form">
   <label>Step3</label>
-  <input type="text" name="step_content3" class="form-control" required value="{{ $recipe->step_content3 ?? old('step_content3') }}">
+  <input type="text" name="step_content3" class="form-control" value="{{ $recipe->step_content3 ?? old('step_content3') }}">
 </div>
 <div class="md-form">
   <label>Step4</label>
-  <input type="text" name="step_content4" class="form-control" required value="{{ $recipe->step_content4 ?? old('step_content4') }}">
+  <input type="text" name="step_content4" class="form-control" value="{{ $recipe->step_content4 ?? old('step_content4') }}">
 </div>
 <div class="md-form">
   <label>Step5</label>
-  <input type="text" name="step_content5" class="form-control" required value="{{ $recipe->step_content5 ?? old('step_content5') }}">
+  <input type="text" name="step_content5" class="form-control" value="{{ $recipe->step_content5 ?? old('step_content5') }}">
 </div>
 <div class="md-form">
   <label>Step6</label>
-  <input type="text" name="step_content6" class="form-control" required value="{{ $recipe->step_content6 ?? old('step_content6') }}">
+  <input type="text" name="step_content6" class="form-control" value="{{ $recipe->step_content6 ?? old('step_content6') }}">
 </div>
 <div class="md-form">
   <label>コツ・ポイント</label>
-  <input type="text" name="cooking_point" class="form-control" required value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
+  <input type="text" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
 </div>
 <div class="form-group">
   <recipe-tags-input
@@ -54,9 +72,9 @@
   </recipe-tags-input>
 </div>
 
-<div class="form-group col-sm-6">
-  <label for="category_id">カテゴリ</label>
-  <select class="form-control" name="category_id" >
+<div class="form-group">
+  <label for="category_id">カテゴリ *</label>
+  <select class="form-control" name="category_id" required>
     
     @foreach ($categories as $id => $name)
     <!-- 変数＄recipeがある時に入る -->
