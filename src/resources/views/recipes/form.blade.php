@@ -67,6 +67,18 @@
 </div>
 
 <div class="form-group">
+  <label for="cooking_time">調理時間</label>
+  <select class="form-control" name="cooking_time">
+    @foreach ($cooking_times as $cooking_time => $time)
+          <!-- <option value="{{ $serving }}"> -->
+      <option value="{{ $cooking_time }}" {{ old('time', $recipe->cooking_time ?? '') == $cooking_time ? 'selected' : ''}}>
+          {{ $time }}
+      </option>
+    @endforeach
+  </select>
+</div>
+
+<div class="form-group">
   <label for="category_id">カテゴリ *</label>
   <select class="form-control" name="category_id" required>
     

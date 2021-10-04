@@ -40,6 +40,7 @@ class RecipeController extends Controller
 
       
       $servings = config('serving');
+      $cooking_times = config('cookingtime');
 
 
       return view('recipes.create', [
@@ -47,6 +48,7 @@ class RecipeController extends Controller
           'allCategoryNames' => $allCategoryNames,
           'categories' => $categories,
           'servings' => $servings,
+          'cooking_times'=> $cooking_times
       ]);
 
   }
@@ -97,7 +99,7 @@ class RecipeController extends Controller
       $old_category_id = Recipe::find($recipe->id)->categories()->where('recipe_id', '=', $recipe->id)->first();
 
       $servings = config('serving');
-
+      $cooking_times = config('cookingtime');
       // print_r($old_serving);
       // dd($old_category_id->id);
 
@@ -109,7 +111,8 @@ class RecipeController extends Controller
         // 'inputCategory' => $inputCategory,
         'categories' => $categories,
         'old_category_id' => $old_category_id,
-        'servings' => $servings
+        'servings' => $servings,
+        'cooking_times' => $cooking_times,
       ]);
   }
 

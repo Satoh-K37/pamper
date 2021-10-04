@@ -101,6 +101,10 @@
     <div class="card-text">
       {{ $recipe->cooking_point }}
     </div>
+    <div class="card-text">
+      {{ $recipe->cooking_time }}分
+    </div>
+
     <div class="card-body pt-0 pb-2 pl-3">
       <div class="card-text">
         <recipe-like

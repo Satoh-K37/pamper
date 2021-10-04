@@ -21,8 +21,7 @@ class Recipe extends Model
       'step_content5',
       'step_content6',
       'cooking_point',
-      // 'category_id',
-      
+      'cooking_time',
     ];
 
   // usersテーブルとのリレーション
@@ -77,9 +76,9 @@ class Recipe extends Model
   }
 
   // DBに数値を保存し、表示のために１人前などの文字列をし、返すメソッド
-  // public function getServingAttribute()
+  // public function getCookingTimeAttribute()
   // {
-  //     return config('serving.'.$this->serving);
+  //     return config('cookingtime.'.$this->cookingtime);
   // }
   
 }
