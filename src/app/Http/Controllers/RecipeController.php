@@ -93,12 +93,13 @@ class RecipeController extends Controller
       
       $category = new Category;
       $categories = $category->getCategories();
-      // category_id取れたあああああ！！！！
       // category_idを取得する
       $old_category_id = Recipe::find($recipe->id)->categories()->where('recipe_id', '=', $recipe->id)->first();
-      
-      // print_r($old_category_id->id); 
-      // dd($recipeId->id);
+
+      $servings = config('serving');
+
+      // print_r($old_serving);
+      // dd($old_category_id->id);
 
       return view('recipes.edit', [
         'recipe' => $recipe,
@@ -108,6 +109,7 @@ class RecipeController extends Controller
         // 'inputCategory' => $inputCategory,
         'categories' => $categories,
         'old_category_id' => $old_category_id,
+        'servings' => $servings
       ]);
   }
 
@@ -117,6 +119,7 @@ class RecipeController extends Controller
       // $inputCategory = $request->category;
 
       $recipe->fill($request->all())->save();
+      // dd($recipe); 
       $recipe->categories()->sync($request->category_id);
 
       $recipe->tags()->detach();

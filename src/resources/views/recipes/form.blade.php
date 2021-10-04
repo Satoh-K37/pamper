@@ -10,15 +10,15 @@
 
 <div class="form-group">
   <select class="form-control" name="serving">
-    @foreach ($servings as $key => $serving)
+    @foreach ($servings as $serving => $serving_name)
       @if(isset($recipe))
-          <option value="{{ $recipe->serving ?? old('serving') }}">>
-              {{ $serving }}人前
-              
+          <!-- <option value="{{ $serving }}"> -->
+          <option value="{{ $serving }}" {{ old('serving_name', $recipe->serving ?? '') == $serving ? 'selected' : ''}}>
+              {{ $serving_name }}
           </option>
       @else
-          <option value="{{ $serving }}" >
-            {{ $serving }}人前
+          <option value="{{ $serving }}">
+            {{ $serving_name }}
           </option>
       @endif
     @endforeach
