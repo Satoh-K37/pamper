@@ -78,7 +78,7 @@
       {{ $recipe->ingredient }}
     </div>
     <div class="card-text">
-      {{ $recipe->seasoning }}
+      {{ $recipe->seasoning }}人前
     </div>
     <div class="card-text">
       {{ $recipe->step_content }}
@@ -101,9 +101,19 @@
     <div class="card-text">
       {{ $recipe->cooking_point }}
     </div>
-    <div class="card-text">
-      {{ $recipe->cooking_time }}分
-    </div>
+    @if($recipe->cooking_time === 5)
+      <div class="card-text">
+        <p>5分以内</p>
+      </div>
+    @elseif($recipe->cooking_time === 60)
+      <div class="card-text">
+        <p>1時間以上</p>
+      </div>
+    @else
+      <div class="card-text">
+        {{ $recipe->cooking_time }}分
+      </div>
+    @endif
 
     <div class="card-body pt-0 pb-2 pl-3">
       <div class="card-text">
