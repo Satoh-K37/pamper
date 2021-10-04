@@ -11,16 +11,10 @@
 <div class="form-group">
   <select class="form-control" name="serving">
     @foreach ($servings as $serving => $serving_name)
-      @if(isset($recipe))
           <!-- <option value="{{ $serving }}"> -->
-          <option value="{{ $serving }}" {{ old('serving_name', $recipe->serving ?? '') == $serving ? 'selected' : ''}}>
-              {{ $serving_name }}
-          </option>
-      @else
-          <option value="{{ $serving }}">
-            {{ $serving_name }}
-          </option>
-      @endif
+      <option value="{{ $serving }}" {{ old('serving_name', $recipe->serving ?? '') == $serving ? 'selected' : ''}}>
+          {{ $serving_name }}
+      </option>
     @endforeach
   </select>
 </div>
@@ -77,16 +71,9 @@
   <select class="form-control" name="category_id" required>
     
     @foreach ($categories as $id => $name)
-    <!-- 変数＄recipeがある時に入る -->
-      @if(isset($recipe))
-          <option value="{{ $id }}" {{ old('category', $old_category_id->id ?? '') == $id ? 'selected' : ''}}>
-              {{ $name }}
-          </option>
-      @else
-          <option value="{{ $id }}" >
-            {{ $name }}
-          </option>
-      @endif
+      <option value="{{ $id }}" {{ old('category', $old_category_id->id ?? '') == $id ? 'selected' : ''}}>
+          {{ $name }}
+      </option>
     @endforeach
   </select>
 </div>
