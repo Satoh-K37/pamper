@@ -101,6 +101,7 @@
     <div class="card-text">
       {{ $recipe->cooking_point }}
     </div>
+    
     @if($recipe->cooking_time === 5)
       <div class="card-text">
         <p>5分以内</p>

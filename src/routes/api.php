@@ -15,4 +15,15 @@ use Illuminate\Http\Request;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
-// });
+Route::post('file_upload',function(){
+
+	$file_name = request()->file->getClientOriginalName();
+
+	request()->file->storeAs('public/',$file_name);
+
+	$recipe = App\recipe::find(1);
+
+	$recipe->update(['image_path' => '/storage/'.$file_name]);
+
+	return $recipe;
+});

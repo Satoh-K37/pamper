@@ -3,6 +3,8 @@
   <label>レシピタイトル *</label>
   <input type="text" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
 </div>
+
+
 <div class="form-group">
   <label></label>
   <textarea name="content" required class="form-control" rows="10" placeholder="今日は何を食べた？">{{ $recipe->content ?? old('content') }}</textarea>
@@ -18,7 +20,13 @@
     @endforeach
   </select>
 </div>
+<div class="card-body pt-0 pb-2 pl-3">
+  <div class="card-text">
+    <file-upload>
 
+    </file-upload>
+  </div>
+</div>
 <div class="md-form">
   <!-- <p>材料:</p> -->
   <label>材料</label>
