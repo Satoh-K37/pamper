@@ -24,10 +24,9 @@
 
 <div class="card-body pt-0 pb-2 pl-3">
   <div class="card-text">
-    <input id="image" type="file" name="image">
+    <input id="image" type="file" name="image_path">
   <!-- Vueで画像をアップロードするとき -->
-    <!-- <file-upload>
-    </file-upload> -->
+    <!-- <file-upload></file-upload> -->
 
   </div>
 </div>

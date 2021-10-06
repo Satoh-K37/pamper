@@ -70,7 +70,12 @@ class RecipeController extends Controller
       $recipe->categories()->attach($request->category_id);
       // $recipe->save();
       // dd($recipe);
+      if($request->image_path){
 
+        if($request->image_path->extension() == 'gif' || $request->image_path->extension() == 'jpeg' || $request->image_path->extension() == 'jpg' || $request->image_path->extension() == 'png'){
+        $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
+        }
+      };
 
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);

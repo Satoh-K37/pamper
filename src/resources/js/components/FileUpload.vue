@@ -1,37 +1,14 @@
 <template>
     <div class="content">
-        <h1>File Upload</h1>
-        <p><input type="file" v-on:change="fileSelected"></p>
-        <button v-on:click="fileUpload">アップロード</button>
-        <p v-show="showRecipeImage"><img v-bind:src="recipe.image_path"></p>
+        <p><input type="file"></p>
+        <button>アップロード</button>
     </div>
 </template>
 
 <script>
-export default {
-    data: function(){
-        return {
-          fileInfo: '',
-          user: '',
-          showRecipeImage: false
-        }
-    },
-    methods:{
-        fileSelected(event){
-            this.fileInfo = event.target.files[0]
-        },
-        fileUpload(){
-            const formData = new FormData()
+    export default {
 
-            formData.append('file',this.fileInfo)
-
-            axios.post('/api/fileupload',formData).then(response =>{
-                this.user = response.data
-                if(response.data.image_path) this.showRecipeImage = true
-            });
-        }
     }
-}
 </script>
 
 <style>
