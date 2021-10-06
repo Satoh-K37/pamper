@@ -1,45 +1,41 @@
 <template>
-  <div class="container">
-    <div class="large-12 medium-12 small-12 cell">
-      <label>File
-        <input type="file" id="file" ref="file" v-on:change="onFileChange"/>
-      </label>
-        <button v-on:click="submitFile()">Submit</button>
-        <img :src="url" v-show="url">
+    <div class="content">
+        <h1>File Upload</h1>
+        <p><input type="file" v-on:change="fileSelected"></p>
+        <button v-on:click="fileUpload">アップロード</button>
+        <p v-show="showRecipeImage"><img v-bind:src="recipe.image_path"></p>
     </div>
- 
-  </div>
 </template>
+
 <script>
-  const axios = require('axios')
-    export default {
-    data(){
-      return {
-        file: '',
-        url: ''
-      }
-    },    
-    methods: {
-      submitFile(){
-        let formData = new FormData();
-        formData.append('file', this.file);
-        axios.post( 'http://localhost:8000/post.php',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        ).then(function() {
-          console.log('Success!!')
-        }).catch(function() {
-          console.log('Failed！')
-        })
-      },      
-      onFileChange(e){
-        this.file = e.target.files[0]
-        this.url = URL.createObjectURL(this.file)
-      }
+export default {
+    data: function(){
+        return {
+          fileInfo: '',
+          user: '',
+          showRecipeImage: false
+        }
+    },
+    methods:{
+        fileSelected(event){
+            this.fileInfo = event.target.files[0]
+        },
+        fileUpload(){
+            const formData = new FormData()
+
+            formData.append('file',this.fileInfo)
+
+            axios.post('/api/fileupload',formData).then(response =>{
+                this.user = response.data
+                if(response.data.image_path) this.showRecipeImage = true
+            });
+        }
     }
-  }
+}
 </script>
+
+<style>
+.content{
+    margin:5em;
+}
+</style>

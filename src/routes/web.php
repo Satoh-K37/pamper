@@ -33,6 +33,8 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
 });
 
+// ファイルアップロード
+Route::resource('/upload', 'UploadController');
 // Route::resource('/comments', 'CommentController');
 // コメント
 // Route::resource('comments', 'CommentController', ['only' => ['destroy']]);

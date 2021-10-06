@@ -20,17 +20,20 @@
     @endforeach
   </select>
 </div>
+
+
 <div class="card-body pt-0 pb-2 pl-3">
   <div class="card-text">
-    <file-upload>
+    <input id="image" type="file" name="image">
+  <!-- Vueで画像をアップロードするとき -->
+    <!-- <file-upload>
+    </file-upload> -->
 
-    </file-upload>
   </div>
 </div>
+
 <div class="md-form">
-  <!-- <p>材料:</p> -->
   <label>材料</label>
-  <!-- <input placeholder="何人前かを入力させます。セレクトボックスでやる。" type="text" name="serving" class="form-control" required value="{{ $recipe->serving ?? old('serving') }}"> -->
   <input type="text" name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}">
 </div>
 

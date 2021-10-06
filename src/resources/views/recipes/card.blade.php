@@ -72,6 +72,10 @@
     </div>
 
     <div class="card-text">
+      <img src="{{ asset('/storage/'.$recipe->image)}}">
+    </div>
+
+    <div class="card-text">
       {{ $recipe->serving }}
     </div>
     <div class="card-text">

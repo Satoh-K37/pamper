@@ -59,6 +59,11 @@ class RecipeController extends Controller
       $recipe->fill($request->all());
       // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
+      // 画像ファイルの保存場所指定
+      if(request('image')){
+        $filename=request()->file('image')->getClientOriginalName();
+        $recipe['image']=request('image')->storeAs('public/images', $filename);
+      }
       $recipe->save();
 
       // カテゴリーを追加
@@ -122,6 +127,7 @@ class RecipeController extends Controller
       // $inputCategory = $request->category;
 
       $recipe->fill($request->all())->save();
+
       // dd($recipe); 
       $recipe->categories()->sync($request->category_id);
 
@@ -143,6 +149,8 @@ class RecipeController extends Controller
 
   public function show(Recipe $recipe)
   {
+      // $recipe=Recipe::find($recipe.id)
+      Storage::disk('local')->exists('public/storage/'.$recipe->image);
       return view('recipes.show', ['recipe' => $recipe]);
   }
 
