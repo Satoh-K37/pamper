@@ -25,8 +25,18 @@
 <div class="card-body pt-0 pb-2 pl-3">
   <div class="card-text">
     <input id="image" type="file" name="image_path">
-  <!-- Vueで画像をアップロードするとき -->
-    <!-- <file-upload></file-upload> -->
+
+    @if(isset($recipe))
+      @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
+          <img src="/storage/image_path/{{ $recipe->id }}.jpg">
+      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpeg'))
+          <img src="/storage/image_path/{{ $recipe->id }}.jpeg">
+      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.png'))
+          <img src="/storage/image_path/{{ $recipe->id }}.png">
+      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.gif'))
+          <img src="/storage/image_path/{{ $recipe->id }}.gif">
+      @endif
+    @endif
 
   </div>
 </div>

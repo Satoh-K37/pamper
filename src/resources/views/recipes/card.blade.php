@@ -72,7 +72,15 @@
     </div>
 
     <div class="card-text">
-      <img src="{{ asset('/storage/'.$recipe->image)}}">
+      @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
+          <img src="/storage/image_path/{{ $recipe->id }}.jpg">
+      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpeg'))
+          <img src="/storage/image_path/{{ $recipe->id }}.jpeg">
+      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.png'))
+          <img src="/storage/image_path/{{ $recipe->id }}.png">
+      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.gif'))
+          <img src="/storage/image_path/{{ $recipe->id }}.gif">
+      @endif
     </div>
 
     <div class="card-text">

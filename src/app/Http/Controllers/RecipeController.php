@@ -70,9 +70,15 @@ class RecipeController extends Controller
       $recipe->categories()->attach($request->category_id);
       // $recipe->save();
       // dd($recipe);
+
+      // もし画像のアップロードがあった場合
       if($request->image_path){
 
-        if($request->image_path->extension() == 'gif' || $request->image_path->extension() == 'jpeg' || $request->image_path->extension() == 'jpg' || $request->image_path->extension() == 'png'){
+        // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
+        if( $request->image_path->extension() == 'gif' 
+        || $request->image_path->extension() == 'jpeg' 
+        || $request->image_path->extension() == 'jpg' 
+        || $request->image_path->extension() == 'png'){
         $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
         }
       };
@@ -141,6 +147,23 @@ class RecipeController extends Controller
           $tag = Tag::firstOrCreate(['name' => $tagName]);
           $recipe->tags()->attach($tag);
       });
+
+      // もし画像のアップロードがあった場合
+      if($recipe->image_path){
+
+        // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
+        if( $recipe->image_path->extension() == 'gif' 
+        || $recipe->image_path->extension() == 'jpeg' 
+        || $recipe->image_path->extension() == 'jpg' 
+        || $recipe->image_path->extension() == 'png'){
+        $recipe->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$recipe->image_path->extension());
+        }
+      };
+
+      $request->tags->each(function ($tagName) use ($recipe) {
+        $tag = Tag::firstOrCreate(['name' => $tagName]);
+        $recipe->tags()->attach($tag);
+      });
       
       // dd($recipe);
       return redirect()->route('recipes.index');
@@ -155,7 +178,7 @@ class RecipeController extends Controller
   public function show(Recipe $recipe)
   {
       // $recipe=Recipe::find($recipe.id)
-      Storage::disk('local')->exists('public/storage/'.$recipe->image);
+      
       return view('recipes.show', ['recipe' => $recipe]);
   }
 
