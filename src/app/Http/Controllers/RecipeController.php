@@ -9,6 +9,8 @@ use App\Category;
 
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class RecipeController extends Controller
 {
@@ -57,13 +59,7 @@ class RecipeController extends Controller
   {
       // dd($request);
       $recipe->fill($request->all());
-      // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
-      // 画像ファイルの保存場所指定
-      if(request('image')){
-        $filename=request()->file('image')->getClientOriginalName();
-        $recipe['image']=request('image')->storeAs('public/images', $filename);
-      }
       $recipe->save();
 
       // カテゴリーを追加
@@ -73,14 +69,14 @@ class RecipeController extends Controller
 
       // もし画像のアップロードがあった場合
       if($request->image_path){
-
+        // Storage::delete('public/image_path', $recipe->image_path);
         // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
-        if( $request->image_path->extension() == 'gif' 
-        || $request->image_path->extension() == 'jpeg' 
-        || $request->image_path->extension() == 'jpg' 
-        || $request->image_path->extension() == 'png'){
+        // if( $request->image_path->extension() == 'gif' 
+        // || $request->image_path->extension() == 'jpeg' 
+        // || $request->image_path->extension() == 'jpg' 
+        // || $request->image_path->extension() == 'png'){
         $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
-        }
+        // }
       };
 
       $request->tags->each(function ($tagName) use ($recipe) {
@@ -118,6 +114,8 @@ class RecipeController extends Controller
       $cooking_times = config('cookingtime');
       // print_r($old_serving);
       // dd($old_category_id->id);
+      // $recipe_file = Recipe::findOrFail($request->id);
+
 
       return view('recipes.edit', [
         'recipe' => $recipe,
@@ -129,41 +127,51 @@ class RecipeController extends Controller
         'old_category_id' => $old_category_id,
         'servings' => $servings,
         'cooking_times' => $cooking_times,
+        // 'recipe_file' => $recipe_file
       ]);
   }
 
   public function update(RecipeRequest $request, Recipe $recipe)
   {
-      // dd($request);
-      // $inputCategory = $request->category;
-
+  
       $recipe->fill($request->all())->save();
+      //更新フォームから送られてきたリクエストパラメーターにFileデータが存在しているかを確認する
+      // Fileデータが存在していない場合はそのまま登録を行う。存在している場合はifの中の処理を行う
+      // src/storage/app/public/image_pathディレクトリに更新をかけるレシピのIDの画像データがないかを確認する
+      // 画像データがなかった場合はそのままデータを登録し、あった場合はレシピIDに一致する画像を削除する。
+      // 削除に成功したら、リクエストパラメーターで送られてきた画像を保存する
+
+      $recipe_image = file(image_path);
+      dd($recipe_image);
+
+      // もし画像のアップロードがあった場合
+      if($request->image_path){
+        // Storage::delete('public/image_path', $recipe->image_path);
+        // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
+        // if( $request->image_path->extension() == 'gif' 
+        // || $request->image_path->extension() == 'jpeg' 
+        // || $request->image_path->extension() == 'jpg' 
+        // || $request->image_path->extension() == 'png'){
+        // Storage::delete('public/image_path', $recipe->id.'.'.$recipe->image_path->extension());
+        $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
+        // }
+      };
 
       // dd($recipe); 
       $recipe->categories()->sync($request->category_id);
 
+      // 既存のタグを全て削除
       $recipe->tags()->detach();
       $request->tags->each(function ($tagName) use ($recipe) {
           $tag = Tag::firstOrCreate(['name' => $tagName]);
           $recipe->tags()->attach($tag);
       });
 
-      // もし画像のアップロードがあった場合
-      if($recipe->image_path){
 
-        // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
-        if( $recipe->image_path->extension() == 'gif' 
-        || $recipe->image_path->extension() == 'jpeg' 
-        || $recipe->image_path->extension() == 'jpg' 
-        || $recipe->image_path->extension() == 'png'){
-        $recipe->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$recipe->image_path->extension());
-        }
-      };
-
-      $request->tags->each(function ($tagName) use ($recipe) {
-        $tag = Tag::firstOrCreate(['name' => $tagName]);
-        $recipe->tags()->attach($tag);
-      });
+      // $request->tags->each(function ($tagName) use ($recipe) {
+      //   $tag = Tag::firstOrCreate(['name' => $tagName]);
+      //   $recipe->tags()->attach($tag);
+      // });
       
       // dd($recipe);
       return redirect()->route('recipes.index');

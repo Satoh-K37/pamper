@@ -23,9 +23,15 @@
 
 
 <div class="card-body pt-0 pb-2 pl-3">
-  <div class="card-text">
-    <input id="image" type="file" name="image_path">
-
+    <p class="desc text-left fs14" >画像ファイルを1点アップロードしてください<span class="required-text" color="red">※必須</span></p>
+  <div class="md-form">
+    <div class="form-group-sm">
+      <!-- <input type="file" name="image_path"> -->
+      <!-- {!! Form::label('image','画像', ['class' => 'd-block mt-2 mb-0']) !!} -->
+      <input type="file" name="image_path" value="" class="ml-3 mr-2 d-inline">
+    </div>
+  </div>
+  <div class="md-form">
     @if(isset($recipe))
       @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
           <img src="/storage/image_path/{{ $recipe->id }}.jpg">
@@ -37,9 +43,10 @@
           <img src="/storage/image_path/{{ $recipe->id }}.gif">
       @endif
     @endif
-
   </div>
 </div>
+
+
 
 <div class="md-form">
   <label>材料</label>

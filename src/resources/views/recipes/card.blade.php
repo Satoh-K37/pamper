@@ -72,17 +72,20 @@
     </div>
 
     <div class="card-text">
+      <!-- <img class="image_path" src="{{ Storage::url($recipe->image_path) }}" alt="" width="150px" height="100px"> -->
+      <!-- <img class="image_path" src="{{ Storage::url($recipe->image_path)}}" alt="" width="150px" height="100px"> -->
       @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
-          <img src="/storage/image_path/{{ $recipe->id }}.jpg">
+          <img src="/storage/image_path/{{ $recipe->id }}.jpg" alt="" width="300px" height="200px">
       @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpeg'))
-          <img src="/storage/image_path/{{ $recipe->id }}.jpeg">
+          <img src="/storage/image_path/{{ $recipe->id }}.jpeg" alt="" width="300px" height="200px">
       @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.png'))
-          <img src="/storage/image_path/{{ $recipe->id }}.png">
+          <img src="/storage/image_path/{{ $recipe->id }}.png" alt="" width="300px" height="200px">
       @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.gif'))
-          <img src="/storage/image_path/{{ $recipe->id }}.gif">
+          <img src="/storage/image_path/{{ $recipe->id }}.gif" alt="" width="300px" height="200px">
       @endif
     </div>
 
+    <!-- ここから先はSHowでのみ表示させるようにしたい -->
     <div class="card-text">
       {{ $recipe->serving }}
     </div>
@@ -114,19 +117,6 @@
       {{ $recipe->cooking_point }}
     </div>
     
-    @if($recipe->cooking_time === 5)
-      <div class="card-text">
-        <p>5分以内</p>
-      </div>
-    @elseif($recipe->cooking_time === 60)
-      <div class="card-text">
-        <p>1時間以上</p>
-      </div>
-    @else
-      <div class="card-text">
-        {{ $recipe->cooking_time }}分
-      </div>
-    @endif
 
     <div class="card-body pt-0 pb-2 pl-3">
       <div class="card-text">
@@ -153,7 +143,6 @@
       @endif
     @endforeach
 
-
     @foreach($recipe->categories as $category)
       @if($loop->first)
         <div class="card-body pt-0 pb-4 pl-3">
@@ -165,6 +154,21 @@
         </div>
       @endif
     @endforeach
+
+    @if($recipe->cooking_time === 5)
+      <div class="card-text">
+        <p>5分以内</p>
+      </div>
+    @elseif($recipe->cooking_time === 60)
+      <div class="card-text">
+        <p>1時間以上</p>
+      </div>
+    @else
+      <div class="card-text">
+        {{ $recipe->cooking_time }}分
+      </div>
+    @endif
+
 
   </div>
 </div>
