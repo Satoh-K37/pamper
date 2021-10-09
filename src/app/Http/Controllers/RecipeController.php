@@ -71,12 +71,12 @@ class RecipeController extends Controller
       if($request->image_path){
         // Storage::delete('public/image_path', $recipe->image_path);
         // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
-        // if( $request->image_path->extension() == 'gif' 
-        // || $request->image_path->extension() == 'jpeg' 
-        // || $request->image_path->extension() == 'jpg' 
-        // || $request->image_path->extension() == 'png'){
+        if( $request->image_path->extension() == 'gif' 
+        || $request->image_path->extension() == 'jpeg' 
+        || $request->image_path->extension() == 'jpg' 
+        || $request->image_path->extension() == 'png'){
         $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
-        // }
+        }
       };
 
       $request->tags->each(function ($tagName) use ($recipe) {
@@ -139,12 +139,8 @@ class RecipeController extends Controller
       // Fileデータが存在していない場合はそのまま登録を行う。存在している場合はifの中の処理を行う
       // src/storage/app/public/image_pathディレクトリに更新をかけるレシピのIDの画像データがないかを確認する
       // 画像データがなかった場合はそのままデータを登録し、あった場合はレシピIDに一致する画像を削除する。
-      // 削除に成功したら、リクエストパラメーターで送られてきた画像を保存する
 
-      $recipe_image = file(image_path);
-      dd($recipe_image);
-
-      // もし画像のアップロードがあった場合
+            // もし画像のアップロードがあった場合
       if($request->image_path){
         // Storage::delete('public/image_path', $recipe->image_path);
         // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
@@ -152,10 +148,12 @@ class RecipeController extends Controller
         // || $request->image_path->extension() == 'jpeg' 
         // || $request->image_path->extension() == 'jpg' 
         // || $request->image_path->extension() == 'png'){
-        // Storage::delete('public/image_path', $recipe->id.'.'.$recipe->image_path->extension());
-        $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
+        $extension = $request->file('image_path')->getClientOriginalExtension();
+        dd($extension);
+        // $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
         // }
       };
+      $extension = $request->file('image_path')->getClientOriginalExtension();
 
       // dd($recipe); 
       $recipe->categories()->sync($request->category_id);

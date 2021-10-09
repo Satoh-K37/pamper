@@ -72,6 +72,8 @@
     </div>
 
     <div class="card-text">
+      <!-- <img src="/storage/uploads/Ae1w8hbG8dYmTkZ9o0sxAyyA3aMH2W9LUtrkZlKM.jpg" alt="" > -->
+
       <!-- <img class="image_path" src="{{ Storage::url($recipe->image_path) }}" alt="" width="150px" height="100px"> -->
       <!-- <img class="image_path" src="{{ Storage::url($recipe->image_path)}}" alt="" width="150px" height="100px"> -->
       @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
