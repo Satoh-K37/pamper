@@ -10,6 +10,7 @@ use App\Category;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+// use Intervention\Image\Facades\Image;
 
 
 class RecipeController extends Controller
@@ -60,24 +61,45 @@ class RecipeController extends Controller
       // dd($request);
       $recipe->fill($request->all());
       $recipe->user_id = $request->user()->id;
-      $recipe->save();
+      // $recipe->save();
 
       // カテゴリーを追加
-      $recipe->categories()->attach($request->category_id);
+      // $recipe->categories()->attach($request->category_id);
       // $recipe->save();
       // dd($recipe);
+      $recipe_image = $request->file('image_path');
 
+        // 画像保存処理
+      if($recipe_image) {
+        // ❷ `recipe`というディレクトリに $recipe_image のデータを保存する
+        $path = Storage::disk('public')->putFile('recipes', $recipe_image);
+        // ❸ basenameで $path の最後の部分（＝ファイルの名前のみ）を取得
+        $recipeFileName = basename($path);
+        // ❹ 取得したファイルの名前のみをDBに保存する
+        $recipe->image_path = $recipeFileName;
+      } else {
+          $path = null;
+      }
       // もし画像のアップロードがあった場合
-      if($request->image_path){
-        // Storage::delete('public/image_path', $recipe->image_path);
-        // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
-        if( $request->image_path->extension() == 'gif' 
-        || $request->image_path->extension() == 'jpeg' 
-        || $request->image_path->extension() == 'jpg' 
-        || $request->image_path->extension() == 'png'){
-        $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
-        }
-      };
+      // if($request->image_path){
+      //   // ''public/images'フォルダにrecipeID.投稿画像の拡張子の形状で保存される
+      //   // gifまたはjpegまたはjpgまたはpngの場合は投稿IDをファイル名にして保存。それ以外の場合はスルーする。
+      //   if( $request->image_path->extension() == 'gif' 
+      //   || $request->image_path->extension() == 'jpeg' 
+      //   || $request->image_path->extension() == 'jpg' 
+      //   || $request->image_path->extension() == 'png'){
+      //     // ''public/images'フォルダにrecipeID.投稿画像の拡張子の形状で保存される
+      //   $filename = $request->image_path->getClientOriginalName();
+      //   $image = $request->image_path->storeAs('', $filename, 'public');
+      //   // $recipe->create(['image_path' => $image]);        // $path = $request->file('image_path')->storeAs('public/images', $recipe->id.'.'.$request->image_path->extension());
+      //   // $recipe->image_path = basename($path);
+
+      //   // $request->file('image_path')->storeAs('public/images', $recipe->id.'.'.$request->image_path->extension());
+      //   }
+      // };
+
+      $recipe->save();
+      $recipe->categories()->attach($request->category_id);
 
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);
@@ -148,7 +170,7 @@ class RecipeController extends Controller
         // || $request->image_path->extension() == 'jpeg' 
         // || $request->image_path->extension() == 'jpg' 
         // || $request->image_path->extension() == 'png'){
-        $extension = $request->file('image_path')->getClientOriginalExtension();
+        $extension = $request->file('image_path');
         dd($extension);
         // $request->file('image_path')->storeAs('public/image_path', $recipe->id.'.'.$request->image_path->extension());
         // }
