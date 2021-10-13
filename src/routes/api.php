@@ -21,7 +21,7 @@ Route::post('file_upload',function(){
 
 	request()->file->storeAs('public/',$file_name);
 
-	$recipe = App\recipe::find(1);
+	$recipe = App\Recipe::find();
 
 	$recipe->update(['image_path' => '/storage/'.$file_name]);
 

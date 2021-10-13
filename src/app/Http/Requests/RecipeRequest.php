@@ -26,6 +26,9 @@ class RecipeRequest extends FormRequest
         return [
           'recipe_title' => 'required|max:50',
           'content' => 'required|max:200',
+          // file:ファイルがアップロードに成功したファイルであることをバリデードする
+          // image:ファイルの画像がjpg、png、bmp、gif、svgであることをバリケードする。
+          // mimes:今回の場合はjpeg,png,jpg,gifを指定しているはず
           // 'image_path' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
           'ingredient' => 'required|max:200',
           'seasoning' => 'required|max:200',

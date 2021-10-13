@@ -73,18 +73,13 @@
     </div>
 
     <div class="card-text">
-      <img src="{{ asset('storage/images/' . $recipe->image_path) }}">
-
-
-      <!-- <img class="image_path" src="{{ Storage::url($recipe->image_path) }}" alt="" width="150px" height="100px"> -->
-      <!-- <img class="image_path" src="{{ Storage::url($recipe->image_path)}}" alt="" width="150px" height="100px"> -->
-      @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
+      @if(file_exists(public_path().'/storage/images/'. $recipe->id .'.jpg'))
           <img src="/storage/image_path/{{ $recipe->id }}.jpg" alt="" width="300px" height="200px">
-      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpeg'))
+      @elseif(file_exists(public_path().'/storage/images/'. $recipe->id .'.jpeg'))
           <img src="/storage/image_path/{{ $recipe->id }}.jpeg" alt="" width="300px" height="200px">
-      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.png'))
+      @elseif(file_exists(public_path().'/storage/images/'. $recipe->id .'.png'))
           <img src="/storage/image_path/{{ $recipe->id }}.png" alt="" width="300px" height="200px">
-      @elseif(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.gif'))
+      @elseif(file_exists(public_path().'/storage/images/'. $recipe->id .'.gif'))
           <img src="/storage/image_path/{{ $recipe->id }}.gif" alt="" width="300px" height="200px">
       @endif
     </div>
