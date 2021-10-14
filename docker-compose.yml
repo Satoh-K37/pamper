@@ -29,7 +29,7 @@ services:
       - app
     volumes:
       - ./src/:/var/www/html
-      - ./src/app/public:/var/www/storage
+      # - ./src/app/public:/var/www/storage
 
   db:
     image: mysql:5.7

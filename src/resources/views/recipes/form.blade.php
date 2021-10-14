@@ -34,7 +34,7 @@
     </div> -->
   <div class="md-form">
     <p class="desc text-left fs14" >画像ファイルを1点アップロードしてください<span class="required-text" color="red">※必須</span></p>
-      <input type="file" name="image_path" value="" class="ml-3 mr-2 d-inline">
+      <input type="file" name="image" value="" class="ml-3 mr-2 d-inline">
     @if(isset($recipe))
       @if(file_exists(public_path().'/storage/image_path/'. $recipe->id .'.jpg'))
           <img src="/storage/image_path/{{ $recipe->id }}.jpg">
