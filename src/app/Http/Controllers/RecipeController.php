@@ -9,6 +9,7 @@ use App\Category;
 
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str; 
 
 class RecipeController extends Controller
 {
@@ -55,17 +56,28 @@ class RecipeController extends Controller
 
   public function store(RecipeRequest $request, Recipe $recipe)
   {
+      // リクエストデータを受け取る
+      $form = $request->all();
+      // フォームトークン削除。おまじない？
+      unset($form['_token']);
+      // 画像データがあるかを確認
+      if(isset($form['image_path'])){
+        $file = $request->file('image_path');
+        $ext = $file->getClientOriginalExtension();
+        $file_token = Str::random(32);
+        $imageFile = $file_token.".".$ext;
+        $form['image_path'] = $imageFile;
+        $request->image_path->storeAs('public/images', $imageFile);
+      }
       // dd($request);
-      $recipe->fill($request->all());
       // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
-      $recipe->save();
-
+      $recipe->fill($form)->save();
+      // $recipe->save();
       // カテゴリーを追加
       $recipe->categories()->attach($request->category_id);
       // $recipe->save();
       // dd($recipe);
-
 
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);
