@@ -12,7 +12,7 @@
 
 <div class="form-group">
   <div class="form-input__picture afterimage">
-    
+    <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
     @if (isset($recipe->image_path))
       <img src="{{ asset("storage/$recipe->image_path") }}"  width="1000" height="300">
     @else

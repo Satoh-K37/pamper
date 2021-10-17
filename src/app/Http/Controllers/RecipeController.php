@@ -130,10 +130,36 @@ class RecipeController extends Controller
 
   public function update(RecipeRequest $request, Recipe $recipe)
   {
-      // dd($request);
-      // $inputCategory = $request->category;
+      $recipe_id = $recipe->id;
 
-      $recipe->fill($request->all())->save();
+      // dd($recipe_id);
+      // リクエストデータを受け取る
+      $form = $request->all();
+      // フォームトークン削除。おまじない？
+      unset($form['_token']);
+      // 画像データがあるかを確認
+      if(isset($form['image_path'])){
+        $delete_image = $recipe->image_path;
+        // dd($delete_image);
+        $delete_path = storage_path().'/app/public/images/'.$delete_image;
+        // dd($delete_path);
+        \File::delete($delete_path);
+
+        if($form['image_path']){
+          $file = $request->file('image_path');
+          $ext = $file->getClientOriginalExtension();
+          $file_token = Str::random(32);
+          $imageFile = $file_token.".".$ext;
+          $form['image_path'] = $imageFile;
+          $request->image_path->storeAs('public/images', $imageFile);
+        }
+
+      }
+      
+      $recipe->user_id = $request->user()->id;
+      $recipe->fill($form)->save();
+
+      // $recipe->fill($request->all())->save();
       // dd($recipe); 
       $recipe->categories()->sync($request->category_id);
 
@@ -149,6 +175,12 @@ class RecipeController extends Controller
 
   public function destroy(Recipe $recipe)
   {
+      
+    $delete_image = $recipe->image_path;
+    // dd($delete_image);
+    $delete_path = storage_path().'/app/public/images/'.$delete_image;
+    // dd($delete_path);
+    \File::delete($delete_path);
       $recipe->delete();
       return redirect()->route('recipes.index');
   }
