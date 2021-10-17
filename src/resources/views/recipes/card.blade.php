@@ -70,7 +70,13 @@
     <div class="card-text">
       {{ $recipe->content }}
     </div>
+    <div class="card-text">
+      @if (isset($recipe->image_path))
+        <!-- <img src="/storage/images/"{{$recipe->image_path}}"> -->
+        <img src="{{ asset("storage/$recipe->image_path") }}"  width="1000" height="300">
 
+      @endif
+    </div>
     <div class="card-text">
       {{ $recipe->serving }}
     </div>

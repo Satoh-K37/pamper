@@ -11,6 +11,23 @@
 </div>
 
 <div class="form-group">
+  <div class="form-input__picture afterimage">
+    
+    @if (isset($recipe->image_path))
+      <img src="{{ asset("storage/$recipe->image_path") }}"  width="1000" height="300">
+    @else
+      <span class="form-input__image_path--text">写真が登録されていません</span>
+    @endif
+  </div>
+  <div class="card-body pt-0 pb-2 pl-3">
+    <div class="card-text">
+      <!-- <file-upload></file-upload> -->
+      <input type="file" name="image_path">
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
   <select class="form-control" name="serving">
     @foreach ($servings as $serving => $serving_name)
           <!-- <option value="{{ $serving }}"> -->
@@ -19,12 +36,6 @@
       </option>
     @endforeach
   </select>
-</div>
-<div class="card-body pt-0 pb-2 pl-3">
-  <div class="card-text">
-    <!-- <file-upload></file-upload> -->
-    <input type="file" name="image_path">
-  </div>
 </div>
 <div class="md-form">
   <!-- <p>材料:</p> -->
