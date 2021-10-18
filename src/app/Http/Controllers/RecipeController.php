@@ -139,21 +139,27 @@ class RecipeController extends Controller
       unset($form['_token']);
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
+        // 削除する画像名を取得
         $delete_image = $recipe->image_path;
         // dd($delete_image);
+        // 削除する画像が存在しているディレクトリのパスを取得
         $delete_path = storage_path().'/app/public/images/'.$delete_image;
         // dd($delete_path);
+        // $delete_pathに入っている画像パスと一致する画像データを削除
         \File::delete($delete_path);
 
+        // 画像を削除後の処理が思い浮かばん…Nullだった場合だと一番最初に登録してなかった時に…
+        // って思ったけど、画像を必須にすればいい話やったな。オススメご飯を共有するサイトで画像ないのはきつすぎやろて！解決
         if($form['image_path']){
-          $file = $request->file('image_path');
+
+        }else{
+          $file = $request->file('image_path');// $formから送られてきた画像パスを取得する。$form->image_pathとかの方が正しい？
           $ext = $file->getClientOriginalExtension();
           $file_token = Str::random(32);
           $imageFile = $file_token.".".$ext;
           $form['image_path'] = $imageFile;
           $request->image_path->storeAs('public/images', $imageFile);
         }
-
       }
       
       $recipe->user_id = $request->user()->id;
@@ -175,14 +181,16 @@ class RecipeController extends Controller
 
   public function destroy(Recipe $recipe)
   {
-      
+    // 削除する画像名を取得
     $delete_image = $recipe->image_path;
     // dd($delete_image);
+    // 削除する画像が存在しているディレクトリのパスを取得
     $delete_path = storage_path().'/app/public/images/'.$delete_image;
     // dd($delete_path);
+    // $delete_pathに入っている画像パスと一致する画像データを削除
     \File::delete($delete_path);
-      $recipe->delete();
-      return redirect()->route('recipes.index');
+    $recipe->delete();
+    return redirect()->route('recipes.index');
   }
 
   public function show(Recipe $recipe)
