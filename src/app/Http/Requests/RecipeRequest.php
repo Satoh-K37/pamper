@@ -26,7 +26,7 @@ class RecipeRequest extends FormRequest
         return [
           'recipe_title' => 'required|max:50',
           'content' => 'required|max:200',
-          'image_path' => 'required|file|mimes:jpeg,png,jpg,bmb|max:2048',
+          'image_path' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
           'ingredient' => 'required|max:200',
           'seasoning' => 'required|max:200',
           'step_content' => 'max:200',
@@ -47,7 +47,8 @@ class RecipeRequest extends FormRequest
         return [
             'recipe_title' => 'レシピタイトル',
             'content' => '本文',
-            'ingredient' => '材料：',
+            'content' => '本文',
+            'image_path' => '画像',
             'seasoning' => '調味料',
             'step_content' => 'Step1',
             'step_content2' => 'Step2',

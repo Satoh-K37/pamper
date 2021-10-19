@@ -15,17 +15,20 @@
     <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
     @if (isset($recipe->image_path))
       <img src="{{ asset("storage/$recipe->image_path") }}"  width="1000" height="300">
+      <div class="card-text">
+        <!-- <file-upload></file-upload> -->
+        <input type="file" name="image_path">
+      </div>
     @else
-      <span class="form-input__image_path--text">写真が登録されていません</span>
+      <span class="form-input__image_path--text">画像が登録されていません</span>
+      <div class="card-text">
+        <!-- <file-upload></file-upload> -->
+        <input type="file" name="image_path">
+      </div>
     @endif
   </div>
-  <div class="card-body pt-0 pb-2 pl-3">
-    <div class="card-text">
-      <!-- <file-upload></file-upload> -->
-      <input type="file" name="image_path">
-    </div>
-  </div>
 </div>
+
 
 <div class="form-group">
   <select class="form-control" name="serving">
