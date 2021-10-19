@@ -17,15 +17,22 @@
       <img src="{{ asset("storage/$recipe->image_path") }}"  width="1000" height="300">
       <div class="card-text">
         <!-- <file-upload></file-upload> -->
-        <input type="file" name="image_path">
+        <!-- <input type="file" name="image_path"> -->
       </div>
     @else
       <span class="form-input__image_path--text">画像が登録されていません</span>
       <div class="card-text">
         <!-- <file-upload></file-upload> -->
-        <input type="file" name="image_path">
+        <!-- <input type="file" name="image_path"> -->
       </div>
     @endif
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="card-text">
+          <!-- <file-upload></file-upload> -->
+    <input type="file" name="image_path">
   </div>
 </div>
 
