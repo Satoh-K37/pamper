@@ -7,7 +7,7 @@
 
 <div class="form-group">
   <label></label>
-  <textarea name="content" required class="form-control" rows="10" placeholder="今日は何を食べた？">{{ $recipe->content ?? old('content') }}</textarea>
+  <textarea name="content" required class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
 </div>
 
 <div class="form-group">
