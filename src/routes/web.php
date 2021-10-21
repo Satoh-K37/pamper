@@ -16,32 +16,38 @@
 // });
 
 Auth::routes();
+// ログイン
 Route::prefix('login')->name('login.')->group(function () {
   Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('{provider}');
   Route::get('/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('{provider}.callback');  
 });
+// アカウント登録
 Route::prefix('register')->name('register.')->group(function () {
   Route::get('/{provider}', 'Auth\RegisterController@showProviderUserRegistrationForm')->name('{provider}');
   Route::post('/{provider}', 'Auth\RegisterController@registerProviderUser')->name('{provider}');
 });
 // レシピ一覧
-Route::get('/', 'RecipeController@index')->name('recipes.index'); 
+Route::get('/', 'RecipeController@index')->name('recipes.index');
+// 検索
+Route::get('searchshow', 'RecipeController@searchshow')->name('recipes.searchshow');
+Route::get('/searchrecipe', 'RecipeController@search')->name('recipes.search');
+// indexとshow以外のメソッドルート
 Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
+// レシピ詳細のルート
 Route::resource('/recipes', 'RecipeController')->only(['show']);
+// いいね機能のルート
 Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::put('/{recipe}/like', 'RecipeController@like')->name('like')->middleware('auth');
   Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
 });
 
-// Route::resource('/comments', 'CommentController');
+
 // コメント
-// Route::resource('comments', 'CommentController', ['only' => ['destroy']]);
 Route::post('/recipe/{comment_id}/comments','CommentController@store');
-// Route::delete('/comments/{comment_id}', 'CommentController@destroy');
 
-
-
+// タグ表示
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
+// アカウントマイページ関連
 Route::prefix('users')->name('users.')->group(function () {
   Route::get('/{name}', 'UserController@show')->name('show');
   // いいね一覧
@@ -52,7 +58,9 @@ Route::prefix('users')->name('users.')->group(function () {
   // フォロワー一覧
   Route::get('/{name}/followers', 'UserController@followers')->name('followers');
   Route::middleware('auth')->group(function () {
+    // フォローをする
     Route::put('/{name}/follow', 'UserController@follow')->name('follow');
+    // フォローを外す
     Route::delete('/{name}/follow', 'UserController@unfollow')->name('unfollow');
   });
 

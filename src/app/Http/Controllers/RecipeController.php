@@ -20,8 +20,37 @@ class RecipeController extends Controller
 
   public function index()
   {
+      // $allCategoryNames = Category::all();
+      $category = new Category;
+      $categories = $category->getCategories()->prepend('選択してください', '');
+      // $searchWord = $request->input('searchWord');
+      // $category_id = $request->input('category_id');
+
       $recipes = Recipe::all()->sortByDesc('created_at');
-      return view('recipes.index', ['recipes' => $recipes]);
+      return view('recipes.index', [
+        'recipes' => $recipes,
+        // 'allCategoryNames' => $allCategoryNames,
+        'categories' => $categories,
+        // 'searchWord' => $searchWord,
+        // 'category_id' => $category_id,
+
+        ]);
+  }
+
+  public function searchShow(Request $request)
+  {
+    $category = new Category;
+    $categories = $category->getCategories()->prepend('選択してください', '');
+    $searchWord = $request->input('searchWord');
+    $category_id = $request->input('category_id');
+
+    $recipes = Recipe::all()->sortByDesc('created_at');
+    return view('recipes.index', [
+      'recipes' => $recipes,
+      'categories' => $categories,
+      'searchWord' => $searchWord,
+      'category_id' => $category_id,
+      ]);
   }
 
   public function create()

@@ -6,6 +6,7 @@
 @section('content')
   @include('nav')
   <div class="container">
+  @include('recipes.search')
   @foreach($recipes as $recipe) 
     @include('recipes.card')
   @endforeach
