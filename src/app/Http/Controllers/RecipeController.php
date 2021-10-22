@@ -18,26 +18,27 @@ class RecipeController extends Controller
       $this->authorizeResource(Recipe::class, 'recipe');
   }
 
-  public function index()
+  public function index(Request $request)
   {
       // $allCategoryNames = Category::all();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
-      // $searchWord = $request->input('searchWord');
-      // $category_id = $request->input('category_id');
+      $searchWord = $request->input('searchWord');
+      $category_id = $request->input('category_id');
 
       $recipes = Recipe::all()->sortByDesc('created_at');
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
         'categories' => $categories,
-        // 'searchWord' => $searchWord,
-        // 'category_id' => $category_id,
+        'searchWord' => $searchWord,
+        'category_id' => $category_id,
 
         ]);
   }
 
-  public function searchShow(Request $request)
+  // 検索結果
+  public function searchResult(Request $request)
   {
     $category = new Category;
     $categories = $category->getCategories()->prepend('選択してください', '');
@@ -45,8 +46,45 @@ class RecipeController extends Controller
     $category_id = $request->input('category_id');
 
     $recipes = Recipe::all()->sortByDesc('created_at');
-    return view('recipes.index', [
+    return view('recipes.searchResult', [
       'recipes' => $recipes,
+      'categories' => $categories,
+      'searchWord' => $searchWord,
+      'category_id' => $category_id,
+      ]);
+  }
+
+  // 検索
+  public function search(Request $request)
+  {
+    //入力される値の中身を定義する
+    $searchWord = $request->input('searchWord'); //キーワードの値
+    $category_id = $request->input('category_id'); //カテゴリの値
+
+    $query = Recipe::query();
+
+    //キーワードが入力された場合、テーブルからrecepeテーブルから一致するレシピを$queryに代入
+    if (isset($searchWord)) {
+      // レシピのtitleとcontentカラムに検索をかける
+      // escapeLikeは指定の記号を文字列としてエスケープするオリジナルメソッド
+      $query->where('title', 'like', '%' . self::escapeLike($searchWord) . '%')
+      ->onwhere('content', 'like', '%' . self::escapeLike($searchWord) . '%');
+    }
+
+    //カテゴリが選択された場合、categoriesテーブルからcategory_idが一致するレシピを$queryに代入
+    if (isset($category_id)) {
+      $query->where('category_id', $category_id);
+    }
+
+    //$queryをcategory_idの昇順に並び替えて$result_recipesに代入
+    $result_recipes = $query->orderBy('category_id', 'asc')->paginate(15);
+    
+    $category = new Category;
+    $categories = $category->getCategories()->prepend('選択してください', '');
+
+
+    return view('recipes.searchResult', [
+      'result_recipes' => $result_recipes,
       'categories' => $categories,
       'searchWord' => $searchWord,
       'category_id' => $category_id,
@@ -250,6 +288,15 @@ class RecipeController extends Controller
           'id' => $recipe->id,
           'countLikes' => $recipe->count_likes,
       ];
+  }
+
+  // static として宣言することで、 クラスのインスタンス化の必要なしにアクセスすることができるようになる
+  // static プロパティは、矢印演算子 -> によりオブジェクトからアクセス することはできないらしい
+
+  //「\\」「%」「_」などの記号を文字としてエスケープさせる
+  public static function escapeLike($str)
+  {
+      return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
   }
 
 }

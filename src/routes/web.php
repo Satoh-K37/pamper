@@ -29,7 +29,7 @@ Route::prefix('register')->name('register.')->group(function () {
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index');
 // 検索
-Route::get('searchshow', 'RecipeController@searchshow')->name('recipes.searchshow');
+Route::get('searchResult', 'RecipeController@searchResult')->name('recipes.searchResult');
 Route::get('/searchrecipe', 'RecipeController@search')->name('recipes.search');
 // indexとshow以外のメソッドルート
 Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
