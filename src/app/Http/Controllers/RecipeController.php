@@ -23,16 +23,27 @@ class RecipeController extends Controller
       // $allCategoryNames = Category::all();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
-      $searchWord = $request->input('searchWord');
-      $category_id = $request->input('category_id');
 
-      $recipes = Recipe::all()->sortByDesc('created_at');
+      $keyword = $request->input('keyword');
+      $query = Recipe::query();
+        #もしキーワードがあったら
+      if(!empty($keyword))
+      {
+        // 
+        $query->where('recipe_title','like','%'.$keyword.'%')
+        ->orWhere('content','like','%'.$keyword.'%');
+      }
+      // dd($recipes);
+      // $keywordがない場合は全検索を実行する
+      $recipes = $query->orderBy('created_at','desc')->paginate(10);
+
+      // $recipes = Recipe::all()->sortByDesc('created_at');
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
         'categories' => $categories,
-        'searchWord' => $searchWord,
-        'category_id' => $category_id,
+        'keyword' => $keyword,
+        // 'category_id' => $category_id,
 
         ]);
   }
@@ -40,44 +51,64 @@ class RecipeController extends Controller
   // 検索
   public function search(Request $request)
   {
-    //入力される値の中身を定義する
-    $searchWord = $request->input('searchWord'); //キーワードの値
-    $category_id = $request->input('category_id'); //カテゴリの値
-    // dd($searchWord);
-    // recipeテーブルの中身をコピー
+    // 検索フォームに入力されたキーワードを受け取る
+    $keyword = $request->input('keyword');
     $query = Recipe::query();
+
+    // dd($keyword);
+    #もしキーワードがあったら
+    if(!empty($keyword))
+    {
+      // 
+      $query->where('recipe_title','like','%'.$keyword.'%')
+      ->orWhere('content','like','%'.$keyword.'%');
+    }
+    // dd($recipes);
+    // $keywordがない場合は全検索を実行する
+    $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
+
+    // $recipes = Recipe::all()->sortByDesc('created_at');
+
+    // //入力される値の中身を定義する
+    // $searchWord = $request->input('searchWord'); //キーワードの値
+    // $category_id = $request->input('category_id'); //カテゴリの値
+    // // dd($searchWord);
+    // // recipeテーブルの中身をコピー
+    // $query = Recipe::query();
     // dd($query);
 
-    //キーワードが入力された場合、テーブルからrecepeテーブルから一致するレシピを$queryに代入
-    if (isset($searchWord)) {
-      // dd($searchWord);
-      // レシピのtitleとcontentカラムに検索をかける
-      // escapeLikeは指定の記号を文字列としてエスケープするオリジナルメソッド
-      // まずは本文のみで
-      $query->where('content', 'like', '%' . self::escapeLike($searchWord) . '%');
-      // ->onwhere('contentrecipe_title', 'like', '%' . self::escapeLike($searchWord) . '%');
-    }
-
-    // これ多分同一テーブルにcategoryテーブルがある想定だな…
-    // //カテゴリが選択された場合、categoriesテーブルからcategory_idが一致するレシピを$queryに代入
-    // if (isset($category_id)) {
-    //   $query->where('category_id', $category_id);
+    // //キーワードが入力された場合、テーブルからrecepeテーブルから一致するレシピを$queryに代入
+    // if (isset($searchWord)) {
+    //   // dd($searchWord);
+    //   // レシピのtitleとcontentカラムに検索をかける
+    //   // escapeLikeは指定の記号を文字列としてエスケープするオリジナルメソッド
+    //   // まずは本文のみで
+    //   $query->where('content', 'like', '%' . self::escapeLike($searchWord) . '%');
+    //   // ->onwhere('contentrecipe_title', 'like', '%' . self::escapeLike($searchWord) . '%');
     // }
 
-    //$queryをupdated_at降順のに並び替えて$result_recipesに代入
-    $result_recipes = $query->orderBy('updated_at', 'Desc');
-    // ->paginate(15);
+    // // これ多分同一テーブルにcategoryテーブルがある想定だな…
+    // // //カテゴリが選択された場合、categoriesテーブルからcategory_idが一致するレシピを$queryに代入
+    // // if (isset($category_id)) {
+    // //   $query->where('category_id', $category_id);
+    // // }
+
+    // //$queryをupdated_at降順のに並び替えて$result_recipesに代入
+    // $result_recipes = $query->orderBy('updated_at', 'Desc');
+    // // ->paginate(15);
     // dd($result_recipes);
 
-    $category = new Category;
-    $categories = $category->getCategories()->prepend('選択してください', '');
+    // $category = new Category;
+    // $categories = $category->getCategories()->prepend('選択してください', '');
 
+    
 
     return view('recipes.searchresult', [
       'result_recipes' => $result_recipes,
-      'categories' => $categories,
-      'searchWord' => $searchWord,
-      'category_id' => $category_id,
+      'keyword' => $keyword,
+      // 'categories' => $categories,
+      // 'searchWord' => $searchWord,
+      // 'category_id' => $category_id,
       ]);
   }
 
