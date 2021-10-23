@@ -28,9 +28,11 @@ Route::prefix('register')->name('register.')->group(function () {
 });
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index');
+// 検索フォームを表示させるルート
+Route::get('/searchresult', 'RecipeController@search')->name('recipes.searchresult');
 // 検索
-Route::get('searchResult', 'RecipeController@searchResult')->name('recipes.searchResult');
-Route::get('/searchrecipe', 'RecipeController@search')->name('recipes.search');
+// Route::get('searchResult', 'RecipeController@searchResult')->name('recipes.searchResult');
+
 // indexとshow以外のメソッドルート
 Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
 // レシピ詳細のルート

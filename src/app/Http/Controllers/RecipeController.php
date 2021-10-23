@@ -3,13 +3,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecipeRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 use App\Recipe;
 use App\Tag;
 use App\Category;
-
-use App\Http\Requests\RecipeRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str; 
 
 class RecipeController extends Controller
 {
@@ -37,53 +37,43 @@ class RecipeController extends Controller
         ]);
   }
 
-  // 検索結果
-  public function searchResult(Request $request)
-  {
-    $category = new Category;
-    $categories = $category->getCategories()->prepend('選択してください', '');
-    $searchWord = $request->input('searchWord');
-    $category_id = $request->input('category_id');
-
-    $recipes = Recipe::all()->sortByDesc('created_at');
-    return view('recipes.searchResult', [
-      'recipes' => $recipes,
-      'categories' => $categories,
-      'searchWord' => $searchWord,
-      'category_id' => $category_id,
-      ]);
-  }
-
   // 検索
   public function search(Request $request)
   {
     //入力される値の中身を定義する
     $searchWord = $request->input('searchWord'); //キーワードの値
     $category_id = $request->input('category_id'); //カテゴリの値
-
+    // dd($searchWord);
+    // recipeテーブルの中身をコピー
     $query = Recipe::query();
+    // dd($query);
 
     //キーワードが入力された場合、テーブルからrecepeテーブルから一致するレシピを$queryに代入
     if (isset($searchWord)) {
+      // dd($searchWord);
       // レシピのtitleとcontentカラムに検索をかける
       // escapeLikeは指定の記号を文字列としてエスケープするオリジナルメソッド
-      $query->where('title', 'like', '%' . self::escapeLike($searchWord) . '%')
-      ->onwhere('content', 'like', '%' . self::escapeLike($searchWord) . '%');
+      // まずは本文のみで
+      $query->where('content', 'like', '%' . self::escapeLike($searchWord) . '%');
+      // ->onwhere('contentrecipe_title', 'like', '%' . self::escapeLike($searchWord) . '%');
     }
 
-    //カテゴリが選択された場合、categoriesテーブルからcategory_idが一致するレシピを$queryに代入
-    if (isset($category_id)) {
-      $query->where('category_id', $category_id);
-    }
+    // これ多分同一テーブルにcategoryテーブルがある想定だな…
+    // //カテゴリが選択された場合、categoriesテーブルからcategory_idが一致するレシピを$queryに代入
+    // if (isset($category_id)) {
+    //   $query->where('category_id', $category_id);
+    // }
 
-    //$queryをcategory_idの昇順に並び替えて$result_recipesに代入
-    $result_recipes = $query->orderBy('category_id', 'asc')->paginate(15);
-    
+    //$queryをupdated_at降順のに並び替えて$result_recipesに代入
+    $result_recipes = $query->orderBy('updated_at', 'Desc');
+    // ->paginate(15);
+    // dd($result_recipes);
+
     $category = new Category;
     $categories = $category->getCategories()->prepend('選択してください', '');
 
 
-    return view('recipes.searchResult', [
+    return view('recipes.searchresult', [
       'result_recipes' => $result_recipes,
       'categories' => $categories,
       'searchWord' => $searchWord,
