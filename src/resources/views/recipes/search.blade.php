@@ -1,7 +1,7 @@
 <div class="container">
   <div class="mx-auto">
     <br>
-    <h2 class="text-center">レシピ検索</h2>
+    <!-- <h2 class="text-center">レシピ検索</h2> -->
     <br>
     <!--検索フォーム-->
     <div class="row">
