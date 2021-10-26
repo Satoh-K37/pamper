@@ -27,17 +27,17 @@ class RecipeController extends Controller
       $keyword = $request->input('keyword');
       $query = Recipe::query();
         #もしキーワードがあったら
-      if(!empty($keyword))
-      {
-        // 
-        $query->where('recipe_title','like','%'.$keyword.'%')
-        ->orWhere('content','like','%'.$keyword.'%');
-      }
+      // if(!empty($keyword))
+      // {
+      //   // 
+      //   $query->where('recipe_title','like','%'.$keyword.'%')
+      //   ->orWhere('content','like','%'.$keyword.'%');
+      // }
       // dd($recipes);
       // $keywordがない場合は全検索を実行する
-      $recipes = $query->orderBy('created_at','desc')->paginate(10);
+      // $recipes = $query->orderBy('created_at','desc')->paginate(10);
 
-      // $recipes = Recipe::all()->sortByDesc('created_at');
+      $recipes = Recipe::all()->sortByDesc('created_at');
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
@@ -51,21 +51,69 @@ class RecipeController extends Controller
   // 検索
   public function search(Request $request)
   {
+    // 検索の概要
+    // １、キーワードとカテゴリが選択されずに検索ボタンがクリックされた場合は、全件表示させる
+    // ２、キーワードが入力されておるが、カテゴリが入力されていない場合は、
+    //   入力されたキーワードで本文とタイトルにあいまい検索を実行し、検索結果を表示
+    // ３、キーワードが入力されていないが、カテゴリが選択されている場合、カテゴリが紐づいているレシピを全て表示する
+    // ４、キーワードとカテゴリのどちらも選択されている場合は、
+    //   キーワードがタイトルと本文と部分一致してるかつ選択したカテゴリと紐づくレシピを表示させる
+
+
     // 検索フォームに入力されたキーワードを受け取る
     $keyword = $request->input('keyword');
+    // 検索時に選択されたcategory_idを受け取る
+    $category_id = $request->input('category_id');
     $query = Recipe::query();
 
     // dd($keyword);
-    #もしキーワードがあったら
+    #もしキーワードが存在している場合は処理を行う
     if(!empty($keyword))
     {
       // 
       $query->where('recipe_title','like','%'.$keyword.'%')
       ->orWhere('content','like','%'.$keyword.'%');
     }
+
+    
+    // カテゴリーのIDが存在している場合に処理を行う。
+    if(!empty($category_id)){
+      // $storeId = [1,2,3]
+      // $query = Menu::query();
+      $query->whereHas('recipes', function($q) use($category_id)  {
+          $q->whereIn('category_recipe.category_id', $category_id);
+      });
+      dd($q);
+    }
     // dd($recipes);
+    
+    
+    // if(!empty($keyword)){
+    //   // $keywordに値がある場合
+    //   $query->where('recipe_title','like','%'.$keyword.'%')
+    //   ->orWhere('content','like','%'.$keyword.'%');
+    // }elseif(!empty($category_id)){
+    //   $query->whereHas('categories', function($q) use($category_id)  {
+    //       $q->whereIn('category_recipe.recipe_id', $category_id);
+    //   });
+    // }elseif(!empty($keyword) && !empty($category_id)){
+    //   // $keywordと$category_idのどちらも存在している場合
+    //   $query->where('recipe_title','like','%'.$keyword.'%')
+    //   ->orWhere('content','like','%'.$keyword.'%');
+    //   $query->whereHas('categories', function($q) use($category_id)  {
+    //       $q->whereIn('category_recipe.recipe_id', $category_id);
+    //   });
+    // }else{
+    //   // $keywordと$category_idのどちらも選択されずに検索ボタンがクリックされた場合
+    //   $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
+    // }
+
+    // キーワードとカテゴリのどちらも選択されている
     // $keywordがない場合は全検索を実行する
     $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
+
+
+    
 
     // $recipes = Recipe::all()->sortByDesc('created_at');
 
