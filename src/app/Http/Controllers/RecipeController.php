@@ -25,6 +25,7 @@ class RecipeController extends Controller
       $categories = $category->getCategories()->prepend('選択してください', '');
 
       $keyword = $request->input('keyword');
+      $category_id = $request->input('category_id');
       $query = Recipe::query();
         #もしキーワードがあったら
       // if(!empty($keyword))
@@ -35,30 +36,20 @@ class RecipeController extends Controller
       // }
       // dd($recipes);
       // $keywordがない場合は全検索を実行する
-      // $recipes = $query->orderBy('created_at','desc')->paginate(10);
-
-      $recipes = Recipe::all()->sortByDesc('created_at');
+      $recipes = $query->orderBy('created_at','desc')->paginate(10);
+      // $recipes = Recipe::all()->sortByDesc('created_at');
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
         'categories' => $categories,
         'keyword' => $keyword,
-        // 'category_id' => $category_id,
-
+        'category_id' => $category_id,
         ]);
   }
 
   // 検索
   public function search(Request $request)
   {
-    // 検索の概要
-    // １、キーワードとカテゴリが選択されずに検索ボタンがクリックされた場合は、全件表示させる
-    // ２、キーワードが入力されておるが、カテゴリが入力されていない場合は、
-    //   入力されたキーワードで本文とタイトルにあいまい検索を実行し、検索結果を表示
-    // ３、キーワードが入力されていないが、カテゴリが選択されている場合、カテゴリが紐づいているレシピを全て表示する
-    // ４、キーワードとカテゴリのどちらも選択されている場合は、
-    //   キーワードがタイトルと本文と部分一致してるかつ選択したカテゴリと紐づくレシピを表示させる
-
 
     // 検索フォームに入力されたキーワードを受け取る
     $keyword = $request->input('keyword');
@@ -66,97 +57,36 @@ class RecipeController extends Controller
     $category_id = $request->input('category_id');
     $query = Recipe::query();
 
+    // dd($category_id);
     // dd($keyword);
     #もしキーワードが存在している場合は処理を行う
     if(!empty($keyword))
     {
-      // 
-      $query->where('recipe_title','like','%'.$keyword.'%')
-      ->orWhere('content','like','%'.$keyword.'%');
+      // recipeタイトルと本文にフォームに入力されたキーワードと部分一致するものがあれば取得する
+      $query->where('recipe_title','like','%'. $keyword .'%')
+      ->orWhere('content','like','%'. $keyword .'%');
     }
 
-    
     // カテゴリーのIDが存在している場合に処理を行う。
     if(!empty($category_id)){
-      // $storeId = [1,2,3]
-      // $query = Menu::query();
-      $query->whereHas('recipes', function($q) use($category_id)  {
-          $q->whereIn('category_recipe.category_id', $category_id);
+      $query->whereHas('categories', function ($query) use ($category_id) {
+        $query->where('categories.id', $category_id);
       });
-      dd($q);
     }
-    // dd($recipes);
-    
-    
-    // if(!empty($keyword)){
-    //   // $keywordに値がある場合
-    //   $query->where('recipe_title','like','%'.$keyword.'%')
-    //   ->orWhere('content','like','%'.$keyword.'%');
-    // }elseif(!empty($category_id)){
-    //   $query->whereHas('categories', function($q) use($category_id)  {
-    //       $q->whereIn('category_recipe.recipe_id', $category_id);
-    //   });
-    // }elseif(!empty($keyword) && !empty($category_id)){
-    //   // $keywordと$category_idのどちらも存在している場合
-    //   $query->where('recipe_title','like','%'.$keyword.'%')
-    //   ->orWhere('content','like','%'.$keyword.'%');
-    //   $query->whereHas('categories', function($q) use($category_id)  {
-    //       $q->whereIn('category_recipe.recipe_id', $category_id);
-    //   });
-    // }else{
-    //   // $keywordと$category_idのどちらも選択されずに検索ボタンがクリックされた場合
-    //   $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
-    // }
 
-    // キーワードとカテゴリのどちらも選択されている
     // $keywordがない場合は全検索を実行する
     $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
 
-
-    
-
-    // $recipes = Recipe::all()->sortByDesc('created_at');
-
-    // //入力される値の中身を定義する
-    // $searchWord = $request->input('searchWord'); //キーワードの値
-    // $category_id = $request->input('category_id'); //カテゴリの値
-    // // dd($searchWord);
-    // // recipeテーブルの中身をコピー
-    // $query = Recipe::query();
-    // dd($query);
-
-    // //キーワードが入力された場合、テーブルからrecepeテーブルから一致するレシピを$queryに代入
-    // if (isset($searchWord)) {
-    //   // dd($searchWord);
-    //   // レシピのtitleとcontentカラムに検索をかける
-    //   // escapeLikeは指定の記号を文字列としてエスケープするオリジナルメソッド
-    //   // まずは本文のみで
-    //   $query->where('content', 'like', '%' . self::escapeLike($searchWord) . '%');
-    //   // ->onwhere('contentrecipe_title', 'like', '%' . self::escapeLike($searchWord) . '%');
-    // }
-
-    // // これ多分同一テーブルにcategoryテーブルがある想定だな…
-    // // //カテゴリが選択された場合、categoriesテーブルからcategory_idが一致するレシピを$queryに代入
-    // // if (isset($category_id)) {
-    // //   $query->where('category_id', $category_id);
-    // // }
-
-    // //$queryをupdated_at降順のに並び替えて$result_recipesに代入
-    // $result_recipes = $query->orderBy('updated_at', 'Desc');
-    // // ->paginate(15);
-    // dd($result_recipes);
-
-    // $category = new Category;
-    // $categories = $category->getCategories()->prepend('選択してください', '');
+    $category = new Category;
+    $categories = $category->getCategories()->prepend('選択してください', '');
 
     
 
     return view('recipes.searchresult', [
       'result_recipes' => $result_recipes,
       'keyword' => $keyword,
-      // 'categories' => $categories,
-      // 'searchWord' => $searchWord,
-      // 'category_id' => $category_id,
+      'categories' => $categories,
+      'category_id' => $category_id,
       ]);
   }
 
@@ -363,10 +293,13 @@ class RecipeController extends Controller
   // static プロパティは、矢印演算子 -> によりオブジェクトからアクセス することはできないらしい
 
   //「\\」「%」「_」などの記号を文字としてエスケープさせる
-  public static function escapeLike($str)
-  {
-      return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
-  }
+  // セキュリティに必要らしいんだけどイマイチ理解できないので一旦コメントアウトしておく。
+  // $query->where('recipe_title','like','%'. $keyword .'%')これでエスケープできてるっぽい
+  //参照：https://qiita.com/horikeso/items/393663f1bffe63bd937e
+  // public static function escapeLike($str)
+  // {
+  //     return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
+  // }
 
 }
 
