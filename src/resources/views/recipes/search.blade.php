@@ -16,7 +16,19 @@
             <div class="col-sm-auto">
               <button type="submit" class="btn btn-primary ">検索</button>
             </div>
-          </div>     
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2">レシピカテゴリ</label>
+            <div class="col-sm-3">
+              <select name="category_id" class="form-control" value="{{ $category_id }}">
+                @foreach($categories as $id => $category_name)
+                <option value="{{ $id }}">
+                  {{ $category_name }}
+                </option>  
+                @endforeach
+              </select>
+            </div>
+          </div>
         </form>
       </div>
     </div>
