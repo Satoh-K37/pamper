@@ -50,7 +50,7 @@ class RecipeController extends Controller
   // 検索
   public function search(Request $request)
   {
-
+    // dd($request->get('id'));
     // 検索フォームに入力されたキーワードを受け取る
     $keyword = $request->input('keyword');
     // 検索時に選択されたcategory_idを受け取る
@@ -65,6 +65,7 @@ class RecipeController extends Controller
       // recipeタイトルと本文にフォームに入力されたキーワードと部分一致するものがあれば取得する
       $query->where('recipe_title','like','%'. $keyword .'%')
       ->orWhere('content','like','%'. $keyword .'%');
+      
     }
 
     // カテゴリーのIDが存在している場合に処理を行う。
@@ -76,10 +77,12 @@ class RecipeController extends Controller
 
     // $keywordがない場合は全検索を実行する
     $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
-
+    
     $category = new Category;
     $categories = $category->getCategories()->prepend('選択してください', '');
-
+    
+    $old_category_id = $category_id;
+    // dd($old_category_id);
     
 
     return view('recipes.searchresult', [
@@ -87,6 +90,7 @@ class RecipeController extends Controller
       'keyword' => $keyword,
       'categories' => $categories,
       'category_id' => $category_id,
+      'old_category_id' => $old_category_id,
       ]);
   }
 

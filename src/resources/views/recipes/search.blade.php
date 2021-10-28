@@ -18,13 +18,13 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2">レシピカテゴリ</label>
+            <label for="category_id" class="col-sm-2">カテゴリ</label>
             <div class="col-sm-3">
               <select name="category_id" class="form-control" value="{{ $category_id }}">
-                @foreach($categories as $id => $category_name)
-                <option value="{{ $id }}">
-                  {{ $category_name }}
-                </option>  
+                @foreach($categories as $id => $name)
+                  <option value="{{ $id }}" {{ old('category', $old_category_id ?? '') == $id ? 'selected' : ''}}>
+                    {{ $name }}
+                  </option>  
                 @endforeach
               </select>
             </div>
