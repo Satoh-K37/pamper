@@ -4,9 +4,32 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
+
+  public function edit($id)
+  {
+    // ログインしているユーザーの情報を取得
+    $auth = Auth::user();
+    return view('users.edit-profile',[ 'auth' => $auth ]);
+  }
+
+  public function update(Request $request)
+  {
+    $user_form = $request->all();
+    $user = Auth::user();
+    //不要な「_token」の削除
+    unset($user_form['_token']);
+    //保存
+    $user->fill($user_form)->save();
+    //リダイレクト
+    return redirect('users.show');
+
+  }
+
   public function show(string $name)
   {
       $user = User::where('name', $name)->first();
