@@ -10,23 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
-  public function edit($id)
+  public function edit()
   {
     // ログインしているユーザーの情報を取得
-    $auth = Auth::user();
-    return view('users.edit-profile',[ 'auth' => $auth ]);
+    return view('users.edit', ['user' => Auth::user() ]);
+
   }
 
-  public function update(Request $request)
+  public function update(Request $request , String $name)
   {
-    $user_form = $request->all();
-    $user = Auth::user();
-    //不要な「_token」の削除
-    unset($user_form['_token']);
-    //保存
-    $user->fill($user_form)->save();
-    //リダイレクト
-    return redirect('users.show');
 
   }
 
