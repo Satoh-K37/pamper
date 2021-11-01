@@ -36,7 +36,8 @@ class RecipeController extends Controller
       // }
       // dd($recipes);
       // $keywordがない場合は全検索を実行する
-      $recipes = $query->orderBy('created_at','desc')->paginate(10);
+      $recipes = $query->orderBy('created_at','desc')->load('user');
+      // ->paginate(10);
       // $recipes = Recipe::all()->sortByDesc('created_at');
       return view('recipes.index', [
         'recipes' => $recipes,
