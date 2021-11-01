@@ -17,7 +17,7 @@ services:
       - DB_HOST=db
       - DB_PORT=3306
       - DB_DATABASE=${DB_NAME}
-      - DB_USERNAME=${DB_USER}
+      - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
 
   web:
@@ -52,7 +52,7 @@ services:
     # MySQLの環境変数
     environment:
       MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
+      MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       TZ: 'Asia/Tokyo'
@@ -67,9 +67,6 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOSTS=db
-      # rootでやるとphpMyAdominにアクセスできるようにはなった
-      # - PMA_USER=root
-      # - PMA_PASSWORD=root
       - PMA_USER=${DB_USERNAME}
       - PMA_PASSWORD=${DB_PASSWORD}
     links:
