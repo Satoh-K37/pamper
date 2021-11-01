@@ -67,8 +67,13 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOSTS=db
+      # rootでやるとphpMyAdominにアクセスできるようにはなった
+      # - PMA_USER=root
+      # - PMA_PASSWORD=root
       - PMA_USER=${DB_USERNAME}
       - PMA_PASSWORD=${DB_PASSWORD}
+    links:
+      - db:mysql
       
   mailhog:
     image: mailhog/mailhog
