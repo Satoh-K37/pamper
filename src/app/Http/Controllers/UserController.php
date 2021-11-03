@@ -13,8 +13,9 @@ class UserController extends Controller
   public function edit($id)
   {
     // ログインしているユーザーの情報を取得
-    $auth = Auth::user();
-    return view('users.edit-profile',[ 'auth' => $auth ]);
+    // $auth = Auth::user();
+    $user = User::where('name', $name)->first();
+    return view('users.edit',[ 'user' => $user ]);
   }
 
   public function update(Request $request)
@@ -32,10 +33,12 @@ class UserController extends Controller
 
   public function show(string $name)
   {
+      // $auth = Auth::user();
       $user = User::where('name', $name)->first();
       $recipes = $user->recipes->sortByDesc('created_at');
 
       return view('users.show', [
+          // 'auth' => $auth,
           'user' => $user,
           'recipes' => $recipes,
       ]);
