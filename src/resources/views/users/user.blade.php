@@ -19,11 +19,9 @@
         {{ $user->name }}
       </a>
       <p></p>
-      <a href="{{ route('users.edit-profile' , ['name' => $user->name]) }}"class="text-dark">
-        プロフィールを編集
-      </a>
+
     </h2>
-      <a href="{{ route('users.edit' }}"><button class="user-btn">ユーザー登録内容の編集</button></a>
+      <a href="{{ route('users.edit', ['name' => $user->name] )}}"><button class="user-btn">ユーザー登録内容の編集</button></a>
   </div>
   <div class="card-body">
     <div class="card-text">
