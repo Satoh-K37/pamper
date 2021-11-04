@@ -1,43 +1,31 @@
 @extends('app')
 
-@section('title')
-    プロフィール編集
-@endsection
+@section('title', $user->name)
 
 @section('content')
   @include('nav')
-    <div id="profile-edit-form" class="container">
-        <div class="row">
-            <div class="col-8 offset-2 bg-white">
-                <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
-                <form method="POST" action="{{ route('edit-profile') }}" class="p-5" enctype="multipart/form-data">
-                    @csrf
-                    {{-- アバター画像 --}}
-                    <span class="avatar-form image-picker">
-                        <input type="file" name="avatar" class="d-none"  id="avatar" />
-                        <label for="avatar" class="d-inline-block">
-                            <img src= class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                        </label>
-                    </span>
-
-                    {{-- ニックネーム --}}
-                    <div class="form-group mt-3">
-                        <label for="name">ニックネーム</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <!-- <strong>{{ $message }}</strong> -->
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-0 mt-3">
-                        <button type="submit" class="btn btn-block btn-secondary">
-                            保存
-                        </button>
-                    </div>
-                </form>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">ユーザ編集</div>
+            <div class="card-body">
+              <!-- 重要な箇所ここから -->
+              <form action=""
+                method="post">
+                @csrf
+                <p>ID: {{ $user->id }}</p>
+                <input type="hidden" name="id" value="{{ $user->id }}" />
+                <p>名前</p>
+                <input type="text" name="name" value="{{ $user->name }}" />
+                <p>メール</p>
+                <input type="text" name="email" value="{{ $user->email }}" /><br />
+                <input type="submit" value="更新" />
+              </form>
+              <!-- 重要な箇所ここまで -->
             </div>
+          </div>
         </div>
+      </div>
     </div>
 @endsection

@@ -53,8 +53,12 @@ Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 Route::prefix('users')->name('users.')->group(function () {
   // Route::get('user/index', 'UserController@index');
   Route::get('/{name}', 'UserController@show')->name('show');
-  Route::get('edit', 'UserController@edit')->name('edit');
-  Route::post('edit', 'UserController@update')->name('update');
+  // Route::get('edit/{id}', 'UsersController@edit')->name('users.edit');
+  // Route::get('edit/{id}', 'UsersController@getEdit')->name('users.edit');
+  // Route::post('edit/{id}', 'UsersController@postEdit')->name('users.postEdit');
+
+  Route::get('/{name}/edit', 'UserController@edit')->name('edit');
+  Route::post('/{name}/update', 'UserController@update')->name('update');
   // Route::get('edit', 'UserController@edit')->name('edit');
   // いいね一覧
   Route::get('/{name}/likes', 'UserController@likes')->name('likes');
