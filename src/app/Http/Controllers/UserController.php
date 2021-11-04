@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+;
+
+
 
 
 class UserController extends Controller
 {
+  public function __construct(User $user)
+  {
+      $this->user = $user;
+  }
 
-  public function edit($id)
+  public function edit(String $name)
   {
     // ログインしているユーザーの情報を取得
     // $auth = Auth::user();
     $user = User::where('name', $name)->first();
-    return view('users.edit',[ 'user' => $user ]);
+    // $user = $this->user->selectUserFindById($id);
+    return view('users.edit', compact('user'));
+
+    // return view('users.edit',[ 'user' => $user ]);
   }
 
   public function update(Request $request)
