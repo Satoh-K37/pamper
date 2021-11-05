@@ -22,22 +22,29 @@ class UserController extends Controller
     // ログインしているユーザーの情報を取得
     // $auth = Auth::user();
     $user = User::where('name', $name)->first();
-    // $user = $this->user->selectUserFindById($id);
-    return view('users.edit', compact('user'));
+    // dd($user);    // $user = $this->user->selectUserFindById($id);
+    // return view('users.edit', compact('user'));
 
-    // return view('users.edit',[ 'user' => $user ]);
+    return view('users.edit',[ 'user' => $user ]);
   }
 
-  public function update(Request $request)
+  public function update(Request $request, String $name)
   {
+    $user = User::where('name', $name)->first();
     $user_form = $request->all();
-    $user = Auth::user();
+    // $user = Auth::user();
     //不要な「_token」の削除
     unset($user_form['_token']);
     //保存
     $user->fill($user_form)->save();
+    $recipes = $user->recipes->sortByDesc('created_at');
     //リダイレクト
-    return redirect('users.show');
+    // return view('users.edit',[ 'user' => $user ]);
+    return view('users.show', [
+      // 'auth' => $auth,
+      'user' => $user,
+      'recipes' => $recipes,
+  ]);
 
   }
 
