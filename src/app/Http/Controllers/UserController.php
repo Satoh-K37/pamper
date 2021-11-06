@@ -30,13 +30,18 @@ class UserController extends Controller
 
   public function update(Request $request, String $name)
   {
+    // dd($request->all());
     $user = User::where('name', $name)->first();
     $user_form = $request->all();
     // $user = Auth::user();
     //不要な「_token」の削除
     unset($user_form['_token']);
     //保存
+    // dd($user_form);
     $user->fill($user_form)->save();
+    $user->password = bcrypt($request->get('password'));
+
+    dd($$user->password);
     $recipes = $user->recipes->sortByDesc('created_at');
     //リダイレクト
     // return view('users.edit',[ 'user' => $user ]);
@@ -131,6 +136,5 @@ class UserController extends Controller
 
       return ['name' => $name];
   }
-
 
 }
