@@ -26,6 +26,7 @@ Route::prefix('register')->name('register.')->group(function () {
   Route::get('/{provider}', 'Auth\RegisterController@showProviderUserRegistrationForm')->name('{provider}');
   Route::post('/{provider}', 'Auth\RegisterController@registerProviderUser')->name('{provider}');
 });
+
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index');
 // 検索フォームを表示させるルート
@@ -43,23 +44,24 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::delete('/{recipe}/like', 'RecipeController@unlike')->name('unlike')->middleware('auth');
 });
 
-
 // コメント
 Route::post('/recipe/{comment_id}/comments','CommentController@store');
-
 // タグ表示
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
+
+
+## PW変更
+// 通常のアクセス（GET）の場合はshowChangePasswordForm、メソッドを実行する
+Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
+// パスワードの変更処理（POST）の場合はChangePasswordメソッドを実行する
+Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
+
 // アカウントマイページ関連
 Route::prefix('users')->name('users.')->group(function () {
   // Route::get('user/index', 'UserController@index');
   Route::get('/{name}', 'UserController@show')->name('show');
-  // Route::get('edit/{id}', 'UsersController@edit')->name('users.edit');
-  // Route::get('edit/{id}', 'UsersController@getEdit')->name('users.edit');
-  // Route::post('edit/{id}', 'UsersController@postEdit')->name('users.postEdit');
-
   Route::get('/{name}/edit', 'UserController@edit')->name('edit');
   Route::post('/{name}/update', 'UserController@update')->name('update');
-  // Route::get('edit', 'UserController@edit')->name('edit');
   // いいね一覧
   Route::get('/{name}/likes', 'UserController@likes')->name('likes');
   // Route::get('/{name}/bookmarks', 'UserController@bookmarks')->name('bookmarks');

@@ -41,13 +41,24 @@
                     </div>
 
                     <!-- <div class="form-group mt-3">
-                        <label for="password">パスワード</label>
-                        <input id="password" type="password" class="form-control @error('name') is-invalid @enderror" name="password" value="{{ old('password', $user->password) }}" required autocomplete="name" autofocus>
+                        <label for="self_introduction">BIO</label>
+                        <input id="self_introduction" type="textarea" class="form-control @error('name') is-invalid @enderror" name="self_introduction" value="{{ old('self_introduction', $user->self_introduction) }}" required autocomplete="name" autofocus>
                         @error('name')
                         <span class="invalid-feedback" role="alert">
                         </span>
                         @enderror
                     </div> -->
+
+                    <div class="form-group mt-3">
+                        <label for="password">パスワード</label>
+                        <!-- <input id="password" type="password" class="form-control @error('name') is-invalid @enderror" name="password" value="{{ old('password', $user->password) }}" required autocomplete="name" autofocus> -->
+                        <input id="password" type="password" class="form-control @error('password', 'updatePassword') is-invalid @enderror" 
+                          value="{{ old('password', $user->password) }}" name="password" required autocomplete="new-password">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                        </span>
+                        @enderror
+                    </div>
 
                     <div class="form-group mb-0 mt-3">
                         <button type="submit" class="btn btn-block btn-secondary">
