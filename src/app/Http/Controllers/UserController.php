@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-;
 
 
 
@@ -41,7 +41,7 @@ class UserController extends Controller
     $user->fill($user_form)->save();
     $user->password = bcrypt($request->get('password'));
 
-    dd($$user->password);
+    // dd($user->password);
     $recipes = $user->recipes->sortByDesc('created_at');
     //リダイレクト
     // return view('users.edit',[ 'user' => $user ]);

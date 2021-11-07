@@ -19,9 +19,6 @@
         {{ $user->name }}
       </a>
       <p></p>
-      <a href="" class="text-dark">
-        {{ $user->self_introduction }}
-      </a>
     </h2>
     @if( Auth::id() === $user->id )
       <a href="{{ route('users.edit', ['name' => $user->name] )}}">
@@ -30,18 +27,13 @@
           ユーザー登録内容の編集
         </button>
       </a>
-      <p></p>
       
-      
-      <a href="{{ route('password.form', ['name' => $user->name]) }}">
-      
-
-        <button class="btn blue-gradient btn-block" style="width: 25%; padding: 10px;">
-          <!-- {{ __('Change Password') }} -->
-          パスワードの変更
-        </button>
-      </a>
     @endif
+
+    <br>
+    <p class="text-dark">
+        {{ $user->self_introduction }}
+    </p>
 
 
   </div>

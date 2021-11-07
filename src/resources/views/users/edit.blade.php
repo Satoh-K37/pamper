@@ -40,24 +40,16 @@
                         @enderror
                     </div>
 
-                    <!-- <div class="form-group mt-3">
-                        <label for="self_introduction">BIO</label>
-                        <input id="self_introduction" type="textarea" class="form-control @error('name') is-invalid @enderror" name="self_introduction" value="{{ old('self_introduction', $user->self_introduction) }}" required autocomplete="name" autofocus>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                        </span>
-                        @enderror
-                    </div> -->
-
                     <div class="form-group mt-3">
-                        <label for="password">パスワード</label>
-                        <!-- <input id="password" type="password" class="form-control @error('name') is-invalid @enderror" name="password" value="{{ old('password', $user->password) }}" required autocomplete="name" autofocus> -->
-                        <input id="password" type="password" class="form-control @error('password', 'updatePassword') is-invalid @enderror" 
-                          value="{{ old('password', $user->password) }}" name="password" required autocomplete="new-password">
-                        @error('name')
+                        <label for="self_introduction">自己紹介</label>
+                        
+                        <textarea id="self_introduction" name="self_introduction" style="height: 100px;" class="form-control">{{ old('self_introduction', $user->self_introduction) }}
+                        </textarea>
+
+                        <!-- @error('name')
                         <span class="invalid-feedback" role="alert">
                         </span>
-                        @enderror
+                        @enderror -->
                     </div>
 
                     <div class="form-group mb-0 mt-3">
@@ -66,8 +58,22 @@
                         </button>
                     </div>
                 </form>
+                  <div class="text-right">
+                    <a href="{{ route('password.form', ['name' => $user->name]) }}" >
+                      パスワードの変更
+                    </a>
+                  </div>
             </div>
         </div>
     </div>
 @endsection
-
+<!-- 
+                    <div class="form-group mb-0 mt-3">
+                      <a href="{{ route('password.form', ['name' => $user->name]) }}">
+                        <button class="btn blue-gradient btn-block" >
+                        <button class="btn blue-gradient btn-block" style="width: 25%; padding: 10px;">
+                          {{ __('Change Password') }}
+                          パスワードの変更
+                        </button>
+                      </a>
+                    </div> -->
