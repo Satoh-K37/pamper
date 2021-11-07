@@ -47,7 +47,6 @@ class RecipeRequest extends FormRequest
         return [
             'recipe_title' => 'レシピタイトル',
             'content' => '本文',
-            'content' => '本文',
             'image_path' => '画像',
             'seasoning' => '調味料',
             'step_content' => 'Step1',
@@ -62,6 +61,7 @@ class RecipeRequest extends FormRequest
         ];
     }
 
+    // タグの個数を制限する
     public function passedValidation()
     {
         $this->tags = collect(json_decode($this->tags))
