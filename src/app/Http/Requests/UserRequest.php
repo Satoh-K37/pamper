@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
           'name' => 'required|max:20',
           // 'password' => '' ,
           'self_introduction' => 'max:200',
-          // 'profile_image',
+          'profile_image',
         ];
     }
 
@@ -36,6 +36,7 @@ class UserRequest extends FormRequest
         return [
           'name' => 'ユーザー名',
           'self_introduction' => '自己紹介',
+          'profile_image' => 'アイコン',
         ];
     }
 

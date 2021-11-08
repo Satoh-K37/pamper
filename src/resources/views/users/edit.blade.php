@@ -12,11 +12,15 @@
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
                 <form method="POST" class="p-5" action="{{ route('users.update',[$user->name]) }}" enctype="multipart/form-data">
                     @csrf
-                    {{-- アバター画像 --}}
+                    {{-- アイコン --}}
                     <span class="avatar-form image-picker">
-                        <input type="file" name="avatar" class="d-none"  id="avatar" />
-                        <label for="avatar" class="d-inline-block">
+                        <input type="file" name="profile_image" class="d-none"  id="profile_image"/>
+                        <label for="profile_image" class="d-inline-block">
+                          @if(isset($user->profile_image))
+                            <img src="{{ asset("storage/$user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                          @else
                             <img src= class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                          @endif
                         </label>
                     </span>
 
@@ -30,15 +34,15 @@
                         </span>
                         @enderror
                     </div>
-                    <div class="form-group mt-3">
+                    <!-- <div class="form-group mt-3">
                         <label for="email">メールアドレス</label>
                         <input id="email" type="text" class="form-control @error('name') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="name" autofocus>
                         @error('name')
                         <span class="invalid-feedback" role="alert">
-                            <!-- <strong>{{ $message }}</strong> -->
+                            <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                    </div>
+                    </div> -->
 
                     <div class="form-group mt-3">
                         <label for="self_introduction">自己紹介</label>
