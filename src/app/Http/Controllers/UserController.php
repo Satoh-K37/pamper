@@ -60,8 +60,9 @@ class UserController extends Controller
       $request->profile_image->storeAs('public/icons/', $iconFile);
     }
 
-    $user->password = bcrypt($request->get('password'));
     $user->fill($user_form)->save();
+    $user->password = bcrypt($request->get('password'));
+    
     
     $recipes = $user->recipes->sortByDesc('created_at');
     return view('users.show', [
