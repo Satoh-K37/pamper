@@ -20,26 +20,14 @@ class RecipeController extends Controller
 
   public function index(Request $request)
   {
-      // $allCategoryNames = Category::all();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
 
       $keyword = $request->input('keyword');
       $category_id = $request->input('category_id');
       $query = Recipe::query();
-        #もしキーワードがあったら
-      // if(!empty($keyword))
-      // {
-      //   // 
-      //   $query->where('recipe_title','like','%'.$keyword.'%')
-      //   ->orWhere('content','like','%'.$keyword.'%');
-      // }
-      // dd($recipes);
-      // $keywordがない場合は全検索を実行する
       $recipes = $query->orderBy('created_at','desc')->paginate(10);
-      // ->load('user');
-      // ->paginate(10);
-      // $recipes = Recipe::all()->sortByDesc('created_at');
+
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
@@ -52,24 +40,19 @@ class RecipeController extends Controller
   // 検索
   public function search(Request $request)
   {
-    // dd($request->get('id'));
     // 検索フォームに入力されたキーワードを受け取る
     $keyword = $request->input('keyword');
     // 検索時に選択されたcategory_idを受け取る
     $category_id = $request->input('category_id');
     $query = Recipe::query();
 
-    // dd($category_id);
-    // dd($keyword);
     #もしキーワードが存在している場合は処理を行う
     if(!empty($keyword))
     {
       // recipeタイトルと本文にフォームに入力されたキーワードと部分一致するものがあれば取得する
       $query->where('recipe_title','like','%'. $keyword .'%')
       ->orWhere('content','like','%'. $keyword .'%');
-      
     }
-
     // カテゴリーのIDが存在している場合に処理を行う。
     if(!empty($category_id)){
       $query->whereHas('categories', function ($query) use ($category_id) {
@@ -84,8 +67,6 @@ class RecipeController extends Controller
     $categories = $category->getCategories()->prepend('選択してください', '');
     
     $old_category_id = $category_id;
-    // dd($old_category_id);
-    
 
     return view('recipes.searchresult', [
       'result_recipes' => $result_recipes,
@@ -102,19 +83,12 @@ class RecipeController extends Controller
           return ['text' => $tag->name];
       });
       
-      // $allCategoryNames = Category::all()->map(function ($category) {
-      //   return ['text' => $category->name];
-      // });
-
-      // $allCategoryNames = Category::pluck('name', 'id');
       $allCategoryNames = Category::all();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
-
       
       $servings = config('serving');
       $cooking_times = config('cookingtime');
-
 
       return view('recipes.create', [
           'allTagNames' => $allTagNames,
@@ -128,11 +102,9 @@ class RecipeController extends Controller
 
   public function store(RecipeRequest $request, Recipe $recipe)
   {
-      // dd($request->all());
       // リクエストデータを受け取る
       $form = $request->all();
-      // dd($form);
-      // フォームトークン削除。おまじない？
+      
       unset($form['_token']);
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
