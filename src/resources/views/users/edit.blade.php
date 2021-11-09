@@ -17,7 +17,7 @@
                         <input type="file" name="profile_image" class="d-none"  id="profile_image"/>
                         <label for="profile_image" class="d-inline-block">
                           @if(isset($user->profile_image))
-                            <img src="{{ asset("storage/$user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
                           @else
                             <img src= class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
                           @endif
