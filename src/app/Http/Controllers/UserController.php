@@ -35,13 +35,16 @@ class UserController extends Controller
     $user = User::where('name', $name)->first();
     // dd($request->all());
     $user_form = $request->all();
+    // dd($user_form->profile_image);
     //不要な「_token」の削除
     unset($user_form['_token']);
     
     // リクエストにprofile_imageが送られてきているかを確認。送られてきている場合はifの中の処理を実行
     if(isset($user_form['profile_image'])){
       // 削除する画像名を取得
+      // dd($user->profile_image);
       $delete_icon = $user->profile_image;
+      // dd($delete_icon);
       // 削除する画像が存在しているディレクトリのパスを取得
       $delete_path = storage_path().'/storage/app/public/icons/'.$delete_icon;
       // $delete_pathに入っている画像パスと一致する画像データを削除
