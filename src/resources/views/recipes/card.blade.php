@@ -1,7 +1,12 @@
 <div class="card mt-3">
   <div class="card-body d-flex flex-row">
     <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
-      <i class="fas fa-user-circle fa-3x mr-1"></i>
+      <!-- <i class="fas fa-user-circle fa-3x mr-1"></i> -->
+      @if($recipe->user->profile_image !== NULL)
+        <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+      @else
+        <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+      @endif
     </a>
     <div>
       <div class="font-weight-bold">

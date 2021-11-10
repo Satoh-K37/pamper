@@ -16,11 +16,11 @@
                     <span class="avatar-form image-picker">
                         <input type="file" name="profile_image" class="d-none"  id="profile_image"/>
                         <label for="profile_image" class="d-inline-block">
-                          @if(isset($user->profile_image))
-                            <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                          @else
-                            <img src= class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-                          @endif
+                        @if($user->profile_image !== NULL)
+                          <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                        @else
+                          <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                        @endif
                         </label>
                     </span>
 

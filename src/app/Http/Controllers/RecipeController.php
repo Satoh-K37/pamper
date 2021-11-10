@@ -182,10 +182,12 @@ class RecipeController extends Controller
       $form = $request->all();
       // フォームトークン削除。
       unset($form['_token']);
+      // dd($form['image_path']);
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
           // 削除する画像名を取得
           $delete_image = $recipe->image_path;
+          // dd($delete_image);
           // 削除する画像が存在しているディレクトリのパスを取得
           $delete_path = storage_path().'/app/public/images/'.$delete_image;
           // $delete_pathに入っている画像パスと一致する画像データを削除
