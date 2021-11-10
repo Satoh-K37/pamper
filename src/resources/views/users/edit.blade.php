@@ -62,11 +62,15 @@
                         </button>
                     </div>
                 </form>
+                @if (Auth::id() == 1)
+                  <!-- ゲストユーザーの場合はパスワード変更のリンクを表示させないようにする -->
+                @else
                   <div class="text-right">
                     <a href="{{ route('password.form', ['name' => $user->name]) }}" >
                       パスワードの変更
                     </a>
                   </div>
+                @endif
             </div>
         </div>
     </div>
