@@ -38,6 +38,12 @@
                 </div>
 
                 <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ログイン</button>
+                
+                <a href="{{ route('login.guest') }}" class="text-grey">
+                  ゲストログイン
+                </a>
+                <!-- </button> -->
+                
 
               </form>
 
@@ -52,3 +58,4 @@
     </div>
   </div>
 @endsection
+  
