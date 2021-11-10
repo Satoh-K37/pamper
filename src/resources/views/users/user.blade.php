@@ -2,10 +2,11 @@
   <div class="card-body">
     <div class="d-flex flex-row">
       <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-        @if (isset($user->profile_image))
-          <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+        @if($user->profile_image !== NULL)
+          <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
+          <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
         @else
-          <i class="fas fa-user-circle fa-3x"></i>
+          <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
         @endif
       </a>
       @if( Auth::id() !== $user->id )

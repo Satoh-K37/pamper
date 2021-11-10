@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            // 'profile_image' => 'default_icon.png',
         ]);
     }
 
@@ -101,6 +102,8 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $providerUser->getEmail(),
             'password' => null,
+            // デフォルトの画像を設定する想定
+            // 'profile_image' => 'storage/icons' . 'default_icon.png',
         ]);
 
         $this->guard()->login($user, true);

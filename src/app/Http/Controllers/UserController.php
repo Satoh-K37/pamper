@@ -33,23 +33,19 @@ class UserController extends Controller
   public function update(Request $request, String $name)
   {
     $user = User::where('name', $name)->first();
-    // dd($request->all());
     $user_form = $request->all();
-    // dd($user_form->profile_image);
     //不要な「_token」の削除
     unset($user_form['_token']);
-    
     // リクエストにprofile_imageが送られてきているかを確認。送られてきている場合はifの中の処理を実行
     if(isset($user_form['profile_image'])){
       // 削除する画像名を取得
-      // dd($user->profile_image);
       $delete_icon = $user->profile_image;
-      // dd($delete_icon);
+      
       // 削除する画像が存在しているディレクトリのパスを取得
-      $delete_path = storage_path().'/storage/app/public/icons/'.$delete_icon;
+      $delete_path = storage_path().'/app/public/icons/'.$delete_icon;
       // $delete_pathに入っている画像パスと一致する画像データを削除
       \File::delete($delete_path);
-
+      
       $file = $request->profile_image;
       // アップロードされた画像の拡張子の取得。getClientOriginalExtension();だとできなかった…なぜ？
       $ext = $request->file('profile_image')->getClientOriginalExtension();
@@ -58,14 +54,13 @@ class UserController extends Controller
       // ファイル名と取得した拡張子を合体
       $iconFile = $file_token.".".$ext;
       // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-      $form['profile_image'] = $iconFile;
+      $user_form['profile_image'] = $iconFile;
       // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
       $request->profile_image->storeAs('public/icons/', $iconFile);
     }
-
+    
     $user->fill($user_form)->save();
     $user->password = bcrypt($request->get('password'));
-    
     
     $recipes = $user->recipes->sortByDesc('created_at');
     return view('users.show', [
