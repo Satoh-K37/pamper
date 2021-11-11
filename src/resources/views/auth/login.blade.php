@@ -39,7 +39,7 @@
 
                 <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ログイン</button>
                 
-                <a href="{{ route('login.guest') }}" class="text-grey">
+                <a href="{{ route('login.guest') }}" class="btn btn-block peach-gradient mt-2 mb-2">
                   ゲストログイン
                 </a>
                 <!-- </button> -->
