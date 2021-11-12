@@ -14,29 +14,34 @@
   <div class="form-input__picture afterimage">
     <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
     @if (isset($recipe->image_path))
-      <!-- <img src="{{ asset("storage/images/$recipe->image_path") }}"  width="1000" height="300"> -->
-      <img src="/storage/images/{{$recipe->image_path}}"  width="1000" height="300">
       <div class="card-text">
-        <!-- <file-upload></file-upload> -->
-        <!-- <input type="file" name="image_path"> -->
+        <img src="/storage/images/{{$recipe->image_path}}"  width="1000" height="300">
       </div>
     @else
-      <span class="form-input__image_path--text">画像が登録されていません</span>
       <div class="card-text">
-        <!-- <file-upload></file-upload> -->
-        <!-- <input type="file" name="image_path"> -->
+        <span class="form-input__image_path--text">画像が登録されていません</span>
       </div>
     @endif
   </div>
 </div>
-
-<div class="form-group">
-  <div class="card-text">
-          <!-- <file-upload></file-upload> -->
-    <input type="file" name="image_path">
+  
+@if(Route::is('recipes.edit'))
+  <div class="form-group">
+    <div class="card-text">
+      <p>編集</p>
+      <!-- <file-upload></file-upload> -->
+      <input type="file" name="image_path">
+    </div>
   </div>
-</div>
-
+@else
+  <div class="form-group">
+    <div class="card-text">
+      <!-- <file-upload></file-upload> -->
+      <p>作成</p>
+      <input type="file" name="image_path" required>
+    </div>
+  </div>
+@endif
 
 <div class="form-group">
   <select class="form-control" name="serving">
