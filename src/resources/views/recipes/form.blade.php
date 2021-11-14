@@ -53,17 +53,25 @@
     @endforeach
   </select>
 </div>
-<div class="md-form">
-  <!-- <p>材料:</p> -->
-  <label>材料</label>
-  <!-- <input placeholder="何人前かを入力させます。セレクトボックスでやる。" type="text" name="serving" class="form-control" required value="{{ $recipe->serving ?? old('serving') }}"> -->
-  <input type="text" name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}">
+
+<div class="hidden_box">
+  <label for="label1">クリックして表示</label>
+  <input type="checkbox" id="label1"/>
+  <div class="hidden_show">
+    <div class="md-form">
+      <!-- <p>材料:</p> -->
+      <label>材料</label>
+      <!-- <input placeholder="何人前かを入力させます。セレクトボックスでやる。" type="text" name="serving" class="form-control" required value="{{ $recipe->serving ?? old('serving') }}"> -->
+      <input type="text" name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}">
+    </div>
+
+    <div class="md-form">
+      <label>調味料</label>
+      <input type="text" name="seasoning" class="form-control" required value="{{ $recipe->seasoning ?? old('seasoning') }}">
+    </div>
+  </div>
 </div>
 
-<div class="md-form">
-  <label>調味料</label>
-  <input type="text" name="seasoning" class="form-control" required value="{{ $recipe->seasoning ?? old('seasoning') }}">
-</div>
 <div class="md-form">
   <label>Step1</label>
   <input type="text" name="step_content" class="form-control" value="{{ $recipe->step_content ?? old('step_content') }}">
