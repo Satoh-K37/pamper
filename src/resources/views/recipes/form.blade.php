@@ -73,29 +73,24 @@
     <input type="checkbox" id="label2"/>
     <label for="label2">調理手順</label>
     <div class="hidden_show">
-      <div class="md-form">
-        <p>Step1</p>
-        <textarea type="text" name="step_content" class="form-control" value="{{ $recipe->step_content ?? old('step_content') }}"></textarea>
+      <div class="md-outline">
+        <textarea placeholder="Step1" rows="4" name="step_content" class="form-control" value="{{ $recipe->step_content ?? old('step_content') }}"></textarea>
       </div>
-      <div class="md-form">
-        <p>Step2</p>
-        <textarea type="text" name="step_content2" class="form-control" value="{{ $recipe->step_content2 ?? old('step_content2') }}"></textarea>
+      <div class="mform-outline">
+        <textarea placeholder="Step2" rows="4" name="step_content2" class="form-control" value="{{ $recipe->step_content2 ?? old('step_content2') }}"></textarea>
       </div>
-      <div class="md-form">
-        <p>Step3</p>
-        <textarea type="text" name="step_content3" class="form-control" value="{{ $recipe->step_content3 ?? old('step_content3') }}"></textarea>
+
+      <div class="md-outline">
+        <textarea placeholder="Step3" rows="4" name="step_content3" class="form-control" value="{{ $recipe->step_content3 ?? old('step_content3') }}"></textarea>
       </div>
-      <div class="md-form">
-        <p>Step4</p>
-        <textarea type="text" name="step_content4" class="form-control" value="{{ $recipe->step_content4 ?? old('step_content4') }}"></textarea>
+      <div class="md-outline">
+        <textarea placeholder="Step4" rows="4"name="step_content4" class="form-control" value="{{ $recipe->step_content4 ?? old('step_content4') }}"></textarea>
       </div>
-      <div class="md-form">
-        <p>Step5</p>
-        <textarea type="text" name="step_content5" class="form-control" value="{{ $recipe->step_content5 ?? old('step_content5') }}"></textarea>
+      <div class="md-outline">
+        <textarea placeholder="Step5" rows="4" name="step_content5" class="form-control" value="{{ $recipe->step_content5 ?? old('step_content5') }}"></textarea>
       </div>
-      <div class="md-form">
-        <p>Step6</p>
-        <textarea type="text" name="step_content6" class="form-control" value="{{ $recipe->step_content6 ?? old('step_content6') }}"></textarea>
+      <div class="md-outline">
+        <textarea placeholder="Step6" rows="4" name="step_content6" class="form-control" value="{{ $recipe->step_content6 ?? old('step_content6') }}"></textarea>
       </div>
     </div>
   </div>      
