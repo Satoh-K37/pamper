@@ -1,3 +1,6 @@
+
+<!-- 非表示の項目を開くときに使ってるアイコン -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 @csrf
 <div class='md-form'>
   <label>レシピタイトル *</label>
@@ -43,35 +46,33 @@
   </div>
 @endif
 
-<div class="form-group">
-  <select class="form-control" name="serving">
-    @foreach ($servings as $serving => $serving_name)
-          <!-- <option value="{{ $serving }}"> -->
-      <option value="{{ $serving }}" {{ old('serving_name', $recipe->serving ?? '') == $serving ? 'selected' : ''}}>
-          {{ $serving_name }}
-      </option>
-    @endforeach
-  </select>
-</div>
-
 
 <div class="hidden_box">
-    <label for="label1">クリックして表示</label>
-    <input type="checkbox" id="label1"/>
-    <div class="hidden_show">
-      <!--非表示ここから-->
-      <textarea name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}" placeholder="材料"></textarea>
-      <textarea type="text" name="seasoning" class="form-control" required value="{{ $recipe->seasoning ?? old('seasoning') }}" placeholder="調味料"></textarea>
-      <!--ここまで-->
+  <input type="checkbox" id="label1"/>
+  <label for="label1">材料、調味料</label>
+  <div class="hidden_show">
+    <!--非表示ここから-->
+    <div class="form-group">
+      <select class="form-control" name="serving">
+        @foreach ($servings as $serving => $serving_name)
+              <!-- <option value="{{ $serving }}"> -->
+          <option value="{{ $serving }}" {{ old('serving_name', $recipe->serving ?? '') == $serving ? 'selected' : ''}}>
+              {{ $serving_name }}
+          </option>
+        @endforeach
+      </select>
     </div>
+    <textarea name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}" placeholder="材料"></textarea>
+    <textarea type="text" name="seasoning" class="form-control" required value="{{ $recipe->seasoning ?? old('seasoning') }}" placeholder="調味料"></textarea>
+    <!--ここまで-->
+  </div>
 </div>
 
 
   <div class="hidden_box">
-    <label for="label2">クリックして表示</label>
     <input type="checkbox" id="label2"/>
+    <label for="label2">調理手順</label>
     <div class="hidden_show">
-
       <div class="md-form">
         <p>Step1</p>
         <textarea type="text" name="step_content" class="form-control" value="{{ $recipe->step_content ?? old('step_content') }}"></textarea>
