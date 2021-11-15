@@ -65,6 +65,7 @@
       <!-- modal -->
     @endif
 
+<!-- contents start -->
   </div>
   <div class="card-body pt-0">
     <h3 class="h4 card-title">
@@ -80,36 +81,39 @@
         <img src="/storage/images/{{$recipe->image_path}}"  width="1000" height="300">
       @endif
     </div>
-    <div class="card-text">
-      {{ $recipe->serving }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->ingredient }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->seasoning }}人前
-    </div>
-    <div class="card-text">
-      {{ $recipe->step_content }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->step_content2 }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->step_content3 }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->step_content4 }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->step_content5 }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->step_content6 }}
-    </div>
-    <div class="card-text">
-      {{ $recipe->cooking_point }}
-    </div>
+
+    @if(Route::is('recipes.show'))
+      <div class="card-text">
+        {{ $recipe->serving }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->ingredient }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->seasoning }}人前
+      </div>
+      <div class="card-text">
+        {{ $recipe->step_content }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->step_content2 }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->step_content3 }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->step_content4 }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->step_content5 }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->step_content6 }}
+      </div>
+      <div class="card-text">
+        {{ $recipe->cooking_point }}
+      </div>
+    @endif
     
     @if($recipe->cooking_time === 5)
       <div class="card-text">
@@ -162,6 +166,6 @@
         </div>
       @endif
     @endforeach
-
+<!-- contents end -->
   </div>
 </div>
