@@ -4,22 +4,57 @@
   background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);
 }
 
+/*全体*/
 .hidden_box {
-  margin: 2em 0;/*前後の余白*/
-  padding: 0;
+  position: relative;
+  margin: 2em 0;
+  padding: 0.5em 1em;
+  border: solid 3px #C0C0C0;
+  border-radius: 8px;
 }
 
 /*ボタン装飾*/
 .hidden_box label {
   padding: 15px;
   font-weight: bold;
-  border: solid 2px black;
+  background: #efefef;
+  border-radius: 5px;
   cursor :pointer;
+  transition: .5s;
+  
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  left: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  font-size: 19px;
+  background: #FFF;
+  color:#C0C0C0;
+  font-weight: bold;
 }
 
-/*ボタンホバー時*/
-.hidden_box label:hover {
-  background: #efefef;
+/*アイコンを表示*/
+.hidden_box label:before {
+  display: inline-block;
+  content: '\f078';
+  font-family: 'FontAwesome';
+  padding-right: 5px;
+  transition: 0.2s;
+}
+
+// /*ボタンホバー時*/
+// .hidden_box label:hover {
+//   // background: silver;
+// }
+
+/*アイコンを切り替え*/
+.hidden_box input:checked + label:before {
+    content: '\f00d';
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    color: #668ad8;
 }
 
 /*チェックは見えなくする*/
@@ -37,8 +72,48 @@
 }
 
 /*クリックで中身表示*/
-.hidden_box input:checked ~ .hidden_show {
+.hidden_box input:checked + label + .hidden_show {
   padding: 10px 0;
   height: auto;
   opacity: 1;
 }
+
+
+// .hidden_box {
+//   margin: 2em 0;/*前後の余白*/
+//   padding: 0;
+// }
+
+// /*ボタン装飾*/
+// .hidden_box label {
+//   padding: 15px;
+//   font-weight: bold;
+//   border: solid 2px black;
+//   cursor :pointer;
+// }
+
+// /*ボタンホバー時*/
+// .hidden_box label:hover {
+//   background: #efefef;
+// }
+
+// /*チェックは見えなくする*/
+// .hidden_box input {
+//   display: none;
+// }
+
+// /*中身を非表示にしておく*/
+// .hidden_box .hidden_show {
+//   height: 0;
+//   padding: 0;
+//   overflow: hidden;
+//   opacity: 0;
+//   transition: 0.8s;
+// }
+
+// /*クリックで中身表示*/
+// .hidden_box input:checked ~ .hidden_show {
+//   padding: 10px 0;
+//   height: auto;
+//   opacity: 1;
+// }
