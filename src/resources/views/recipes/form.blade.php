@@ -31,16 +31,15 @@
 @if(Route::is('recipes.edit'))
   <div class="form-group">
     <div class="card-text">
-      <p>編集</p>
-
-      <input type="file" name="image_path">
+      <!-- <input type="file" name="image_path"> -->
+      <image-preview-component></image-preview-component>
     </div>
   </div>
 @else
   <div class="form-group">
     <div class="card-text">
-      <p>作成</p>
-      <input type="file" name="image_path" required>
+      <!-- <input type="file" name="image_path" required> -->
+      <image-preview-component></image-preview-component>
     </div>
   </div>
 @endif
