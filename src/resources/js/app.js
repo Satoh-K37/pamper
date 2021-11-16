@@ -21,6 +21,7 @@ const app = new Vue({
     step5Count: "",
     step6Count: "",
     cookingpointCount: "",
+    commentCount: "",
   },
   
   components: {

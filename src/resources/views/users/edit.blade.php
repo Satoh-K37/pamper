@@ -27,7 +27,7 @@
                     {{-- ニックネーム --}}
                     <div class="form-group mt-3">
                         <label for="name">ニックネーム</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                        <input maxlength="50" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
                         @error('name')
                         <span class="invalid-feedback" role="alert">
                             <!-- <strong>{{ $message }}</strong> -->
@@ -47,8 +47,7 @@
                     <div class="form-group mt-3">
                         <label for="self_introduction">自己紹介</label>
                         
-                        <textarea id="self_introduction" name="self_introduction" style="height: 100px;" class="form-control">{{ old('self_introduction', $user->self_introduction) }}
-                        </textarea>
+                        <textarea  maxlength="150" id="self_introduction" name="self_introduction" style="height: 100px;" class="form-control">{{ old('self_introduction', $user->self_introduction) }}</textarea>
 
                         <!-- @error('name')
                         <span class="invalid-feedback" role="alert">
