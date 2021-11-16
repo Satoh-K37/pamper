@@ -4,7 +4,7 @@ import RecipeLike from './components/RecipeLike'
 import RecipeTagsInput from './components/RecipeTagsInput'
 import FollowButton from './components/FollowButton'
 import FileUpload from './components/FileUpload'
-import TextCount from './components/TextCount'
+import ImagePreviewComponent from './components/ImagePreviewComponent'
 
 
 const app = new Vue({
@@ -23,12 +23,11 @@ const app = new Vue({
     cookingpointCount: "",
     commentCount: "",
   },
-  
   components: {
     RecipeLike,
     RecipeTagsInput,
     FollowButton,
     FileUpload,
-    TextCount,
+    ImagePreviewComponent,
   }
 });
