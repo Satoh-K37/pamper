@@ -9,8 +9,7 @@
 
 <div class="form-group">
   <label></label>
-    <textarea v-model.trim="contentCount" maxlength="300" name="content" required class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
-    <p>@{{ contentCount.length }}/300</p>
+    <textarea name="content" required class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
 </div>
 
 <div class="form-group">
@@ -32,14 +31,14 @@
   <div class="form-group">
     <div class="card-text">
       <!-- <input type="file" name="image_path"> -->
-      <image-preview-component></image-preview-component>
+      <image-preview></image-preview>
     </div>
   </div>
 @else
   <div class="form-group">
     <div class="card-text">
       <!-- <input type="file" name="image_path" required> -->
-      <image-preview-component></image-preview-component>
+      <image-preview></image-preview>
     </div>
   </div>
 @endif
@@ -60,10 +59,8 @@
       </select>
     </div>
     
-    <textarea v-model.trim="ingredientCount" maxlength="150" name="ingredient" class="form-control" required value="{{ $recipe->ingredient ?? old('ingredient') }}" placeholder="材料"></textarea>
-      <p>@{{ ingredientCount.length }}/150</p>
-    <textarea v-model.trim="seasoningCount" maxlength="150" name="seasoning" class="form-control" required value="{{ $recipe->seasoning ?? old('seasoning') }}" placeholder="調味料"></textarea>
-      <p>@{{ seasoningCount.length }}/150</p>
+    <textarea name="ingredient" class="form-control" required placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
+    <textarea name="seasoning" class="form-control" required placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
     <!--ここまで-->
   </div>
 </div>
@@ -75,33 +72,27 @@
     <div class="hidden_show">
 
       <div class="md-outline">
-        <textarea v-model.trim="step1Count" maxlength="100" placeholder="Step1" rows="4" name="step_content" class="form-control" value="{{ $recipe->step_content ?? old('step_content') }}"></textarea>
-        <p>@{{ step1Count.length }}/100</p>
+        <textarea placeholder="Step1" rows="4" name="step_content" class="form-control">{{ $recipe->step_content ?? old('step_content') }}</textarea>
       </div>
 
       <div class="mform-outline">
-        <textarea v-model.trim="step2Count" maxlength="100" placeholder="Step2" rows="4" name="step_content2" class="form-control" value="{{ $recipe->step_content2 ?? old('step_content2') }}"></textarea>
-        <p>@{{ step2Count.length }}/100</p>
+        <textarea placeholder="Step2" rows="4" name="step_content2" class="form-control">{{ $recipe->step_content2 ?? old('step_content2') }}</textarea>
       </div>
 
       <div class="md-outline">
-        <textarea v-model.trim="step3Count" maxlength="100" placeholder="Step3" rows="4" name="step_content3" class="form-control" value="{{ $recipe->step_content3 ?? old('step_content3') }}"></textarea>
-          <p>@{{ step3Count.length }}/100</p>
+        <textarea placeholder="Step3" rows="4" name="step_content3" class="form-control">{{ $recipe->step_content3 ?? old('step_content3') }}</textarea>
       </div>
 
       <div class="md-outline">
-        <textarea v-model.trim="step4Count" maxlength="100" placeholder="Step4" rows="4"name="step_content4" class="form-control" value="{{ $recipe->step_content4 ?? old('step_content4') }}"></textarea>
-          <p>@{{ step4Count.length }}/100</p>
+        <textarea placeholder="Step4" rows="4"name="step_content4" class="form-control">{{ $recipe->step_content4 ?? old('step_content4') }}</textarea>
       </div>
 
       <div class="md-outline">
-        <textarea v-model.trim="step5Count" maxlength="100" placeholder="Step5" rows="4" name="step_content5" class="form-control" value="{{ $recipe->step_content5 ?? old('step_content5') }}"></textarea>
-          <p>@{{ step5Count.length }}/100</p>
+        <textarea placeholder="Step5" rows="4" name="step_content5" class="form-control">{{ $recipe->step_content5 ?? old('step_content5') }}</textarea>
       </div>
 
       <div class="md-outline">
-        <textarea v-model.trim="step6Count" maxlength="100" placeholder="Step6" rows="4" name="step_content6" class="form-control" value="{{ $recipe->step_content6 ?? old('step_content6') }}"></textarea>
-          <p>@{{ step6Count.length }}/100</p>
+        <textarea placeholder="Step6" rows="4" name="step_content6" class="form-control">{{ $recipe->step_content6 ?? old('step_content6') }}</textarea>
       </div>
     </div>
   </div>      
@@ -109,8 +100,7 @@
 
 <div class="md-form">
   <label>コツ・ポイント</label>
-  <input v-model.trim="cookingpointCount" maxlength="100" type="text" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
-    <p>@{{ cookingpointCount.length }}/100</p>
+  <input type="text" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
 </div>
 <div class="form-group">
   <recipe-tags-input
