@@ -7,6 +7,7 @@ use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+
 use App\Recipe;
 use App\Tag;
 use App\Category;
