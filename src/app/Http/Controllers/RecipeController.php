@@ -6,6 +6,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use InterventionImage; // エイリアスを使用している
+// use Intervention\Image\Facades\Image; // Imageファサードを使う
+// use Illuminate\Support\Facades\Storage; // Storageファサードを使う
+
 
 
 use App\Recipe;
@@ -103,21 +107,35 @@ class RecipeController extends Controller
 
   public function store(RecipeRequest $request, Recipe $recipe)
   {
-      // リクエストデータを受け取る
-      $form = $request->all();
+    // リクエストデータを受け取る
+    $form = $request->all();
+    unset($form['_token']);
+
       
-      unset($form['_token']);
+      // unset($form['_token']);
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
-        $file = $request->file('image_path');
+        // $file = $request->file('image_path');
+        $file = \Image::make($request->file('image_path'));
+        dd($file);
         $ext = $file->getClientOriginalExtension();
         $file_token = Str::random(32);
         $imageFile = $file_token.".".$ext;
+        dd($imageFile);
+        $imageFile->resize(600, null,
+          function ($constraint) {
+              // 縦横比を保持したままにする
+              $constraint->aspectRatio();
+              // 小さい画像は大きくしない
+              $constraint->upsize();
+            }
+          );
         $form['image_path'] = $imageFile;
         // dd($request->image_path);
         $request->image_path->storeAs('public/images/',$imageFile);
         // dd($tes);
       }
+
       // dd($request);
       // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
