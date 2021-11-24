@@ -71,14 +71,14 @@
     <h3 class="h4 card-title">
       <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
         {{ $recipe->recipe_title }}
-      </a>
+      </a>å
     </h3>
     <div class="card-text">
       {{ $recipe->content }}
     </div>
     <div class="card-text">
       @if (isset($recipe->image_path))
-        <img src="/storage/images/{{$recipe->image_path}}"  width="1000" height="300">
+        <img src="/storage/images/{{$recipe->image_path}}"å>
       @endif
     </div>
 
