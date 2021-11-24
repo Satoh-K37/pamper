@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+// use Illuminate\Http\UploadedFile;
 use InterventionImage; // エイリアスを使用している
+use Storage;
 // use Intervention\Image\Facades\Image; // Imageファサードを使う
 // use Illuminate\Support\Facades\Storage; // Storageファサードを使う
 
@@ -25,6 +27,7 @@ class RecipeController extends Controller
 
   public function index(Request $request)
   {
+      // phpinfo();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
 
@@ -107,33 +110,34 @@ class RecipeController extends Controller
 
   public function store(RecipeRequest $request, Recipe $recipe)
   {
-    // リクエストデータを受け取る
-    $form = $request->all();
-    unset($form['_token']);
-
-      
+      //リクエストデータを受け取る
+      $form = $request->all();
       // unset($form['_token']);
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
-        // $file = $request->file('image_path');
-        $file = \Image::make($request->file('image_path'));
-        dd($file);
-        $ext = $file->getClientOriginalExtension();
-        $file_token = Str::random(32);
-        $imageFile = $file_token.".".$ext;
-        dd($imageFile);
-        $imageFile->resize(600, null,
-          function ($constraint) {
-              // 縦横比を保持したままにする
-              $constraint->aspectRatio();
-              // 小さい画像は大きくしない
-              $constraint->upsize();
-            }
-          );
-        $form['image_path'] = $imageFile;
-        // dd($request->image_path);
-        $request->image_path->storeAs('public/images/',$imageFile);
-        // dd($tes);
+        // 変数fileにrequestから画像の情報を取得し、代入
+        $file = $request->file('image_path');
+        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        $fileName = uniqid(rand(). '_');
+        // 拡張子を取得
+        $extension = $file->extension();
+        // $fileNameと$extensionを使い、オリジナルのファイル名を作成
+        $fileNameToStore = $fileName.".".$extension;
+        // フォームから受け取った画像をリサイズする。
+        $resizedImage = InterventionImage::make($file)
+          ->resize(500, 500, 
+            function ($constraint) {
+            // 縦横比を保持したままにする
+            $constraint->aspectRatio();
+            // 小さい画像は大きくしない
+            $constraint->upsize();
+          }
+          // encode()すると画像として扱ってくれるらしい
+        )->encode();
+        // $form['image_path']にオリジナルのファイル名を代入する
+        $form['image_path'] = $fileNameToStore;
+        // ファイルディレクトリに保存する処理。
+        Storage::put('public/images/'. $fileNameToStore, $resizedImage);
       }
 
       // dd($request);

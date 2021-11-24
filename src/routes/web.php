@@ -48,6 +48,7 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
 
 // コメント
 Route::post('/recipe/{comment_id}/comments','CommentController@store');
+// Route::delete('/recipe/{comment_id}/comments', 'UserController@delete');
 // タグ表示
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 

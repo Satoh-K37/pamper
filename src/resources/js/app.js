@@ -9,9 +9,9 @@ import ImagePreview from './components/ImagePreview'
 
 const app = new Vue({
   el: '#app',
-  // data: {
+  data: {
   //   // 文字数カウントできるようになったけどなんか微妙…
-  //   commentCount: "",
+    commentCount: "",
   //   // 以下はバリデーションで対応。文字数カウントはしない。
   //   contentCount: "",
   //   // ingredientCount: "",
@@ -24,7 +24,7 @@ const app = new Vue({
   //   // step6Count: "",
   //   // cookingpointCount: "",
     
-  // },
+  },
   components: {
     RecipeLike,
     RecipeTagsInput,
