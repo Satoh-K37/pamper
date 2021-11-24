@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title', 'ログイン')
-
+@include('nav')
 @section('content')
   <div class="container">
     <div class="row">
@@ -11,9 +11,9 @@
           <div class="card-body text-center">
             <h2 class="h3 card-title text-center mt-2">ログイン</h2>
 
-            <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
+            <!-- <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
               <i class="fab fa-google mr-1"></i>Googleでログイン
-            </a>
+            </a> -->
             
             @include('error_card_list')
             
@@ -38,12 +38,17 @@
                 </div>
 
                 <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ログイン</button>
+
+                <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger mt-2 mb-2">
+                  <i class="fab fa-google mr-1"></i>Googleでログイン
+                </a>
                 
                 <a href="{{ route('login.guest') }}" class="btn btn-block peach-gradient mt-2 mb-2">
                   ゲストログイン
                 </a>
                 <!-- </button> -->
                 
+
 
               </form>
 

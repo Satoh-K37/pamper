@@ -13,9 +13,9 @@
           <div class="card-body text-center">
             <h2 class="h3 card-title text-center mt-2">ユーザー登録</h2>
 
-            <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
+            <!-- <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
               <i class="fab fa-google mr-1"></i>Googleで登録
-            </a>
+            </a> -->
             <!-- エラーメッセージを表示させる -->
             @include('error_card_list')
 
@@ -41,6 +41,9 @@
                 </div>
                 <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ユーザー登録</button>
               </form>
+              <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger mt-2 mb-2">
+                <i class="fab fa-google mr-1"></i>Googleで登録
+              </a>
 
               <div class="mt-0">
                 <a href="{{ route('login') }}" class="card-text">ログインはこちら</a>
