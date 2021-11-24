@@ -203,9 +203,6 @@ class RecipeController extends Controller
   {
       // リクエストデータを受け取る
       $form = $request->all();
-      // フォームトークン削除。
-      unset($form['_token']);
-      // dd($form['image_path']);
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
           // 削除する画像名を取得
@@ -215,21 +212,43 @@ class RecipeController extends Controller
           $delete_path = storage_path().'/app/public/images/'.$delete_image;
           // $delete_pathに入っている画像パスと一致する画像データを削除
           \File::delete($delete_path);
-
-          $file = $request->image_path;
-          // dd($file);
-          // アップロードされた画像の拡張子の取得。getClientOriginalExtension();だとできなかった…なぜ？
-          // $ext = pathinfo($file, PATHINFO_EXTENSION);
-          $ext = $request->file('image_path')->getClientOriginalExtension();
-          // dd($ext);
-          // ファイル名をランダムで作成
-          $file_token = Str::random(32);
-          // ファイル名と取得した拡張子を合体
-          $imageFile = $file_token.".".$ext;
-          // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-          $form['image_path'] = $imageFile;
-          // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-          $request->image_path->storeAs('public/images/', $imageFile);
+        // 変数fileにrequestから画像の情報を取得し、代入
+        $file = $request->image_path;
+        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        $fileName = uniqid(rand(). '_');
+        // 拡張子を取得
+        $extension = $file->extension();
+        // $fileNameと$extensionを使い、オリジナルのファイル名を作成
+        $fileNameToStore = $fileName.".".$extension;
+        // フォームから受け取った画像をリサイズする。
+        $resizedImage = InterventionImage::make($file)
+          ->resize(1200, 800, 
+            function ($constraint) {
+            // 縦横比を保持したままにする
+            $constraint->aspectRatio();
+            // 小さい画像は大きくしない
+            $constraint->upsize();
+          }
+          // encode()すると画像として扱ってくれるらしい
+        )->encode();
+        // $form['image_path']にオリジナルのファイル名を代入する
+        $form['image_path'] = $fileNameToStore;
+        // ファイルディレクトリに保存する処理。
+        Storage::put('public/images/'. $fileNameToStore, $resizedImage);
+          // $file = $request->image_path;
+          // // dd($file);
+          // // アップロードされた画像の拡張子の取得。getClientOriginalExtension();だとできなかった…なぜ？
+          // // $ext = pathinfo($file, PATHINFO_EXTENSION);
+          // $ext = $request->file('image_path')->getClientOriginalExtension();
+          // // dd($ext);
+          // // ファイル名をランダムで作成
+          // $file_token = Str::random(32);
+          // // ファイル名と取得した拡張子を合体
+          // $imageFile = $file_token.".".$ext;
+          // // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
+          // $form['image_path'] = $imageFile;
+          // // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
+          // $request->image_path->storeAs('public/images/', $imageFile);
       }
 
       $recipe->user_id = $request->user()->id;

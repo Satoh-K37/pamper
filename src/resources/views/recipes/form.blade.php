@@ -17,7 +17,7 @@
     <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
     @if (isset($recipe->image_path))
       <div class="card-text">
-        <img src="/storage/images/{{$recipe->image_path}}"  width="1000" height="300">
+        <img src="/storage/images/{{$recipe->image_path}}">
       </div>
     @else
       <div class="card-text">
