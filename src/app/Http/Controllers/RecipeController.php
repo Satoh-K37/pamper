@@ -215,13 +215,13 @@ class RecipeController extends Controller
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->image_path;
         // // ユニークIDとランダム関数を使ってランダムな文字列を作成
-        $fileName = uniqid(rand(). '_');
+        $file_name = uniqid(rand(). '_');
         // 拡張子を取得
         $extension = $file->extension();
         // $fileNameと$extensionを使い、オリジナルのファイル名を作成
-        $fileNameToStore = $fileName.".".$extension;
+        $filename_to_store = $file_name.".".$extension;
         // フォームから受け取った画像をリサイズする。
-        $resizedImage = InterventionImage::make($file)
+        $resized_image = InterventionImage::make($file)
           ->resize(1200, 800, 
             function ($constraint) {
             // 縦横比を保持したままにする
@@ -232,9 +232,9 @@ class RecipeController extends Controller
           // encode()すると画像として扱ってくれるらしい
         )->encode();
         // $form['image_path']にオリジナルのファイル名を代入する
-        $form['image_path'] = $fileNameToStore;
+        $form['image_path'] = $filename_to_store;
         // ファイルディレクトリに保存する処理。
-        Storage::put('public/images/'. $fileNameToStore, $resizedImage);
+        Storage::put('public/images/'. $filename_to_store, $resized_image);
           // $file = $request->image_path;
           // // dd($file);
           // // アップロードされた画像の拡張子の取得。getClientOriginalExtension();だとできなかった…なぜ？
