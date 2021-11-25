@@ -50,13 +50,13 @@ class UserController extends Controller
       // アップロードされた画像の拡張子の取得。getClientOriginalExtension();だとできなかった…なぜ？
       $ext = $request->file('profile_image')->getClientOriginalExtension();
       // ファイル名をランダムで作成
-      $file_token = Str::random(32);
+      $file_name = Str::random(32);
       // ファイル名と取得した拡張子を合体
-      $iconFile = $file_token.".".$ext;
+      $icon_file = $file_name.".".$ext;
       // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-      $user_form['profile_image'] = $iconFile;
+      $user_form['profile_image'] = $icon_file;
       // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-      $request->profile_image->storeAs('public/icons/', $iconFile);
+      $request->profile_image->storeAs('public/icons/', $icon_file);
     }
     
     $user->fill($user_form)->save();
