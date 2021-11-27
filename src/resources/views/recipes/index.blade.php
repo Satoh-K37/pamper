@@ -6,9 +6,22 @@
 @section('content')
   @include('nav')
   <div class="container">
-  @include('recipes.search')
-  @foreach($recipes as $recipe) 
-    @include('recipes.card')
-  @endforeach
+    @include('recipes.search')
+    @foreach($recipes as $recipe) 
+      @include('recipes.card')
+    @endforeach
+    <div class="container">
+      {{ $recipes->links() }}
+    </div>
   </div>
+    <!-- <div class="contents">
+        <div v-for="recipe in recipes" :key="recipe.id">
+            @{{ recipe.recipe }}
+        </div>
+        <infinite-loading @infinite="fetchRecipes"></infinite-loading>
+        <InfiniteRecipe></InfiniteRecipe>
+    </div> -->
 @endsection
+
+
+

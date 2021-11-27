@@ -11,9 +11,6 @@ use InterventionImage; // エイリアスを使用している
 use Storage;
 // use Intervention\Image\Facades\Image; // Imageファサードを使う
 // use Illuminate\Support\Facades\Storage; // Storageファサードを使う
-
-
-
 use App\Recipe;
 use App\Tag;
 use App\Category;
@@ -34,7 +31,7 @@ class RecipeController extends Controller
       $keyword = $request->input('keyword');
       $category_id = $request->input('category_id');
       $query = Recipe::query();
-      $recipes = $query->orderBy('created_at','desc')->paginate(10);
+      $recipes = $query->orderBy('created_at','desc')->paginate();
 
       return view('recipes.index', [
         'recipes' => $recipes,
@@ -59,17 +56,17 @@ class RecipeController extends Controller
     {
       // recipeタイトルと本文にフォームに入力されたキーワードと部分一致するものがあれば取得する
       $query->where('recipe_title','like','%'. $keyword .'%')
-      ->orWhere('content','like','%'. $keyword .'%');
+      ->orWhere('content','like','%'. $keyword .'%')->paginate();
     }
     // カテゴリーのIDが存在している場合に処理を行う。
     if(!empty($category_id)){
       $query->whereHas('categories', function ($query) use ($category_id) {
         $query->where('categories.id', $category_id);
-      });
+      })->paginate();
     }
 
     // $keywordがない場合は全検索を実行する
-    $result_recipes = $query->orderBy('created_at','desc')->paginate(10);
+    $result_recipes = $query->orderBy('created_at','desc')->paginate();
     
     $category = new Category;
     $categories = $category->getCategories()->prepend('選択してください', '');

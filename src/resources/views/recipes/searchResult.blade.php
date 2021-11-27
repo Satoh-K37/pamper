@@ -19,5 +19,7 @@
     @foreach($result_recipes as $recipe)
       @include('recipes.card')
     @endforeach
+    {{ $result_recipes->links() }}
+    
   </div>
 @endsection
