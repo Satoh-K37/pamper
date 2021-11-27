@@ -76,8 +76,7 @@ class UserController extends Controller
   {
       // $auth = Auth::user();
       $user = User::where('name', $name)->first();
-      $recipes = $user->recipes->sortByDesc('created_at');
-      // ->paginate();
+      $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
       // ->paginate();
 
       return view('users.show', [
@@ -92,7 +91,7 @@ class UserController extends Controller
   {
       $user = User::where('name', $name)->first();
 
-      $recipes = $user->likes->sortByDesc('created_at');
+      $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
       // ->paginate();
       return view('users.likes', [
           'user' => $user,
