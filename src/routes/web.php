@@ -31,6 +31,7 @@ Route::prefix('register')->name('register.')->group(function () {
 
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index');
+
 // 検索フォームを表示させるルート
 Route::get('/searchresult', 'RecipeController@search')->name('recipes.searchresult');
 // 検索

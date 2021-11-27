@@ -63,6 +63,7 @@ class UserController extends Controller
     $user->password = bcrypt($request->get('password'));
     
     $recipes = $user->recipes->sortByDesc('created_at');
+
     return view('users.show', [
       // 'auth' => $auth,
       'user' => $user,
@@ -76,6 +77,8 @@ class UserController extends Controller
       // $auth = Auth::user();
       $user = User::where('name', $name)->first();
       $recipes = $user->recipes->sortByDesc('created_at');
+      // ->paginate();
+      // ->paginate();
 
       return view('users.show', [
           // 'auth' => $auth,
@@ -90,7 +93,7 @@ class UserController extends Controller
       $user = User::where('name', $name)->first();
 
       $recipes = $user->likes->sortByDesc('created_at');
-
+      // ->paginate();
       return view('users.likes', [
           'user' => $user,
           'recipes' => $recipes,
