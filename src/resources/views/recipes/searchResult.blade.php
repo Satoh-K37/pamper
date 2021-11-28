@@ -15,7 +15,7 @@
           @if (count($result_recipes) >0)
             全{{ $result_recipes->total() }}件中
             {{  ($result_recipes->currentPage() -1) * $result_recipes->perPage() + 1}} - 
-            {{ (($result_recipes->currentPage() -1) * $result_recipes->perPage() + 1) + (count($result_recipes) -1)  }}件のデータが表示されています。</p>
+            {{ (($result_recipes->currentPage() -1) * $result_recipes->perPage() + 1) + (count($result_recipes) -1)  }}件のレシピ</p>
           @else
             <p>データがありません。</p>
           @endif
@@ -25,7 +25,7 @@
     @foreach($result_recipes as $recipe)
       @include('recipes.card')
     @endforeach
-    {{ $result_recipes->links() }}
+    {{ $result_recipes->appends(request()->query())->links() }}
     
   </div>
 @endsection

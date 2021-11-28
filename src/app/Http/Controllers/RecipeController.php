@@ -66,7 +66,7 @@ class RecipeController extends Controller
     }
 
     // $keywordがない場合は全検索を実行する
-    $result_recipes = $query->orderBy('created_at','desc')->paginate();
+    $result_recipes = $query->orderBy('created_at','desc')->paginate(5);
     
     $category = new Category;
     $categories = $category->getCategories()->prepend('選択してください', '');
