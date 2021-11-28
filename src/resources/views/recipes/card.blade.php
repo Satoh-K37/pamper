@@ -73,13 +73,27 @@
         {{ $recipe->recipe_title }}
       </a>å
     </h3>
+
     <div class="card-text">
       {{ $recipe->content }}
     </div>
-    <div class="card-text">
+
+    <!-- <div class="card-text">
       @if (isset($recipe->image_path))
-        <img src="/storage/images/{{$recipe->image_path}}"å>
+        <img src="/storage/images/{{$recipe->image_path}}">
       @endif
+    </div> -->
+
+    <div class="card-text">
+    <!-- <div id="app"> -->
+      <vue-pure-lightbox
+        
+        thumbnail='/storage/images/{{$recipe->image_path}}'
+        :images="[
+          '/storage/images/{{$recipe->image_path}}'
+        ]"
+      ></vue-pure-lightbox>
+    <!-- </div> -->
     </div>
 
     @if(Route::is('recipes.show'))
