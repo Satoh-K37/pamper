@@ -45,7 +45,7 @@
 
 <div class="hidden_box">
   <input type="checkbox" id="label1"/>
-  <label for="label1">材料、調味料</label>
+  <label for="label1" >材料、調味料</label>
   <div class="hidden_show">
     <!--非表示ここから-->
     <div class="form-group">
