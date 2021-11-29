@@ -122,7 +122,7 @@ class RecipeController extends Controller
         $fileNameToStore = $fileName.".".$extension;
         // フォームから受け取った画像をリサイズする。
         $resizedImage = InterventionImage::make($file)
-          ->fit(860, 484, // アスペクト比３：２
+          ->fit(860, 532, // アスペクト比1:1.618 黄金比
             function ($constraint) {
             // 縦横比を保持したままにする
             $constraint->aspectRatio();
@@ -219,7 +219,7 @@ class RecipeController extends Controller
         $filename_to_store = $file_name.".".$extension;
         // フォームから受け取った画像をリサイズする。
         $resized_image = InterventionImage::make($file)
-            ->fit(860, 484, // アスペクト比q16:9
+          ->fit(860, 532, // アスペクト比1:1.618 黄金比
             function ($constraint) {
             // 縦横比を保持したままにする
             $constraint->aspectRatio();
