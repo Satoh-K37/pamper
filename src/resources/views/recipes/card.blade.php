@@ -84,10 +84,9 @@
       @endif
     </div> -->
 
-    <div class="card-text">
+    <div class="card-text" style="width: max">
     <!-- <div id="app"> -->
       <vue-pure-lightbox
-        
         thumbnail='/storage/images/{{$recipe->image_path}}'
         :images="[
           '/storage/images/{{$recipe->image_path}}'
