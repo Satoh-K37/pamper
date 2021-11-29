@@ -30,15 +30,15 @@
 @if(Route::is('recipes.edit'))
   <div class="form-group">
     <div class="card-text">
-      <input type="file" name="image_path">
-      <!-- <image-preview></image-preview> -->
+      <!-- <input type="file" name="image_path"> -->
+      <image-preview></image-preview>
     </div>
   </div>
 @else
   <div class="form-group">
     <div class="card-text">
-      <input type="file" name="image_path" required>
-      <!-- <image-preview></image-preview> -->
+      <!-- <input type="file" name="image_path" required> -->
+      <image-preview></image-preview>
     </div>
   </div>
 @endif
