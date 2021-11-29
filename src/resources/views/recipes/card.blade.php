@@ -89,9 +89,11 @@
       <vue-pure-lightbox
         thumbnail='/storage/images/{{$recipe->image_path}}'
         :images="[
+          
           '/storage/images/{{$recipe->image_path}}'
         ]"
       ></vue-pure-lightbox>
+      <!-- '/storage/images/{{$recipe->image_path}}' -->
     <!-- </div> -->
     </div>
 
