@@ -8,6 +8,8 @@ import FileUpload from './components/FileUpload'
 import ImagePreview from './components/ImagePreview'
 import VuePureLightbox from 'vue-pure-lightbox'
 import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
+import ImgInputer from 'vue-img-inputer'
+import 'vue-img-inputer/dist/index.css'
 
 
 
@@ -20,6 +22,7 @@ const app = new Vue({
   data: {
   //   // 文字数カウントできるようになったけどなんか微妙…
     commentCount: "",
+    file:"",
   },
   components: {
     RecipeLike,
@@ -28,6 +31,7 @@ const app = new Vue({
     FileUpload,
     ImagePreview,
     'vue-pure-lightbox': VuePureLightbox,
+    'img-inputer': ImgInputer,
   }
 
 });
