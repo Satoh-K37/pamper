@@ -1,19 +1,22 @@
 <template>
     <div>
-        <div>
-          <!-- ref属性を指定することでファイル情報を動的に取得できる -->
-          <input type="file" name="image_path" ref="preview" v-on:change="show">
-        </div>
-        <!-- 一時URLが生成されている場合のみアップロードされた画像を表示する -->
-        <div class="preview-box" v-if="url">
-            <img class="image-preview" v-bind:src="url" width="860" height="532,">
-        </div>
+      <!-- 新規投稿時は画像を必須にしたい。image_pathがある場合は必須じゃなくして、新規投稿時は必須にする -->
+      <!-- ref属性を指定することでファイル情報を動的に取得できる -->
+      <div>
+        
+        <input required type="file" name="image_path" ref="preview" v-on:change="show">
+      </div>
+      <!-- 一時URLが生成されている場合のみアップロードされた画像を表示する -->
+      <div class="preview-box" v-if="url">
+          <img class="image-preview" v-bind:src="url" width="860" height="532,">
+      </div>
     </div>
 
 
 </template>
 
 <script>
+
 export default {
     data() {
         return {

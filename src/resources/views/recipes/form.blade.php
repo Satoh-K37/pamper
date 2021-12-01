@@ -30,14 +30,12 @@
 @if(Route::is('recipes.edit'))
   <div class="form-group">
     <div class="card-text">
-      <!-- <input type="file" name="image_path"> -->
-      <!-- <image-preview></image-preview> -->
-      <div id="app">
-        <img-inputer v-model="image_path" type='file' theme="light" size="large"
+      <image-preview></image-preview>
+      <!-- <div id="app">
+        <img-inputer v-model="file" name="image_path" theme="light" size="large"
                     placeholder="ファイルをここにドラッグする"
                     bottom-text="ファイルをドロップするかここをクリックしてください" />
-        <input name="image_path">
-      </div>
+      </div> -->
     </div>
   </div>
 @else
@@ -46,13 +44,9 @@
       <!-- <input type="file" name="image_path" required> -->
       <image-preview></image-preview>
       <!-- <div id="app">
-        <img-inputer v-model="file"
-                    name="image_path"
-                    theme="light"
-                    size="large"
+        <img-inputer v-model="file" name="image_path" theme="light" size="large"
                     placeholder="ファイルをここにドラッグする"
                     bottom-text="ファイルをドロップするかここをクリックしてください" />
-        <!-- <input type="file" name="image_path"> -->
       </div> -->
     </div>
   </div>
