@@ -30,7 +30,7 @@
 @if(Route::is('recipes.edit'))
   <div class="form-group">
     <div class="card-text">
-      <image-preview></image-preview>
+      <image-edit-preview></image-edit-preview>
       <!-- <div id="app">
         <img-inputer v-model="file" name="image_path" theme="light" size="large"
                     placeholder="ファイルをここにドラッグする"
