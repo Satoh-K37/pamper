@@ -2,7 +2,7 @@
     <div>
       <!-- ref属性を指定することでファイル情報を動的に取得できる -->
       <div>
-        <input required type="file" name="image_path" ref="preview" v-on:change="show">
+        <input type="file" name="image_path" ref="preview" v-on:change="show">
       </div>
 
       <!-- 一時URLが生成されている場合のみアップロードされた画像を表示する -->
