@@ -68,8 +68,8 @@
       </select>
     </div>
     
-    <textarea name="ingredient" class="form-control" required placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
-    <textarea name="seasoning" class="form-control" required placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
+    <textarea name="ingredient" required class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
+    <textarea name="seasoning" class="form-control" placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
     <!--ここまで-->
   </div>
 </div>

@@ -28,7 +28,7 @@ class RecipeRequest extends FormRequest
           'content' => 'required|max:300',
           'image_path' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
           'ingredient' => 'required|max:200',
-          'seasoning' => 'required|max:200',
+          'seasoning' => 'max:200',
           'step_content' => 'max:100',
           'step_content2' => 'max:100',
           'step_content3' => 'max:100',
