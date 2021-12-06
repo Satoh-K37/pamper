@@ -69,6 +69,11 @@
                       パスワードの変更
                     </a>
                   </div>
+                  <div class="text-right">
+                    <a href="{{ route('email_change.form', ['name' => $user->name]) }}" >
+                      メールアドレスの変更
+                    </a>
+                  </div>
                 @endif
             </div>
         </div>

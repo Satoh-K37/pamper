@@ -54,11 +54,19 @@ Route::post('/recipe/{comment_id}/comments','CommentController@store');
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 
 
+
 ## PW変更
 // 通常のアクセス（GET）の場合はshowChangePasswordForm、メソッドを実行する
 Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
 // パスワードの変更処理（POST）の場合はChangePasswordメソッドを実行する
 Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
+
+// メールアドレス変更
+Route::get('/email_change', 'Auth\ChangeEmailAddressController@emailChangeForm')->name('email_change.form');
+
+Route::get('/email', 'Auth\ChangeEmailAddressController.php@emailEdit')->name('email.edit');
+Route::post('/email', 'Auth\ChangeEmailAddressController.php@emailChange')->name('email.change');
+Route::get('/email_update', 'Auth\ChangeEmailAddressController.php@emailUpdate');
 
 // アカウントマイページ関連
 Route::prefix('users')->name('users.')->group(function () {
@@ -80,5 +88,9 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::delete('/{name}/follow', 'UserController@unfollow')->name('unfollow');
   });
 
+// メールアドレス変更
+Route::get('/user/email', 'UserController@userEmailEdit')->name('email.edit');
+Route::post('/user/email', 'UserController@userEmailChange')->name('email.change');
+Route::get('/user/userEmailUpdate/', 'UserController@userEmailUpdate');
 
 });
