@@ -6,6 +6,7 @@
 @section('content')
   @include('nav')
   <div class="container">
+    @include('error_card_list')
     @include('recipes.search')
     @foreach($recipes as $recipe) 
       @include('recipes.card')

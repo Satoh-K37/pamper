@@ -63,8 +63,7 @@ Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')-
 
 // メールアドレス変更
 Route::get('/email_change', 'Auth\ChangeEmailAddressController@emailChangeForm')->name('email_change.form');
-
-Route::get('/email', 'Auth\ChangeEmailAddressController.php@emailEdit')->name('email.edit');
+// Route::get('/email', 'Auth\ChangeEmailAddressController.php@emailEdit')->name('email.edit');
 Route::post('/email', 'Auth\ChangeEmailAddressController.php@emailChange')->name('email.change');
 Route::get('/email_update', 'Auth\ChangeEmailAddressController.php@emailUpdate');
 
