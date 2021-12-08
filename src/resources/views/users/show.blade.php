@@ -5,6 +5,11 @@
 @section('content')
   @include('nav')
   <div class="container">
+      @if (session('status'))
+        <div class="card-text alert alert-success">
+          {{ session('status') }}
+        </div>
+      @endif
     @include('users.user')
     {{ $recipes->count() }}件
 
