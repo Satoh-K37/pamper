@@ -4,17 +4,21 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ChangeEmailRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
+use App\ChangeEmail;
+use App\User;
 
 class ChangeEmailAddressController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth');
-    // $this->middleware('verified')->except(['emailChangeform', 'changeEmail']);
+      // $this->user = $user;
+      $this->middleware('auth');
   }
 
   public function emailChangeform()
@@ -22,46 +26,46 @@ class ChangeEmailAddressController extends Controller
     return view('auth.email_change');
   }
 
-  public function sendChangeEmailLink(Request $request){
-    $user = Auth::user();
-    // ユーザーの投稿を取得するための変数
-    $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
-    $new_email = $request->new_email;
-        // トークン生成
-    $token = hash_hmac(
-      'sha256',
-      Str::random(40) . $new_email,
-      config('app.key')
-    );
+  // public function sendChangeEmailLink(Request $request){
+  //   $user = Auth::user();
+  //   // ユーザーの投稿を取得するための変数
+  //   $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
+  //   $new_email = $request->new_email;
+  //       // トークン生成
+  //   $token = hash_hmac(
+  //     'sha256',
+  //     Str::random(40) . $new_email,
+  //     config('app.key')
+  //   );
 
-      // トークンをDBに保存
-    DB::beginTransaction();
-    try {
-        $param = [];
-        $param['user_id'] = Auth::id();
-        $param['new_email'] = $new_email;
-        $param['update_token'] = $update_token;
-        $email_reset = EmailReset::create($param);
+  //     // トークンをDBに保存
+  //   DB::beginTransaction();
+  //   try {
+  //       $param = [];
+  //       $param['user_id'] = Auth::id();
+  //       $param['new_email'] = $new_email;
+  //       $param['update_token'] = $update_token;
+  //       $email_reset = EmailReset::create($param);
 
-        DB::commit();
+  //       DB::commit();
 
-        $email_reset->sendEmailResetNotification($update_token);
+  //       $email_reset->sendEmailResetNotification($update_token);
 
         
-      return view('users.show', [
-        'user' => $user,
-        'recipes' => $recipes,
-      ])->with('flash_message', '確認メールを送信しました。');
-    } catch (\Exception $e) {
-        DB::rollback();
-        return view('users.show', [
-          'user' => $user,
-          'recipes' => $recipes,
-        ])->with('flash_message', 'メール更新に失敗しました。');
-    }
-  }
-  // public function changeEmail(Request $request)
-  // {
+  //     return view('users.show', [
+  //       'user' => $user,
+  //       'recipes' => $recipes,
+  //     ])->with('flash_message', '確認メールを送信しました。');
+  //   } catch (\Exception $e) {
+  //       DB::rollback();
+  //       return view('users.show', [
+  //         'user' => $user,
+  //         'recipes' => $recipes,
+  //       ])->with('flash_message', 'メール更新に失敗しました。');
+  //   }
+  // }
+
+  // public function changeEmail(Request $request){
   //   // ログインしてるユーザーのレコードを取得
   //   $user = Auth::user();
   //   // メールアドレスの変更がない場合は、何も処理せす完了する。エラー表示の方がいいかな？
@@ -83,10 +87,79 @@ class ChangeEmailAddressController extends Controller
   //     'user' => $user,
   //     'recipes' => $recipes,
   //   ])->with('status', __('メールアドレス変更の確認メールを送信しました。'));
-
   // }
 
-  public function userEmailUpdate(Request $request)
+  public function emailChange(Request $request)
   {
+    // 対象レコード取得
+    $user = Auth::user();
+    // $form = $request->all();
+    // dd($form);
+    $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
+    // リクエストデータ受取
+    $new_email = $request->input('new_email');
+    // dd($new_email);
+    // メール照合用トークン生成
+    $update_token = hash_hmac(
+      'sha256',
+      Str::random(40).$new_email,
+      env('APP_KEY')
+    );
+      
+      // 変更データ一時保存DBへレコード保存
+      // DB::table('change_email')->insert([
+      //   [
+      //       'user_id' => $user->id,
+      //       'new_email' => $new_email,
+      //       'update_token' => $update_token
+      //   ]
+      // ]);
+      $change_email = new ChangeEmail;
+      $change_email->user_id = $user->id;
+      $change_email->new_email = $new_email;
+      $change_email->update_token = $update_token;
+      // dd($change_email);
+      $change_email->save();
+      // dd($change_email);
+      // メール送付
+      $domain =env('APP_URL');
+
+      // 第一引数でメールテンプレートを指定している。第二引数でリンクURLを生成してる？
+      Mail::send('emails/change_email', [
+        'url' => "{$domain}/email_update/?token={$update_token}"
+      ],
+        function ($message) use ($change_email) {
+        $message->to($change_email->new_email)->subject('メールアドレス確認');
+      });
+      // return redirect('user');
+      // マイページ遷移
+      return view('users.show', [
+        'user' => $user,
+        'recipes' => $recipes,
+      ]);
+
+  }
+
+  public function emailUpdate(Request $request)
+  {
+    // トークン受け取り
+    $token = $request->input('token');
+    // トークン照合
+    $email_change = DB::table('change_email')
+    ->where('update_token', '=', $token)->first();
+
+    // 照合一致で一時保存DBのメールアドレスをDBメールアドレスに上書
+    $user = User::find($email_change->user_id);
+    $user->email = $email_change->new_email;
+    $user->save();
+    // 一時保存DBレコード削除
+    DB::table('change_email')
+    ->where('update_token', '=', $token)->delete();
+
+    // $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
+    // 変更完了通知
+    // (----あとで作成----)
+    // リダイレクト
+    return redirect()->route('recipes.index');
   }
 }
