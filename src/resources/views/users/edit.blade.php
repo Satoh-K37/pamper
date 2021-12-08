@@ -8,7 +8,7 @@
   @include('nav')
     <div id="profile-edit-form" class="container">
         <div class="row">
-            <div class="col-8 offset-2 bg-white">
+            <div class="col-8 offset-2 bg-white my-5">
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
                 <form method="POST" class="p-5" action="{{ route('users.update',[$user->name]) }}" enctype="multipart/form-data">
                     @csrf
@@ -64,16 +64,20 @@
                 @if (Auth::id() == 1)
                   <!-- ゲストユーザーの場合はパスワード変更のリンクを表示させないようにする -->
                 @else
-                  <div class="text-right">
-                    <a href="{{ route('password.form', ['name' => $user->name]) }}" >
-                      パスワードの変更
-                    </a>
-                  </div>
-                  <div class="text-right">
-                    <a href="{{ route('email_change.form', ['name' => $user->name]) }}" >
-                      メールアドレスの変更
-                    </a>
-                  </div>
+                  <a href="{{ route('password.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                      <dt>パスワードの変更</dt>
+                      <dd class="mb-0"></dd>
+                    </dl>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                  </a>
+                  <a href="{{ route('email_change.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <dl class="mb-0">
+                      <dt>メールアドレスの変更</dt>
+                      <dd class="mb-0"></dd>
+                    </dl>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                  </a>
                 @endif
             </div>
         </div>

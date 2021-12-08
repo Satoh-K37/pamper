@@ -16,6 +16,7 @@
 // });
 
 Auth::routes();
+// Auth::routes(['verify' => true]);
 // ログイン
 Route::prefix('login')->name('login.')->group(function () {
   Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('{provider}');
@@ -53,18 +54,19 @@ Route::post('/recipe/{comment_id}/comments','CommentController@store');
 // タグ表示
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 
-
-
 ## PW変更
-// 通常のアクセス（GET）の場合はshowChangePasswordForm、メソッドを実行する
+// 通常のアクセス（GET）の場合はshowChangePasswordFormメソッドを実行する
 Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
 // パスワードの変更処理（POST）の場合はChangePasswordメソッドを実行する
 Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
 
-// メールアドレス変更
+// メールアドレス変更フォームにアクセス
 Route::get('/email_change', 'Auth\ChangeEmailAddressController@emailChangeForm')->name('email_change.form');
-// Route::get('/email', 'Auth\ChangeEmailAddressController.php@emailEdit')->name('email.edit');
-Route::post('/email', 'Auth\ChangeEmailAddressController.php@emailChange')->name('email.change');
+
+// メールアドレス確認メールを送信
+Route::post('/email', 'Auth\ChangeEmailAddressController@sendChangeEmailLink')->name('email.change');
+// Route::post('/email', 'Auth\ChangeEmailAddressController@emailChange')->name('email.change');
+
 Route::get('/email_update', 'Auth\ChangeEmailAddressController.php@emailUpdate');
 
 // アカウントマイページ関連
