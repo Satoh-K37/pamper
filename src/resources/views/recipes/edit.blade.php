@@ -8,7 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="card mt-3">
+        <div class="card my-5">
           <div class="card-body pt-0">
             @include('error_card_list')
             <div class="card-text">

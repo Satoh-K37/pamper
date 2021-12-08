@@ -27,7 +27,6 @@ class ChangePasswordController extends Controller
     {
       // dd($request);
       //ValidationはChangePasswordRequestで処理
-      /* ===ここにパスワード変更の処理=== */
       // ログイン中のユーザーを取得
       $user = Auth::user();
       // ユーザーの投稿を取得するための変数
@@ -42,8 +41,6 @@ class ChangePasswordController extends Controller
           'recipes' => $recipes,
       ]);
 
-      // パスワード変更処理後、homeにリダイレクト
-      // return redirect()->route('home')->with('status', __('Your password has been changed.'));
     }
     
 }

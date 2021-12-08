@@ -62,7 +62,7 @@ class UserController extends Controller
     $user->fill($user_form)->save();
     $user->password = bcrypt($request->get('password'));
     
-    $recipes = $user->recipes->sortByDesc('created_at');
+    $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
 
     return view('users.show', [
       // 'auth' => $auth,
