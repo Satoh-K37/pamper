@@ -17,6 +17,15 @@
           endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
         >
         </follow-button>
+      @else
+        <div class="ml-auto">
+          <a href="{{ route('users.edit', ['name' => $user->name] )}}">
+            <!-- <button class="user-btn"> -->
+            <button class="btn-sm btn-primary p-2" >
+              プロフィール編集
+            </button>
+          </a>
+        </div>
       @endif
     </div>
     <h2 class="h5 card-title m-0">
@@ -25,15 +34,6 @@
       </a>
       <p></p>
     </h2>
-    @if( Auth::id() === $user->id )
-      <a href="{{ route('users.edit', ['name' => $user->name] )}}">
-        <!-- <button class="user-btn"> -->
-        <button class="btn blue-gradient btn-block" style="width: 25%; padding: 10px;">
-          ユーザー登録内容の編集
-        </button>
-      </a>
-      
-    @endif
 
     <br>
     <p class="text-dark">

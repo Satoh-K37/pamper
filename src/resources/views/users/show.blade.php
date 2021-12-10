@@ -4,12 +4,9 @@
 
 @section('content')
   @include('nav')
+  @include('error_card_list')
+  @include('flash_message')
   <div class="container">
-      @if (session('status'))
-        <div class="card-text alert alert-success">
-          {{ session('status') }}
-        </div>
-      @endif
     @include('users.user')
     {{ $recipes->count() }}件
 

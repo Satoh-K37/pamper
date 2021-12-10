@@ -13,11 +13,8 @@ import ImgInputer from 'vue-img-inputer'
 import 'vue-img-inputer/dist/index.css'
 
 
-
 //Vue-infinite-loadingを使用する
 // Vue.use(InfiniteLoading);
-
-
 const app = new Vue({
   el: '#app',
   data: {
@@ -35,5 +32,4 @@ const app = new Vue({
     'vue-pure-lightbox': VuePureLightbox,
     'img-inputer': ImgInputer,
   }
-
 });

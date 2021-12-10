@@ -7,6 +7,7 @@
   @include('nav')
   <div class="container">
     @include('error_card_list')
+    @include('flash_message')
     @include('recipes.search')
     @foreach($recipes as $recipe) 
       @include('recipes.card')

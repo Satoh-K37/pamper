@@ -16,6 +16,7 @@
             </a> -->
             
             @include('error_card_list')
+            @include('flash_message')
             
             <div class="card-text">
               <form method="POST" action="{{ route('login') }}">

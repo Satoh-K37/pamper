@@ -5,6 +5,7 @@
 @section('content')
   @include('nav')
   <div class="container">
+    
     @include('users.user')
     {{ $recipes->count() }}件
 

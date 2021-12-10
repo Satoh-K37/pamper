@@ -7,6 +7,8 @@
 @section('content')
   @include('nav')
     <div id="profile-edit-form" class="container">
+      @include('error_card_list')
+      @include('flash_message')
         <div class="row">
             <div class="col-8 offset-2 bg-white my-5">
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
@@ -24,7 +26,6 @@
                         </label>
                     </span>
 
-                    {{-- ニックネーム --}}
                     <div class="form-group mt-3">
                         <label for="name">ニックネーム</label>
                         <input maxlength="50" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>

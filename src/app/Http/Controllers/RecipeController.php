@@ -158,7 +158,7 @@ class RecipeController extends Controller
       // });
 
       // dd($recipe);
-      return redirect()->route('recipes.index');
+      return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました');
   }
 
   public function edit(Recipe $recipe)
@@ -262,7 +262,7 @@ class RecipeController extends Controller
       });
       
       // dd($recipe);
-      return redirect()->route('recipes.index');
+      return redirect()->route('recipes.index')->with('flash_message', 'レシピの編集が完了しました');
   }
 
   public function destroy(Recipe $recipe)
@@ -276,7 +276,7 @@ class RecipeController extends Controller
     // $delete_pathに入っている画像パスと一致する画像データを削除
     \File::delete($delete_path);
     $recipe->delete();
-    return redirect()->route('recipes.index');
+    return redirect()->route('recipes.index')->with('flash_message', 'レシピの削除が完了しました');
   }
 
   public function show(Recipe $recipe)

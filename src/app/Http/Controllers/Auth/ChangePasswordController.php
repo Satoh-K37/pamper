@@ -35,12 +35,14 @@ class ChangePasswordController extends Controller
       $user->password = bcrypt($request->get('password'));
       $user->save();
 
+      session()->flash('flash_message', 'パスワード変更の確認メールを送信しました。');
       return view('users.show', [
           // 'auth' => $auth,
           'user' => $user,
           'recipes' => $recipes,
       ]);
-
+    // ->with('flash_message', 'メールアドレスの変更が完了しました。');
+    
     }
     
 }
