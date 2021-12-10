@@ -62,13 +62,13 @@ Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')-
 
 
 // メールアドレス変更フォームにアクセス ビュー表示
-Route::get('/email_change', 'Auth\ChangeEmailAddressController@emailChangeForm')->name('email_change.form');
+Route::get('/email/change', 'Auth\ChangeEmailAddressController@emailChangeForm')->name('email_change.form');
 // メールアドレス確認メールを送信
 // Route::post('/email', 'Auth\ChangeEmailAddressController@sendChangeEmailLink')->name('email.changeLink');
 // メールアドレス確認メールを送信
 Route::post('/email', 'Auth\ChangeEmailAddressController@emailChange')->name('email.change');
 // 認証用
-Route::get('/email_update', 'Auth\ChangeEmailAddressController@emailUpdate');
+Route::get('/email/update', 'Auth\ChangeEmailAddressController@emailUpdate')->name('email.update');
 
 // アカウントマイページ関連
 Route::prefix('users')->name('users.')->group(function () {

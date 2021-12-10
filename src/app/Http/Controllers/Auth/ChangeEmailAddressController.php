@@ -122,16 +122,14 @@ class ChangeEmailAddressController extends Controller
       $change_email->save();
       // dd($change_email);
       // メール送付
-      $domain =env('APP_URL');
+      $domain = env('APP_URL');
 
       // 第一引数でメールテンプレートを指定している。第二引数でリンクURLを生成してる？
-      Mail::send('emails/change_email', [
-        'url' => "{$domain}/email_update/?token={$update_token}"
-      ],
-        function ($message) use ($change_email) {
-        $message->to($change_email->new_email)->subject('メールアドレス確認');
+      Mail::send([ 'text' => 'emails/change_email'], 
+      ['emailchange_url' => "{$domain}/email/update/?token={$update_token}"],
+      function ($message) use ($change_email) {
+        $message->to($change_email->new_email)->subject('[重要]メールアドレス変更URLの送付');
       });
-      // return redirect('user');
       // マイページ遷移
       return view('users.show', [
         'user' => $user,

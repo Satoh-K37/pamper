@@ -40,7 +40,6 @@ class UserController extends Controller
     if(isset($user_form['profile_image'])){
       // 削除する画像名を取得
       $delete_icon = $user->profile_image;
-      
       // 削除する画像が存在しているディレクトリのパスを取得
       $delete_path = storage_path().'/app/public/icons/'.$delete_icon;
       // $delete_pathに入っている画像パスと一致する画像データを削除

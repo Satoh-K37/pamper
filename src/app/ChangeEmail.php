@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class ChangeEmail extends Model
 {
   protected $table = 'change_email';
@@ -13,4 +15,5 @@ class ChangeEmail extends Model
     'new_email',
     'update_token',
   ];
+
 }
