@@ -62,13 +62,12 @@ class UserController extends Controller
     $user->password = bcrypt($request->get('password'));
     
     $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
-
+    session()->flash('flash_message', 'プロフィールの編集が完了しました');
     return view('users.show', [
       // 'auth' => $auth,
       'user' => $user,
       'recipes' => $recipes,
   ]);
-
   }
 
   public function show(string $name)
@@ -138,7 +137,8 @@ class UserController extends Controller
       $request->user()->followings()->detach($user);
       $request->user()->followings()->attach($user);
 
-      return ['name' => $name];
+      
+      return ['name' => $name , session()->flash('flash_message', 'フォローしました')];
   }
   
   // フォローを解除するメソッド
@@ -152,8 +152,7 @@ class UserController extends Controller
       }
 
       $request->user()->followings()->detach($user);
-
-      return ['name' => $name];
+      return ['name' => $name, session()->flash('flash_message', 'フォローを解除しました')];
   }
 
 }

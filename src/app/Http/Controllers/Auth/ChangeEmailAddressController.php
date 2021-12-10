@@ -131,6 +131,7 @@ class ChangeEmailAddressController extends Controller
         $message->to($change_email->new_email)->subject('[重要]メールアドレス変更URLの送付');
       });
       // マイページ遷移
+      session()->flash('flash_message', 'メールアドレス変更の確認メールを送信しました。');
       return view('users.show', [
         'user' => $user,
         'recipes' => $recipes,
@@ -158,6 +159,7 @@ class ChangeEmailAddressController extends Controller
     // 変更完了通知
     // (----あとで作成----)
     // リダイレクト
-    return redirect()->route('recipes.index');
+    return redirect()->route('recipes.index')->with('flash_message', 'メールアドレスの変更が完了しました。');
+
   }
 }

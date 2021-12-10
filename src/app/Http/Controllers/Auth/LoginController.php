@@ -68,17 +68,17 @@ class LoginController extends Controller
           'provider' => $provider,
           'email' => $providerUser->getEmail(),
           'token' => $providerUser->token,
-      ]);
+      ])->with('flash_message', 'ログインしました。');
     }
     // ゲストログイン処理
     public function guestLogin()
     {
         // id=1 のゲストユーザー情報がDBに存在すれば、ゲストログインする
         if (Auth::loginUsingId(self::GUEST_USER_ID)) {
-            return redirect('/');
+            return redirect('/')->with('flash_message', 'ゲストユーザーでログインしました。');
         }
 
-        return redirect('/');
+        return redirect('/')->with('flash_message', 'ゲストユーザーでログインしました。');
     }
     
     // protected function loggedOut(Request $request)

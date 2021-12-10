@@ -13,6 +13,7 @@
             <h2 class="h3 card-title text-center mt-2">パスワード再設定</h2>
 
             @include('error_card_list')
+            @include('flash_message')
 
             @if (session('status'))
               <div class="card-text alert alert-success">

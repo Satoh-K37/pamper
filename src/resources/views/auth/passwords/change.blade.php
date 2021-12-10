@@ -10,6 +10,8 @@
             <div class="card">
                 <div class="card-header">パスワード変更</div>
 
+                @include('error_card_list')
+                @include('flash_message')
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.change') }}">
                         @csrf
@@ -65,7 +67,7 @@
                         </div>
                     </form>
                 </div>
-                
+
             </div>
         </div>
     </div>

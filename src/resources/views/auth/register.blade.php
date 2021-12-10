@@ -18,6 +18,8 @@
             </a> -->
             <!-- エラーメッセージを表示させる -->
             @include('error_card_list')
+            <!-- 成功時にメッセージを表示させる -->
+            @include('flash_message')
 
             <div class="card-text">
               <form method="POST" action="{{ route('register') }}">
