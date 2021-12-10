@@ -25,6 +25,7 @@ class BareMail extends Mailable
      * Build the message.
      *
      * @return $this
+     * 空っぽの設定メールとして使用する。何も設定せずに自分自身を返す。
      */
     public function build()
     {

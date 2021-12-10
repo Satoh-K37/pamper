@@ -56,6 +56,8 @@ return [
     */
 
     'from' => [
+        // 第一引数には.envファイルに設定した値が入る。（no-reply@example.comがはいるはず。）
+        // 第二引数には.envファイルの値などが存在しない際のデフォルトの値となる。
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
