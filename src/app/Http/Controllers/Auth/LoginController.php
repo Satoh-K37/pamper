@@ -68,7 +68,7 @@ class LoginController extends Controller
           'provider' => $provider,
           'email' => $providerUser->getEmail(),
           'token' => $providerUser->token,
-      ])->with('flash_message', 'ログインしました。');
+      ]);
     }
     // ゲストログイン処理
     public function guestLogin()

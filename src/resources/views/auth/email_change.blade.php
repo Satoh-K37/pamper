@@ -14,11 +14,6 @@
 
             @include('error_card_list')
             @include('flash_message')
-            @if (session('status'))
-              <div class="card-text alert alert-success">
-                {{ session('status') }}
-              </div>
-            @endif
 
             <div class="card-text">
               <form action="{{ route('email.change') }}" method="POST">

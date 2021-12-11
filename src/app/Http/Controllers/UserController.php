@@ -138,7 +138,7 @@ class UserController extends Controller
       $request->user()->followings()->attach($user);
 
       
-      return ['name' => $name , session()->flash('flash_message', 'フォローしました')];
+      return ['name' => $name];
   }
   
   // フォローを解除するメソッド
@@ -152,7 +152,7 @@ class UserController extends Controller
       }
 
       $request->user()->followings()->detach($user);
-      return ['name' => $name, session()->flash('flash_message', 'フォローを解除しました')];
+      return ['name' => $name];
   }
 
 }

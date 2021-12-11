@@ -93,6 +93,11 @@ class ChangeEmailAddressController extends Controller
   {
     // 対象レコード取得
     $user = Auth::user();
+
+    // ユーザーのメールアドレスと一致した場合は変更がないと表示させる
+    if ($user->email == $request->get('new_email')){
+      return redirect()->route('.')->with('flash_message', 'メールアドレスの変更はありません。');
+    }
     // $form = $request->all();
     // dd($form);
     $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
