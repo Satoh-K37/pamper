@@ -96,7 +96,14 @@ class ChangeEmailAddressController extends Controller
 
     // ユーザーのメールアドレスと一致した場合は変更がないと表示させる
     if ($user->email == $request->get('new_email')){
-      return redirect()->route('.')->with('flash_message', 'メールアドレスの変更はありません。');
+      return redirect()->route('email_change.form')->with('flash_message', 'メールアドレスの変更はありません。');
+    }
+
+    $old_email = $request->get('new_email');
+    // これでUserテーブルにnew_emailの値で検索かけて存在していた場合は、ifに入る
+    $exist_email = User::where($old_email);
+    if (isset($exist_email)){
+      return redirect()->route('email_change.form')->with('flash_message', 'メールアドレスはすでに使われています。');
     }
     // $form = $request->all();
     // dd($form);
