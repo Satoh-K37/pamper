@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 
 use App\ChangeEmail;
 use App\User;
+use Carbon\Carbon;
 
 class ChangeEmailAddressController extends Controller
 {
@@ -75,6 +76,7 @@ class ChangeEmailAddressController extends Controller
       function ($message) use ($change_email) {
         $message->to($change_email->new_email)->subject('[重要]メールアドレス変更URLの送付');
       });
+
       // マイページ遷移
       session()->flash('flash_message', 'メールアドレス変更の確認メールを送信しました。');
       return view('users.show', [
@@ -86,11 +88,15 @@ class ChangeEmailAddressController extends Controller
 
   public function emailUpdate(Request $request)
   {
-    // トークン受け取り
+
     $token = $request->input('token');
     // トークン照合
     $email_change = DB::table('change_email')
     ->where('update_token', '=', $token)->first();
+
+    // トークンが存在しているかつトークンの有効期限が切れていない場合は入る
+    if ($email_change && !$this->tokenExpired($email_change->created_at)) {
+    // トークン受け取り
 
     // 照合一致で一時保存DBのメールアドレスをDBメールアドレスに上書
     $user = User::find($email_change->user_id);
@@ -100,11 +106,31 @@ class ChangeEmailAddressController extends Controller
     DB::table('change_email')
     ->where('update_token', '=', $token)->delete();
 
-    // $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
-    // 変更完了通知
-    // (----あとで作成----)
-    // リダイレクト
     return redirect()->route('recipes.index')->with('flash_message', 'メールアドレスの変更が完了しました。');
 
+    }else{
+      // レコードが存在していた場合は対象レコードを削除
+      if ($email_change){
+        // 一時保存DBレコード削除
+        DB::table('change_email')
+        ->where('update_token', '=', $token)->delete();
+      }
+      return redirect()->route('email_change.form')->with('flash_message', 'URLの有効期限がきれています。再度メールアドレスの変更を行ってください');
+    }
+
+
   }
+
+
+  // トークンが有効期限切れかをチェック
+  protected function tokenExpired($createdAt)
+  {
+      // トークンの有効期限は60分に設定
+      $expires =  60 * 120;
+      return Carbon::parse($createdAt)->addSeconds($expires)->isPast();
+  }
+
+
+
+
 }
