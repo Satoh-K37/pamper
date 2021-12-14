@@ -26,88 +26,29 @@ class ChangeEmailAddressController extends Controller
     return view('auth.email_change');
   }
 
-  // public function sendChangeEmailLink(Request $request){
-  //   $user = Auth::user();
-  //   // ユーザーの投稿を取得するための変数
-  //   $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
-  //   $new_email = $request->new_email;
-  //       // トークン生成
-  //   $token = hash_hmac(
-  //     'sha256',
-  //     Str::random(40) . $new_email,
-  //     config('app.key')
-  //   );
-
-  //     // トークンをDBに保存
-  //   DB::beginTransaction();
-  //   try {
-  //       $param = [];
-  //       $param['user_id'] = Auth::id();
-  //       $param['new_email'] = $new_email;
-  //       $param['update_token'] = $update_token;
-  //       $email_reset = EmailReset::create($param);
-
-  //       DB::commit();
-
-  //       $email_reset->sendEmailResetNotification($update_token);
-
-        
-  //     return view('users.show', [
-  //       'user' => $user,
-  //       'recipes' => $recipes,
-  //     ])->with('flash_message', '確認メールを送信しました。');
-  //   } catch (\Exception $e) {
-  //       DB::rollback();
-  //       return view('users.show', [
-  //         'user' => $user,
-  //         'recipes' => $recipes,
-  //       ])->with('flash_message', 'メール更新に失敗しました。');
-  //   }
-  // }
-
-  // public function changeEmail(Request $request){
-  //   // ログインしてるユーザーのレコードを取得
-  //   $user = Auth::user();
-  //   // メールアドレスの変更がない場合は、何も処理せす完了する。エラー表示の方がいいかな？
-  //   if ($user->email == $request->get('email')){
-  //     return redirect()->route('setting')->with('status', __('"メールアドレス変更の確認メールを送信しました。'));
-  //   }
-  //   // フォームに入力されたメールアドレスを取得する
-  //   $user->email = $request->get('email');
-  //   // メール認証をリセットする
-  //   $user->email_verified_at = null;
-  //   $user->save();
-  //   // 認証メールを送信する
-  //   $user->sendEmailVerificationNotification();
-  //   // マイページに遷移させるので自身が投稿したレシピなどを取得する
-  //   $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
-  //   // マイページ遷移
-  //   return view('users.show', [
-  //     // 'auth' => $auth,
-  //     'user' => $user,
-  //     'recipes' => $recipes,
-  //   ])->with('status', __('メールアドレス変更の確認メールを送信しました。'));
-  // }
-
   public function emailChange(Request $request)
   {
-    // 対象レコード取得
+    // ログインしているユーザーを取得
     $user = Auth::user();
-
-    // ユーザーのメールアドレスと一致した場合は変更がないと表示させる
-    if ($user->email == $request->get('new_email')){
-      return redirect()->route('email_change.form')->with('flash_message', 'メールアドレスの変更はありません。');
+    // マイページに遷移する際に必要になる
+    $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
+    
+    // ユーザーのメールアドレスと一致した場合はマイページに遷移し、変更がないと表示させる
+    if ($user->email === $request->get('new_email')){
+      session()->flash('flash_message', 'メールアドレスの変更はありません。');
+      return view('users.show', [
+        'user' => $user,
+        'recipes' => $recipes,
+      ]);
     }
-
-    $old_email = $request->get('new_email');
-    // これでUserテーブルにnew_emailの値で検索かけて存在していた場合は、ifに入る
-    $exist_email = User::where($old_email);
-    if (isset($exist_email)){
+    // すでにメールアドレスが登録されている場合は確認メールを送信させない
+    // DBに検索かけて存在していた場合は、ifに入る
+    if (DB::table('users')->where('email', $request->get('new_email'))->exists()){
+      // メールアドレス変更入力フォームにリダイレクトし、メッセージを表示させる
       return redirect()->route('email_change.form')->with('flash_message', 'メールアドレスはすでに使われています。');
     }
-    // $form = $request->all();
-    // dd($form);
-    $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
+
+    // メールアドレスが登録されていなかった場合は通常通りにメールを送信させる。
     // リクエストデータ受取
     $new_email = $request->input('new_email');
     // dd($new_email);
@@ -118,14 +59,6 @@ class ChangeEmailAddressController extends Controller
       env('APP_KEY')
     );
       
-      // 変更データ一時保存DBへレコード保存
-      // DB::table('change_email')->insert([
-      //   [
-      //       'user_id' => $user->id,
-      //       'new_email' => $new_email,
-      //       'update_token' => $update_token
-      //   ]
-      // ]);
       $change_email = new ChangeEmail;
       $change_email->user_id = $user->id;
       $change_email->new_email = $new_email;
