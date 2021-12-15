@@ -9,7 +9,7 @@
 
 <div class="form-group">
   <label></label>
-    <textarea name="content" required class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
+    <textarea name="content" class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
 </div>
 
 <div class="form-group">
@@ -68,7 +68,7 @@
       </select>
     </div>
     
-    <textarea name="ingredient" required class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
+    <textarea name="ingredient" class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
     <textarea name="seasoning" class="form-control" placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
     <!--ここまで-->
   </div>
