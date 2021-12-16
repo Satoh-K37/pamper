@@ -12,6 +12,7 @@
     @foreach($recipes as $recipe) 
       @include('recipes.card')
     @endforeach
+    
     <div class="container">
       {{ $recipes->links() }}
     </div>

@@ -3,7 +3,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 @csrf
 <div class='md-form'>
-  <label>レシピタイトル *</label>
+  <label>レシピタイトル<span> 必須</span></label>
+    
   <input type="text" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
 </div>
 
@@ -21,7 +22,7 @@
       </div>
     @else
       <div class="card-text">
-        <span class="form-input__image_path--text">画像が登録されていません</span>
+        <span class="form-input__image_path--text">画像が登録されていません。画像は必須です。</span>
       </div>
     @endif
   </div>
@@ -67,7 +68,6 @@
         @endforeach
       </select>
     </div>
-    
     <textarea name="ingredient" class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
     <textarea name="seasoning" class="form-control" placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
     <!--ここまで-->
@@ -132,7 +132,8 @@
 </div>
 
 <div class="form-group">
-  <label for="category_id">カテゴリ *</label>
+  <label for="category_id">カテゴリ</label>
+  <span>必須</span>
   <select class="form-control" name="category_id" required>
     
     @foreach ($categories as $id => $name)
