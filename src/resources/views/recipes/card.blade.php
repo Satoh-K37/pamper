@@ -71,7 +71,7 @@
     <h3 class="h4 card-title">
       <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
         {{ $recipe->recipe_title }}
-      </a>å
+      </a>
     </h3>
 
     <div class="card-text">
@@ -183,4 +183,64 @@
     @endforeach
 <!-- contents end -->
   </div>
+</div>
+
+<div class="card border border-light shadow-0 my-5">
+  <div class="card-header bg-transparent border-light">
+    Header
+  </div>
+  <div class="card my-5">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <vue-pure-lightbox
+            thumbnail='/storage/images/{{$recipe->image_path}}'
+            :images="[
+              
+              '/storage/images/{{$recipe->image_path}}'
+            ]"
+          ></vue-pure-lightbox>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">
+            <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
+              {{ $recipe->recipe_title }}
+            </a>
+          </h5>
+          <p class="card-text">
+            {{ $recipe->content }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer bg-transparent border-light">
+    Footer
+  </div>
+</div>
+
+<div class="card border border-light shadow-0 my-5">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of the
+      card's content.
+    </p>
+  </div>
+</div>
+
+<div class="card border border-light shadow-0 my-5">
+  <div class="card-header bg-transparent border-light">Header</div>
+  <div class="card-body text-light">
+    <h5 class="card-title">Success card title</h5>
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of the
+      card's content.
+    </p>
+  </div>
+  <div class="card-footer bg-transparent border-light">Footer</div>
 </div>
