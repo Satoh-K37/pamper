@@ -10,5 +10,7 @@
     @include('recipes.card')
     @include('comments.comment_list')
     @include('comments.form')
+
+
     
 @endsection

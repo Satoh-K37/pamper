@@ -17,6 +17,7 @@
       {{ $recipes->links() }}
     </div>
   </div>
+
     <!-- <div class="contents">
         <div v-for="recipe in recipes" :key="recipe.id">
             @{{ recipe.recipe }}
