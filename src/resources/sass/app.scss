@@ -75,3 +75,75 @@
 textarea {
   margin: 10px 0px;
 }
+
+
+.recipe-label {
+  position: relative;
+  background: #ffd98a;
+  padding: 2px 5px 2px 25px;
+  font-size: 20px;
+  color: #474747;
+  border-radius: 0 10px 10px 0;
+  
+}
+
+.recipe-label:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f2e7";
+  display: inline-block;
+  line-height: 40px;
+  position: absolute;
+  padding: 0em;
+  color: white;
+  background: #ffa337;
+  font-weight: 900;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  left: -1.35em;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: solid 3px white; 
+  border-radius: 50%;
+}
+
+ol.list-wrap{
+  counter-reset:number; /*数字をリセット*/
+  list-style-type: none!important; /*数字を一旦消す*/
+  padding: 0.3em 0.8em;
+  
+}
+ol li.list {
+  border-bottom: dashed 1px orange;
+  position: relative;
+  padding: 0.5em 0.5em 0.5em 30px;
+  line-height: 1.5em;
+}
+ol li.list:before{
+  /* 以下数字をつける */
+  position: absolute;
+  counter-increment: number;
+  content: counter(number);
+  /*数字のデザイン変える*/
+  display:inline-block;
+  background: #ffb107;
+  color: white;
+  font-family: 'Avenir','Arial Black','Arial',sans-serif;
+  font-weight:bold;
+  font-size: 15px;
+  border-radius: 50%;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  /*以下 上下中央寄せのため*/
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+ol li.list:last-of-type {
+  border-bottom: none; /*最後のliの線だけ消す*/
+}

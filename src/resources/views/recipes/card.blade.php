@@ -114,40 +114,55 @@
               </div>
             </div>
           </div>
-            <div class="card-text">
+            <div class="mb-5">
               {{ $recipe->content }}
             </div>
           @if(Route::is('recipes.show'))
-            <div class="card-text">
-              {{ $recipe->serving }}
+            <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
+              材料・調味料（{{ $recipe->serving }}人前）
             </div>
-            <div class="card-text">
-              {{ $recipe->ingredient }}
+            <ol class="list-wrap">
+                <li class="list">
+                  <p class="my-2">{{ $recipe->ingredient }}</p>
+                </li>
+                <li class="list">
+                  <p class="my-2">{{ $recipe->seasoning }}</p>
+                </li>
+            </ol>
+              
+
+            <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
+              作り方
             </div>
-            <div class="card-text">
-              {{ $recipe->seasoning }}人前
+
+            <ol class="list-wrap">
+                <li class="list">
+                  <p class="my-2">{{ $recipe->step_content }}</p>
+                </li>
+                <li class="list">
+                  <p class="my-2">{{ $recipe->step_content2 }}</p>
+                </li>
+                <li class="list">
+                  <p class="my-2">{{ $recipe->step_content3 }}</p>
+                </li>
+                <li class="list">
+                  <p class="my-2">{{ $recipe->step_content4 }}</p>
+                </li>
+                <li class="list">
+                  <p class="my-2">{{ $recipe->step_content5 }}</p>
+                </li>
+                <li class="list">
+                  <p class="my-2">{{ $recipe->step_content6 }}</p>
+                </li>
+            </ol>
+            <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
+              コツ・ポイント
             </div>
-            <div class="card-text">
-              {{ $recipe->step_content }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content2 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content3 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content4 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content5 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content6 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->cooking_point }}
-            </div>
+            <ol class="list-wrap">
+              <li class="list my-2">
+                <p class="my-2">{{ $recipe->cooking_point }}</p>
+              </li>
+            </ol>
           @endif
 
 
