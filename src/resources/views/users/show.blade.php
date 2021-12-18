@@ -14,9 +14,13 @@
       @foreach($recipes as $recipe)
         @include('recipes.card')
       @endforeach
-      <div class="container">
-        {{ $recipes->links() }}
-      </div>
+    <nav class="my-4" aria-label="...">
+      <ul class="pagination pagination-circle justify-content-center">
+        <li class="page-item">
+          {{ $recipes->links() }}
+        </li>
+      </ul>
+    </nav>
 
   </div>
 @endsection

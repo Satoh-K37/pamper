@@ -5,18 +5,22 @@
 
 @section('content')
   @include('nav')
-  <div class="container">
+  
     @include('error_card_list')
     @include('flash_message')
     @include('recipes.search')
-    @foreach($recipes as $recipe) 
-      @include('recipes.card')
-    @endforeach
-    
-    <div class="container">
-      {{ $recipes->links() }}
+    <div class="d-flex my-box-light flex-wrap mb-2">
+      @foreach($recipes as $recipe)
+        @include('recipes.index_card')
+      @endforeach
     </div>
-  </div>
+    <nav class="my-4" aria-label="...">
+      <ul class="pagination pagination-circle justify-content-center">
+        <li class="page-item">
+          {{ $recipes->links() }}
+        </li>
+      </ul>
+    </nav>
 
     <!-- <div class="contents">
         <div v-for="recipe in recipes" :key="recipe.id">

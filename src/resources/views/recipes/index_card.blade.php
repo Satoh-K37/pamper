@@ -1,20 +1,18 @@
-<!-- コンテンツスタート２ -->
-<div class="card my-5">
-  <div class="row g-0">
-    <div class="col-md-12">
+  <!--Main layout-->
+
+    <div class="col-lg-4 col-md-12 mb-4">
       <div class="card">
-        <vue-pure-lightbox
-          thumbnail='/storage/images/{{$recipe->image_path}}'
-          :images="[
-            
-            '/storage/images/{{$recipe->image_path}}'
-          ]"
-        ></vue-pure-lightbox>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card-body my-0 py-0">
-        <div class="card-title pt-0">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <vue-pure-lightbox
+            thumbnail='/storage/images/{{$recipe->image_path}}'
+            :images="[
+              
+              '/storage/images/{{$recipe->image_path}}'
+            ]"
+          ></vue-pure-lightbox>
+        </div>
+              
+        <div class="card-body">
           <div class="card-body d-flex flex-row">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
               @if($recipe->user->profile_image !== NULL)
@@ -23,15 +21,18 @@
                 <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
               @endif
             </a>
-            <div class="font-weight-bold ml-2 my-auto">
+            <div class="font-weight-bold ml-2">
               <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
                 {{ $recipe->user->name }}
+                <p class="font-weight-lighter">
+                  {{ $recipe->created_at->format('Y/m/d H:i') }}
+                </p>
               </a>
             </div>
-            <div class="font-weight-lighter ml-2 my-auto">
+            <!-- <div class="font-weight-lighter ml-2">
               {{ $recipe->created_at->format('Y/m/d H:i') }}
-            </div>
-        @if( Auth::id() === $recipe->user_id )
+            </div> -->
+            @if( Auth::id() === $recipe->user_id )
           <!-- dropdown -->
             <div class="ml-auto card-text ml-5 my-auto">
               <div class="dropdown">
@@ -76,16 +77,15 @@
             </div>
             <!-- modal -->
           @endif
-        </div>
-      </div>
-      <!--  -->
+          </div>
+          
           <div class="d-flex my-box-light">
             <div class="my-box mr-auto">
-              <h4 class="card-title">
+              <h5 class="card-title">
                 <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
                   {{ $recipe->recipe_title }}
                 </a>
-              </h4>
+              </h5>
             </div>
             <div class="my-box">
               @foreach($recipe->categories as $category)
@@ -100,6 +100,7 @@
                 @endif
               @endforeach
             </div>
+
             <div class="my-box">
               <div class="card-body">
                 <div class="card-text line-height">
@@ -114,43 +115,11 @@
               </div>
             </div>
           </div>
-            <div class="card-text">
-              {{ $recipe->content }}
-            </div>
-          @if(Route::is('recipes.show'))
-            <div class="card-text">
-              {{ $recipe->serving }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->ingredient }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->seasoning }}人前
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content2 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content3 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content4 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content5 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->step_content6 }}
-            </div>
-            <div class="card-text">
-              {{ $recipe->cooking_point }}
-            </div>
-          @endif
 
-
+          <p class="card-text">
+            {{ $recipe->content }}
+          </p>
+          
           <div class="d-flex my-box-light mt-5">
             <div class="my-box mr-auto">
               @foreach($recipe->tags as $tag)
@@ -167,9 +136,9 @@
                 @endif
               @endforeach
             </div>
-            <div class="my-box">
+            <div class="my-box ml-3">
               <i class="far fa-comment mr-1 my-1">
-                ここにコメントの数を入れる
+                ?
               </i>
             </div>
             <div class="my-box">
@@ -182,8 +151,9 @@
               </recipe-like>
             </div>
           </div>
-
+        </div>
       </div>
     </div>
-  </div>
-</div>
+      <!--Section: Content-->
+
+  <!--Main layout-->
