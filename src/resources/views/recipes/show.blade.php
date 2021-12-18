@@ -4,13 +4,15 @@
 
 @section('content')
   @include('nav')
-  <div class="container"> 
+  <div class="container my-2">
     @include('error_card_list')
     @include('flash_message')
     @include('recipes.card')
+
     @include('comments.comment_list')
     @include('comments.form')
-
+  </div>
 
     
 @endsection
+

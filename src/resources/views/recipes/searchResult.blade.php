@@ -22,10 +22,19 @@
         </div>
       </div>
     </div>
-    @foreach($result_recipes as $recipe)
-      @include('recipes.card')
-    @endforeach
-    {{ $result_recipes->appends(request()->query())->links() }}
+    <div class="d-flex my-box-light flex-wrap my-2">
+      @foreach($result_recipes as $recipe)
+        @include('recipes.index_card')
+      @endforeach
+    </div>
+    <nav class="my-4" aria-label="...">
+      <ul class="pagination pagination-circle justify-content-center">
+        <li class="page-item">
+          {{ $result_recipes->appends(request()->query())->links() }}
+        </li>
+      </ul>
+    </nav>
+    
     
   </div>
 @endsection
