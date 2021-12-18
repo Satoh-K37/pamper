@@ -5,7 +5,7 @@
 @include('nav')
 
 @section('content')
-  <div class="container">
+  <div class="container my-5">
     <div class="row">
       <div class="mx-auto col col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
         <h1 class="text-center"><a class="text-dark" href="/">SPOILY</a></h1>
@@ -41,13 +41,13 @@
                   <label for="password_confirmation">パスワード(確認)</label>
                   <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required>
                 </div>
-                <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ユーザー登録</button>
+                <button class="btn btn-block blue-gradient my-1" type="submit">ユーザー登録</button>
               </form>
-              <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger mt-2 mb-2">
+              <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger my-1">
                 <i class="fab fa-google mr-1"></i>Googleで登録
               </a>
 
-              <div class="mt-0">
+              <div class="my-3">
                 <a href="{{ route('login') }}" class="card-text">ログインはこちら</a>
               </div>
               

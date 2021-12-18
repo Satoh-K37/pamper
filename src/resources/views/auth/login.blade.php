@@ -3,7 +3,7 @@
 @section('title', 'ログイン')
 @include('nav')
 @section('content')
-  <div class="container">
+  <div class="container my-5">
     <div class="row">
       <div class="mx-auto col col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
         <h1 class="text-center"><a class="text-dark" href="/">SPOILY</a></h1>
@@ -33,9 +33,9 @@
                 </div>
                 
                 <input type="hidden" name="remember" id="remember" value="on">
-                
-                <div class="text-left">
-                  <a href="{{ route('password.request') }}" class="card-text">パスワードを忘れた方</a>
+
+                <div class="text-right my-2">
+                  <a href="{{ route('password.request') }}" class="card-text">パスワードを忘れた方はこちら</a>
                 </div>
 
                 <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ログイン</button>
@@ -53,7 +53,7 @@
 
               </form>
 
-              <div class="mt-0">
+              <div class="my-2">
                 <a href="{{ route('register') }}" class="card-text">ユーザー登録はこちら</a>
               </div>
 
