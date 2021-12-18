@@ -137,30 +137,46 @@
             @endif
               
 
+            @if(isset($recipe->step_content) || isset($recipe->step_content2)|| isset($recipe->step_content3) 
+                || isset($recipe->step_content4) || isset($recipe->step_content5) || isset($recipe->step_content6))
             <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
               作り方
             </div>
 
             <ol class="list-wrap">
+                @if(isset($recipe->step_content))
                 <li class="list">
                   <p class="my-2">{{ $recipe->step_content }}</p>
                 </li>
+                @endif
+                @if(isset($recipe->step_content2))
                 <li class="list">
                   <p class="my-2">{{ $recipe->step_content2 }}</p>
                 </li>
+                @endif
+                @if(isset($recipe->step_content3))
                 <li class="list">
                   <p class="my-2">{{ $recipe->step_content3 }}</p>
                 </li>
+                @endif
+                @if(isset($recipe->step_content4))
                 <li class="list">
                   <p class="my-2">{{ $recipe->step_content4 }}</p>
                 </li>
+                @endif
+                @if(isset($recipe->step_content5))
                 <li class="list">
                   <p class="my-2">{{ $recipe->step_content5 }}</p>
                 </li>
+                @endif
+                @if(isset($recipe->step_content6))
                 <li class="list">
                   <p class="my-2">{{ $recipe->step_content6 }}</p>
                 </li>
+                @endif
             </ol>
+            @endif
+            @if(isset($recipe->cooking_point))
             <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
               コツ・ポイント
             </div>
@@ -169,6 +185,7 @@
                 <p class="my-2">{{ $recipe->cooking_point }}</p>
               </li>
             </ol>
+            @endif
           @endif
 
 
