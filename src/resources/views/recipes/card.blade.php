@@ -118,17 +118,23 @@
               {{ $recipe->content }}
             </div>
           @if(Route::is('recipes.show'))
+            @if(isset($recipe->ingredient) || isset($recipe->seasoning))
             <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
               材料・調味料（{{ $recipe->serving }}人前）
             </div>
             <ol class="list-wrap">
+                @if(isset($recipe->ingredient))
                 <li class="list">
                   <p class="my-2">{{ $recipe->ingredient }}</p>
                 </li>
+                @endif
+                @if(isset($recipe->seasoning))
                 <li class="list">
                   <p class="my-2">{{ $recipe->seasoning }}</p>
                 </li>
+                @endif
             </ol>
+            @endif
               
 
             <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
