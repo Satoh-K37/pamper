@@ -20,6 +20,16 @@ const app = new Vue({
   data: {
   //   // 文字数カウントできるようになったけどなんか微妙…
     commentCount: "",
+    // recipeContentCount: "",
+    // recipeTitleCount: "",
+    // recipeIngredientCount: "",
+    // recipeSeasoningCount: "",
+    // recipeStep1Count: "",
+    // recipeStep2Count: "",
+    // recipeStep3Count: "",
+    // recipeStep4Count: "",
+    // recipeStep5Count: "",
+    // recipeStep6Count:"",
     file: "",
   },
   components: {
