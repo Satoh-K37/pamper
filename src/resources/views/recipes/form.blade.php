@@ -21,8 +21,8 @@
   <div class="form-input__picture afterimage">
     <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
     @if (isset($recipe->image_path))
-      <div class="card-text">
-        <img src="/storage/images/{{$recipe->image_path}}">
+      <div class="card-text img-fluid">
+        <img class="card-text img-fluid" src="/storage/images/{{$recipe->image_path}}">
       </div>
     @else
       <div class="card-text">

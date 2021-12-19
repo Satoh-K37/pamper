@@ -7,7 +7,7 @@
 
       <!-- 一時URLが生成されている場合のみアップロードされた画像を表示する -->
       <div class="preview-box" v-if="url">
-          <img class="image-preview" v-bind:src="url" width="860" height="532">
+          <img class="image-preview img-fluid" v-bind:src="url">
       </div>
     </div>
 
