@@ -49,8 +49,10 @@ Route::prefix('recipes')->name('recipes.')->group(function () {
 });
 
 // コメント
-Route::post('/recipe/{comment_id}/comments','CommentController@store');
-// Route::delete('/recipe/{comment_id}/comments', 'UserController@delete');
+Route::resource('/comments', 'CommentController')->only(['store','destroy']);
+// Route::post('/recipe/{comment_id}/comments','CommentController@store');
+// Route::delete('/recipe/{comment_id}/comments', 'CommentController@delete');
+// Route::resource('recipes.comments', 'CommentController', ['only' => ['store', 'update', 'destroy'],]);
 // タグ表示
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 

@@ -57,11 +57,11 @@
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-                            <form method="POST" action="{{ route('recipes.destroy', ['recipe' => $recipe]) }}">
+                            <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment]) }}">
                               @csrf
                               @method('DELETE')
                               <div class="modal-body">
-                                コメントを削除します。よろしいですか？（仮でレシピ削除のルートを貼ってるので削除するを押さないで）
+                              コメント「{{ $comment->comment }}」を削除します。よろしいですか？
                               </div>
                               <div class="modal-footer justify-content-between">
                                 <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>

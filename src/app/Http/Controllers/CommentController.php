@@ -35,16 +35,26 @@ class CommentController extends Controller
       return redirect()->back()->with('comment_flash_message', 'コメントを投稿しました');
   }  
 
-  // public function destroy(Comment $comment)
-  // // public function destroy(Request $request)
-  // {
-  //     $comment = Comment::find($comment->id);
-  //     $comment->delete();
+  public function destroy(Comment $comment)
+  // public function destroy(Request $request)
+  {
+    if(Auth::id() == $comment->user_id) {
+      $comment = Comment::find($comment->id);
+      // dd($comment);
+      $comment->delete();
 
-  //     // return redirect()->route('comment', $user->id);
-  //     return redirect()->back();
-  //     // return view('recipes.show', ['recipe' => $recipe]);
-  // }
+      // return redirect()->route('comment', $user->id);
+      return redirect()->back()->with('comment_flash_message', 'コメントの削除が完了しました');
+    }
+      // return view('recipes.show', ['recipe' => $recipe]);
+      // if(Auth::id() == $comment->user_id || Auth::id() == $item->user_id) {
+      //   $comment->delete();
+      //   // return redirect()->route('comment', $user->id);
+      //   return redirect()->back()->with('comment_flash_message', 'コメントの削除が完了しました');
+  
+      //   // return view('recipes.show', ['recipe' => $recipe]);
+      // }
+  }
 
 }
 
