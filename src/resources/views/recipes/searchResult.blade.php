@@ -6,7 +6,9 @@
 @section('content')
   @include('nav')
   <div class="container">
-    @include('recipes.search')
+    <div class="d-flex my-box-light justify-content-end mr-1 my-3">
+      @include('recipes.search')
+    </div>
     <div class="card mt-3">
       <div class="card-body">
         <!-- <h2 class="h4 card-title m-0">検索キーワード：{{$keyword}}</h2> -->
