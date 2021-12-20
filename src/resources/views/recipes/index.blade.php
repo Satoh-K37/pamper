@@ -8,7 +8,9 @@
   
     @include('error_card_list')
     @include('flash_message')
-    @include('recipes.search')
+    <div class="d-flex my-box-light justify-content-end mr-3 my-3">
+      @include('recipes.search')
+    </div>
     <div class="d-flex my-box-light flex-wrap mb-2">
       @foreach($recipes as $recipe)
         @include('recipes.index_card')
