@@ -3,12 +3,13 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 @csrf
 <div class='md-form'>
-  <label>レシピタイトル<span> 必須</span></label>
-    
+  <label>レシピタイトル<span id="must-icon">必須</span></label>
   <input type="text" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
+  
   <!-- v-model.trim="recipeTitleCount" -->
   <!-- <p class="text-right">@{{ recipeTitleCount.length }}/50</p> -->
 </div>
+  
 
 <div class="form-group">
   <label></label>
@@ -26,7 +27,8 @@
       </div>
     @else
       <div class="card-text">
-        <span class="form-input__image_path--text">画像が登録されていません。画像は必須です。</span>
+        <span class="form-input__image_path--text">画像が登録されていません。<span id="must-icon">必須</span></span>
+        
       </div>
     @endif
   </div>
@@ -141,9 +143,8 @@
 
 <div class="form-group">
   <label for="category_id">カテゴリ</label>
-  <span>必須</span>
+  <span id="must-icon">必須</span>
   <select class="form-control" name="category_id" required>
-    
     @foreach ($categories as $id => $name)
       <option value="{{ $id }}" {{ old('category', $old_category_id->id ?? '') == $id ? 'selected' : ''}}>
           {{ $name }}
