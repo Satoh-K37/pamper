@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
-  検索
+<button type="button" class="btn btn--circle btn--circle-c btn--shadow" data-toggle="modal" data-target="#basicExampleModal">
+  <i class="fas fa-search"></i>
 </button>
 
 <!-- Modal -->
