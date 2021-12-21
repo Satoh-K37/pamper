@@ -7,7 +7,7 @@
   <div class="container">
     
     @include('users.user')
-    @include('users.tabs', ['hasRecipes' => true, 'hasLikes' => false])
+    @include('users.tabs', ['hasRecipes' => false, 'hasLikes' => true])
       @foreach($recipes as $recipe)
         @include('recipes.card')
       @endforeach

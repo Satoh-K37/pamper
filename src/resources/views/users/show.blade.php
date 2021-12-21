@@ -8,7 +8,6 @@
   @include('flash_message')
   <div class="container">
     @include('users.user')
-    
       @include('users.tabs', ['hasRecipes' => true, 'hasLikes' => false])
       @foreach($recipes as $recipe)
         @include('recipes.card')
