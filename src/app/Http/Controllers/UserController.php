@@ -103,10 +103,12 @@ class UserController extends Controller
       $user = User::where('name', $name)->first();
 
       $followings = $user->followings->sortByDesc('created_at');
+      $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
 
       return view('users.followings', [
           'user' => $user,
           'followings' => $followings,
+          'recipes' => $recipes,
       ]);
   }
   
@@ -116,10 +118,12 @@ class UserController extends Controller
       $user = User::where('name', $name)->first();
 
       $followers = $user->followers->sortByDesc('created_at');
+      $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
 
       return view('users.followers', [
           'user' => $user,
           'followers' => $followers,
+          'recipes' => $recipes,
       ]);
   }
 

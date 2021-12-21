@@ -232,20 +232,6 @@ class RecipeController extends Controller
         $form['image_path'] = $filename_to_store;
         // ファイルディレクトリに保存する処理。
         Storage::put('public/images/'. $filename_to_store, $resized_image);
-          // $file = $request->image_path;
-          // // dd($file);
-          // // アップロードされた画像の拡張子の取得。getClientOriginalExtension();だとできなかった…なぜ？
-          // // $ext = pathinfo($file, PATHINFO_EXTENSION);
-          // $ext = $request->file('image_path')->getClientOriginalExtension();
-          // // dd($ext);
-          // // ファイル名をランダムで作成
-          // $file_token = Str::random(32);
-          // // ファイル名と取得した拡張子を合体
-          // $imageFile = $file_token.".".$ext;
-          // // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-          // $form['image_path'] = $imageFile;
-          // // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-          // $request->image_path->storeAs('public/images/', $imageFile);
       }
 
       $recipe->user_id = $request->user()->id;
