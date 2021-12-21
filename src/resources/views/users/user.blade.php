@@ -1,55 +1,87 @@
-<div class="card mt-3">
-  <div class="card-body">
-    <div class="d-flex flex-row">
-      <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-        @if($user->profile_image !== NULL)
-          <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
-          <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-        @else
-          <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
-        @endif
-      </a>
-      @if( Auth::id() !== $user->id )
-        <follow-button
-          class="ml-auto"
-          :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
-          :authorized='@json(Auth::check())'
-          endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
-        >
-        </follow-button>
-      @else
-        <div class="ml-auto">
-          <a href="{{ route('users.edit', ['name' => $user->name] )}}">
-            <!-- <button class="user-btn"> -->
-            <button class="btn-sm btn-primary p-2" >
-              プロフィール編集
-            </button>
-          </a>
-        </div>
-      @endif
-    </div>
-    <h2 class="h5 card-title m-0">
-      <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-        {{ $user->name }}
-      </a>
-      <p></p>
-    </h2>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-8 col-lg-12 mx-auto">
+      <!-- Section: Block Content -->
+      <section>
+        <!-- Card -->
+        <div class="card testimonial-card">
+            <!-- Background color -->
+            <div class="card-up warning-color-dark p-3 white-text">
+              <span>
+                <i class="fas fa-arrow-left">backで前のページに戻るようにする</i>
+              </span>
+              <a class="font-weight-normal ml-3">{{ $user->name }}</a>
+              
+            </div>
+            <!-- Avatar -->
+            <!-- <div class="avatar mr-auto white"> -->
+              <div class="d-flex flex-row my-2 mx-2">
+                <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+                  @if($user->profile_image !== NULL)
+                    <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
+                    <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                  @else
+                    <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                  @endif
+                </a>
+                @if( Auth::id() !== $user->id )
+                  <follow-button
+                    class="ml-auto"
+                    :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
+                    :authorized='@json(Auth::check())'
+                    endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
+                  >
+                  </follow-button>
+                @else
+                  <div class="ml-auto">
+                    <a href="{{ route('users.edit', ['name' => $user->name] )}}">
+                      <button class="btn btn-outline-dark btn-rounded p-2" id="btn-radius">
+                        プロフィール編集
+                      </button>
+                    </a>
+                  </div>
+                @endif
+              </div>
+            <!-- </div> -->
+            <h2 class="h5 card-title ml-3">
+              <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+                {{ $user->name }}
+              </a>
+            </h2>
+            <p class="text-dark mx-3">
+                {{ $user->self_introduction }}
+            </p>
 
-    <br>
-    <p class="text-dark">
-        {{ $user->self_introduction }}
-    </p>
+
+            <!-- Content -->
+            <div class="card-body px-3 py-4">
+              <div class="row">
+                <div class="col-4 text-center">
+                  <p class="font-weight-bold mb-0 text-muted">{{ $recipes->count() }}</p>
+                  <p class="small text-uppercase mb-0">件の投稿</p>
+                </div>
+                <div class="col-4 text-center border-left border-right">
+                  <a class="font-weight-bold mb-0 text-muted" href="{{ route('users.followings', ['name' => $user->name]) }}">
+                    {{ $user->count_followings }}
+                  </a>
+                  <p class="small text-uppercase mb-0">フォロー</p>
+                </div>
+                <div class="col-4 text-center">
+                  <a class="font-weight-bold mb-0 text-muted" href="{{ route('users.followers', ['name' => $user->name]) }}">
+                    {{ $user->count_followers }}
+                  </a>
+                  <p class="small text-uppercase mb-0">フォロワー</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- Card -->
+
+      </section>
+      <!-- Section: Block Content -->
 
 
-  </div>
-  <div class="card-body">
-    <div class="card-text">
-      <a href="{{ route('users.followings', ['name' => $user->name]) }}" class="text-muted">
-        {{ $user->count_followings }} フォロー
-      </a>
-      <a href="{{ route('users.followers', ['name' => $user->name]) }}" class="text-muted">
-        {{ $user->count_followers }} フォロワー
-      </a>
     </div>
   </div>
 </div>
