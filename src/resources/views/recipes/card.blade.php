@@ -1,7 +1,7 @@
 <!-- コンテンツスタート２ -->
 <div class="card my-5">
   <div class="row g-0">
-    <div class="col-md-12">
+    <div class="col-md-12 card-group">
       <div class="card">
         <vue-pure-lightbox
           thumbnail='/storage/images/{{$recipe->image_path}}'
@@ -79,13 +79,8 @@
         </div>
       </div>
       <!--  -->
-          <div class="d-flex my-box-light">
+          <div class="d-flex my-box-light py-0 my-0">
             <div class="my-box mr-auto">
-              <h4 class="card-title">
-                <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
-                  {{ $recipe->recipe_title }}
-                </a>
-              </h4>
             </div>
             <div class="my-box">
               @foreach($recipe->categories as $category)
@@ -114,7 +109,12 @@
               </div>
             </div>
           </div>
-            <div class="mb-5">
+          <h4 class="font-weight-bold text-truncate d-inline-block" style="width: 100%;">
+            <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
+              {{ $recipe->recipe_title }}
+            </a>
+          </h4>
+            <div class="card-text mb-5">
               {{ $recipe->content }}
             </div>
           @if(Route::is('recipes.show'))
