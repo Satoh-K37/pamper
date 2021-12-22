@@ -7,9 +7,9 @@
         <div class="card testimonial-card">
             <!-- Background color -->
             <div class="card-up warning-color-dark p-3 white-text">
-              <span>
-                <i class="fas fa-arrow-left">backで前のページに戻るようにする</i>
-              </span>
+              <a onclick="history.back(-1);return false;">
+                <i class="fas fa-arrow-left"></i>
+              </a>
               <a class="font-weight-normal ml-3">{{ $user->name }}</a>
               
             </div>

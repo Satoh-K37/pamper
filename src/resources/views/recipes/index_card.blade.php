@@ -1,6 +1,6 @@
   <!--Main layout-->
 
-    <div class="col-lg-4 col-md-12 mb-4">
+    <div class="col-lg-4 col-md-12 mb-4 card-group">
       <div class="card">
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <vue-pure-lightbox
@@ -20,7 +20,7 @@
                 <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
               @endif
             </a>
-            <div class="font-weight-bold ml-2">
+            <div class="font-weight-bold">
               <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
                 {{ $recipe->user->name }}
                 <p class="font-weight-lighter">
@@ -78,13 +78,9 @@
           @endif
           </div>
           
-          <div class="d-flex my-box-light">
+
+          <div class="d-flex my-box-light py-0 my-0">
             <div class="my-box mr-auto">
-              <h5 class="card-title">
-                <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
-                  {{ $recipe->recipe_title }}
-                </a>
-              </h5>
             </div>
             <div class="my-box">
               @foreach($recipe->categories as $category)
@@ -115,15 +111,23 @@
             </div>
           </div>
 
+          <div class="font-weight-bold text-truncate d-inline-block" style="width: 100%;">
+            <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
+              {{ $recipe->recipe_title }}
+            </a>
+          </div>
+
           <p class="card-text">
-            {{ $recipe->content }}
+            <!-- <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}"> -->
+              {{ Str::limit($recipe->content, 50, '...') }}
+            <!-- </a> -->
           </p>
           
-          <div class="d-flex my-box-light mt-5">
+          <div class="d-flex my-box-light">
             <div class="my-box mr-auto">
               @foreach($recipe->tags as $tag)
                 @if($loop->first)
-                  <div class="card-body pt-0 pb-4 pl-3">
+                  <div class="card-body pt-0 pb-2 pl-0 pr-4">
                     <div class="card-text line-height">
                 @endif
                     <a href="{{ route('tags.show', ['name' => $tag->name]) }}" class="border ml-2 my-3 text-muted">
@@ -156,3 +160,5 @@
       <!--Section: Content-->
 
   <!--Main layout-->
+
+  

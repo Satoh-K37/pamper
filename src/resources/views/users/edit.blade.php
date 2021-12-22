@@ -22,9 +22,9 @@
                   <div class="card testimonial-card">
                     <!-- Background color -->
                     <div class="card-up warning-color-dark p-3 white-text">
-                      <span>
+                      <a onclick="history.back(-1);return false;">
                         <i class="fas fa-arrow-left"></i>
-                      </span>
+                      </a>
                       <span class="font-weight-normal ml-3">プロフィールを編集する</span>
                     </div>
                     <!-- Avatar -->
