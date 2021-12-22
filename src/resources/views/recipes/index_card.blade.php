@@ -118,9 +118,8 @@
           </div>
 
           <p class="card-text">
-            <!-- <a class="text-dark" href="{{ route('recipes.show', ['recipe' => $recipe]) }}"> -->
-              {{ Str::limit($recipe->content, 50, '...') }}
-            <!-- </a> -->
+            {{$recipe->content}}
+            <!-- {{ Str::limit($recipe->content, 50, '...') }} -->
           </p>
           
           <div class="d-flex my-box-light">
