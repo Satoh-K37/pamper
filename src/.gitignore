@@ -19,3 +19,5 @@ Homestead.yaml
 
 /.vagrant
 .phpunit.result.cache
+
+.DS_Store
