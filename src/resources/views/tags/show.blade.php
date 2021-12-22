@@ -5,6 +5,9 @@
 @section('content')
   @include('nav')
   <div class="container">
+    <div class="d-flex my-box-light justify-content-end mr-1 my-3">
+      @include('recipes.search')
+    </div>
     <div class="card mt-3">
       <div class="card-body">
         <h2 class="h4 card-title m-0">{{ $tag->hashtag }}</h2>
@@ -13,8 +16,10 @@
         </div>
       </div>
     </div>
-    @foreach($tag->recipes as $recipe)
-      @include('recipes.card')
-    @endforeach
+    <div class="d-flex my-box-light flex-wrap my-2">
+      @foreach($tag->recipes as $recipe)
+        @include('recipes.index_card')
+      @endforeach
+    </div>
   </div>
 @endsection
