@@ -81,8 +81,13 @@ class LoginController extends Controller
         return redirect('/')->with('flash_message', 'ゲストユーザーでログインしました。');
     }
     
-    // protected function loggedOut(Request $request)
-    // {
-    //   return view('recipes.index', ['recipes' => $recipes]);
-    // }
+    protected function loggedOut(Request $request)
+    {
+      // ログアウト後WelComeページに遷移させる
+      // session()->flash('flash_message', 'ログアウトしました。');
+      // return view('welcome');
+      session()->flash('flash_message', 'ログアウトしました。');
+      return view('auth.register');
+      
+    }
 }
