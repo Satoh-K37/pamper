@@ -6,17 +6,17 @@
 
 @section('content')
   @include('nav')
-    <div id="profile-edit-form" class="container">
+    <div class="container my-3" id="profile-edit-form">
       @include('error_card_list')
       @include('flash_message')
-        <div class="container my-3">
+        <div class="container">
           <div class="row">
 
-            <div class="col-md-8 col-lg-8 mx-auto">
+            <div class="col-md-8 col-lg-12 mx-auto">
               <!-- <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">
                 プロフィール編集
               </div> -->
-                <form method="POST" class="p-5" action="{{ route('users.update',[$user->name]) }}" enctype="multipart/form-data">
+                <form method="POST" class="" action="{{ route('users.update',[$user->name]) }}" enctype="multipart/form-data">
                   @csrf
                   <!-- Card -->
                   <div class="card testimonial-card">
@@ -64,28 +64,28 @@
                   <!-- </div> -->
                   <!-- Card end-->
               <!-- </form> -->
-                    <div class="card-body px-3 py-4">
-                      <div class="row">
-                        @if (Auth::id() == 1)
-                            <!-- ゲストユーザーの場合はパスワード変更のリンクを表示させないようにする -->
-                        @else
-                          <a href="{{ route('password.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                            <dl class="mb-0">
-                              <dt>パスワードの変更</dt>
-                              <dd class="mb-0"></dd>
-                            </dl>
-                            <div><i class="fas fa-chevron-right"></i></div>
-                          </a>
-                          <a href="{{ route('email_change.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                            <dl class="mb-0">
-                              <dt>メールアドレスの変更</dt>
-                              <dd class="mb-0"></dd>
-                            </dl>
-                            <div><i class="fas fa-chevron-right"></i></div>
-                          </a>
-                        @endif
-                      </div>
+                  <div class="card-body px-3 py-4">
+                    <div class="row">
+                      @if (Auth::id() == 1)
+                          <!-- ゲストユーザーの場合はパスワード変更のリンクを表示させないようにする -->
+                      @else
+                        <a href="{{ route('password.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                          <dl class="mb-0">
+                            <dt>パスワードの変更</dt>
+                            <dd class="mb-0"></dd>
+                          </dl>
+                          <div><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                        <a href="{{ route('email_change.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                          <dl class="mb-0">
+                            <dt>メールアドレスの変更</dt>
+                            <dd class="mb-0"></dd>
+                          </dl>
+                          <div><i class="fas fa-chevron-right"></i></div>
+                        </a>
+                      @endif
                     </div>
+                  </div>
                 </form>
               </div>
             </div>

@@ -4,44 +4,41 @@
       <!-- Section: Block Content -->
       <section>
         <!-- Card -->
-        <div class="card testimonial-card">
+        <div class="card testimonial-card">　
             <!-- Background color -->
             <div class="card-up warning-color-dark p-3 white-text">
               <a onclick="history.back(-1);return false;">
                 <i class="fas fa-arrow-left"></i>
               </a>
               <a class="font-weight-normal ml-3">{{ $user->name }}</a>
-              
             </div>
-            <!-- Avatar -->
-            <!-- <div class="avatar mr-auto white"> -->
-              <div class="d-flex flex-row my-2 mx-2">
-                <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-                  @if($user->profile_image !== NULL)
-                    <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
-                    <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
-                  @else
-                    <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
-                  @endif
-                </a>
-                @if( Auth::id() !== $user->id )
-                  <follow-button
-                    class="ml-auto"
-                    :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
-                    :authorized='@json(Auth::check())'
-                    endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
-                  >
-                  </follow-button>
+            <div class="d-flex flex-row my-2 mx-2">
+              <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+                @if($user->profile_image !== NULL)
+                  <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
+                  <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
                 @else
-                  <div class="ml-auto">
-                    <a href="{{ route('users.edit', ['name' => $user->name] )}}">
-                      <button class="btn btn-outline-dark btn-rounded p-2" id="btn-radius">
-                        プロフィール編集
-                      </button>
-                    </a>
-                  </div>
+                  <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
                 @endif
-              </div>
+              </a>
+              @if( Auth::id() !== $user->id )
+                <follow-button
+                  class="ml-auto"
+                  :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
+                  :authorized='@json(Auth::check())'
+                  endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
+                >
+                </follow-button>
+              @else
+                <div class="ml-auto">
+                  <a href="{{ route('users.edit', ['name' => $user->name] )}}">
+                    <button class="btn btn-outline-dark btn-rounded p-2" id="btn-radius">
+                      プロフィール編集
+                    </button>
+                  </a>
+                </div>
+              @endif
+            </div>
             <!-- </div> -->
             <h2 class="h5 card-title ml-3">
               <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
@@ -74,8 +71,7 @@
                 </div>
               </div>
             </div>
-
-          </div>
+        </div>
           <!-- Card -->
 
       </section>
