@@ -76,5 +76,13 @@ class Recipe extends Model
   {
       return $this->likes->count();
   }
+
+
+  //  現在のいいね数を算出するメソッド
+  public function getCountCommentsAttribute(): int
+  {
+      return $this->comments->count();
+  }
+  
   
 }

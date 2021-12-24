@@ -14,6 +14,7 @@ use Storage;
 use App\Recipe;
 use App\Tag;
 use App\Category;
+use App\Comment;
 
 class RecipeController extends Controller
 {
@@ -32,7 +33,7 @@ class RecipeController extends Controller
       $category_id = $request->input('category_id');
       $query = Recipe::query();
       $recipes = $query->orderBy('created_at','desc')->paginate();
-
+      
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
@@ -80,6 +81,13 @@ class RecipeController extends Controller
       'category_id' => $category_id,
       'old_category_id' => $old_category_id,
       ]);
+  }
+
+  public function show(Recipe $recipe)
+  {
+      return view('recipes.show', [
+        'recipe' => $recipe,
+        ]);
   }
 
   public function create()
@@ -265,10 +273,6 @@ class RecipeController extends Controller
     return redirect()->route('recipes.index')->with('flash_message', 'レシピの削除が完了しました');
   }
 
-  public function show(Recipe $recipe)
-  {
-      return view('recipes.show', ['recipe' => $recipe]);
-  }
 
   public function like(Request $request, Recipe $recipe)
   {
