@@ -190,7 +190,7 @@
 
 
           <div class="d-flex my-box-light mt-5">
-            <div class="my-box mr-auto">
+            <div class="my-box mr-auto p-2">
               @foreach($recipe->tags as $tag)
                 @if($loop->first)
                   <div class="card-body pt-0 pb-4 pl-3">
@@ -205,13 +205,13 @@
                 @endif
               @endforeach
             </div>
-            <div class="my-box">
+            <div class="my-box p-2">
               <recipe-comment
                 :initial-count-comments='@json($recipe->count_comments)'
               >
               </recipe-comment>
             </div>
-            <div class="my-box">
+            <div class="my-box p-2">
               <recipe-like
                 :initial-is-liked-by='@json($recipe->isLikedBy(Auth::user()))'
                 :initial-count-likes='@json($recipe->count_likes)'
