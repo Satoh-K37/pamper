@@ -2,6 +2,7 @@ import './bootstrap'
 import Vue from 'vue'
 
 import RecipeLike from './components/RecipeLike'
+import RecipeComment from './components/RecipeComment'
 import RecipeTagsInput from './components/RecipeTagsInput'
 import FollowButton from './components/FollowButton'
 import FileUpload from './components/FileUpload'
@@ -34,6 +35,7 @@ const app = new Vue({
   },
   components: {
     RecipeLike,
+    RecipeComment,
     RecipeTagsInput,
     FollowButton,
     FileUpload,

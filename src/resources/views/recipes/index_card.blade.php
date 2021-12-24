@@ -139,9 +139,12 @@
               @endforeach
             </div>
             <div class="my-box ml-3">
-              <i class="far fa-comment mr-1 my-1">
-                ?
-              </i>
+              <!-- <i class="far fa-comment mr-1 my-1">
+              </i> -->
+              <recipe-comment
+                :initial-count-comments='@json($recipe->count_comments)'
+              >
+              </recipe-comment>
             </div>
             <div class="my-box">
               <recipe-like
