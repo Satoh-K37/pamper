@@ -191,6 +191,7 @@ button.btn--circle:hover i {
 }
 // 
 
-
-
-
+.width-max { /* 画面幅いっぱいにしたい要素にあてるクラス */
+  margin: 0 calc(50% - 50vw);
+  width: 100vw;
+}
