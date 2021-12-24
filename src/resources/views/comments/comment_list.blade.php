@@ -4,7 +4,17 @@
     <div class="card">
       <div class="card-body">
         <div class="text-right mb-4">
+        @auth
           @include('comments.form')
+        @else
+          <p class="text-muted">
+            コメントするにはログインが必要です。アカウントの登録がまだの方はアカウントの登録をお願いします。
+          </p>
+          <div class="my-3">
+            <a href="{{ route('login') }}">ログインはこちら</a>
+            <a href="{{ route('register') }}">ユーザー登録はこちら</a>
+          </div>
+        @endauth
         </div>
         <hr>
         @foreach ($recipe->comments as $comment)
@@ -83,15 +93,12 @@
             <hr>
           </div>
           <!--Grid column-->
-          
         </div>
         <!--Grid row-->
         @endforeach
       </div>
-      
     </div>
-    
   </section>
   <!-- Section: Block Content -->
-
 </div>
+
