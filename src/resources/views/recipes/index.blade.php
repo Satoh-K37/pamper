@@ -8,10 +8,12 @@
   
     @include('error_card_list')
     @include('flash_message')
-    <div class="d-flex my-box-light justify-content-end mr-3 my-3">
-      @include('recipes.search')
-    </div>
-    <div class="d-flex my-box-light flex-wrap mb-2">
+    @auth
+      <div class="d-flex my-box-light justify-content-end mr-3">
+        @include('recipes.search')
+      </div>
+    @endauth      
+    <div class="d-flex my-box-light flex-wrap my-3">
       @foreach($recipes as $recipe)
         @include('recipes.index_card')
       @endforeach
