@@ -1,11 +1,8 @@
 @extends('app')
-
 @section('title', 'ユーザー登録')
-
 @include('nav')
-
 @section('content')
-<div class="width-max container-fluid text-lg-left mw-100 p-0 m-0">
+<div class="width-max container-fluid text-lg-left mw-100 p-0">
   <!--Section: Content-->
   <section class="mydark-grey-text mw-100">
 
@@ -29,7 +26,7 @@
       <!--Grid column-->
       <div class="col-lg-6 mt-5 px-3 w-auto bordered">
         <!-- <img src="/storage/logo_transparent.png" class="img-fluid mb-2"> -->
-        <h2 class="font-weight-bold">美味しさ、ガンガン見つけよう</h2>
+        <h2 class="font-weight-bold">あなたを甘やかす、<p>ご褒美ごはんをここでみつけよう。</p></h2>
 
         <div class="container mt-5">
           <div class="mx-auto">
@@ -91,11 +88,5 @@
 
 
 </div>
-
-
-
-
-
-
 
 @endsection
