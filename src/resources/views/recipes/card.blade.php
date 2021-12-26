@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-12">
       <div class="card-body my-0 py-0">
-        <div class="card-title pt-0">
+        <div class="card-title px-0 py-0 mx-0 my-0">
           <div class="card-body d-flex flex-row">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
               @if($recipe->user->profile_image !== NULL)
@@ -26,15 +26,18 @@
             <div class="font-weight-bold ml-2 my-auto">
               <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
                 {{ $recipe->user->name }}
+                <p class="font-weight-lighter">
+                  {{ $recipe->created_at->format('Y/m/d H:i') }}  
+                </p>
               </a>
             </div>
-            <div class="font-weight-lighter ml-2 my-auto">
+            <!-- <div class="font-weight-lighter ml-2 my-auto">
               {{ $recipe->created_at->format('Y/m/d H:i') }}
-            </div>
+            </div> -->
         @if( Auth::id() === $recipe->user_id )
           <!-- dropdown -->
             <div class="ml-auto card-text ml-5 my-auto">
-              <div class="dropdown">
+              <div class="dropdown px-3">
                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-v"></i>
                 </a>

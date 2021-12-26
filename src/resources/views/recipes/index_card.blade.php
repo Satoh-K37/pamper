@@ -140,12 +140,12 @@
             @endforeach
           </div>
           <div class="my-box ml-3 p-2">
-            <!-- <i class="far fa-comment mr-1 my-1">
-            </i> -->
-            <recipe-comment
-              :initial-count-comments='@json($recipe->count_comments)'
-            >
-            </recipe-comment>
+            <!-- <a class="text-muted" href="{{ route('recipes.show', ['recipe' => $recipe]) }}"> -->
+              <recipe-comment
+                :initial-count-comments='@json($recipe->count_comments)'
+              >
+              </recipe-comment>
+            <!-- </a> -->
           </div>
           <div class="my-box p-2">
             <recipe-like
