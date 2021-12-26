@@ -4,8 +4,7 @@
       type="button"
       class="btn m-0 p-1 shadow-none"
     >
-      <i class="far fa-comment mr-1 my-1"
-      />
+      <i class="far fa-comment mr-1 my-1"/>
     </button>
     {{ countComments }}
   </div>
