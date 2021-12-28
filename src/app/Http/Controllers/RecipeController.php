@@ -26,14 +26,18 @@ class RecipeController extends Controller
   public function index(Request $request)
   {
       // phpinfo();
+      \DB::enableQueryLog();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
 
       $keyword = $request->input('keyword');
       $category_id = $request->input('category_id');
       $query = Recipe::query();
-      $recipes = $query->orderBy('created_at','desc')->paginate();
-      
+      // $recipes = $query->orderBy('created_at','desc')->paginate();
+      $recipes = $query->orderByDesc('created_at')->paginate();
+      $recipes->loadMissing('user');
+      // ->load('user');
+      // dd(\DB::getQueryLog());
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
