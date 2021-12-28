@@ -6,13 +6,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        key: composer-v2-{{ checksum "laravel/composer.lock" }}
+          key: composer-v2-{{ checksum "laravel/composer.lock" }}
       - run: 
-            working_directory: src
-            command: composer install -n --prefer-dist
-      - run:
-            working_directory: src
-            name: npm ci
+          working_directory: src
+          command: composer install -n --prefer-dist
+      - run:name: npm ci
       - run: 
             working_directory: src
             command: npm run dev
