@@ -9,8 +9,8 @@ jobs:
       - restore_cache:
           key: composer-v2-{{ checksum "src/composer.lock" }}
       - run:
-        working_directory: src
-        command: composer install -n --prefer-dist
+          working_directory: src
+          command: composer install -n --prefer-dist
       - save_cache:
           key: composer-v2-{{ checksum "src/composer.lock" }}
           paths:
