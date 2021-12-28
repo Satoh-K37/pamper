@@ -5,16 +5,10 @@ jobs:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      - restore_cache:
-          key: composer-v2-{{ checksum "laravel/composer.lock" }}
-      - run: 
-          working_directory: src
-          command: composer install -n --prefer-dist
-      - run:name: npm ci
-      - run: 
-            working_directory: src
-            command: npm run dev
+      - run: sudo composer self-update
+      - run: composer install -n --prefer-dist
+      - run: npm ci
+      - run: npm run dev
       - run:
-          working_directory: src
           name: php test
           command: vendor/bin/phpunit
