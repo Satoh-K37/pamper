@@ -1,42 +1,75 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
+      - image: circleci/php:7.3.0-node-browsers
+      # - image: circleci/mariadb:10.4
+    # environment:
+    #   - DB_CONNECTION: circle_testing
+    working_directory: ~/src
     steps:
       - checkout
-      - restore_cache:
-          key: composer-v2-{{ checksum "src/composer.lock" }}
       - run:
-          working_directory: src
+          name: Update apt-get
+          command: sudo apt-get update
+      - run:
+          name: Docker php extensions install
+          command: sudo docker-php-ext-install pdo_mysql
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install PHP libraries
           command: composer install -n --prefer-dist
       - save_cache:
-          key: composer-v2-{{ checksum "src/composer.lock" }}
           paths:
-            - src/vendor 
-      - restore_cache:
-          key: npm-v2-{{ checksum "src/package-lock.json" }}
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
       - run:
-          working_directory: src
-          name: npm ci
-          command: |
-            if [ ! -d node_modules ]; then
-              npm ci
-            fi
-      - save_cache:
-          key: npm-v2-{{ checksum "src/package-lock.json" }}
-          paths:
-            - src/node_modules
-      - run:
-          working_directory: src
-          command: npm run dev
-      - run:
-          # working_directory: src
           name: Run PHPUnit
           command: vendor/bin/phpunit
-      # - run: php ./src/artisan --env=testing
-      # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
-      # - run:
-      #     working_directory: src
-      #     name: php test
-      #     command: vendor/bin/phpunit
+
+
+# version: 2.1
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/php:7.3-node-browsers
+#     steps:
+#       - checkout
+#       - restore_cache:
+#           key: composer-v2-{{ checksum "src/composer.lock" }}
+#       - run:
+#           working_directory: src
+#           command: composer install -n --prefer-dist
+#       - save_cache:
+#           key: composer-v2-{{ checksum "src/composer.lock" }}
+#           paths:
+#             - src/vendor 
+#       - restore_cache:
+#           key: npm-v2-{{ checksum "src/package-lock.json" }}
+#       - run:
+#           working_directory: src
+#           name: npm ci
+#           command: |
+#             if [ ! -d node_modules ]; then
+#               npm ci
+#             fi
+#       - save_cache:
+#           key: npm-v2-{{ checksum "src/package-lock.json" }}
+#           paths:
+#             - src/node_modules
+#       - run:
+#           working_directory: src
+#           command: npm run dev
+#       - run:
+#           # working_directory: src
+#           name: Run PHPUnit
+#           command: vendor/bin/phpunit
+#       # - run: php ./src/artisan --env=testing
+#       # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
+#       # - run:
+#       #     working_directory: src
+#       #     name: php test
+#       #     command: vendor/bin/phpunit
