@@ -32,7 +32,7 @@ jobs:
           command: npm run dev
       - run:
           name: php test
-          command: ./src/vendor/bin/phpunit
+          command: ./vendor/bin/phpunit
 
       # - run: php ./src/artisan --env=testing
       # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
