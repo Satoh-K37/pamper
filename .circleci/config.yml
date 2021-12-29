@@ -5,7 +5,6 @@ jobs:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      # - run: sudo composer self-update
       - restore_cache:
           key: composer-v2-{{ checksum "src/composer.lock" }}
       - run:
@@ -31,10 +30,13 @@ jobs:
       - run:
           working_directory: src
           command: npm run dev
+      # - run: php ./src/artisan --env=testing
+      # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
       - run:
           working_directory: src
           name: php test
-          command: vendor/bin/phpunit
+          command: vendor/bin/phpunit tests
+
       # - run: php ./src/artisan --env=testing
       # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
       # - run:
