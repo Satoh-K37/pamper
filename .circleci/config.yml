@@ -3,72 +3,42 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+    working_directory: ~/src
     steps:
       - checkout
-      - run: sudo composer self-update --1
       - restore_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
-      - run: composer install -n --prefer-dist
-      - save_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
-          paths:
-            - vendor
-      - restore_cache:
-          key: npm-v1-{{ checksum "package-lock.json" }}
+          key: composer-v2-{{ checksum "composer.lock" }}
       - run:
+          # working_directory: src
+          command: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v2-{{ checksum "composer.lock" }}
+          paths:
+            - src/vendor 
+      - restore_cache:
+          key: npm-v2-{{ checksum "package-lock.json" }}
+      - run:
+          # working_directory: src
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
               npm ci
-            fi 
+            fi
       - save_cache:
-          key: npm-v1-{{ checksum "package-lock.json" }}
+          key: npm-v2-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      - run: npm run dev
       - run:
+          # working_directory: src
+          command: npm run dev
+      - run:
+          # working_directory: src
           name: php test
           command: vendor/bin/phpunit
-# version: 2.1
-# jobs:
-#   build:
-#     docker:
-#       - image: circleci/php:7.3-node-browsers
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           key: composer-v2-{{ checksum "src/composer.lock" }}
-#       - run:
-#           working_directory: src
-#           command: composer install -n --prefer-dist
-#       - save_cache:
-#           key: composer-v2-{{ checksum "src/composer.lock" }}
-#           paths:
-#             - src/vendor 
-#       - restore_cache:
-#           key: npm-v2-{{ checksum "src/package-lock.json" }}
-#       - run:
-#           working_directory: src
-#           name: npm ci
-#           command: |
-#             if [ ! -d node_modules ]; then
-#               npm ci
-#             fi
-#       - save_cache:
-#           key: npm-v2-{{ checksum "src/package-lock.json" }}
-#           paths:
-#             - src/node_modules
-#       - run:
-#           working_directory: src
-#           command: npm run dev
-#       - run:
-#           working_directory: src
-#           name: php test
-#           command: vendor/bin/phpunit
 
-#       # - run: php ./src/artisan --env=testing
-#       # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
-#       # - run:
-#       #     working_directory: src
-#       #     name: php test
-#       #     command: vendor/bin/phpunit
+      # - run: php ./src/artisan --env=testing
+      # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
+      # - run:
+      #     working_directory: src
+      #     name: php test
+      #     command: vendor/bin/phpunit
