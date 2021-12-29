@@ -31,7 +31,7 @@ jobs:
           working_directory: src
           command: npm run dev
       - run:
-          working_directory: src
+          # working_directory: src
           name: php test
           command: vendor/bin/phpunit
       # - run: php ./src/artisan --env=testing
