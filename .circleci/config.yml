@@ -32,7 +32,7 @@ jobs:
           command: npm run dev
       - run:
           name: Run PHPUnit
-          command: vendor/bin/phpunit
+          command: docker-compose exec app vendor/bin/phpunit
       # - run:
       #     name: php test
       #     command: vendor/bin/phpunit
