@@ -3,37 +3,36 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
-    working_directory: ~/src
     steps:
       - checkout
       - restore_cache:
-          key: composer-v2-{{ checksum "composer.lock" }}
+          key: composer-v2-{{ checksum "src/composer.lock" }}
       - run:
-          # working_directory: src
+          working_directory: src
           command: composer install -n --prefer-dist
       - save_cache:
-          key: composer-v2-{{ checksum "composer.lock" }}
+          key: composer-v2-{{ checksum "src/composer.lock" }}
           paths:
             - src/vendor 
       - restore_cache:
-          key: npm-v2-{{ checksum "package-lock.json" }}
+          key: npm-v2-{{ checksum "src/package-lock.json" }}
       - run:
-          # working_directory: src
+          working_directory: src
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
               npm ci
             fi
       - save_cache:
-          key: npm-v2-{{ checksum "package-lock.json" }}
+          key: npm-v2-{{ checksum "src/package-lock.json" }}
           paths:
-            - node_modules
+            - src/node_modules
       - run:
-          # working_directory: src
+          working_directory: src
           command: npm run dev
       - run:
-          # working_directory: src
-          name: php test
+          working_directory: src
+          name: Run PHPUnit
           command: vendor/bin/phpunit
 
       # - run: php ./src/artisan --env=testing
