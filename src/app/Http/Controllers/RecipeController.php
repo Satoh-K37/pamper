@@ -26,14 +26,18 @@ class RecipeController extends Controller
   public function index(Request $request)
   {
       // phpinfo();
+      // \DB::enableQueryLog();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
 
       $keyword = $request->input('keyword');
       $category_id = $request->input('category_id');
       $query = Recipe::query();
-      $recipes = $query->orderBy('created_at','desc')->paginate();
-      
+      // $recipes = $query->orderBy('created_at','desc')->paginate();
+      $recipes = $query->orderByDesc('created_at')->paginate();
+      $recipes->loadMissing('user','likes','tags');
+      // ->load('user');
+      // dd(\DB::getQueryLog());
       return view('recipes.index', [
         'recipes' => $recipes,
         // 'allCategoryNames' => $allCategoryNames,
@@ -67,7 +71,8 @@ class RecipeController extends Controller
     }
 
     // $keywordがない場合は全検索を実行する
-    $result_recipes = $query->orderBy('created_at','desc')->paginate(5);
+    $result_recipes = $query->orderBy('created_at','desc')->paginate();
+    $result_recipes->loadMissing('user','likes','tags');
     
     $category = new Category;
     $categories = $category->getCategories()->prepend('選択してください', '');
