@@ -21,6 +21,7 @@ jobs:
       - run:
           working_directory: src
           name: npm ci
+          # node_modulesが存在していない場合はnpm ciを実行する
           command: |
             if [ ! -d node_modules ]; then
               npm ci
@@ -28,7 +29,8 @@ jobs:
       - save_cache:
           key: npm-v2-{{ checksum "src/package-lock.json" }}
           paths:
-            - src/node_modules
+            - $HOME/.npm
+            # - src/node_modules
       - run:
           working_directory: src
           command: npm run dev
