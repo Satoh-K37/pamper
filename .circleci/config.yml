@@ -1,32 +1,47 @@
-version: 2
-
+version: 2.1
 jobs:
   build:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: circleci/php:7.1-node-browsers
+      - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      - run: sudo apt update
-      - run: sudo docker-php-ext-install zip
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "composer.json" }}
-            - v1-dependencies-
-      - run: composer install -n --prefer-dist
+          key: composer-v2-{{ checksum "src/composer.lock" }}
+      - run:
+          working_directory: src
+          command: composer install -n --prefer-dist
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
+          key: composer-v2-{{ checksum "src/composer.lock" }}
           paths:
-            - ./vendor
+            - src/vendor 
       - restore_cache:
-          keys:
-            - node-v1-{{ checksum "package.json" }}
-            - node-v1-
-      - run: yarn install
+          key: npm-v2-{{ checksum "src/package-lock.json" }}
+      - run:
+          working_directory: src
+          name: npm ci
+          command: |
+            if [ ! -d node_modules ]; then
+              npm ci
+            fi
       - save_cache:
-          key: node-v1-{{ checksum "package.json" }}
+          key: npm-v2-{{ checksum "src/package-lock.json" }}
           paths:
-            - node_modules
-      - run: ./vendor/bin/codecept build
-      - run: ./vendor/bin/codecept run
+            - src/node_modules
+      - run:
+          working_directory: src
+          command: npm run dev
+      # - run: php ./src/artisan --env=testing
+      # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
+      - run:
+          working_directory: src
+          name: php test
+          command: vendor/bin/phpunit tests
+
+      # - run: php ./src/artisan --env=testing
+      # - run: php ./src/vendor/bin/phpunit --configuration=./src/phpunit.xml
+      # - run:
+      #     working_directory: src
+      #     name: php test
+      #     command: vendor/bin/phpunit
