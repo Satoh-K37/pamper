@@ -260,8 +260,9 @@ class RecipeController extends Controller
           $recipe->tags()->attach($tag);
       });
       
+      return view('recipes.index');
       // dd($recipe);
-      return redirect()->route('recipes.index')->with('flash_message', 'レシピの編集が完了しました');
+      // return redirect()->route('recipes.index')->with('flash_message', 'レシピの編集が完了しました');
   }
 
   public function destroy(Recipe $recipe)
