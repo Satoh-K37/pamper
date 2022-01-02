@@ -62,14 +62,13 @@ jobs:
       - run:
           name: deploy
           command: |
-            ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd laravel-ci && \
+            ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd spoily-ci/src && \
               git pull origin main && \
               composer install -n --no-dev --prefer-dist && \
               npm ci && \
               npm run prod && \
               php artisan migrate --force && \
               php artisan config:cache"
-
 workflows:
   version: 2
   build_deploy:
