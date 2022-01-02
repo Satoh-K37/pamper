@@ -11,6 +11,8 @@ class RecipesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+      DB::table('recipes')->insert([
+
+      ]);
     }
 }

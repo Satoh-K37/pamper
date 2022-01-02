@@ -20,12 +20,15 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
 
 ### 使用技術
 - フロントエンド
-  - HTML / CSS / Sass / MDBootstrap
+  - HTML 
+  - CSS
+  - Sass
+  - MDBootstrap
   - Vue.js 2.6.14
   - jQuery
 
 - バックエンド
-  - PHP 7.4.1-fpm
+  - PHP 7.4.1-fpm/
   - Laravel 6.20.1
   - Composer 2.0.14
   - PHPUnit
@@ -34,7 +37,7 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
   - CircleCi
   - Docker 20.10.8/docker-compose 1.29.2
   - nginx 1.18-alpine
-  - MySQL 8.0
+  - MySQL 5.7
   - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM)
 
 
@@ -65,10 +68,6 @@ I should spoil myself! 自分にご褒美あげなくちゃ！って英文のspo
   - カテゴリ検索機能
   - タグ検索機能（タグをクリックすることで指定したタグに紐付く投稿の一覧を表示）
 
-- **通知機能**
-  - フォロー通知
-  - コメント通知
-  - いいね通知
 ## DB設計
 
 
