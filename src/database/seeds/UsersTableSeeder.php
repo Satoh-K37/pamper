@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         'remember_token' => Str::random(10),
       ]);
 
-      factory(App\User::class,10)->create()->each(function($user){
+      factory(App\User::class,100)->create()->each(function($user){
           // $recipe = new App\Recipe();
           // $recipe->user_id = $user->id;
           // $recipe->recipe_title = 'デモ';
