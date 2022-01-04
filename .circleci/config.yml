@@ -84,9 +84,9 @@ jobs:
           name: deploy to prod
           command: |
             aws deploy create-deployment \
-            --application-name spoily-ci \
-            --deployment-group-name spoily-ci \
-            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
+            --application-name spoily-ci/src \
+            --deployment-group-name spoily-ci/src \
+            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci/src.zip,bundleType=zip
 
 orbs:
   aws-cli: circleci/aws-cli@1.0.0
