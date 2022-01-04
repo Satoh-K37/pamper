@@ -1,23 +1,8 @@
 version: 2.1
 jobs:
   build:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: circleci/php:7.3-node-browsers
-    #   - image: circleci/postgres:11.6-alpine
-    #     environment:
-    #       POSTGRES_DB: larasns
-    #       POSTGRES_USER: default
-    #       POSTGRES_PASSWORD: secret
-    # environment:
-    #   APP_ENV: testing
-    #   DB_CONNECTION: mysql
-    #   DB_HOST: localhost
-    #   DB_PORT: 5432
-    #   DB_DATABASE: larasns
-    #   DB_USERNAME: default
-    #   DB_PASSWORD: secret
     steps:
       - checkout
       - restore_cache:
@@ -57,18 +42,54 @@ jobs:
   deploy:
     docker:
       - image: circleci/php:7.3-node-browsers
+    environment:
+      AWS_DEFAULT_REGION: ap-northeast-1
     steps:
-      - add_ssh_keys
+      - checkout
+      - run: sudo composer self-update
+      - restore_cache:
+          key: composer-no-dev-v2-{{ checksum "src/composer.lock" }}
+      - run: 
+          working_directory: src
+          command: composer install -n --no-dev --prefer-dist
+      - save_cache:
+          key: composer-no-dev-v2-{{ checksum "src/composer.lock" }}
+          paths:
+            - vendor
+      - restore_cache:
+          key: npm-v2-{{ checksum "src/package-lock.json" }}
       - run:
-          name: deploy
+          working_directory: src
+          name: npm ci
           command: |
-            ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd spoily-ci/src && \
-              git pull origin main && \
-              composer install -n --no-dev --prefer-dist && \
-              npm ci && \
-              npm run prod && \
-              php artisan migrate --force && \
-              php artisan config:cache"
+            if [ ! -d node_modules ]; then
+              npm ci
+            fi
+      - save_cache:
+          key: npm-v2-{{ checksum "src/package-lock.json" }}
+          paths:
+            - $HOME/.npm
+            # - src/node_modules
+      - run: 
+          working_directory: src
+          command: npm run prod
+      - run:
+          name: archive artifacts
+          command: zip -ryq spoily-ci.zip .
+      - aws-cli/install
+      - run:
+          name: upload artifacts to s3
+          command: aws s3 cp spoily-ci.zip s3://${AWS_S3_BUCKET_NAME}
+      - run:
+          name: deploy to prod
+          command: |
+            aws deploy create-deployment \
+            --application-name spoily-ci \
+            --deployment-group-name spoily-ci \
+            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
+
+orbs:
+  aws-cli: circleci/aws-cli@1.0.0
 workflows:
   version: 2
   build_deploy:
