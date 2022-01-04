@@ -78,8 +78,8 @@ jobs:
           command: zip -ryq spoily-ci.zip .
       - aws-cli/install
       - run:
-          name: upload artifacts to s3
-          command: aws s3 cp spoily-ci.zip s3://${AWS_S3_BUCKET_NAME}
+          name: upload artifacts to S3
+          command: aws S3 cp spoily-ci.zip S3://${AWS_S3_BUCKET_NAME}
       - run:
           name: deploy to prod
           command: |
