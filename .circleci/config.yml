@@ -84,9 +84,9 @@ jobs:
           name: deploy to prod
           command: |
             aws deploy create-deployment \
-            --application-name laravel-ci \
-            --deployment-group-name laravel-ci \
-            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=laravel-ci.zip,bundleType=zip
+            --application-name src \
+            --deployment-group-name src \
+            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=src.zip,bundleType=zip
 
 orbs:
   aws-cli: circleci/aws-cli@1.0.0
