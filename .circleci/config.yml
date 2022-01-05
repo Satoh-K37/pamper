@@ -55,7 +55,7 @@ jobs:
       - save_cache:
           key: composer-no-dev-v2-{{ checksum "src/composer.lock" }}
           paths:
-            - vendor
+            - src/vendor
       - restore_cache:
           key: npm-v2-{{ checksum "src/package-lock.json" }}
       - run:
