@@ -35,7 +35,3 @@ Homestead.json
 
 # Local History for Visual Studio Code
 .history/
-
-
-# AWS
-src/storage
