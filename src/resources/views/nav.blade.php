@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand">
+<nav class="navbar navbar-expand navbar-dark">
+<!-- <nav class="navbar navbar-expand"> -->
 
   <a class="navbar-brand" href="/"><i class="far fa-sticky-note mr-1"></i>SPOILY</a>
 
