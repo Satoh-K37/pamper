@@ -2,10 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/webapp/spoily-ci
+    destination: /home/webapp/src
 
 permissions:
-  - object: /home/webapp/spoily-ci
+  - object: /home/webapp/src
     owner: webapp
     group: webapp
 
