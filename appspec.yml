@@ -2,15 +2,15 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/webapp/spoily-ci/src
+    destination: /home/webapp/spoily-ci
 
 permissions:
-  - object: /home/webapp/spoily-ci/src
+  - object: /home/webapp/spoily-ci
     owner: webapp
     group: webapp
 
 hooks:
   AfterInstall:
-    - location: ./scripts/after_install.sh
+    - location: ./src/scripts/after_install.sh
       timeout: 60
       runas: webapp
