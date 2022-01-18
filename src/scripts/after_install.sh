@@ -2,6 +2,6 @@
 
 set -eux
 
-cd ~/spoily-ci
+cd ~/srcs
 php artisan migrate --force
 php artisan config:cache
