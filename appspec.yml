@@ -9,6 +9,6 @@ permissions:
     group: webapp
 hooks:
   AfterInstall:
-    - location: ./scripts/after_install.sh
+    - location: ./src/scripts/after_install.sh
       timeout: 60
       runas: webapp
