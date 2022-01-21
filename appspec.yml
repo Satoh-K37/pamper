@@ -3,12 +3,10 @@ os: linux
 files:
   - source: /
     destination: /home/webapp/spoily-ci
-
 permissions:
   - object: /home/webapp/spoily-ci
     owner: webapp
     group: webapp
-
 hooks:
   AfterInstall:
     - location: ./scripts/after_install.sh
