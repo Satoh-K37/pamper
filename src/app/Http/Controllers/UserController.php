@@ -75,7 +75,7 @@ class UserController extends Controller
       // $auth = Auth::user();
       $user = User::where('name', $name)->first();
       $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
-      $recipes->loadMissing('user');
+      // ->paginate();
 
       return view('users.show', [
           // 'auth' => $auth,
@@ -90,7 +90,6 @@ class UserController extends Controller
       $user = User::where('name', $name)->first();
 
       $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
-      $recipes->loadMissing('user');
       // ->paginate();
       return view('users.likes', [
           'user' => $user,
@@ -101,15 +100,15 @@ class UserController extends Controller
   // フォロー一覧を表示
   public function followings(string $name)
   {
-      $user = User::where('name', $name)->first()->load('followings.followers');
+      $user = User::where('name', $name)->first();
+
       $followings = $user->followings->sortByDesc('created_at');
-      // $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
-      // $recipes->loadMissing('user');
+      $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
 
       return view('users.followings', [
           'user' => $user,
           'followings' => $followings,
-          // 'recipes' => $recipes,
+          'recipes' => $recipes,
       ]);
   }
   
@@ -118,14 +117,13 @@ class UserController extends Controller
   {
       $user = User::where('name', $name)->first();
 
-      $followers = $user->followers->sortByDesc('created_at')->load('followers.followers');
-      // $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
-      // $recipes->loadMissing('user');
+      $followers = $user->followers->sortByDesc('created_at');
+      $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
 
       return view('users.followers', [
           'user' => $user,
           'followers' => $followers,
-          // 'recipes' => $recipes,
+          'recipes' => $recipes,
       ]);
   }
 
