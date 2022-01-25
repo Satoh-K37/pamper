@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         // db:seedでデータベースに登録される
         $this->call([
           CategoriesTableSeeder::class,
-          UsersTableSeeder::class,
+          // UsersTableSeeder::class,
           // RecipesTableSeeder::class,
         ]);
 
