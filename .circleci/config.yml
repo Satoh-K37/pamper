@@ -102,11 +102,7 @@ jobs:
             - src/node_modules
       - run: 
           working_directory: src
-          command: |
-          npm run prod
-          "cd laravel-ci && \
-          php artisan migrate --force && \
-          php artisan config:cache"
+          command: npm run prod
 #       - run:
 #           working_directory: src
 #           name: archive artifacts
@@ -123,17 +119,17 @@ jobs:
 #             --deployment-group-name laravel-ci \
 #             --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
 
-# orbs:
-#   aws-cli: circleci/aws-cli@1.0.0
-# workflows:
-#   version: 2
-#   build_deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only:
-#                 - main
+orbs:
+  aws-cli: circleci/aws-cli@1.0.0
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
