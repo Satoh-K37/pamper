@@ -74,7 +74,7 @@ jobs:
           working_directory: src
           command: npm run prod
       - run:
-          working_directory: src
+          # working_directory: src
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
       - aws-cli/install
