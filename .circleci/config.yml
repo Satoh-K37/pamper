@@ -113,9 +113,9 @@ jobs:
       #     command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
       - run:
           name: deploy to prod
+          working_directory: src
           command: |
-              cd src && \
-              php artisan migrate --force && \
+              "php artisan migrate --force && \
               php artisan config:cache"
           # command: |
           #   aws deploy create-deployment \
