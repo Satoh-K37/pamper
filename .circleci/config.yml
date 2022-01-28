@@ -83,7 +83,7 @@ jobs:
           command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
       - run:
           name: deploy to prod
-          working_directory: src
+          # working_directory: src
           command: |
             aws deploy create-deployment \
             --application-name laravel-ci \
