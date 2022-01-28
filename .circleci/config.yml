@@ -59,7 +59,7 @@ jobs:
       - restore_cache:
           key: npm-v2-{{ checksum "src/package-lock.json" }}
       - run:
-          working_directory: src
+          # working_directory: src
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
@@ -71,7 +71,7 @@ jobs:
             # - $HOME/.npm
             - src/node_modules
       - run: 
-          working_directory: src
+          # working_directory: src
           command: npm run prod
       - run:
           # working_directory: src
