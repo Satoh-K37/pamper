@@ -55,6 +55,7 @@ jobs:
               cd src && \
               php artisan migrate --force && \
               php artisan config:cache"
+              
     # steps:
     #   - checkout
     #   - run: sudo composer self-update
