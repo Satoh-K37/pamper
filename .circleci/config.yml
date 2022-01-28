@@ -59,7 +59,7 @@ jobs:
       - restore_cache:
           key: npm-v2-{{ checksum "src/package-lock.json" }}
       - run:
-          # working_directory: src
+          working_directory: src
           name: npm ci
           command: |
             if [ ! -d node_modules ]; then
@@ -71,10 +71,10 @@ jobs:
             # - $HOME/.npm
             - src/node_modules
       - run: 
-          # working_directory: src
+          working_directory: src
           command: npm run prod
       - run:
-          # working_directory: src
+          working_directory: src
           name: archive artifacts
           command: zip -ryq laravel-ci.zip .
       - aws-cli/install
@@ -83,7 +83,7 @@ jobs:
           command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
       - run:
           name: deploy to prod
-          # working_directory: src
+          working_directory: src
           command: |
             aws deploy create-deployment \
             --application-name laravel-ci \
