@@ -39,36 +39,6 @@ jobs:
           name: php test
           command: vendor/bin/phpunit tests
 
-#   deploy:
-#     docker:
-#       - image: circleci/php:7.4.1-node-browsers
-#     steps:
-#       - add_ssh_keys
-#       - run:
-#           name: deploy
-#           command: |
-#             ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd laravel-ci && \
-#               git pull origin main && \
-#               composer install -n --no-dev --prefer-dist && \
-#               npm ci && \
-#               npm run prod && \
-#               cd src && \
-#               php artisan migrate --force && \
-#               php artisan config:cache"
-
-# workflows:
-#   version: 2
-#   build_deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only:
-#                 - main
-
   deploy:
     docker:
       - image: circleci/php:7.4.1-node-browsers
@@ -103,25 +73,22 @@ jobs:
       - run: 
           working_directory: src
           command: npm run prod
-      # - run:
-      #     working_directory: src
-      #     name: archive artifacts
-      #     command: zip -ryq laravel-ci.zip .
+      - run:
+          working_directory: src
+          name: archive artifacts
+          command: zip -ryq laravel-ci.zip .
       - aws-cli/install
-      # - run:
-      #     name: upload artifacts to s3
-      #     command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
+      - run:
+          name: upload artifacts to s3
+          command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
       - run:
           name: deploy to prod
           working_directory: src
           command: |
-              "php artisan migrate --force && \
-              php artisan config:cache"
-          # command: |
-          #   aws deploy create-deployment \
-          #   --application-name laravel-ci \
-          #   --deployment-group-name laravel-ci \
-          #   --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
+            aws deploy create-deployment \
+            --application-name laravel-ci \
+            --deployment-group-name laravel-ci \
+            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
 
 orbs:
   aws-cli: circleci/aws-cli@1.0.0
