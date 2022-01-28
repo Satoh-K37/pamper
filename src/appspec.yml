@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/webapp/laravel-ci
+    destination: /home/webapp/laravel-ci/src
 permissions:
-  - object: /home/webapp/laravel-ci
+  - object: /home/webapp/laravel-ci/src
     owner: webapp
     group: webapp
 hooks:
