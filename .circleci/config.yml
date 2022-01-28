@@ -47,7 +47,8 @@ jobs:
 #       - run:
 #           name: deploy
 #           command: |
-#             ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} "cd laravel-ci && \
+#             ssh -o StrictHostKeyChecking=no -t webapp@${HOST_NAME} 
+#              "cd laravel-ci && \
 #               git pull origin main && \
 #               composer install -n --no-dev --prefer-dist && \
 #               npm ci && \
@@ -98,26 +99,29 @@ jobs:
       - save_cache:
           key: npm-v2-{{ checksum "src/package-lock.json" }}
           paths:
-            - $HOME/.npm
-            # - src/node_modules
+            # - $HOME/.npm
+            - src/node_modules
       - run: 
           working_directory: src
           command: npm run prod
       - run:
           # working_directory: src
-          name: archive artifacts
-          command: zip -ryq laravel-ci.zip .
+          # name: archive artifacts
+          # command: zip -ryq laravel-ci.zip .
       - aws-cli/install
-      - run:
-          name: upload artifacts to s3
-          command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
+      # - run:
+          # name: upload artifacts to s3
+          # command: aws s3 cp laravel-ci.zip s3://${AWS_S3_BUCKET_NAME}
       - run:
           name: deploy to prod
           command: |
             aws deploy create-deployment \
             --application-name laravel-ci \
             --deployment-group-name laravel-ci \
-            --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
+            cd src && \
+            php artisan migrate --force && \
+            php artisan config:cache"
+      # --s3-location bucket=${AWS_S3_BUCKET_NAME},key=spoily-ci.zip,bundleType=zip
 
 orbs:
   aws-cli: circleci/aws-cli@1.0.0
