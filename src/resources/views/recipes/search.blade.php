@@ -48,8 +48,8 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="sbumit" class="btn btn-primary">検索</button>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">キャンセル</button>
+                    <button type="sbumit" class="btn btn-outline-primary">検索する</button>
                   </div>
                 </form>
               </div>
