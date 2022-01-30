@@ -26,7 +26,7 @@
               <div class="col-sm">
                 <form method="GET" action="{{ route('recipes.searchresult')}}">
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">キーワード</label>
+                    <label class="col-sm-3 col-form-label">キーワード</label>
                     <!--入力-->
                     <div class="col-sm-8">
                       <input type="text" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力してください">
@@ -36,7 +36,7 @@
                     </div> -->
                   </div>
                   <div class="form-group row">
-                    <label for="category_id" class="col-sm-2">カテゴリ</label>
+                    <label for="category_id" class="col-sm-3">カテゴリ</label>
                     <div class="col-sm-8">
                       <select name="category_id" class="form-control" value="{{ $category_id }}">
                         @foreach($categories as $id => $name)
