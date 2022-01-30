@@ -28,7 +28,7 @@
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label">キーワード</label>
                     <!--入力-->
-                    <div class="col-sm-5">
+                    <div class="col-sm-8">
                       <input type="text" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力してください">
                     </div>
                     <!-- <div class="col-sm-auto">
@@ -37,7 +37,7 @@
                   </div>
                   <div class="form-group row">
                     <label for="category_id" class="col-sm-2">カテゴリ</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-8">
                       <select name="category_id" class="form-control" value="{{ $category_id }}">
                         @foreach($categories as $id => $name)
                           <option value="{{ $id }}" {{ old('category', $old_category_id ?? '') == $id ? 'selected' : ''}}>
