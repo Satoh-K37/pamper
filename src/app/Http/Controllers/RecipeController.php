@@ -128,12 +128,6 @@ class RecipeController extends Controller
       if(isset($form['image_path'])){
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->file('image_path');
-        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
-        $fileName = uniqid(rand(). '_');
-        // 拡張子を取得
-        $extension = $file->extension();
-        // $fileNameと$extensionを使い、オリジナルのファイル名を作成
-        $fileNameToStore = $fileName.".".$extension;
         // フォームから受け取った画像をリサイズする。
         $resizedImage = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
@@ -145,10 +139,22 @@ class RecipeController extends Controller
           }
           // encode()すると画像として扱ってくれるらしい
         )->encode();
-        // $form['image_path']にオリジナルのファイル名を代入する
+        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        $fileName = uniqid(rand(). '_');
+        // 拡張子を取得
+        $extension = $file->extension();
+        // $fileNameと$extensionを使い、ユニークなファイル名を作成
+        $fileNameToStore = $fileName.".".$extension;
+        // ローカルでの処理
+        // $form['image_path']にユニークなファイル名を代入する
         $form['image_path'] = $fileNameToStore;
         // ファイルディレクトリに保存する処理。
         Storage::put('public/images/'. $fileNameToStore, $resizedImage);
+
+        // S3への画像アップロード
+        // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage, 'public');
+        // // アップロードした画像のフルパスを取得
+        // $form['image_path'] = Storage::disk('s3')->url($path);
       }
 
       // dd($request);
@@ -225,12 +231,6 @@ class RecipeController extends Controller
           \File::delete($delete_path);
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->image_path;
-        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
-        $file_name = uniqid(rand(). '_');
-        // 拡張子を取得
-        $extension = $file->extension();
-        // $fileNameと$extensionを使い、オリジナルのファイル名を作成
-        $filename_to_store = $file_name.".".$extension;
         // フォームから受け取った画像をリサイズする。
         $resized_image = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
@@ -242,7 +242,13 @@ class RecipeController extends Controller
           }
           // encode()すると画像として扱ってくれるらしい
         )->encode();
-        // $form['image_path']にオリジナルのファイル名を代入する
+        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        $file_name = uniqid(rand(). '_');
+        // 拡張子を取得
+        $extension = $file->extension();
+        // $fileNameと$extensionを使い、オリジナルのファイル名を作成
+        $filename_to_store = $file_name.".".$extension;
+        // $form['image_path']にユニークなファイル名を代入する
         $form['image_path'] = $filename_to_store;
         // ファイルディレクトリに保存する処理。
         Storage::put('public/images/'. $filename_to_store, $resized_image);
