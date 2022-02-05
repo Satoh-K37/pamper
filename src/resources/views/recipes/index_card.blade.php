@@ -12,7 +12,7 @@
         </div>
               
         <div class="card-body">
-          <div class="card-body d-flex flex-row">
+          <div class="card-body d-flex flex-row pl-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
               @if($recipe->user->profile_image !== NULL)
                 <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
@@ -20,7 +20,7 @@
                 <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
               @endif
             </a>
-            <div class="font-weight-bold">
+            <div class="font-weight-bold mx-3">
               <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
                 {{ $recipe->user->name }}
                 <p class="font-weight-lighter">
