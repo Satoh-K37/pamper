@@ -33,10 +33,10 @@
             </div> -->
             @if( Auth::id() === $recipe->user_id )
           <!-- dropdown -->
-            <div class="ml-auto card-text ml-5 my-auto">
+            <div class="ml-auto card-text">
               <div class="dropdown">
                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v"></i>
+                  <i class="fas fa-ellipsis-v my-3"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                   <a class="dropdown-item" href="{{ route("recipes.edit", ['recipe' => $recipe]) }}">
@@ -140,7 +140,7 @@
             @endforeach
           </div>
           <div class="my-box ml-3 p-2">
-            <span class="text-muted" href="{{ route('recipes.show', ['recipe' => $recipe]) }}">
+            <span class="text-muted">
               <recipe-comment
                 :initial-count-comments='@json($recipe->count_comments)'
               >
