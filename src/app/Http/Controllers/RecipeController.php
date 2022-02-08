@@ -25,7 +25,7 @@ class RecipeController extends Controller
 
   public function index(Request $request)
   {
-      // phpinfo();
+      phpinfo();
       // \DB::enableQueryLog();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
@@ -232,7 +232,7 @@ class RecipeController extends Controller
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->image_path;
         // フォームから受け取った画像をリサイズする。
-        $resized_image = InterventionImage::make($file)
+        $resizedImage = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
             function ($constraint) {
             // 縦横比を保持したままにする
@@ -251,7 +251,7 @@ class RecipeController extends Controller
         // $form['image_path']にユニークなファイル名を代入する
         $form['image_path'] = $filename_to_store;
         // ファイルディレクトリに保存する処理。
-        Storage::put('public/images/'. $filename_to_store, $resized_image);
+        Storage::put('public/images/'. $filename_to_store, $resizedImage);
       }
 
       $recipe->user_id = $request->user()->id;
