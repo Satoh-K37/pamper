@@ -55,9 +55,9 @@ class UserController extends Controller
       // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
       $user_form['profile_image'] = $icon_file;
       // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-      // $request->profile_image->storeAs('public/icons/', $icon_file);
+      $request->profile_image->storeAs('public/icons/', $icon_file);
 
-      Storage::disk('s3')->putFile('/', $file);
+      // Storage::disk('s3')->putFile('/', $file);
     }
     
     $user->fill($user_form)->save();
