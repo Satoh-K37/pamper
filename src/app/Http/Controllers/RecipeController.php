@@ -25,7 +25,7 @@ class RecipeController extends Controller
 
   public function index(Request $request)
   {
-      phpinfo();
+      // phpinfo();
       // \DB::enableQueryLog();
       $category = new Category;
       $categories = $category->getCategories()->prepend('選択してください', '');
