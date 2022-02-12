@@ -151,10 +151,18 @@ class RecipeController extends Controller
         // ファイルディレクトリに保存する処理。
         // Storage::put('public/images/'. $fileNameToStore, $resizedImage);
         // S3への画像アップロード
-        $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore, $resizedImage ,'public');
+        $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
         // アップロードした画像のフルパスを取得
         $form['image_path'] = Storage::disk('s3')->url($path);
-        dd($form['image_path']);
+        // dd($form['image_path']);
+
+        // １、S３に保存するのは画像自体を保存する。リサイズした画像しかりね。
+        // ２、DBにはS3にアップロードした画像のファイルを置いてる場所、ファイルパスを保存することでViewで参照できるようになる。
+        // ３、つまり順番としては
+        // ・画像をリサイズしたものをS3にアップロードする（この時にオリジナルのファイル名もどうにかつける。）
+        // ・アップロードした画像のファイルパスを$form['image_path'] に代入して、保存。
+        // ・Viewで参照する
+
         
       }
 
