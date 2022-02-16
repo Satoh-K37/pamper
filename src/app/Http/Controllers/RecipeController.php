@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\File;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -127,6 +128,14 @@ class RecipeController extends Controller
       if(isset($form['image_path'])){
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->file('image_path');
+        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        $fileName = uniqid(rand(). '_');
+        // 拡張子を取得
+        $extension = $file->extension();
+        // $fileNameと$extensionを使い、ユニークなファイル名を作成
+        $fileNameToStore = $fileName.".".$extension;
+        // S3にアップロードする際に一度ローカルに画像を保存する
+        $tmpPath = storage_path('public/images/') . $fileNameToStore;
         // フォームから受け取った画像をリサイズする。
         $resizedImage = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
@@ -137,20 +146,19 @@ class RecipeController extends Controller
             $constraint->upsize();
           }
           // encode()すると画像として扱ってくれるらしい
-        )->encode();
-        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
-        $fileName = uniqid(rand(). '_');
-        // 拡張子を取得
-        $extension = $file->extension();
-        // $fileNameと$extensionを使い、ユニークなファイル名を作成
-        $fileNameToStore = $fileName.".".$extension;
-        // ローカルでの処理
-        // $form['image_path']にユニークなファイル名を代入する
-        $form['image_path'] = $fileNameToStore;
-        // ファイルディレクトリに保存する処理。
-        Storage::put('public/images/'. $fileNameToStore, $resizedImage);
+        )->encode()->save($tmpPath);
+
+        // // ローカルでの処理
+        // // $form['image_path']にユニークなファイル名を代入する
+        // $form['image_path'] = $fileNameToStore;
+        // // ファイルディレクトリに保存する処理。
+        // Storage::put('public/images/'. $fileNameToStore, $resizedImage);
         
         // // S3への画像アップロード
+        Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
+        // 一時ファイルを削除
+        Storage::disk('local')->delete('public/images/' . $tmpFile);
+
         // // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
         // $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore ,'public');
         // // アップロードした画像のフルパスを取得
