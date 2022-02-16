@@ -6,11 +6,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RecipeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-// use Illuminate\Http\UploadedFile;
-use InterventionImage; // エイリアスを使用している
-use Storage;
-// use Intervention\Image\Facades\Image; // Imageファサードを使う
-// use Illuminate\Support\Facades\Storage; // Storageファサードを使う
+use Intervention\Image\Facades\Image as InterventionImage;
+use Illuminate\Support\Facades\Storage as Storage;
+// use InterventionImage; // エイリアスを使用している
+// use Storage;
 use App\Recipe;
 use App\Tag;
 use App\Category;
@@ -147,15 +146,16 @@ class RecipeController extends Controller
         $fileNameToStore = $fileName.".".$extension;
         // ローカルでの処理
         // $form['image_path']にユニークなファイル名を代入する
-        // $form['image_path'] = $fileNameToStore;
+        $form['image_path'] = $fileNameToStore;
         // ファイルディレクトリに保存する処理。
-        // Storage::put('public/images/'. $fileNameToStore, $resizedImage);
-        // S3への画像アップロード
-        // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
-        $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore ,'public');
-        // アップロードした画像のフルパスを取得
-        $form['image_path'] = Storage::disk('s3')->url($path);
-        // dd($form['image_path']);
+        Storage::put('public/images/'. $fileNameToStore, $resizedImage);
+        
+        // // S3への画像アップロード
+        // // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
+        // $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore ,'public');
+        // // アップロードした画像のフルパスを取得
+        // $form['image_path'] = Storage::disk('s3')->url($path);
+        // // dd($form['image_path']);
 
         // １、S３に保存するのは画像自体を保存する。リサイズした画像しかりね。
         // ２、DBにはS3にアップロードした画像のファイルを置いてる場所、ファイルパスを保存することでViewで参照できるようになる。
