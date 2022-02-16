@@ -135,7 +135,7 @@ class RecipeController extends Controller
         // $fileNameと$extensionを使い、ユニークなファイル名を作成
         $fileNameToStore = $fileName.".".$extension;
         // S3にアップロードする際に一度ローカルに画像を保存する
-        $tmpPath = storage_path('public/images/') . $fileNameToStore;
+        $tmpPath = storage_path('app/public/images/') . $fileNameToStore;
         // フォームから受け取った画像をリサイズする。
         $resizedImage = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
@@ -157,7 +157,7 @@ class RecipeController extends Controller
         // // S3への画像アップロード
         Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
         // 一時ファイルを削除
-        Storage::disk('local')->delete('public/images/' . $tmpFile);
+        Storage::disk('local')->delete('images/' . $tmpFile);
 
         // // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
         // $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore ,'public');
