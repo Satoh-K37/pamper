@@ -146,7 +146,7 @@ class RecipeController extends Controller
             $constraint->upsize();
           }
           // encode()すると画像として扱ってくれるらしい
-        )->encode()->save($tmpPath);
+        )->save($tmpPath);
 
         // // ローカルでの処理
         // // $form['image_path']にユニークなファイル名を代入する
