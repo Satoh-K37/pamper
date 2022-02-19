@@ -159,7 +159,7 @@ class RecipeController extends Controller
         Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
         // 一時ファイルを削除
         Storage::disk('local')->delete('images/' . $fileName);
-        dd($tmpPath);
+        // dd($tmpPath);
         
         // // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
         // $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore ,'public');
