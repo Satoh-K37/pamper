@@ -155,16 +155,16 @@ class RecipeController extends Controller
         // Storage::put('public/images/'. $fileNameToStore, $resizedImage);
         
         // // S3への画像アップロード
-        $form['image_path'] = $tmpPath;
-        Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
-        // 一時ファイルを削除
-        Storage::disk('local')->delete('images/' . $fileName);
+        // $form['image_path'] = $tmpPath;
+        // Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
+        // // 一時ファイルを削除
+        // Storage::disk('local')->delete('images/' . $fileName);
         // dd($tmpPath);
         
-        // // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
-        // $path = Storage::disk('s3')->putFile('myprefix', $fileNameToStore ,'public');
+        // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
+        $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
         // // アップロードした画像のフルパスを取得
-        // $form['image_path'] = Storage::disk('s3')->url($path);
+        $form['image_path'] = Storage::disk('s3')->url($path);
         // // dd($form['image_path']);
 
         // １、S３に保存するのは画像自体を保存する。リサイズした画像しかりね。
