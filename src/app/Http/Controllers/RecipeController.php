@@ -131,9 +131,9 @@ class RecipeController extends Controller
         // // ユニークIDとランダム関数を使ってランダムな文字列を作成
         $fileName = uniqid(rand(). '_');
         // 拡張子を取得
-        // $extension = $file->extension();
+        $extension = $file->extension();
         // $fileNameと$extensionを使い、ユニークなファイル名を作成
-        // $fileNameToStore = $fileName.".".$extension;
+        $fileNameToStore = $fileName.".".$extension;
         // S3にアップロードする際に一度ローカルに画像を保存する
         $tmpPath = storage_path('app/tmp/') . $fileName;
         // フォームから受け取った画像をリサイズする。
@@ -160,11 +160,13 @@ class RecipeController extends Controller
         // // 一時ファイルを削除
         // Storage::disk('local')->delete('images/' . $fileName);
         // dd($tmpPath);
-        
+        $path = Storage::disk('s3')->put('/uploads/'.$fileNameToStore,(string)$resizedImage, 'public');
+        $url = Storage::disk('s3')->url('uploads/'.$fileNameToStore);
+
         // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
-        $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
+        // $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
         // // アップロードした画像のフルパスを取得
-        $form['image_path'] = Storage::disk('s3')->url($path);
+        $form['image_path'] = $url
         // // dd($form['image_path']);
         
       }
@@ -245,7 +247,7 @@ class RecipeController extends Controller
         $file = $request->image_path;
         // フォームから受け取った画像をリサイズする。
         $resizedImage = InterventionImage::make($file)
-          ->fit(860, 532, // アスペクト比1:1.618 黄金比
+          ->fit(860, 532, // アスペクト比1:1.618 黄金比すす
             function ($constraint) {
             // 縦横比を保持したままにする
             $constraint->aspectRatio();
