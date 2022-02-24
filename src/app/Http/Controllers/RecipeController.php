@@ -154,19 +154,19 @@ class RecipeController extends Controller
         // // ファイルディレクトリに保存する処理。
         // Storage::put('public/images/'. $fileNameToStore, $resizedImage);
         
-        // // S3への画像アップロード
-        // $form['image_path'] = $tmpPath;
-        // Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
-        // // 一時ファイルを削除
-        // Storage::disk('local')->delete('images/' . $fileName);
+        // S3への画像アップロード
+        $form['image_path'] = $tmpPath;
+        Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $file, 'public');
+        // 一時ファイルを削除
+        Storage::disk('local')->delete('images/' . $fileName);
         // dd($tmpPath);
-        $path = Storage::disk('s3')->put('/uploads/'.$fileNameToStore,(string)$resizedImage, 'public');
-        $url = Storage::disk('s3')->url('uploads/'.$fileNameToStore);
+        // $path = Storage::disk('s3')->put('/uploads/'.$fileNameToStore,(string)$resizedImage, 'public');
+        // $url = Storage::disk('s3')->url('uploads/'.$fileNameToStore);
 
-        // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
+        $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
         // $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
         // // アップロードした画像のフルパスを取得
-        $form['image_path'] = $url;
+        $form['image_path'] = Storage::disk('s3')->url($path);
         // // dd($form['image_path']);
         
       }
