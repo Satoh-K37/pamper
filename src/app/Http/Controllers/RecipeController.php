@@ -163,8 +163,8 @@ class RecipeController extends Controller
         // $path = Storage::disk('s3')->put('/uploads/'.$fileNameToStore,(string)$resizedImage, 'public');
         // $url = Storage::disk('s3')->url('uploads/'.$fileNameToStore);
 
-        $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
-        // $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
+        // $path = Storage::disk('s3')->putFile('myprefix', $resizedImage ,'public');
+        $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
         // // アップロードした画像のフルパスを取得
         $form['image_path'] = Storage::disk('s3')->url($path);
         // // dd($form['image_path']);
