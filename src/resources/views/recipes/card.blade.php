@@ -143,7 +143,7 @@
             @if(isset($recipe->step_content) || isset($recipe->step_content2)|| isset($recipe->step_content3) 
                 || isset($recipe->step_content4) || isset($recipe->step_content5) || isset($recipe->step_content6))
             <div class="recipe-label ml-2 my-2 text-center font-weight-bold">
-              作り方
+              作り方・食べ方
             </div>
 
             <ol class="list-wrap">
