@@ -145,8 +145,8 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-          // encode()すると画像として扱ってくれるらしい
-        )->save($tmpPath);
+          )->encode(); //すると画像として扱ってくれるらしい
+        // )->save($tmpPath);
 
         // // ローカルでの処理
         // // $form['image_path']にユニークなファイル名を代入する
@@ -154,15 +154,15 @@ class RecipeController extends Controller
         // // ファイルディレクトリに保存する処理。
         // Storage::put('public/images/'. $filename_to_store, $resized_image);
         // ユニークなファイル名をimage_pathカラムに代入
-        $form['image_path'] = $filename_to_store;
-        // S3への画像アップロード
-        Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
-        // 一時ファイルを削除
-        Storage::disk('local')->delete('images/' . $tmpPath);
+        // $form['image_path'] = $filename_to_store;
+        // // S3への画像アップロード
+        // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
+        // // 一時ファイルを削除
+        // Storage::disk('local')->delete('images/' . $tmpPath);
 
         // dd($tmpPath);
-        // $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
-        // $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
+        $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
+        $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
 
         // $path = Storage::disk('s3')->putFile('myprefix', $resized_image ,'public');
         // $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
@@ -248,12 +248,13 @@ class RecipeController extends Controller
         $file = $request->image_path;
         // フォームから受け取った画像をリサイズする。
         $resized_image = InterventionImage::make($file)
-          ->fit(860, 532, // アスペクト比1:1.618 黄金比すす
+          // ->resize(null, 532,
+          ->fit(860, 532, // アスペクト比1:1.618 黄金比 横×縦
             function ($constraint) {
             // 縦横比を保持したままにする
             $constraint->aspectRatio();
             // 小さい画像は大きくしない
-            $constraint->upsize();
+            // $constraint->upsize();
           }
           // encode()すると画像として扱ってくれるらしい
         )->encode();
