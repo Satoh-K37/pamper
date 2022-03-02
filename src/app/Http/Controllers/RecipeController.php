@@ -134,8 +134,8 @@ class RecipeController extends Controller
         $extension = $file->extension();
         // $file_nameと$extensionを使い、ユニークなファイル名を作成
         $filename_to_store = $file_name.".".$extension;
-        // S3にアップロードする際に一度ローカルに画像を保存する
-        $tmpPath = storage_path('app/tmp/') . $file_name;
+        // // S3にアップロードする際に一度ローカルに画像を保存する
+        // $tmpPath = storage_path('app/tmp/') . $file_name;
         // フォームから受け取った画像をリサイズする。
         $resized_image = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
@@ -145,30 +145,31 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-          )->encode(); //すると画像として扱ってくれるらしい
+        )->encode(); //すると画像として扱ってくれるらしい
         // )->save($tmpPath);
 
-        // // ローカルでの処理
-        // // $form['image_path']にユニークなファイル名を代入する
-        // $form['image_path'] = $filename_to_store;
-        // // ファイルディレクトリに保存する処理。
-        // Storage::put('public/images/'. $filename_to_store, $resized_image);
-        // ユニークなファイル名をimage_pathカラムに代入
-        // $form['image_path'] = $filename_to_store;
-        // // S3への画像アップロード
-        // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
-        // // 一時ファイルを削除
-        // Storage::disk('local')->delete('images/' . $tmpPath);
+        // ローカルでの処理
+        if(app()->isLocal()){
+          // $form['image_path']にユニークなファイル名を代入する
+          $form['image_path'] = $filename_to_store;
+          // ファイルディレクトリに保存する処理。
+          Storage::put('public/images/'. $filename_to_store, $resized_image);
+        }
+        // 本番環境での処理
+        else{
+          // S3への画像アップロード
+          // ユニークなファイル名をimage_pathカラムに代入
+          $form['image_path'] = $filename_to_store;
+          Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
+          // 一時ファイルを削除
+          Storage::disk('local')->delete('images/' . $tmpPath);
 
-        // dd($tmpPath);
-        $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
-        $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
+          // dd($tmpPath);
+          // $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
+          // $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
 
-        // $path = Storage::disk('s3')->putFile('myprefix', $resized_image ,'public');
-        // $path = Storage::disk('s3')->putFile('myprefix', $file ,'public');
-        // // アップロードした画像のフルパスを取得
-        // $form['image_path'] = Storage::disk('s3')->url($path);
-        // // dd($form['image_path']);
+          // $path = $request->file('image_path')
+        }
         
       }
 
@@ -264,10 +265,19 @@ class RecipeController extends Controller
         $extension = $file->extension();
         // $fileNameと$extensionを使い、オリジナルのファイル名を作成
         $filename_to_store = $file_name.".".$extension;
-        // $form['image_path']にユニークなファイル名を代入する
-        $form['image_path'] = $filename_to_store;
-        // ファイルディレクトリに保存する処理。
-        Storage::put('public/images/'. $filename_to_store, $resized_image);
+
+        // ローカルでの処理
+        if(app()->isLocal()){
+          // $form['image_path']にユニークなファイル名を代入する
+          $form['image_path'] = $filename_to_store;
+          // ファイルディレクトリに保存する処理。
+          Storage::put('public/images/'. $filename_to_store, $resized_image);
+          
+        }
+        // 本番環境での処理
+        else {
+          // 本番環境の処理を書く
+        }
       }
 
       $recipe->user_id = $request->user()->id;
