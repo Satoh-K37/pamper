@@ -164,11 +164,12 @@ class RecipeController extends Controller
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
 
-          // dd($tmpPath);
-          $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
-          $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
+          // // dd($tmpPath);
+          // $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
+          // $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
 
-          // $path = $request->file('image_path')
+          Storage::disk('s3')->putFile('/', $file);
+          
         }
         
       }
