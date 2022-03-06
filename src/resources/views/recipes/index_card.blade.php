@@ -2,6 +2,7 @@
 
     <div class="col-lg-4 col-md-12 mb-4 card-group">
       <div class="card">
+
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <vue-pure-lightbox
             thumbnail='/storage/images/{{$recipe->image_path}}'
@@ -12,10 +13,10 @@
         </div>
               
         <div class="card-body">
-          <div class="card-body d-flex flex-row pl-0">
+          <div class="card-body d-flex flex-row p-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
               @if($recipe->user->profile_image !== NULL)
-                <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+                <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50 px; height: 50px;">
               @else
                 <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
               @endif
@@ -77,15 +78,14 @@
             <!-- modal -->
           @endif
           </div>
-          
 
-          <div class="d-flex my-box-light py-0 my-0">
+          <div class="d-flex my-box-light">
             <div class="my-box mr-auto">
             </div>
             <div class="my-box">
               @foreach($recipe->categories as $category)
                 @if($loop->first)
-                  <div class="card-body">
+                  <div class="card-body m-0 p-0">
                     <div class="card-text line-height">
                 @endif
                     {{ $category->name }}
@@ -97,7 +97,7 @@
             </div>
 
             <div class="my-box">
-              <div class="card-body">
+              <div class="card-body ml-2 p-0">
                 <div class="card-text line-height">
                   @if($recipe->cooking_time === 5)
                       <p>5分以内</p>
@@ -121,8 +121,8 @@
             {{$recipe->content}}
             <!-- {{ Str::limit($recipe->content, 50, '...') }} -->
           </p>
-        
         </div>
+
         <div class="d-flex align-items-end my-box-light">
           <div class="my-box mr-auto p-2">
             @foreach($recipe->tags as $tag)
@@ -139,6 +139,7 @@
               @endif
             @endforeach
           </div>
+          
           <div class="my-box ml-3 p-2">
             <span class="text-muted">
               <recipe-comment
