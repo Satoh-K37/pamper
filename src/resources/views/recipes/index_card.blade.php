@@ -10,9 +10,9 @@
               '/storage/images/{{$recipe->image_path}}'
             ]"
           ></vue-pure-lightbox> -->
+          <img src="{{ Storage::disk('s3')->url("laravel-ci-myprefix/{{$recipe->image_path}}") }}" />
 
-          <img src="{{ Storage::disk('s3')->url(laravel-ci-myprefix/{{$recipe->image_path}} ) }} "/>
-
+          
         </div>
               
         <div class="card-body">
