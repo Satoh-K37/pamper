@@ -169,7 +169,8 @@ class RecipeController extends Controller
           // $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
           // $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
           
-          $resized_image->storeAs('/', $filename_to_store, 's3');
+          // $resized_image->storeAs('/', $filename_to_store, 's3');
+          $file->storeAs('/', $filename_to_store, 's3');
 
           
           // Storage::disk('s3')->putFile('/', $resized_image);
