@@ -125,6 +125,7 @@ class RecipeController extends Controller
       $form = $request->all();
       // unset($form['_token']);
       // 画像データがあるかを確認
+      
       if(isset($form['image_path'])){
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->file('image_path');
@@ -159,7 +160,7 @@ class RecipeController extends Controller
         else{
           // S3への画像アップロード
           // ユニークなファイル名をimage_pathカラムに代入
-          $form['image_path'] = $filename_to_store;
+          // $form['image_path'] = $filename_to_store;
           // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
@@ -167,8 +168,12 @@ class RecipeController extends Controller
           // // dd($tmpPath);
           // $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
           // $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
+          
+          $resized_image->storeAs('/', $filename_to_store, 's3');
 
-          Storage::disk('s3')->putFile('/', $resized_image);
+          
+          // Storage::disk('s3')->putFile('/', $resized_image);
+          // Storage::disk('s3')->putFile('/laravel-ci-myprefix', $file);
           
         }
         
