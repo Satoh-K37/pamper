@@ -16,6 +16,9 @@
               '{{ Storage::disk('s3')->url('laravel-ci-myprefix/{{$recipe->image_path}}') }}'
             ]"
           ></vue-pure-lightbox> -->
+          <img src="{{ Storage::disk('s3')->url("laravel-ci-myprefix/2036959508_62261b6f561b2.jpg") }}">
+
+          
           
         </div>
               
