@@ -4,12 +4,15 @@
       <div class="card">
 
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <vue-pure-lightbox
+          <!-- <vue-pure-lightbox
             thumbnail='/storage/images/{{$recipe->image_path}}'
             :images="[
               '/storage/images/{{$recipe->image_path}}'
             ]"
-          ></vue-pure-lightbox>
+          ></vue-pure-lightbox> -->
+
+          <img src="{{ Storage::disk('s3')->url(laravel-ci-myprefix/{{$recipe->image_path}} ) }} "/>
+
         </div>
               
         <div class="card-body">
