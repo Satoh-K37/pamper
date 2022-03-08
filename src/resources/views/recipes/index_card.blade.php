@@ -9,17 +9,7 @@
             :images="[
               '/storage/images/{{$recipe->image_path}}'
             ]"
-          ></vue-pure-lightbox>
-
-          <!-- <vue-pure-lightbox
-            thumbnail='{{ Storage::disk('s3')->url('laravel-ci-myprefix/{{$recipe->image_path}}') }}'
-            :images="[
-              '{{ Storage::disk('s3')->url('laravel-ci-myprefix/{{$recipe->image_path}}') }}'
-            ]"
-          ></vue-pure-lightbox> -->
-          <!-- <img src="{{ Storage::disk('s3')->url("laravel-ci-myprefix/1943529501_6222306bd0029.jpg .jpg") }}"> -->
-
-          
+          ></vue-pure-lightbox>          
           
         </div>
               
