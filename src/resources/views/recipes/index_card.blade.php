@@ -11,7 +11,6 @@
             ]"
           ></vue-pure-lightbox>    
         </div>
-        <!-- thumbnail='/storage/images/{{$recipe->image_path}}' -->
         <div class="card-body">
           <div class="card-body d-flex flex-row p-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
