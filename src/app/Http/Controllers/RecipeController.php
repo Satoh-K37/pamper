@@ -173,10 +173,10 @@ class RecipeController extends Controller
           // $file->storeAs('/', $file, 's3');
 
           // 成功
-          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
-          // Storage::disk('s3')->putFile('/', $resized_image);
-          // Storage::disk('s3')->putFile('/laravel-ci-myprefix', $file);
+          $path = Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image, 'public');
           
+          $url = Storage::disk('s3')->url($path);
+
         }
         
       }
@@ -202,7 +202,7 @@ class RecipeController extends Controller
       // });
 
       // dd($recipe);
-      return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました');
+      return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました', 's3url', $url);
   }
 
   public function edit(Recipe $recipe)
