@@ -173,9 +173,7 @@ class RecipeController extends Controller
           // $file->storeAs('/', $file, 's3');
 
           // 成功
-          $path = Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image, 'public');
-          
-          $url = Storage::disk('s3')->url($path);
+          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image, 'public');
 
         }
         
@@ -203,7 +201,7 @@ class RecipeController extends Controller
       // });
 
       // dd($recipe);
-      return redirect()->route('recipes.index', compact('ulr'))->with('flash_message', 'レシピの投稿が完了しました');
+      return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました');
   }
 
   public function edit(Recipe $recipe)
