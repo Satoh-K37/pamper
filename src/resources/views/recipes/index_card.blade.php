@@ -11,7 +11,7 @@
           ></vue-pure-lightbox>
         </div>
         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="{{ Storage::disk('s3')->url( {{$url}} )}}">
+          <img src="{{$url}}">
         </div>
         <div class="card-body">
           <div class="card-body d-flex flex-row p-0">

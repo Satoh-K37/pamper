@@ -181,6 +181,7 @@ class RecipeController extends Controller
         
       }
 
+      
       // dd($request);
       // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
@@ -202,7 +203,7 @@ class RecipeController extends Controller
       // });
 
       // dd($recipe);
-      return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました', 's3url', $url);
+      return redirect()->route('recipes.index', compact('ulr'))->with('flash_message', 'レシピの投稿が完了しました');
   }
 
   public function edit(Recipe $recipe)
