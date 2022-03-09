@@ -3,14 +3,22 @@
     <div class="col-lg-4 col-md-12 mb-4 card-group">
       <div class="card">
 
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <!-- <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
           <vue-pure-lightbox
             thumbnail='/storage/images/{{$recipe->image_path}}'
             :images="[
               '/storage/images/{{$recipe->image_path}}'
             ]"
-          ></vue-pure-lightbox>          
-          
+          ></vue-pure-lightbox>    
+        </div> -->
+
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <vue-pure-lightbox
+            thumbnail="{{ Storage::disk('s3')->url('/laravel-ci-myprefix/public/images/{{$recipe->image_path}}/') }}"
+            :images="[
+              "{{ Storage::disk('s3')->url('/laravel-ci-myprefix/public/images/{{$recipe->image_path}}/') }}"
+            ]"
+          ></vue-pure-lightbox>    
         </div>
               
         <div class="card-body">
