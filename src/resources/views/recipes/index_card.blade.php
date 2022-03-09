@@ -10,9 +10,9 @@
             ]"
           ></vue-pure-lightbox>
         </div>
-        <!-- <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="(config('filesystems.s3.url')/public/images/{{ $recipe->image_path }}" > -->
-        <!-- </div> -->
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="(config('filesystems.s3.url')/public/images/{{ $recipe->image_path }}" >
+        </div>
         <div class="card-body">
           <div class="card-body d-flex flex-row p-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
