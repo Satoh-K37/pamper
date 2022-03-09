@@ -160,7 +160,7 @@ class RecipeController extends Controller
         else{
           // S3への画像アップロード
           // ユニークなファイル名をimage_pathカラムに代入
-          $form['image_path'] = $filename_to_store;
+          // $form['image_path'] = $filename_to_store;
           // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
@@ -173,7 +173,8 @@ class RecipeController extends Controller
           // $file->storeAs('/', $file, 's3');
 
           // 成功
-          Storage::disk('s3')->put('public/images/'. $filename_to_store, $file);
+          $path = Storage::disk('s3')->putFile('public/images/', $file,  'public');
+          $form['image_path'] = $path;
           // Storage::disk('s3')->putFile('/', $resized_image);
           // Storage::disk('s3')->putFile('/laravel-ci-myprefix', $file);
           
