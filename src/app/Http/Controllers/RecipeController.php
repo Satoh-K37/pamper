@@ -173,7 +173,7 @@ class RecipeController extends Controller
           // $file->storeAs('/', $file, 's3');
 
           // 成功
-          $path = Storage::disk('s3')->putFile('public/images/', $file,  'public');
+          $path = Storage::disk('s3')->put('public/images/', $file,  'public');
           $form['image_path'] = $path;
           // Storage::disk('s3')->putFile('/', $resized_image);
           // Storage::disk('s3')->putFile('/laravel-ci-myprefix', $file);
