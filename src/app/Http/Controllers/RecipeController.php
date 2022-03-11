@@ -174,7 +174,7 @@ class RecipeController extends Controller
 
           // 成功
           // Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
-          $path = Storage::disk('s3')->putFile(config('s3.dir_name.images'), $resized_image, 'public');
+          $path = Storage::disk('s3')->putFile('/public/images/', $resized_image, 'public');
           $form['image_path'] = Storage::disk('s3')->url($path);
 
         }
