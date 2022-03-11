@@ -2,17 +2,20 @@
 
     <div class="col-lg-4 col-md-12 mb-4 card-group">
       <div class="card">
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <vue-pure-lightbox
-            thumbnail='/storage/images/{{$recipe->image_path}}'
-            :images="[
-              '/storage/images/{{$recipe->image_path}}'
-            ]"
-          ></vue-pure-lightbox>
-        </div>
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-          <img src="{{ Storage::disk('s3')->url("/public/images/{$recipe->image_path}") }}">
-        </div>
+        @if(app()->isLocal() || app()->runningUnitTests())
+          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <vue-pure-lightbox
+              thumbnail='/storage/images/{{$recipe->image_path}}'
+              :images="[
+                '/storage/images/{{$recipe->image_path}}'
+              ]"
+            ></vue-pure-lightbox>
+          </div>
+        @else
+          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="{{ Storage::disk('s3')->url("/public/images/{$recipe->image_path}") }}">
+          </div>
+        @endif
         <div class="card-body">
           <div class="card-body d-flex flex-row p-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
