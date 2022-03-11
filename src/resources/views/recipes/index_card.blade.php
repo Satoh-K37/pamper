@@ -13,7 +13,8 @@
           </div>
         @else
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img src="{{ Storage::disk('s3')->get("/public/images/{$recipe->image_path}") }}">
+            <img src="{{ Storage::disk('s3')->url('public/images/{$recipe->image_path}') }}">
+            <img src="{{ Storage::disk('s3')->get('public/images/{$recipe->image_path}') }}">
           </div>
         @endif
         <div class="card-body">
