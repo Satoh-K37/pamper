@@ -171,8 +171,8 @@ class RecipeController extends Controller
           
           // $resized_image->storeAs('/', $filename_to_store, 's3');
           // $file->storeAs('/', $file, 's3');
-
           // 成功
+          // S3にリサイズした画像をオリジナルのファイル名でアップロードする
           Storage::disk('s3')->put('/public/images/'. $filename_to_store, $resized_image);
           // $path = Storage::disk('s3')->put('/public/images/', $resized_image, 'public');
           // $form['image_path'] = Storage::disk('s3')->url($path);
