@@ -129,14 +129,14 @@ class RecipeController extends Controller
       if(isset($form['image_path'])){
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->file('image_path');
+        $file_name = $request->file('image_path')->getClientOriginalName();;
+        
         // // ユニークIDとランダム関数を使ってランダムな文字列を作成
         // $file_name = uniqid(rand(). '_');
-        // '_'が悪さしてるかもしれないのでなしにしてみる
-        $file_name = uniqid(rand());
-        // 拡張子を取得
-        $extension = $file->extension();
-        // $file_nameと$extensionを使い、ユニークなファイル名を作成
-        $filename_to_store = $file_name.".".$extension;
+        // // 拡張子を取得
+        // $extension = $file->extension();
+        // // $file_nameと$extensionを使い、ユニークなファイル名を作成
+        // $filename_to_store = $file_name.".".$extension;
         // // S3にアップロードする際に一度ローカルに画像を保存する
         // $tmpPath = storage_path('app/tmp/') . $file_name;
         // フォームから受け取った画像をリサイズする。
@@ -165,14 +165,14 @@ class RecipeController extends Controller
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
           // 成功
-          // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          $path = Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
-          // ユニークなファイル名をimage_pathカラムに代入
-          $form['image_path'] = $filename_to_store;
+          // // S3にリサイズした画像をオリジナルのファイル名でアップロードする
+          // $path = Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
+          // // ユニークなファイル名をimage_pathカラムに代入
+          // $form['image_path'] = $filename_to_store;
 
           
-          // $path = Storage::disk('s3')->putFile('public/images/', $resized_image, 'public');
-          // $form['image_path'] = Storage::disk('s3')->url($path);
+          $path = Storage::disk('s3')->putFile('public/images/', $request->file('file'));
+          $form['image_path'] = Storage::disk('s3')->url($path);
 
         }
       }
