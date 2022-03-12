@@ -147,7 +147,7 @@ class RecipeController extends Controller
             $constraint->upsize();
           }
         // )->encode(); //すると画像として扱ってくれるらしい
-        )->save($tmpPath);
+        )->save();
 
         // ローカルでの処理
         if(app()->isLocal()){
@@ -160,7 +160,7 @@ class RecipeController extends Controller
         else{
           // S3への画像アップロード
           // ユニークなファイル名をimage_pathカラムに代入
-          $form['image_path'] = $filename_to_store;
+          // $form['image_path'] = $filename_to_store;
           // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
@@ -170,7 +170,7 @@ class RecipeController extends Controller
           // Storage::disk('s3')->put('/public/images/'. $filename_to_store, $resized_image);
 
           
-          $path = Storage::disk('s3')->putFile('/public/images/', $resized_image, 'public');
+          $path = Storage::disk('s3')->putFile('public/images/', $resized_image, 'public');
           $form['image_path'] = Storage::disk('s3')->url($path);
 
         }
