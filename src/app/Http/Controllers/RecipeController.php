@@ -146,8 +146,8 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-        // )->encode(); //すると画像として扱ってくれるらしい
-        )->save();
+        )->encode(); //すると画像として扱ってくれるらしい
+        // )->save();
 
         // ローカルでの処理
         if(app()->isLocal()){
