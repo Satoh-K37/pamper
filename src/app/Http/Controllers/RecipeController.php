@@ -146,8 +146,8 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-        )->encode(); //すると画像として扱ってくれるらしい
-        // )->save($tmpPath);
+        // )->encode(); //すると画像として扱ってくれるらしい
+        )->save($tmpPath);
 
         // ローカルでの処理
         if(app()->isLocal()){
@@ -164,18 +164,14 @@ class RecipeController extends Controller
           // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
-
-          // // dd($tmpPath);
-          // $path = Storage::disk('s3')->put('/uploads/'.$filename_to_store,(string)$resized_image, 'public');
-          // $url = Storage::disk('s3')->url('uploads/'.$filename_to_store);
           
-          // $resized_image->storeAs('/', $filename_to_store, 's3');
-          // $file->storeAs('/', $file, 's3');
           // 成功
           // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          Storage::disk('s3')->put('/public/images/'. $filename_to_store, $resized_image);
-          // $path = Storage::disk('s3')->put('/public/images/', $resized_image, 'public');
-          // $form['image_path'] = Storage::disk('s3')->url($path);
+          // Storage::disk('s3')->put('/public/images/'. $filename_to_store, $resized_image);
+
+          
+          $path = Storage::disk('s3')->putFile('/public/images/', $resized_image, 'public');
+          $form['image_path'] = Storage::disk('s3')->url($path);
 
         }
       }
