@@ -130,7 +130,9 @@ class RecipeController extends Controller
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->file('image_path');
         // // ユニークIDとランダム関数を使ってランダムな文字列を作成
-        $file_name = uniqid(rand(). '_');
+        // $file_name = uniqid(rand(). '_');
+        // '_'が悪さしてるかもしれないのでなしにしてみる
+        $file_name = uniqid(rand());
         // 拡張子を取得
         $extension = $file->extension();
         // $file_nameと$extensionを使い、ユニークなファイル名を作成
