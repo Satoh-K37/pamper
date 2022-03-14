@@ -31,9 +31,6 @@
                     <div class="col-sm-8">
                       <input type="text" class="form-control" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力してください">
                     </div>
-                    <!-- <div class="col-sm-auto">
-                      <button type="submit" class="btn btn-primary ">検索</button>
-                    </div> -->
                   </div>
                   <div class="form-group row">
                     <label for="category_id" class="col-sm-3">カテゴリ</label>
