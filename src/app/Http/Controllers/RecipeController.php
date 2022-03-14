@@ -137,22 +137,23 @@ class RecipeController extends Controller
         $extension = $file->extension();
         // // $file_nameと$extensionを使い、ユニークなファイル名を作成
         $filename_to_store = $file_name.".".$extension;
-        // // S3にアップロードする際に一度ローカルに画像を保存する
-        // $tmpPath = storage_path('app/tmp/') . $file_name;
-        // フォームから受け取った画像をリサイズする。
-        $resized_image = InterventionImage::make($file)
-          ->fit(860, 532, // アスペクト比1:1.618 黄金比
-            function ($constraint) {
-            // 縦横比を保持したままにする
-            $constraint->aspectRatio();
-            // 小さい画像は大きくしない
-            $constraint->upsize();
-          }
-        )->encode(); //すると画像として扱ってくれるらしい
-        // )->save();
+
+        // S3にアップロードする際に一度ローカルに画像を保存する
+        $tmpPath = storage_path('public/tmp/') . $file_name;
 
         // ローカルでの処理
         if(app()->isLocal()){
+          // フォームから受け取った画像をリサイズする。
+          $resized_image = InterventionImage::make($file)
+            ->fit(860, 532, // アスペクト比1:1.618 黄金比
+              function ($constraint) {
+              // 縦横比を保持したままにする
+              $constraint->aspectRatio();
+              // 小さい画像は大きくしない
+              $constraint->upsize();
+            }
+          )->encode(); //すると画像として扱ってくれるらしい
+          
           // $form['image_path']にユニークなファイル名を代入する
           $form['image_path'] = $filename_to_store;
           // ファイルディレクトリに保存する処理。
@@ -160,20 +161,28 @@ class RecipeController extends Controller
         }
         // 本番環境での処理
         else{
-          // S3への画像アップロード
-          // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
-          // // 一時ファイルを削除
-          // Storage::disk('local')->delete('images/' . $tmpPath);
-          // 成功
-          // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image, 'public');
-          // ユニークなファイル名をimage_pathカラムに代入
-          $form['image_path'] = $filename_to_store;
+          // フォームから受け取った画像をリサイズする。
+          $resized_image = InterventionImage::make($file)
+            ->fit(860, 532, // アスペクト比1:1.618 黄金比
+                function ($constraint) {
+                // 縦横比を保持したままにする
+                $constraint->aspectRatio();
+                // 小さい画像は大きくしない
+                $constraint->upsize();
+              }
+            )->save($tmpPath);
 
+          // S3への画像アップロード
+          $path = Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $resized_image, 'public');
           
-          // $path = Storage::disk('s3')->put('public/images/', $resized_image, 'public');
-          // dd($path);
-          // $form['image_path'] = Storage::disk('s3')->url($path);
+          // 一時ファイルを削除
+          Storage::disk('local')->delete('public/tmp/' . $tmpFile);
+
+
+          // // S3にリサイズした画像をオリジナルのファイル名でアップロードする
+          // Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image->encode());
+          // // ユニークなファイル名をimage_pathカラムに代入
+          // $form['image_path'] = $filename_to_store;
 
         }
       }
