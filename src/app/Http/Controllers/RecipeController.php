@@ -139,7 +139,7 @@ class RecipeController extends Controller
         $filename_to_store = $file_name.".".$extension;
 
         // S3にアップロードする際に一度ローカルに画像を保存する
-        $tmpPath = storage_path('public/tmp/') . $file_name;
+        $tmpPath = storage_path('public/tmp/') . $filename_to_store;
 
         // ローカルでの処理
         if(app()->isLocal()){
@@ -173,7 +173,7 @@ class RecipeController extends Controller
             )->save($tmpPath);
 
           // S3への画像アップロード
-          $path = Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $resized_image, 'public');
+          $path = Storage::putFileAs(config('filesystems.s3.url'), new File($tmpPath), $resized_image->encode(), 'public');
           
           // 一時ファイルを削除
           Storage::disk('local')->delete('public/tmp/' . $tmpFile);
