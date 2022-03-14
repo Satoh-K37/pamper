@@ -165,11 +165,10 @@ class RecipeController extends Controller
           // // 一時ファイルを削除
           // Storage::disk('local')->delete('images/' . $tmpPath);
           // 成功
-          // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
           // ユニークなファイル名をimage_pathカラムに代入
           $form['image_path'] = $filename_to_store;
-
+          // S3にリサイズした画像をオリジナルのファイル名でアップロードする
+          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
           
           // $path = Storage::disk('s3')->put('public/images/', $resized_image, 'public');
           // dd($path);
