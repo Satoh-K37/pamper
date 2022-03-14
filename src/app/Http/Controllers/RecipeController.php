@@ -148,15 +148,15 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-        // ) //すると画像として扱ってくれるらしい
-        )->save();
+        )->encode(); //すると画像として扱ってくれるらしい
+        // )->save();
 
         // ローカルでの処理
         if(app()->isLocal()){
           // $form['image_path']にユニークなファイル名を代入する
           $form['image_path'] = $filename_to_store;
           // ファイルディレクトリに保存する処理。
-          Storage::put('public/images/'. $filename_to_store, $resized_image->encode());
+          Storage::put('public/images/'. $filename_to_store, $resized_image);
         }
         // 本番環境での処理
         else{
