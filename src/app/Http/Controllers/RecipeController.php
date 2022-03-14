@@ -80,7 +80,7 @@ class RecipeController extends Controller
     
     $old_category_id = $category_id;
 
-    return view('recipes.searchresult', [
+    return view('recipes.search_result', [
       'result_recipes' => $result_recipes,
       'keyword' => $keyword,
       'categories' => $categories,
@@ -168,7 +168,7 @@ class RecipeController extends Controller
           // ユニークなファイル名をimage_pathカラムに代入
           $form['image_path'] = $filename_to_store;
           // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
+          Storage::disk('s3')->put('/public/images/'. $filename_to_store, $resized_image, 'public');
           
           // $path = Storage::disk('s3')->put('public/images/', $resized_image, 'public');
           // dd($path);
