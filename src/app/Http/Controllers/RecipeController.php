@@ -148,8 +148,8 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-        )->encode(); //すると画像として扱ってくれるらしい
-        // )->save();
+        // )->encode(); //すると画像として扱ってくれるらしい
+        )->save();
 
         // ローカルでの処理
         if(app()->isLocal()){
@@ -166,17 +166,13 @@ class RecipeController extends Controller
           // Storage::disk('local')->delete('images/' . $tmpPath);
           // 成功
           // ユニークなファイル名をimage_pathカラムに代入
-          $form['image_path'] = $filename_to_store;
+          // $form['image_path'] = $filename_to_store;
           // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          // Storage::disk('s3')->putFile('public/images/'. $filename_to_store, $resized_image);
-          // Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
           // // S3にリサイズした画像をオリジナルのファイル名でアップロードする
-          Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
+          // Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
 
-          // $path = Storage::disk('s3')->put('public/images/', $resized_image, 'public');
-          // dd($path);
-          // $form['image_path'] = Storage::disk('s3')->url($path);
-
+          $path = Storage::disk('s3')->putFile('public/images/', $file, 'public');
+          $form['image_path'] = Storage::disk('s3')->url($path);
         }
       }
       
