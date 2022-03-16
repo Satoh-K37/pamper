@@ -249,14 +249,14 @@ class RecipeController extends Controller
       $form = $request->all();
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
-          // 削除する画像名を取得
-          $delete_image = $recipe->image_path;
-          // dd($delete_image);
-          // 削除する画像が存在しているディレクトリのパスを取得
-          $delete_path = storage_path().'/app/public/images/'.$delete_image;
-          // $delete_pathに入っている画像パスと一致する画像データを削除
-          \File::delete($delete_path);
-        // 変数fileにrequestから画像の情報を取得し、代入
+        // // 削除する画像名を取得
+        // $delete_image = $recipe->image_path;
+        // // dd($delete_image);
+        // // 削除する画像が存在しているディレクトリのパスを取得
+        // $delete_path = storage_path().'/app/public/images/'.$delete_image;
+        // // $delete_pathに入っている画像パスと一致する画像データを削除
+        // \File::delete($delete_path);
+        // // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->image_path;
         // フォームから受け取った画像をリサイズする。
         // $resized_image = InterventionImage::make($file)
@@ -283,6 +283,13 @@ class RecipeController extends Controller
 
         // ローカルでの処理
         if(app()->isLocal()){
+          // 削除する画像名を取得
+          $delete_image = $recipe->image_path;
+          // 削除する画像が存在しているディレクトリのパスを取得
+          $delete_path = storage_path().'/app/public/images/'.$delete_image;
+          // $delete_pathに入っている画像パスと一致する画像データを削除
+          \File::delete($delete_path);
+          // 変数fileにrequestから画像の情報を取得し、代入
           // $form['image_path']にユニークなファイル名を代入する
           $form['image_path'] = $filename_to_store;
           // ファイルディレクトリに保存する処理。
@@ -290,6 +297,10 @@ class RecipeController extends Controller
         }
         else {
           // 本番環境での処理
+          // 削除する画像名を取得
+          $delete_image = $recipe->image_path;
+          // 削除する画像が存在しているディレクトリのパスを取得
+          Storage::disk('s3')->delete($delete_image);
           // ユニークなファイル名をimage_pathカラムに代入
           $form['image_path'] = 'public/images/'. $filename_to_store;
           // S3にリサイズした画像をオリジナルのファイル名でアップロードする
