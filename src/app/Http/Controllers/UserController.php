@@ -45,7 +45,7 @@ class UserController extends Controller
       // ファイル名をランダムで作成
       $file_name = uniqid(rand(). '_');
       // ファイル名と取得した拡張子を合体
-      $icon_file = $file_name.".".$ext;
+      $icon_file_name = $file_name.".".$ext;
 
       if(app()->isLocal()){
         // 削除する画像名を取得 
@@ -55,9 +55,9 @@ class UserController extends Controller
         // $delete_pathに入っている画像パスと一致する画像データを削除
         \File::delete($delete_path);
         // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-        $user_form['profile_image'] = $icon_file;
+        $user_form['profile_image'] = $icon_file_name;
         // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-        $path = $request->profile_image->storeAs('public/icons/', $icon_file);
+        $path = $request->profile_image->storeAs('public/icons/', $icon_file_name);
       }else{
         // 削除する画像名を取得 
         $delete_icon = $user->profile_image;
@@ -65,9 +65,9 @@ class UserController extends Controller
         Storage::disk('s3')->delete($delete_icon); 
         // 新しく保存する画像ファイルをDBに保存
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-        $user_form['profile_image'] = 'public/icons/'. $icon_file;
+        $user_form['profile_image'] = 'public/icons/'. $icon_file_name;
         // S3に保存
-        Storage::disk('s3')->put('public/icons/', $icon_file);
+        Storage::disk('s3')->put('public/icons/'. $icon_file_name, $file);
       }
 
       // Storage::disk('s3')->putFile('/', $file);
