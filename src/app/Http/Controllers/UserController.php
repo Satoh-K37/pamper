@@ -69,7 +69,7 @@ class UserController extends Controller
         // 削除する画像名を取得 
         $delete_icon = $user->profile_image;
         // 取得した画像ファイルをS3から削除する
-        Storage::disk('s3')->delete($delete_icon); 
+        Storage::disk('s3')->delete($delete_icon);
         // 新しく保存する画像ファイルをDBに保存
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
         $user_form['profile_image'] = 'public/icons/'. $icon_file_name;

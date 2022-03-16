@@ -5,17 +5,17 @@
       <div class="card">
         @if(app()->isLocal() || app()->runningUnitTests())
           <vue-pure-lightbox
-            thumbnail='/storage/images/{{$recipe->image_path}}'
+            thumbnail='/storage/images/{{$recipes->image_path}}'
             :images="[
               
-              '/storage/images/{{$recipe->image_path}}'
+              '/storage/images/{{$recipes->image_path}}'
             ]"
           ></vue-pure-lightbox>
         @else
           <vue-pure-lightbox
-            thumbnail='{{ Storage::disk('s3')->url("$recipe->image_path") }}'
+            thumbnail='{{ Storage::disk('s3')->url("$recipes->image_path") }}'
             :images="[
-              '{{ Storage::disk('s3')->url("$recipe->image_path") }}'
+              '{{ Storage::disk('s3')->url("$recipes->image_path") }}'
             ]"
           ></vue-pure-lightbox>
         @endif
@@ -25,16 +25,16 @@
       <div class="card-body my-0 py-0">
         <div class="card-title px-0 py-0 mx-0 my-0">
           <div class="card-body d-flex flex-row px-0">
-            <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
+            <a href="{{ route('users.show', ['name' => $recipes->user->name]) }}" class="text-dark">
               @if(app()->isLocal() || app()->runningUnitTests())
-                @if($recipe->user->profile_image !== NULL)
-                  <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @if($recipes->user->profile_image !== NULL)
+                  <img src="/storage/icons/{{$recipes->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @else
                   <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @endif
               @else
-                @if($recipe->user->profile_image !== NULL)
-                  <img src="{{ Storage::disk('s3')->url("$recipe->user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @if($recipes->user->profile_image !== NULL)
+                  <img src="{{ Storage::disk('s3')->url("$recipes->user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @else
                   <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @endif
