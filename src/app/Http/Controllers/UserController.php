@@ -66,8 +66,9 @@ class UserController extends Controller
         // 新しく保存する画像ファイルをDBに保存
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
         $user_form['profile_image'] = 'public/icons/'. $icon_file_name;
+        $icon_image = $file->encode();
         // S3に保存
-        Storage::disk('s3')->put('public/icons/'. $icon_file_name, $file->encode());
+        Storage::disk('s3')->put('public/icons/'. $icon_file_name, $icon_image);
       }
 
       // Storage::disk('s3')->putFile('/', $file);
