@@ -5,8 +5,8 @@
       <i class="far fa-sticky-note mr-1"></i>SPOILY
     </a>
   @else
-    <a class="navbar-brand" href="/" src='/storage/logo_transparent.png'>
-      <img src='{{ Storage::disk('s3')->url("$recipe->image_path") }}' class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+    <a class="navbar-brand" href="/">
+      <img src='{{ Storage::disk('s3')->url("logo_transparent.png") }}' class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
     </a>
   @endif
   <ul class="navbar-nav ml-auto">
