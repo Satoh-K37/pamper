@@ -13,14 +13,26 @@
               <a class="font-weight-normal ml-3">{{ $user->name }}</a>
             </div>
             <div class="d-flex flex-row my-2 mx-2">
-              <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-                @if($user->profile_image !== NULL)
-                  <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
-                  <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
-                @else
-                  <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
-                @endif
-              </a>
+              @if(app()->isLocal() || app()->runningUnitTests())
+                <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+                  @if($user->profile_image !== NULL)
+                    <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
+                    <img src='/storage/icons/{{$user->profile_image}}' class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                  @else
+                    <img src='/storage/default_icon.png' class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                  @endif
+                </a>
+              @else
+                <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+                  @if($user->profile_image !== NULL)
+                    <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
+                    <img src='{{ Storage::disk('s3')->url("$user->profile_image") }}' class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                  @else
+                    <img src='{{ Storage::disk('s3')->url("default_icon.png") }}' class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                  @endif
+                </a>
+              @endif
+
               @if( Auth::id() !== $user->id )
                 <follow-button
                   class="ml-auto"

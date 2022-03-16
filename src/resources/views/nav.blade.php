@@ -1,8 +1,14 @@
 <nav class="navbar navbar-expand navbar-dark">
 <!-- <nav class="navbar navbar-expand"> -->
-
-  <a class="navbar-brand" href="/"><i class="far fa-sticky-note mr-1"></i>SPOILY</a>
-
+  @if(app()->isLocal() || app()->runningUnitTests())
+    <a class="navbar-brand" href="/" src='/storage/logo_transparent.png'>
+      <i class="far fa-sticky-note mr-1"></i>SPOILY
+    </a>
+  @else
+    <a class="navbar-brand" href="/" src='/storage/logo_transparent.png'>
+      <img src='{{ Storage::disk('s3')->url("$recipe->image_path") }}' class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+    </a>
+  @endif
   <ul class="navbar-nav ml-auto">
     @guest
     <li class="nav-item">
