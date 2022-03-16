@@ -24,10 +24,18 @@
         <div class="card-body">
           <div class="card-body d-flex flex-row p-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
-              @if($recipe->user->profile_image !== NULL)
-                <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50 px; height: 50px;">
+              @if(app()->isLocal() || app()->runningUnitTests())
+                @if($recipe->user->profile_image !== NULL)
+                  <img src="/storage/icons/{{ $recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50 px; height: 50px;">
+                @else
+                  <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+                @endif
               @else
-                <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+                @if($recipe->user->profile_image !== NULL)
+                  <img src="{{ Storage::disk('s3')->url("$recipe->user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @else
+                  <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @endif
               @endif
             </a>
             <div class="font-weight-bold mx-3">
