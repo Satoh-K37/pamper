@@ -159,11 +159,9 @@ class RecipeController extends Controller
         if(app()->isLocal()){
           // $form['image_path']にユニークなファイル名を代入する
           $form['image_path'] = $filename_to_store;
-          
           // ファイルディレクトリに保存する処理。
           Storage::put('public/images/'. $filename_to_store, $resized_image);
           
-
         }
         // 本番環境での処理
         else{
@@ -328,14 +326,23 @@ class RecipeController extends Controller
 
   public function destroy(Recipe $recipe)
   {
-    // 削除する画像名を取得
-    $delete_image = $recipe->image_path;
-    // dd($delete_image);
-    // 削除する画像が存在しているディレクトリのパスを取得
-    $delete_path = storage_path().'/app/public/images/'.$delete_image;
-    // dd($delete_path);
-    // $delete_pathに入っている画像パスと一致する画像データを削除
-    \File::delete($delete_path);
+    if(app()->isLocal()){
+      // 削除する画像名を取得
+      $delete_image = $recipe->image_path;
+      // dd($delete_image);
+      // 削除する画像が存在しているディレクトリのパスを取得
+      $delete_path = storage_path().'/app/public/images/'.$delete_image;
+      // dd($delete_path);
+      // $delete_pathに入っている画像パスと一致する画像データを削除
+      \File::delete($delete_path);
+    }else{
+      // 本番環境での処理
+      // 削除する画像名を取得
+      $delete_image = $recipe->image_path;
+      // 削除する画像が存在しているディレクトリのパスを取得
+      Storage::disk('s3')->delete($delete_image);
+    }
+    
     $recipe->delete();
 
     return redirect()->route('recipes.index')->with('flash_message', 'レシピの削除が完了しました');
