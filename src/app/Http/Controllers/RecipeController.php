@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\File;
 use App\Http\Requests\RecipeRequest;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as InterventionImage;
 use Illuminate\Support\Facades\Storage as Storage;
 // use InterventionImage; // エイリアスを使用している
 // use Storage;
+use App\User;
 use App\Recipe;
 use App\Tag;
 use App\Category;
@@ -91,8 +93,11 @@ class RecipeController extends Controller
 
   public function show(Recipe $recipe)
   {
+      $user = User::where('name', $recipe->user->name)->first();
+      
       return view('recipes.show', [
         'recipe' => $recipe,
+        'user' => $user,
         ]);
   }
 
