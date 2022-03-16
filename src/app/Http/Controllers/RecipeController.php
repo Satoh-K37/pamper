@@ -139,7 +139,11 @@ class RecipeController extends Controller
         $filename_to_store = $file_name.".".$extension;
         // // S3にアップロードする際に一度ローカルに画像を保存する
         // $tmpPath = storage_path('app/tmp/') . $file_name;
-        // フォームから受け取った画像をリサイズする。
+        // フォームから受け取った画像をリサイズする
+        // 縦長の画像
+        // $resized_image = InterventionImage::make($file)
+        //   ->resizeCanvas(860, 532, 'center', true)->encode();// アスペクト比1:1.618 黄金比
+
         $resized_image = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
             function ($constraint) {
@@ -149,7 +153,7 @@ class RecipeController extends Controller
             $constraint->upsize();
           }
         )->encode(); //すると画像として扱ってくれるらしい
-        // )->save();
+        // // )->save();
 
         // ローカルでの処理
         if(app()->isLocal()){
@@ -171,7 +175,6 @@ class RecipeController extends Controller
           // // S3にリサイズした画像をオリジナルのファイル名でアップロードする
           // Storage::disk('s3')->put('public/images/'. $filename_to_store, $resized_image);
           Storage::disk('s3')->put('public/images/'.$filename_to_store, $resized_image);
-
 
           // $path = Storage::disk('s3')->putFile('public/images/', $file, 'public');
           // $form['image_path'] = Storage::disk('s3')->url($path);
@@ -253,6 +256,9 @@ class RecipeController extends Controller
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->image_path;
         // フォームから受け取った画像をリサイズする。
+        // $resized_image = InterventionImage::make($file)
+        //   ->resizeCanvas(860, 532, 'center', true)->encode();// アスペクト比1:1.618 黄金比
+
         $resized_image = InterventionImage::make($file)
           // ->resize(null, 532,
           ->fit(860, 532, // アスペクト比1:1.618 黄金比 横×縦
@@ -260,10 +266,11 @@ class RecipeController extends Controller
             // 縦横比を保持したままにする
             $constraint->aspectRatio();
             // 小さい画像は大きくしない
-            // $constraint->upsize();
+            $constraint->upsize();
           }
-          // encode()すると画像として扱ってくれるらしい
         )->encode();
+          // encode()すると画像として扱ってくれるらしい
+        
         // // ユニークIDとランダム関数を使ってランダムな文字列を作成
         $file_name = uniqid(rand(). '_');
         // 拡張子を取得
