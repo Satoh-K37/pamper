@@ -1,12 +1,13 @@
 <nav class="navbar navbar-expand navbar-dark">
 <!-- <nav class="navbar navbar-expand"> -->
   @if(app()->isLocal() || app()->runningUnitTests())
-    <a class="navbar-brand" href="/" src='/storage/logo_transparent.png'>
-      <i class="far fa-sticky-note mr-1"></i>SPOILY
+    <a class="navbar-brand" href="/">
+      <img src='/storage/logo_transparent.png' style="object-fit: cover; width: 200px; height: 50px;">
+      <!-- <i class="far fa-sticky-note mr-1" style="object-fit: cover; width: 50px; height: 50px;"></i>SPOILY -->
     </a>
   @else
     <a class="navbar-brand" href="/">
-      <img src='{{ Storage::disk('s3')->url("logo_transparent.png") }}' class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+      <img src='{{ Storage::disk('s3')->url("logo_transparent.png") }}' style="object-fit: cover; width: 200px; height: 50px;">
     </a>
   @endif
   <ul class="navbar-nav ml-auto">
