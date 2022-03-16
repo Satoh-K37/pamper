@@ -12,14 +12,21 @@
       <div class="col-lg-6 w-auto bordered">
 
         <!--Image-->
-        <div class="view overlay mw-100">
-          <!-- <img src="https://mdbootstrap.com/img/Photos/Others/img%20(27).jpg" class="img-fluid"
-            alt=""> -->
-          <img src="/storage/logo.png" class="img-fluid h-100">
-          <a>
-            <div class="mask rgba-white-light"></div>
-          </a>
-        </div>
+        @if(app()->isLocal() || app()->runningUnitTests())
+          <div class="view overlay mw-100">
+            <img src="/storage/logo.png" class="img-fluid h-100">
+            <a>
+              <div class="mask rgba-white-light"></div>
+            </a>
+          </div>
+        @else
+          <div class="view overlay mw-100">
+            <img src='{{ Storage::disk('s3')->url("logo.png")}}' class="img-fluid h-100">
+            <a>
+              <div class="mask rgba-white-light"></div>
+            </a>
+          </div>
+        @endif
 
       </div>
       <!--Grid column-->

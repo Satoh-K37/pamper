@@ -3,12 +3,22 @@
   <div class="row g-0">
     <div class="col-md-12 card-group">
       <div class="card">
-        <vue-pure-lightbox
-          thumbnail='{{ Storage::disk('s3')->url("$recipe->image_path") }}'
-          :images="[
-            '{{ Storage::disk('s3')->url("$recipe->image_path") }}'
-          ]"
-        ></vue-pure-lightbox>
+        @if(app()->isLocal() || app()->runningUnitTests())
+          <vue-pure-lightbox
+            thumbnail='/storage/images/{{$recipe->image_path}}'
+            :images="[
+              
+              '/storage/images/{{$recipe->image_path}}'
+            ]"
+          ></vue-pure-lightbox>
+        @else
+          <vue-pure-lightbox
+            thumbnail='{{ Storage::disk('s3')->url("$recipe->image_path") }}'
+            :images="[
+              '{{ Storage::disk('s3')->url("$recipe->image_path") }}'
+            ]"
+          ></vue-pure-lightbox>
+        @endif
       </div>
     </div>
     <div class="col-md-12">
@@ -17,7 +27,11 @@
           <div class="card-body d-flex flex-row px-0">
             <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
               @if($recipe->user->profile_image !== NULL)
-                <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @if(app()->isLocal() || app()->runningUnitTests())
+                  <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @else
+                  <img src="{{ Storage::disk('s3')->url("$recipe->user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @endif
               @else
                 <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
               @endif

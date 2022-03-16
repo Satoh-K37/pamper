@@ -22,13 +22,18 @@
   <div class="form-input__picture afterimage">
     <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
     @if (isset($recipe->image_path))
-      <div class="card-text img-fluid">
-        <img class="card-text img-fluid" src="/storage/images/{{$recipe->image_path}}">
-      </div>
+      @if(app()->isLocal() || app()->runningUnitTests())
+        <div class="card-text img-fluid">
+          <img class="card-text img-fluid" src="/storage/images/{{$recipe->image_path}}">
+        </div>
+      @else
+        <div class="card-text img-fluid">
+          <img class="card-text img-fluid" src="{{ Storage::disk('s3')->url("$recipe->image_path") }}">
+        </div>
+      @endif
     @else
       <div class="card-text">
         <span class="form-input__image_path--text">画像が登録されていません。<span id="must-icon">必須</span></span>
-        
       </div>
     @endif
   </div>
