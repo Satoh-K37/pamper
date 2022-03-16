@@ -43,11 +43,12 @@ class UserController extends Controller
       
       $file = $request->profile_image;
       // アップロードされた画像の拡張子の取得。
-      $ext = $request->file('profile_image')->getClientOriginalExtension();
+      // $ext = $request->file('profile_image')->getClientOriginalExtension();
+      $extension = $file->extension();
       // ファイル名をランダムで作成
       $file_name = uniqid(rand(). '_');
       // ファイル名と取得した拡張子を合体
-      $icon_file_name = $file_name.".".$ext;
+      $icon_file_name = $file_name.".".$extension;
       // dd($icon_file_name);
       // dd($resized_image);
       if(app()->isLocal()){
@@ -63,7 +64,7 @@ class UserController extends Controller
         $user_form['profile_image'] = $icon_file_name;
         // dd($user_form['profile_image']);
         // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-        $request->profile_image->storeAs('public/icons/', $icon_file_name);
+        $request->profile_image->storeAs('public/icons/',$icon_file_name);
         
       }else{
         // 削除する画像名を取得 
@@ -72,7 +73,7 @@ class UserController extends Controller
         Storage::disk('s3')->delete($delete_icon);
         // 新しく保存する画像ファイルをDBに保存
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-        $user_form['profile_image'] = 'public/icons/'. $icon_file_name;
+        $user_form['profile_image'] = $icon_file_name;
 
         $resized_image = InterventionImage::make($file)
         // ->resize(null, 532,
