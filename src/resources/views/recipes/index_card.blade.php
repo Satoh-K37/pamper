@@ -13,8 +13,12 @@
           </div>
         @else
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img src="{{ $recipe->image_path }}">
-            <img src={{ Storage::disk('s3')->url("$recipe->image_path") }}>
+            <vue-pure-lightbox
+              thumbnail='{{ Storage::disk('s3')->url("$recipe->image_path") }}'
+              :images="[
+                '{{ Storage::disk('s3')->url("$recipe->image_path") }}'
+              ]"
+            ></vue-pure-lightbox>
           </div>
         @endif
         <div class="card-body">
