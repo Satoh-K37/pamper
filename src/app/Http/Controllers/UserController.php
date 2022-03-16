@@ -6,8 +6,10 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image as InterventionImage;
+use Illuminate\Support\Facades\Storage as Storage;
 use App\User;
-use Storage;
+
 
 
 
@@ -46,18 +48,40 @@ class UserController extends Controller
       $file_name = uniqid(rand(). '_');
       // ファイル名と取得した拡張子を合体
       $icon_file_name = $file_name.".".$ext;
-
+      // dd($icon_file_name);
+      $resized_image = InterventionImage::make($file)
+        // ->resize(null, 532,
+        ->fit(400, 300, // アスペクト比1:1.618 黄金比 横×縦
+          function ($constraint) {
+          // 縦横比を保持したままにする
+          $constraint->aspectRatio();
+          // 小さい画像は大きくしない
+          $constraint->upsize();
+        }
+      )->encode();
+      // dd($resized_image);
       if(app()->isLocal()){
         // 削除する画像名を取得 
         $delete_icon = $user->profile_image;
+        // dd($delete_icon);
         // 削除する画像が存在しているディレクトリのパスを取得
-        $delete_path = storage_path().'/app/public/icons/'.$delete_icon;
+        $delete_path = storage_path().'/app/public/icons/'. $delete_icon;
+        // dd($delete_path);
         // $delete_pathに入っている画像パスと一致する画像データを削除
         \File::delete($delete_path);
         // $formのimage_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-        $user_form['profile_image'] = $icon_file_name;
+        $user_form['profile_image'] = 'public/icons/'.$icon_file_name;
+        // dd($user_form['profile_image']);
         // storeAsでオリジナルの画像名をつけて、指定のディレクトリに画像を保存
-        $request->profile_image->storeAs('public/icons/', $icon_file_name);
+        // $request->profile_image->storeAs('public/icons/', $icon_file_name, $resized_image);
+        Storage::put('public/icons/'. $icon_file_name, $resized_image);
+        // dd($path);
+
+        // // $form['image_path']にユニークなファイル名を代入する
+        // $form['image_path'] = $filename_to_store;
+        // // ファイルディレクトリに保存する処理。
+        // Storage::put('public/images/'. $filename_to_store, $resized_image);
+        
       }else{
         // 削除する画像名を取得 
         $delete_icon = $user->profile_image;
@@ -66,9 +90,8 @@ class UserController extends Controller
         // 新しく保存する画像ファイルをDBに保存
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
         $user_form['profile_image'] = 'public/icons/'. $icon_file_name;
-        $icon_image = $file->encode();
         // S3に保存
-        Storage::disk('s3')->put('public/icons/'. $icon_file_name, $icon_image);
+        Storage::disk('s3')->put('public/icons/'. $icon_file_name, $resized_image);
       }
 
       // Storage::disk('s3')->putFile('/', $file);
