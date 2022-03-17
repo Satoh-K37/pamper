@@ -25,7 +25,7 @@ class RecipeController extends Controller
       $this->authorizeResource(Recipe::class, 'recipe');
   }
 
-  public function index(Request $request)
+  public function index(Request $request, Recipe $recipe)
   {
       // phpinfo();
       // \DB::enableQueryLog();
@@ -38,10 +38,14 @@ class RecipeController extends Controller
       // $recipes = $query->orderBy('created_at','desc')->paginate();
       $recipes = $query->orderByDesc('created_at')->paginate();
       $recipes->loadMissing('user','likes','tags');
+      
+      // $user = User::where('name', $recipe->user->name)->first();
+
       // ->load('user');
       // dd(\DB::getQueryLog());
       return view('recipes.index', [
         'recipes' => $recipes,
+        // 'user' => $user,
         // 'allcategory_names' => $allCategoryNames,
         'categories' => $categories,
         'keyword' => $keyword,
@@ -94,6 +98,8 @@ class RecipeController extends Controller
   public function show(Recipe $recipe)
   {
       $user = User::where('name', $recipe->user->name)->first();
+      
+      // dd($user);
 
       return view('recipes.show', [
         'recipe' => $recipe,
