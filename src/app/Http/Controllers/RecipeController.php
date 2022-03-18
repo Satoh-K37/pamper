@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as InterventionImage;
 use Illuminate\Support\Facades\Storage as Storage;
-// use InterventionImage; // エイリアスを使用している
-// use Storage;
 use App\User;
 use App\Recipe;
 use App\Tag;
@@ -25,7 +23,8 @@ class RecipeController extends Controller
       $this->authorizeResource(Recipe::class, 'recipe');
   }
 
-  public function index(Request $request, Recipe $recipe)
+
+  public function index(Request $request)
   {
       // phpinfo();
       // \DB::enableQueryLog();
