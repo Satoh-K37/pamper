@@ -4,7 +4,7 @@
       <!-- Section: Block Content -->
       <section>
         <!-- Card -->
-        <div class="card testimonial-card">　
+        <div class="card testimonial-card">
             <!-- Background color -->
             <div class="card-up p-3 white-text" style="background: #fca326">
               <a onclick="history.back(-1);return false;">
@@ -26,7 +26,7 @@
                 <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
                   @if($user->profile_image !== NULL)
                     <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
-                    <img src="{{ Storage::disk('s3')->url("$user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
+                    <img src="{{ $user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
                   @else
                     <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
                   @endif
