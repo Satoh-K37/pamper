@@ -87,7 +87,7 @@ class UserController extends Controller
         )->encode();
         // S3に保存
         Storage::disk('s3')->put('public/icons/'. $icon_file_name, $resized_image);
-        $path = 'public/icons/' . $icon_file_name;
+        // $path = 'public/icons/' . $icon_file_name;
       }
 
       // Storage::disk('s3')->putFile('/', $file);
