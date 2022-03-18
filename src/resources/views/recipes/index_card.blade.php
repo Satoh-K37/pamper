@@ -32,7 +32,8 @@
                 @endif
               @else
                 @if($recipe->user->profile_image !== NULL)
-                  <img src= Storage::disk('s3')->url("$recipe->user->profile_image")' class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                  <!-- <img src="{{ Storage::disk('s3')->url("$recipe->user->profile_image") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;"> -->
+                  {{ Storage::disk('s3')->url("$recipe->user->profile_image") }
                 @else
                   <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @endif
