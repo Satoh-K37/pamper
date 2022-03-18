@@ -33,7 +33,7 @@
                 @endif
               @else
                 @if($user->profile_image !== NULL)
-                  <img src="{{ $user->profile_image" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                  <img src="{{ $user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @else
                   <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @endif
