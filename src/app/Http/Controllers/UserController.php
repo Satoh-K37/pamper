@@ -73,7 +73,7 @@ class UserController extends Controller
         Storage::disk('s3')->delete($delete_icon);
         // 新しく保存する画像ファイルをDBに保存
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
-        $user_form['profile_image'] = 'public/icons/' . $icon_file_name;
+        // $user_form['profile_image'] = 'public/icons/' . $icon_file_name;
 
         $resized_image = InterventionImage::make($file)
         // ->resize(null, 532,
@@ -86,8 +86,8 @@ class UserController extends Controller
         }
         )->encode();
         // S3に保存
-        Storage::disk('s3')->put('public/icons/'. $icon_file_name, $resized_image);
-        // $path = 'public/icons/' . $icon_file_name;
+        $path = Storage::disk('s3')->put('public/icons/'. $icon_file_name, $resized_image);
+        $user_form['profile_image'] = Storage::disk('s3')->url($path);
       }
 
       // Storage::disk('s3')->putFile('/', $file);
