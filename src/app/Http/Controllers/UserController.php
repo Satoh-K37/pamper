@@ -75,19 +75,19 @@ class UserController extends Controller
         // image_pathにファイル名と取得した拡張子を合体した物を代入する。保存する時に使う
         // $user_form['profile_image'] = 'public/icons/' . $icon_file_name;
 
-        $resized_image = InterventionImage::make($file)
-        // ->resize(null, 532,
-        ->fit(400, 300, // アスペクト比1:1.618 黄金比 横×縦
-          function ($constraint) {
-          // 縦横比を保持したままにする
-          $constraint->aspectRatio();
-          // 小さい画像は大きくしない
-          $constraint->upsize();
-        }
-        )->encode();
+        // $resized_image = InterventionImage::make($file)
+        // // ->resize(null, 532,
+        // ->fit(400, 300, // アスペクト比1:1.618 黄金比 横×縦
+        //   function ($constraint) {
+        //   // 縦横比を保持したままにする
+        //   $constraint->aspectRatio();
+        //   // 小さい画像は大きくしない
+        //   $constraint->upsize();
+        // }
+        // )->encode();
         // S3に保存
         // $path = Storage::disk('s3')->put('public/icons/'. $icon_file_name, $resized_image);
-        $path = Storage::disk('s3')->putFile('public/icons/'. $icon_file_name, $file);
+        $path = Storage::disk('s3')->putFile('public/icons/', $file, 'public');
         $user_form['profile_image'] = Storage::disk('s3')->url($path);
       }
 
