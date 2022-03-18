@@ -61,6 +61,7 @@ class Recipe extends Model
     
   }
 
+
   // あるユーザーがいいね済みかどうかを判定するメソッド
   public function isLikedBy(?User $user): bool
   {
