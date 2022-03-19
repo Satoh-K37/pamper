@@ -55,7 +55,6 @@ class RecipeController extends Controller
   // 検索
   public function search(Request $request)
   {
-    
     // 検索フォームに入力されたキーワードを受け取る
     $keyword = $request->input('keyword');
     // 検索時に選択されたcategory_idを受け取る

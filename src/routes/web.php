@@ -34,7 +34,7 @@ Route::prefix('register')->name('register.')->group(function () {
 Route::get('/', 'RecipeController@index')->name('recipes.index');
 
 // 検索フォームを表示させるルート
-Route::get('/searchresult', 'RecipeController@search')->name('recipes.searchresult');
+Route::get('/searchresult', 'RecipeController@search')->name('recipes.search_result');
 // 検索
 // Route::get('searchResult', 'RecipeController@searchResult')->name('recipes.searchResult');
 
