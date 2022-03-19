@@ -24,7 +24,7 @@
             <!--検索フォーム-->
             <div class="row">
               <div class="col-sm">
-                <form method="GET" action="{{ route('recipes.searchresult')}}">
+                <form method="GET" action="{{ route('recipes.search_result')}}">
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">キーワード</label>
                     <!--入力-->
