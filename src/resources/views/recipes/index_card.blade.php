@@ -46,9 +46,6 @@
                 </p>
               </a>
             </div>
-            <!-- <div class="font-weight-lighter ml-2">
-              {{ $recipe->created_at->format('Y/m/d H:i') }}
-            </div> -->
             @if( Auth::id() === $recipe->user_id )
           <!-- dropdown -->
             <div class="ml-auto card-text">
