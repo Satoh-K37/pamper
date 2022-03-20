@@ -134,25 +134,17 @@ class RecipeController extends Controller
       $form = $request->all();
       // unset($form['_token']);
       // 画像データがあるかを確認
-      
       if(isset($form['image_path'])){
         // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->file('image_path');
-        // $file_name = $request->file('image_path')->getClientOriginalName();;
-        
-        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        // ユニークなIDとランダム関数を使ってランダムな文字列を作成
         $file_name = uniqid(rand(). '_');
-        // // 拡張子を取得
+        // 拡張子を取得
         $extension = $file->extension();
-        // // $file_nameと$extensionを使い、ユニークなファイル名を作成
+        // $file_nameと$extensionを使い、ユニークなファイル名を作成
         $filename_to_store = $file_name.".".$extension;
-        // // S3にアップロードする際に一度ローカルに画像を保存する
-        // $tmpPath = storage_path('app/tmp/') . $file_name;
-        // フォームから受け取った画像をリサイズする
-        // 縦長の画像
-        // $resized_image = InterventionImage::make($file)
-        //   ->resizeCanvas(860, 532, 'center', true)->encode();// アスペクト比1:1.618 黄金比
 
+        // フォームから受け取った画像をリサイズする
         $resized_image = InterventionImage::make($file)
           ->fit(860, 532, // アスペクト比1:1.618 黄金比
             function ($constraint) {
@@ -161,11 +153,10 @@ class RecipeController extends Controller
             // 小さい画像は大きくしない
             $constraint->upsize();
           }
-        )->encode(); //すると画像として扱ってくれるらしい
-        // // )->save();
+        )->encode();
 
         // ローカルでの処理
-        if(app()->isLocal()){
+        if(app()->isLocal() || app()->runningUnitTests()){
           // $form['image_path']にユニークなファイル名を代入する
           $form['image_path'] = $filename_to_store;
           // ファイルディレクトリに保存する処理。
@@ -179,27 +170,14 @@ class RecipeController extends Controller
           $form['image_path'] = 'public/images/'. $filename_to_store;
           // S3にリサイズした画像をオリジナルのファイル名でアップロードする
           Storage::disk('s3')->put('public/images/'.$filename_to_store, $resized_image);
-
-          // S3への画像アップロード
-          // Storage::putFileAs(config('filesystems.s3.url'), new File($filename_to_store), $resized_image, 'public');
-          // // 一時ファイルを削除
-          // Storage::disk('local')->delete('images/' . $tmpPath);
-
-
-          // $path = Storage::disk('s3')->putFile('public/images/', $file, 'public');
-          // $form['image_path'] = Storage::disk('s3')->url($path);
         }
       }
       
-      // dd($request);
       // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
       $recipe->fill($form)->save();
-      // $recipe->save();
       // カテゴリーを追加
       $recipe->categories()->attach($request->category_id);
-      // $recipe->save();
-      // dd($recipe);
 
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);
@@ -210,8 +188,6 @@ class RecipeController extends Controller
       //   $category = Category::firstOrCreate(['name' => $categoryName]);
       //   $recipe->categories()->attach($category);
       // });
-
-      // dd($recipe);
       return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました');
   }
 
@@ -234,8 +210,7 @@ class RecipeController extends Controller
 
       $servings = config('serving');
       $cooking_times = config('cookingtime');
-      // print_r($old_serving);
-      // dd($old_category_id->id);
+      
 
       return view('recipes.edit', [
         'recipe' => $recipe,
@@ -257,17 +232,10 @@ class RecipeController extends Controller
       // 画像データがあるかを確認
       if(isset($form['image_path'])){
         // // 削除する画像名を取得
-        // $delete_image = $recipe->image_path;
-        // // dd($delete_image);
-        // // 削除する画像が存在しているディレクトリのパスを取得
-        // $delete_path = storage_path().'/app/public/images/'.$delete_image;
-        // // $delete_pathに入っている画像パスと一致する画像データを削除
-        // \File::delete($delete_path);
-        // // 変数fileにrequestから画像の情報を取得し、代入
         $file = $request->image_path;
-        // フォームから受け取った画像をリサイズする。
-        // $resized_image = InterventionImage::make($file)
-        //   ->resizeCanvas(860, 532, 'center', true)->encode();// アスペクト比1:1.618 黄金比
+
+        // 削除する画像名を取得
+        $delete_image = $recipe->image_path;
 
         $resized_image = InterventionImage::make($file)
           // ->resize(null, 532,
@@ -279,9 +247,8 @@ class RecipeController extends Controller
             $constraint->upsize();
           }
         )->encode();
-          // encode()すると画像として扱ってくれるらしい
         
-        // // ユニークIDとランダム関数を使ってランダムな文字列を作成
+        // ユニークIDとランダム関数を使ってランダムな文字列を作成
         $file_name = uniqid(rand(). '_');
         // 拡張子を取得
         $extension = $file->extension();
@@ -289,9 +256,7 @@ class RecipeController extends Controller
         $filename_to_store = $file_name.".".$extension;
 
         // ローカルでの処理
-        if(app()->isLocal()){
-          // 削除する画像名を取得
-          $delete_image = $recipe->image_path;
+        if(app()->isLocal() || app()->runningUnitTests()){
           // 削除する画像が存在しているディレクトリのパスを取得
           $delete_path = storage_path().'/app/public/images/'.$delete_image;
           // $delete_pathに入っている画像パスと一致する画像データを削除
@@ -301,11 +266,7 @@ class RecipeController extends Controller
           $form['image_path'] = $filename_to_store;
           // ファイルディレクトリに保存する処理。
           Storage::put('public/images/'. $filename_to_store, $resized_image);
-        }
-        else {
-          // 本番環境での処理
-          // 削除する画像名を取得
-          $delete_image = $recipe->image_path;
+        }else {
           // 削除する画像が存在しているディレクトリのパスを取得
           Storage::disk('s3')->delete($delete_image);
           // ユニークなファイル名をimage_pathカラムに代入
@@ -318,8 +279,6 @@ class RecipeController extends Controller
       $recipe->user_id = $request->user()->id;
       $recipe->fill($form)->save();
 
-      // $recipe->fill($request->all())->save();
-      // dd($recipe); 
       $recipe->categories()->sync($request->category_id);
 
       $recipe->tags()->detach();
@@ -327,21 +286,18 @@ class RecipeController extends Controller
           $tag = Tag::firstOrCreate(['name' => $tagName]);
           $recipe->tags()->attach($tag);
       });
-      
-      // return view('recipes.index');
-      // dd($recipe);
+
       return redirect()->route('recipes.index')->with('flash_message', 'レシピの編集が完了しました');
   }
 
   public function destroy(Recipe $recipe)
   {
-    if(app()->isLocal()){
+    if(app()->isLocal() || app()->runningUnitTests()){
       // 削除する画像名を取得
       $delete_image = $recipe->image_path;
-      // dd($delete_image);
+      
       // 削除する画像が存在しているディレクトリのパスを取得
       $delete_path = storage_path().'/app/public/images/'.$delete_image;
-      // dd($delete_path);
       // $delete_pathに入っている画像パスと一致する画像データを削除
       \File::delete($delete_path);
     }else{

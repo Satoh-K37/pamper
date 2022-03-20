@@ -16,7 +16,6 @@
               @if(app()->isLocal() || app()->runningUnitTests())
                 <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
                   @if($user->profile_image !== NULL)
-                    <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
                     <img src='/storage/icons/{{$user->profile_image}}' class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
                   @else
                     <img src='/storage/default_icon.png' class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
@@ -25,7 +24,6 @@
               @else
                 <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
                   @if($user->profile_image !== NULL)
-                    <!-- <img src="/storage/icons{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;"> -->
                     <img src="{{ $user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
                   @else
                     <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 100px; height: 100px;">
