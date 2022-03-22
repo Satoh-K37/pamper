@@ -24,10 +24,10 @@
       <div class="card-body my-0 py-0">
         <div class="card-title px-0 py-0 mx-0 my-0">
           <div class="card-body d-flex flex-row px-0">
-            <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
+            <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
               @if(app()->isLocal() || app()->runningUnitTests())
-                @if($recipe->user->profile_image !== NULL)
-                  <img src="/storage/icons/{{$recipe->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
+                @if($user->profile_image !== NULL)
+                  <img src="/storage/icons/{{$user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @else
                   <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 50px; height: 50px;">
                 @endif
@@ -40,7 +40,7 @@
               @endif
             </a>
             <div class="font-weight-bold ml-2 my-auto">
-              <a href="{{ route('users.show', ['name' => $recipe->user->name]) }}" class="text-dark">
+              <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
                 {{ $recipe->user->name }}
                 <p class="font-weight-lighter">
                   {{ $recipe->created_at->format('Y/m/d H:i') }}  

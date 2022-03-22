@@ -95,13 +95,13 @@ class RecipeController extends Controller
 
   public function show(Recipe $recipe)
   {
-      // $user = User::where('name', $recipe->user->name)->first();
+      $user = User::where('name', $recipe->user->name)->first();
       
       // dd($user);
 
       return view('recipes.show', [
         'recipe' => $recipe,
-        // 'user' => $user,
+        'user' => $user,
         ]);
   }
 
