@@ -24,12 +24,19 @@
           <div class="col-12 mb-3 mx-auto">
             <div class="media">
               <a href="{{ route('users.show', ['name' => $comment->user->name]) }}" class="text-dark">
-                <!-- <i class="fas fa-user-circle fa-3x mr-1"></i> -->
+              @if(app()->isLocal() || app()->runningUnitTests())
                 @if($comment->user->profile_image !== NULL)
                   <img src="/storage/icons/{{$comment->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
                 @else
                   <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
                 @endif
+              @else
+                @if($comment->user->profile_image !== NULL)
+                  <img src="{{ $comment->user->profile_image }}" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+                @else
+                  <img src="{{ Storage::disk('s3')->url("default_icon.png") }}" class="rounded-circle" style="object-fit: cover; width: 75px; height: 75px;">
+                @endif
+              @endif
               </a>
               <div class="media-body">
                 <h6 class="mt-1 font-weight-bold">
