@@ -8,11 +8,16 @@
   
     @include('error_card_list')
     @include('flash_message')
+    
     @auth
       <div class="d-flex my-box-light justify-content-end mr-3">
         @include('recipes.search')
       </div>
-    @endauth      
+    @endauth
+    <toast></toast>
+    <div id="app">
+      <button v-on:click="doClick">Show!</button>
+    </div>
     <div class="d-flex my-box-light flex-wrap my-3">
       @foreach($recipes as $recipe)
         @include('recipes.index_card')
