@@ -1,7 +1,7 @@
 @if (session('flash_message'))
   <div class="flash_message alert alert-primary text-center card-text">
     <ul class="flash_message mb-0">
-      <li>{{ session('flash_message') }}</li>
+      {{ session('flash_message') }}
     </ul>
   </div>
 @endif
@@ -13,3 +13,5 @@
     </div>
   </div>
 @endif
+
+<toast></toast>
