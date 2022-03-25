@@ -14,9 +14,9 @@
         @include('recipes.search')
       </div>
     @endauth
-    <toast></toast>
+    
     <div id="app">
-      <button v-on:click="doClick">Show!</button>
+      <toast-message></toast-message>
     </div>
     <div class="d-flex my-box-light flex-wrap my-3">
       @foreach($recipes as $recipe)
