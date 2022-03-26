@@ -10,7 +10,7 @@ import FollowButton from './components/FollowButton'
 import FileUpload from './components/FileUpload'
 import ImagePreview from './components/ImagePreview'
 import ImageEditPreview from './components/ImageEditPreview'
-import Toast from './components/Toast'
+import ToastMessage from './components/ToastMessage'
 import VuePureLightbox from 'vue-pure-lightbox'
 import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
 import ImgInputer from 'vue-img-inputer'
@@ -26,15 +26,11 @@ import 'vue-img-inputer/dist/index.css'
 
 //Vue-infinite-loadingを使用する
 // Vue.use(InfiniteLoading);
+
 Vue.use(Toasted);
 
 const app = new Vue({
   el: '#app',
-  methods: {
-    doClick:function(){
-      this.$toasted.show('hello billo');
-    }
-  },
   data: {
   //   // 文字数カウントできるようになったけどなんか微妙…
     commentCount: "",
@@ -49,6 +45,19 @@ const app = new Vue({
     // recipeStep5Count: "",
     // recipeStep6Count:"",
     file: "",
+    isActive: true,
+  },
+  props: {},
+  mounted: function () {
+      this.isActive = true
+      //マウント後1.2秒経ったらeraseMessageを呼ぶ
+      setTimeout(this.eraseMessage, 1200)
+  },
+  methods: {
+      //フラッシュメッセージを見えなくする
+      eraseMessage: function(){
+          this.isActive = false
+      }
   },
   components: {
     RecipeLike,
@@ -58,7 +67,7 @@ const app = new Vue({
     FileUpload,
     ImagePreview,
     ImageEditPreview,
-    Toast,
+    ToastMessage,
     'vue-pure-lightbox': VuePureLightbox,
     'img-inputer': ImgInputer,
   },
