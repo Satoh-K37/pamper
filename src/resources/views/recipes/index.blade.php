@@ -8,6 +8,9 @@
   
     @include('error_card_list')
     @include('flash_message')
+    <div id="app">
+      <toast-message></toast-message>
+    </div>
     
     @auth
       <div class="d-flex my-box-light justify-content-end mr-3">
@@ -15,9 +18,7 @@
       </div>
     @endauth
     
-    <div id="app">
-      <toast-message></toast-message>
-    </div>
+
     <div class="d-flex my-box-light flex-wrap my-3">
       @foreach($recipes as $recipe)
         @include('recipes.index_card')

@@ -1,16 +1,20 @@
 <template>
     <div>
-        <h1>vue-toasted</h1>  
-        <b-button variant="outline-success" v-on:click="showToast()">Notificationを表示</b-button>    
+      <button v-on:click="doClick">Show!</button>
+      <!-- {{ session('flash_message') }} -->
     </div>
 </template>
   
 <script>    
   export default {
     methods: {
-      showToast(){
-          this.$toasted.show('Hello Notification')
-      }
-    }
+      doClick:function(){
+        this.$toasted.success("投稿に成功しました！", { 
+          theme: "bubble", 
+          position: "bottom-center", 
+          duration : 5000
+        });
+      },
+    },
   }
 </script>

@@ -26,6 +26,7 @@ import 'vue-img-inputer/dist/index.css'
 
 //Vue-infinite-loadingを使用する
 // Vue.use(InfiniteLoading);
+
 Vue.use(Toasted);
 
 const app = new Vue({
@@ -44,6 +45,19 @@ const app = new Vue({
     // recipeStep5Count: "",
     // recipeStep6Count:"",
     file: "",
+    isActive: true,
+  },
+  props: {},
+  mounted: function () {
+      this.isActive = true
+      //マウント後1.2秒経ったらeraseMessageを呼ぶ
+      setTimeout(this.eraseMessage, 1200)
+  },
+  methods: {
+      //フラッシュメッセージを見えなくする
+      eraseMessage: function(){
+          this.isActive = false
+      }
   },
   components: {
     RecipeLike,
