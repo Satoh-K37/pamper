@@ -47,6 +47,7 @@ const app = new Vue({
     file: "",
   },
   methods: {
+
   },
   components: {
     RecipeLike,
@@ -61,3 +62,4 @@ const app = new Vue({
     'img-inputer': ImgInputer,
   },
 });
+
