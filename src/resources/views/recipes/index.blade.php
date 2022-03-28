@@ -8,9 +8,7 @@
   
     @include('error_card_list')
     @include('flash_message')
-    <div id="app">
-      <toast-message></toast-message>
-    </div>
+    <toast-message></toast-message>
     
     @auth
       <div class="d-flex my-box-light justify-content-end mr-3">
