@@ -17,10 +17,20 @@
         type: Number,
         default: 0,
       },
+      initialRecipeContentCount: {
+        type: Number,
+        default: 0,
+      },
+      initialRecipeTitleCount: {
+        type: Number,
+        default: 0,
+      },
     },
     data() {
       return {
         countComments: this.initialCountComments,
+        recipeContentCount: this.initialRecipeContentCount,
+        recipeTitleCount: this.initialRecipeTitleCount,
       }
     },
   }

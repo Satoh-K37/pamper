@@ -4,18 +4,18 @@
 @csrf
 <div class='md-form'>
   <label>レシピタイトル<span id="must-icon">必須</span></label>
-  <input type="text" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
+  <input type="text" v-model.trim="recipeTitleCount" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
   
-  <!-- v-model.trim="recipeTitleCount" -->
-  <!-- <p class="text-right">@{{ recipeTitleCount.length }}/50</p> -->
+  <!--  -->
+  <p class="text-right">@{{ recipeTitleCount.length }}/50</p>
 </div>
   
 
 <div class="form-group">
   <label></label>
-    <textarea name="content" maxlength="300" class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
+    <textarea v-model.trim="recipeContentCount" name="content" maxlength="300" class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
     <!-- v-model.trim="recipeContentCount" -->
-    <!-- <p class="text-right">@{{ recipeContentCount.length }}/300</p> -->
+    <p class="text-right">@{{ recipeContentCount.length }}/300</p>
 </div>
 
 <div class="form-group">
