@@ -34,8 +34,8 @@ const app = new Vue({
   data: {
   //   // 文字数カウントできるようになったけどなんか微妙…
     commentCount: "",
-    // recipeContentCount: "",
-    // recipeTitleCount: "",
+    recipeContentCount: "",
+    recipeTitleCount: "",
     // recipeIngredientCount: "",
     // recipeSeasoningCount: "",
     // recipeStep1Count: "",
@@ -62,4 +62,3 @@ const app = new Vue({
     'img-inputer': ImgInputer,
   },
 });
-
