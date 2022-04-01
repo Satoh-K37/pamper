@@ -200,6 +200,8 @@ button.btn--circle:hover i {
   width: 100vw;
 }
 
+
+// フラッシュメッセージを一定時間で隠す
 #hideMe {
   -moz-animation: cssAnimation 0s ease-in 5s forwards;
   /* Firefox */
