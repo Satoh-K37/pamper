@@ -1,25 +1,35 @@
 <template>
-    <div>
-      <button v-on:click="doClick">Show!</button>
-      <!-- {{ session('flash_message') }} -->
-      
+  <div>
+
+    <!-- v-ifで<script>内のshowがtrueであれば表示する -->
+    <div
+      class="flash"
+      v-if="show === true"
+    >
+      this is flash message!
     </div>
+
+    <!-- clickしたらmethods:{}内のshowFlashが発火する -->
+    <button
+      @click="showFlash"
+    >
+      show flash message
+    </button>
+  </div>
 </template>
-  
-<script>    
+
+<script>
   export default {
-  el: '',
-  data: {
-    
-  },
+//...略
     methods: {
-      doClick:function(){
-        this.$toasted.success("投稿に成功しました！", { 
-          theme: "bubble", 
-          position: "bottom-center", 
-          duration : 5000
-        });
-      },
-    },
+      showFlash(){
+        this.show = true;
+      // setTimeoutで3000ms後にshowをfalseにする
+        setTimeout(() => {
+          this.show = false}
+          ,3000
+        )
+      }
+    }
   }
 </script>

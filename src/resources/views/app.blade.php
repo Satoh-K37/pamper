@@ -15,13 +15,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
   <!-- original CSS -->
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+  <!-- toastr -->
+  <!-- @toastr_css -->
 </head>
 
 <body>
   <div id="app">
     @yield('content')
-    
   </div>
   <script src="{{ mix('js/app.js') }}"></script>
   <!-- JQuery -->
@@ -32,6 +34,11 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
+  <!-- Toastr.js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <!-- @toastr_js
+  @toastr_render -->
 </body>
 
 </html>

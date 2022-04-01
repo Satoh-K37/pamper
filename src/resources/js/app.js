@@ -1,4 +1,18 @@
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+
 import './bootstrap'
+// import './flashmessage'
+
 import Vue from 'vue'
 // Toastをインポート
 import Toasted from 'vue-toasted'
@@ -16,14 +30,6 @@ import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
 import ImgInputer from 'vue-img-inputer'
 import 'vue-img-inputer/dist/index.css'
 
-// Toastを使えるようにする
-// Vue.use(Toasted, {
-//   position: 'top-center',
-//   duration: 3000,
-//   fullWidth: true,  
-//   type: 'success'  
-// })
-
 //Vue-infinite-loadingを使用する
 // Vue.use(InfiniteLoading);
 
@@ -32,7 +38,6 @@ Vue.use(Toasted);
 const app = new Vue({
   el: '#app',
   data: {
-  //   // 文字数カウントできるようになったけどなんか微妙…
     commentCount: "",
     recipeContentCount: "",
     recipeTitleCount: "",
@@ -47,7 +52,6 @@ const app = new Vue({
     file: "",
   },
   methods: {
-
   },
   components: {
     RecipeLike,
@@ -62,3 +66,4 @@ const app = new Vue({
     'img-inputer': ImgInputer,
   },
 });
+
