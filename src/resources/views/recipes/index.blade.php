@@ -8,7 +8,10 @@
   
     @include('error_card_list')
     @include('flash_message')
-    <toast-message></toast-message>
+    <!-- <toast-message></toast-message> -->
+    <!-- <div v-bind:class="flashMassage">@{{flashMassage}}</div> -->
+    
+
 
     
     @auth
