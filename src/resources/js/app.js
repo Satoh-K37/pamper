@@ -24,6 +24,7 @@ import FollowButton from './components/FollowButton'
 import FileUpload from './components/FileUpload'
 import ImagePreview from './components/ImagePreview'
 import ImageEditPreview from './components/ImageEditPreview'
+import FormCount from './components/FormCount'
 import VuePureLightbox from 'vue-pure-lightbox'
 import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
 import ImgInputer from 'vue-img-inputer'
@@ -40,14 +41,15 @@ const app = new Vue({
     commentCount: "",
     recipeContentCount: "",
     recipeTitleCount: "",
-    // recipeIngredientCount: "",
-    // recipeSeasoningCount: "",
-    // recipeStep1Count: "",
-    // recipeStep2Count: "",
-    // recipeStep3Count: "",
-    // recipeStep4Count: "",
-    // recipeStep5Count: "",
-    // recipeStep6Count:"",
+    recipeIngredientCount: "",
+    recipeSeasoningCount: "",
+    recipeStep1Count: "",
+    recipeStep2Count: "",
+    recipeStep3Count: "",
+    recipeStep4Count: "",
+    recipeStep5Count: "",
+    recipeStep6Count: "",
+    cookingPointCount: "",
     file: "",
   },
   methods: {
@@ -60,6 +62,7 @@ const app = new Vue({
     FileUpload,
     ImagePreview,
     ImageEditPreview,
+    FormCount,
     'vue-pure-lightbox': VuePureLightbox,
     'img-inputer': ImgInputer,
   },
