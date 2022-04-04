@@ -3,15 +3,9 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 @csrf
 <div class='md-form'>
-  @if(Route::is('recipes.create'))
     <label>レシピタイトル<span id="must-icon">必須</span></label>
     <input type="text" v-model="recipeTitleCount" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
     <p class="text-right">@{{ recipeTitleCount.length }}/50</p>
-  @else
-    <label>レシピタイトル<span id="must-icon">必須</span></label>
-    <input type="text" id="recipeTitleCount" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}" v-model="recipeTitleCount" >
-    <p class="text-right">@{{ recipeTitleCount.length }}/50</p>
-  @endif
 </div>
   
 <div class="form-group">
@@ -22,7 +16,7 @@
 
 <div class="form-group">
   <div class="form-input__picture afterimage">
-    <!-- image_pathの中身がNULLじゃない場合は画像を表示させる -->
+    <!-- image_pathの中身が存在している場合は画像を表示させる -->
     @if (isset($recipe->image_path))
       @if(app()->isLocal() || app()->runningUnitTests())
         <div class="card-text img-fluid">
@@ -118,7 +112,7 @@
 
 <div class="md-form">
   <label>コツ・ポイント</label>
-  <input type="text" v-model="cookingPointCount" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
+  <input type="text" v-model="cookingPointCount" maxlength="100" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
   <p class="text-right">@{{ cookingPointCount.length }}/100</p>
   
 </div>
