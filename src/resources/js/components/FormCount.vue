@@ -1,4 +1,9 @@
 <template>
+  <div class='md-form'>
+    <label>レシピタイトル<span id="must-icon">必須</span></label>
+    <input type="text" name="recipe_title"  maxlength="50" class="form-control"  v-model="recipeTitleCount">
+    <p class="text-right">{{ recipeTitleCount.length }}/50</p>
+  </div>
 </template>
 
 <script>
