@@ -6,13 +6,16 @@
     <!-- <label>レシピタイトル<span id="must-icon">必須</span></label>
     <input type="text" v-model="recipeTitleCount" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
     <p class="text-right">@{{ recipeTitleCount.length }}/50</p> -->
-    <form-count></form-count>
+
+    <label>レシピタイトル<span id="must-icon">必須</span></label>
+    <input type="text" maxlength="50" name="recipe_title" class="form-control" required value="{{ $recipe->recipe_title ?? old('recipe_title') }}">
 </div>
   
 <div class="form-group">
   <label></label>
-    <textarea name="content" v-model="recipeContentCount" maxlength="300" class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
-    <p class="text-right">@{{ recipeContentCount.length }}/300</p>
+    <textarea name="content" maxlength="300" class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
+    <!-- <textarea name="content" v-model="recipeContentCount" maxlength="300" class="form-control" rows="10" placeholder="ご褒美ご飯は何にした？">{{ $recipe->content ?? old('content') }}</textarea>
+    <p class="text-right">@{{ recipeContentCount.length }}/300</p> -->
 </div>
 
 <div class="form-group">
@@ -49,7 +52,7 @@
     </div>
   </div>
 @endif
-
+<!-- <ingredients-form></ingredients-form> -->
 <div class="hidden_box">
   <input type="checkbox" id="label1"/>
   <label for="label1" >材料、調味料</label>
@@ -65,12 +68,15 @@
         @endforeach
       </select>
     </div>
-    <!-- <textarea maxlength="200" v-model="recipeIngredientCount" name="ingredient" class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea> -->
-    <textarea maxlength="200" v-model="recipeIngredientCount" name="ingredient" class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
-    <p class="text-right">@{{ recipeIngredientCount.length }}/200</p>
+    
+    <textarea maxlength="200" name="ingredient" class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
+    <!-- <textarea maxlength="200" v-model="recipeIngredientCount" name="ingredient" class="form-control"  placeholder="材料">{{ $recipe->ingredient ?? old('ingredient') }}</textarea>
+    <p class="text-right">@{{ recipeIngredientCount.length }}/200</p> -->
 
-    <textarea maxlength="200" v-model="recipeSeasoningCount"  name="seasoning" class="form-control" placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
-    <p class="text-right">@{{ recipeSeasoningCount.length }}/200</p>
+    <textarea maxlength="200" name="seasoning" class="form-control" placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
+
+    <!-- <textarea maxlength="200" v-model="recipeSeasoningCount"  name="seasoning" class="form-control" placeholder="調味料">{{ $recipe->seasoning ?? old('seasoning') }}</textarea>
+    <p class="text-right">@{{ recipeSeasoningCount.length }}/200</p> -->
   </div>
 </div>
 
@@ -81,33 +87,39 @@
     <div class="hidden_show">
 
       <div class="md-outline">
-        <textarea maxlength="100" v-model="recipeStep1Count" placeholder="Step1" rows="3" name="step_content" class="form-control">{{ $recipe->step_content ?? old('step_content') }}</textarea>
-        <p class="text-right">@{{ recipeStep1Count.length }}/100</p>
+        <textarea maxlength="100" placeholder="Step1" rows="3" name="step_content" class="form-control">{{ $recipe->step_content ?? old('step_content') }}</textarea>
+        <!-- <textarea maxlength="100" v-model="recipeStep1Count" placeholder="Step1" rows="3" name="step_content" class="form-control">{{ $recipe->step_content ?? old('step_content') }}</textarea>
+        <p class="text-right">@{{ recipeStep1Count.length }}/100</p> -->
       </div>
 
       <div class="mform-outline">
-        <textarea maxlength="100" v-model="recipeStep2Count" placeholder="Step2" rows="3" name="step_content2" class="form-control">{{ $recipe->step_content2 ?? old('step_content2') }} </textarea>
-        <p class="text-right">@{{ recipeStep2Count.length }}/100</p>
+        <textarea maxlength="100" placeholder="Step2" rows="3" name="step_content2" class="form-control">{{ $recipe->step_content2 ?? old('step_content2') }} </textarea>
+        <!-- <textarea maxlength="100" v-model="recipeStep2Count" placeholder="Step2" rows="3" name="step_content2" class="form-control">{{ $recipe->step_content2 ?? old('step_content2') }} </textarea>
+        <p class="text-right">@{{ recipeStep2Count.length }}/100</p> -->
       </div>
 
       <div class="md-outline">
-        <textarea maxlength="100" v-model="recipeStep3Count" placeholder="Step3" rows="3" name="step_content3" class="form-control">{{ $recipe->step_content3 ?? old('step_content3') }}</textarea>
-        <p class="text-right">@{{ recipeStep3Count.length }}/100</p>
+        <textarea maxlength="100" placeholder="Step3" rows="3" name="step_content3" class="form-control">{{ $recipe->step_content3 ?? old('step_content3') }}</textarea>
+        <!-- <textarea maxlength="100" v-model="recipeStep3Count" placeholder="Step3" rows="3" name="step_content3" class="form-control">{{ $recipe->step_content3 ?? old('step_content3') }}</textarea>
+        <p class="text-right">@{{ recipeStep3Count.length }}/100</p> -->
       </div>
 
       <div class="md-outline">
-        <textarea maxlength="100" v-model="recipeStep4Count" placeholder="Step4" rows="3" name="step_content4" class="form-control">{{ $recipe->step_content4 ?? old('step_content4') }}</textarea>
-        <p class="text-right">@{{ recipeStep4Count.length }}/100</p>
+        <textarea maxlength="100" placeholder="Step4" rows="3" name="step_content4" class="form-control">{{ $recipe->step_content4 ?? old('step_content4') }}</textarea>
+        <!-- <textarea maxlength="100" v-model="recipeStep4Count" placeholder="Step4" rows="3" name="step_content4" class="form-control">{{ $recipe->step_content4 ?? old('step_content4') }}</textarea>
+        <p class="text-right">@{{ recipeStep4Count.length }}/100</p> -->
       </div>
 
       <div class="md-outline">
         <textarea maxlength="100" v-model="recipeStep5Count" placeholder="Step5" rows="3" name="step_content5" class="form-control">{{ $recipe->step_content5 ?? old('step_content5') }}</textarea>
-        <p class="text-right">@{{ recipeStep5Count.length }}/100</p>
+        <!-- <textarea maxlength="100" v-model="recipeStep5Count" placeholder="Step5" rows="3" name="step_content5" class="form-control">{{ $recipe->step_content5 ?? old('step_content5') }}</textarea>
+        <p class="text-right">@{{ recipeStep5Count.length }}/100</p> -->
       </div>
 
       <div class="md-outline">
-        <textarea  maxlength="100" v-model.trim="recipeStep6Count" placeholder="Step6" rows="3" name="step_content6" class="form-control">{{ $recipe->step_content6 ?? old('step_content6') }}</textarea>
-        <p class="text-right">@{{ recipeStep6Count.length }}/100</p>
+        <textarea  maxlength="100" placeholder="Step6" rows="3" name="step_content6" class="form-control">{{ $recipe->step_content6 ?? old('step_content6') }}</textarea>
+        <!-- <textarea  maxlength="100" v-model="recipeStep6Count" placeholder="Step6" rows="3" name="step_content6" class="form-control">{{ $recipe->step_content6 ?? old('step_content6') }}</textarea>
+        <p class="text-right">@{{ recipeStep6Count.length }}/100</p> -->
       </div>
     </div>
   </div>      
@@ -115,8 +127,9 @@
 
 <div class="md-form">
   <label>コツ・ポイント</label>
-  <input type="text" v-model="cookingPointCount" maxlength="100" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
-  <p class="text-right">@{{ cookingPointCount.length }}/100</p>
+    <input type="text" maxlength="100" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
+  <!-- <input type="text" v-model="cookingPointCount" maxlength="100" name="cooking_point" class="form-control" value="{{ $recipe->cooking_point ?? old('cooking_point') }}">
+  <p class="text-right">@{{ cookingPointCount.length }}/100</p> -->
   
 </div>
 <div class="form-group">
