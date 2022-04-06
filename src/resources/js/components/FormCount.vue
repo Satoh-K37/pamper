@@ -3,7 +3,7 @@
 
 <script>
   export default {
-    props: {
+    props:{
       initialRecipeTitleCount: {
         type: String,
         default: "",
@@ -55,17 +55,17 @@
     },
     data() {
       return {
-        recipeTitleCount: this.initialRecipeTitleCount,
-        recipeContentCount: this.initialRecipeContentCount,
-        recipeIngredientCount: this.initialRecipeIngredientCount,
-        recipeSeasoningCount: this.initialRecipeSeasoningCount,
-        recipeStep1Count: this.initialRecipeStep1Count,
-        recipeStep2Count: this.initialRecipeStep2Count,
-        recipeStep3Count: this.initialRecipeStep3Count,
-        recipeStep4Count: this.initialRecipeStep4Count,
-        recipeStep5Count: this.initialRecipeStep5Count,
-        recipeStep6Count: this.initialRecipeStep6Count,
-        cookingPointCount: this.initialCookingPointCount
+        // recipeTitleCount: this.initialRecipeTitleCount,
+        // recipeContentCount: this.initialRecipeContentCount,
+        // recipeIngredientCount: this.initialRecipeIngredientCount,
+        // recipeSeasoningCount: this.initialRecipeSeasoningCount,
+        // recipeStep1Count: this.initialRecipeStep1Count,
+        // recipeStep2Count: this.initialRecipeStep2Count,
+        // recipeStep3Count: this.initialRecipeStep3Count,
+        // recipeStep4Count: this.initialRecipeStep4Count,
+        // recipeStep5Count: this.initialRecipeStep5Count,
+        // recipeStep6Count: this.initialRecipeStep6Count,
+        // cookingPointCount: this.initialCookingPointCount
       }
     },
   }
