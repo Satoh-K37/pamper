@@ -29,9 +29,10 @@ import VuePureLightbox from 'vue-pure-lightbox'
 import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
 import ImgInputer from 'vue-img-inputer'
 import 'vue-img-inputer/dist/index.css'
+import InfiniteLoading from 'vue-infinite-loading'
 
 //Vue-infinite-loadingを使用する
-// Vue.use(InfiniteLoading);
+Vue.use(InfiniteLoading);
 
 Vue.use(Toasted);
 
