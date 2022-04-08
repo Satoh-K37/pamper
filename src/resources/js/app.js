@@ -34,7 +34,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 //Vue-infinite-loadingを使用する
 Vue.use(InfiniteLoading);
 
-Vue.use(Toasted);
+// Vue.use(Toasted);
 
 const app = new Vue({
   el: '#app',
@@ -66,6 +66,7 @@ const app = new Vue({
     // FormCount,
     'vue-pure-lightbox': VuePureLightbox,
     'img-inputer': ImgInputer,
+    'vue-infinite-loading': InfiniteLoading,
   },
 });
 
