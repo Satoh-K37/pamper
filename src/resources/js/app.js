@@ -11,7 +11,7 @@
 
 
 import './bootstrap'
-// import './flashmessage'
+import './scroll.js'
 
 import Vue from 'vue'
 // Toastをインポート
