@@ -22,9 +22,13 @@
     
 
     <div class="d-flex my-box-light flex-wrap my-3">
-      @foreach($recipes as $recipe)
+      <!-- @foreach($recipes as $recipe)
         @include('recipes.index_card')
-      @endforeach
+      @endforeach -->
+      <div v-for="recipe in recipes" :key="recipe.id">
+          @{{ recipe.recipe }}
+      </div>
+      <infinite-loading @infinite="fetchRecipes"></infinite-loading>
     </div>
     <nav class="my-4" aria-label="...">
       <ul class="pagination pagination-circle justify-content-center">
