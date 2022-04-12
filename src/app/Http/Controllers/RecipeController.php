@@ -341,6 +341,45 @@ class RecipeController extends Controller
           'countLikes' => $recipe->count_likes,
       ];
   }
+  
+  public function fetch(Request $request) {
+      // レシピIDリストをJSONデコード＆デコードエラーバリデーション
+      $decodedFetchedRecipeIdList = json_decode($request->fetchedRecipeIdList, true); 
+      if (json_last_error() !== JSON_ERROR_NONE) {
+          return response()->json(['errorMessage' => json_last_error_msg()],500);
+      }
+      // ツイートを取得
+      $recipes = $this->RecipeService->extractShowRecipes($decodedFetchedRecipeIdList, $request->page);
+
+      return response()->json(['recipes' => $recipes], 200);
+  }
+
+  // レシピを取得し、Vueに渡すための処理
+  public function extractShowRecipes($fetchRecipeIdList, $page)
+  {
+      $limit = 10; // 一度に取得する件数
+      $offset = $page * $limit; // 現在の取得開始位置
+      $recipes = Recipe::orderBy('created_at', 'desc')->offset($offset)->take($limit)->get();
+      // 対象のレコードがが存在しない場合は、空の配列を返す
+      if (is_null($recipes)) {
+          return [];
+      }
+      // 対象のレコードを返す
+      if (is_null($fetchRecipeIdList)) {
+          return $recipes;
+      }
+
+      // $showableRecipesに空の配列を代入
+      $showableRecipes = [];
+      // foreachで対象のレコードを取得し、配列に挿入
+      foreach ($recipes as $recipe) {
+          if (!in_array($recipe->id, $fetchRecipeIdList)) {
+              $showableRecipes[] = $recipe;
+          }
+      }
+
+      return $showableRecipes;
+  }
 
   // static として宣言することで、 クラスのインスタンス化の必要なしにアクセスすることができるようになる
   // static プロパティは、矢印演算子 -> によりオブジェクトからアクセス することはできないらしい
