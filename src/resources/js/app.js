@@ -14,8 +14,6 @@ import './bootstrap'
 import './scroll.js'
 
 import Vue from 'vue'
-// Toastをインポート
-import Toasted from 'vue-toasted'
 
 import RecipeLike from './components/RecipeLike'
 import RecipeComment from './components/RecipeComment'
@@ -24,7 +22,6 @@ import FollowButton from './components/FollowButton'
 import FileUpload from './components/FileUpload'
 import ImagePreview from './components/ImagePreview'
 import ImageEditPreview from './components/ImageEditPreview'
-// import FormCount from './components/FormCount'
 import VuePureLightbox from 'vue-pure-lightbox'
 import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
 import ImgInputer from 'vue-img-inputer'
@@ -33,8 +30,6 @@ import InfiniteLoading from 'vue-infinite-loading'
 
 //Vue-infinite-loadingを使用する
 Vue.use(InfiniteLoading);
-
-// Vue.use(Toasted);
 
 const app = new Vue({
   el: '#app',
@@ -63,7 +58,6 @@ const app = new Vue({
     FileUpload,
     ImagePreview,
     ImageEditPreview,
-    // FormCount,
     'vue-pure-lightbox': VuePureLightbox,
     'img-inputer': ImgInputer,
     'vue-infinite-loading': InfiniteLoading,
