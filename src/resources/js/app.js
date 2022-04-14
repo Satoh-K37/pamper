@@ -11,7 +11,6 @@
 
 
 import './bootstrap'
-import './scroll.js'
 
 import Vue from 'vue'
 
@@ -26,7 +25,6 @@ import VuePureLightbox from 'vue-pure-lightbox'
 import styles from 'vue-pure-lightbox/dist/VuePureLightbox.css'
 import ImgInputer from 'vue-img-inputer'
 import 'vue-img-inputer/dist/index.css'
-import InfiniteLoading from 'vue-infinite-loading'
 
 //Vue-infinite-loadingを使用する
 Vue.use(InfiniteLoading);
@@ -60,7 +58,6 @@ const app = new Vue({
     ImageEditPreview,
     'vue-pure-lightbox': VuePureLightbox,
     'img-inputer': ImgInputer,
-    'vue-infinite-loading': InfiniteLoading,
   },
 });
 
