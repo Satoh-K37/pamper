@@ -22,14 +22,17 @@
     
 
     <div class="d-flex my-box-light flex-wrap my-3">
-      <!-- @foreach($recipes as $recipe)
+      @foreach($recipes as $recipe)
         @include('recipes.index_card')
-      @endforeach -->
-      <div v-for="recipe in recipes" :key="recipe.id">
-          @{{ recipe.recipe }}
+      @endforeach
+      <!-- 無限スクロール -->
+      <div v-for="(item, $index) in list" :key="$index">
+        <!-- Hacker News item loop -->
       </div>
-      <infinite-loading @infinite="fetchRecipes"></infinite-loading>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
     </div>
+
     <nav class="my-4" aria-label="...">
       <ul class="pagination pagination-circle justify-content-center">
         <li class="page-item">

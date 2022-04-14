@@ -341,7 +341,7 @@ class RecipeController extends Controller
           'countLikes' => $recipe->count_likes,
       ];
   }
-  
+
   public function fetch(Request $request) {
       // レシピIDリストをJSONデコード＆デコードエラーバリデーション
       $decodedFetchedRecipeIdList = json_decode($request->fetchedRecipeIdList, true); 
