@@ -18,15 +18,13 @@
       <div class="d-flex my-box-light justify-content-end mr-3">
         @include('recipes.search')
       </div>
-    @endauth
-    
+    @endauth    
 
     <div class="d-flex my-box-light flex-wrap my-3">
       @foreach($recipes as $recipe)
         @include('recipes.index_card')
       @endforeach
     </div>
-
     <nav class="my-4" aria-label="...">
       <ul class="pagination pagination-circle justify-content-center">
         <li class="page-item">
