@@ -27,7 +27,7 @@ import ImgInputer from 'vue-img-inputer'
 import 'vue-img-inputer/dist/index.css'
 
 //Vue-infinite-loadingを使用する
-Vue.use(InfiniteLoading);
+// Vue.use(InfiniteLoading);
 
 const app = new Vue({
   el: '#app',
