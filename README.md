@@ -40,8 +40,8 @@
   - MySQL 5.7
   - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM)
 
-
 ## AWS構成図
+![aws_diagram drawio](https://user-images.githubusercontent.com/36786134/163817739-e16ad22c-97af-45e4-9f5b-565ba5c6bd63.png)
 
 
 ## 機能一覧
