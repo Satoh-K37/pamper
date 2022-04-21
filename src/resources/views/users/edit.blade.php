@@ -21,7 +21,7 @@
                   <!-- Card -->
                   <div class="card testimonial-card">
                     <!-- Background color -->
-                    <div class="card-up warning-color-dark p-3 white-text">
+                    <div class="card-up p-3 white-text" style="background: #fca326">
                       <a onclick="history.back(-1);return false;">
                         <i class="fas fa-arrow-left"></i>
                       </a>
