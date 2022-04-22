@@ -64,20 +64,20 @@
             <div class="card-body px-3 py-4">
               <div class="row">
                 <div class="col-4 text-center">
-                  <p class="font-weight-bold mb-0 text-muted">{{ $recipes->count() }}</p>
-                  <p class="small text-uppercase mb-0">件の投稿</p>
+                  <span class="font-weight-bold mb-0 text-muted">{{ $recipes->count() }}</span>
+                  <span class="small text-uppercase mb-0">件の投稿</span>
                 </div>
                 <div class="col-4 text-center border-left border-right">
                   <a class="font-weight-bold mb-0 text-muted" href="{{ route('users.followings', ['name' => $user->name]) }}">
                     {{ $user->count_followings }}
                   </a>
-                  <p class="small text-uppercase mb-0">フォロー</p>
+                  <span class="small text-uppercase mb-0">フォロー</span>
                 </div>
                 <div class="col-4 text-center">
                   <a class="font-weight-bold mb-0 text-muted" href="{{ route('users.followers', ['name' => $user->name]) }}">
                     {{ $user->count_followers }}
                   </a>
-                  <p class="small text-uppercase mb-0">フォロワー</p>
+                  <span class="small text-uppercase mb-0">フォロワー</span>
                 </div>
               </div>
             </div>
