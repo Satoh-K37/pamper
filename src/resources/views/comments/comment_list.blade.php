@@ -8,12 +8,12 @@
           @include('comments.form')
         @else
           <p class="text-muted">
-            コメントするにはログインが必要です。アカウントの登録がまだの方はアカウントの登録をお願いします。
+            コメントするには<a href="{{ route('login') }}">ログイン</a>が必要です。アカウントの登録がまだの方は<a href="{{ route('register') }}">アカウントの登録</a>をお願いします。
           </p>
-          <div class="my-3">
+          <!-- <div class="my-3">
             <a href="{{ route('login') }}">ログインはこちら</a>
             <a href="{{ route('register') }}">ユーザー登録はこちら</a>
-          </div>
+          </div> -->
         @endauth
         </div>
         <hr>
