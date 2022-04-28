@@ -14,9 +14,14 @@
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
   <!-- original CSS -->
-  <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+  @if(app()->isLocal() || app()->runningUnitTests())
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  @else
+    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+  @endif
+
   <!-- Toastr CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> -->
   <!-- toastr -->
   <!-- @toastr_css -->
 </head>
@@ -25,7 +30,6 @@
   <div id="app">
     @yield('content')
   </div>
-  <script src="{{ mix('js/app.js') }}"></script>
   <!-- JQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Bootstrap tooltips -->
@@ -39,6 +43,7 @@
 
   <!-- @toastr_js
   @toastr_render -->
+  <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>
