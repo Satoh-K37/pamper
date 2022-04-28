@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Collection; //Paginate
 use Illuminate\Pagination\LengthAwarePaginator; //Paginate
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
          * @param string $pageName
          * @return array
          */
+        // ページネーション処理
         Collection::macro('paginate', function($perPage, $total = null, $page = null, $pageName = 'page') {
           $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
@@ -49,5 +51,10 @@ class AppServiceProvider extends ServiceProvider
               ]
           );
         });
+
+        // URLをhttpsにする処理
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
