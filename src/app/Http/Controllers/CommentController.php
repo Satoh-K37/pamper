@@ -31,8 +31,6 @@ class CommentController extends Controller
       $comment->user_id = Auth::user()->id;
       $comment->save();
 
-
-
       // 直前にリダイレクト
       return redirect()->back()->with('comment_flash_message', 'コメントを投稿しました');
   }  
