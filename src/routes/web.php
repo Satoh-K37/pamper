@@ -41,9 +41,9 @@ Route::get('/searchresult', 'RecipeController@search')->name('recipes.search_res
 // Route::get('searchResult', 'RecipeController@searchResult')->name('recipes.searchResult');
 
 // indexとshow以外のメソッドルート
-Route::resource('/recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
+Route::resource('recipes', 'RecipeController')->except(['index','show'])->middleware('auth');
 // レシピ詳細のルート
-Route::resource('/recipes', 'RecipeController')->only(['show']);
+Route::resource('recipes', 'RecipeController')->only(['show']);
 // いいね機能のルート
 Route::prefix('recipes')->name('recipes.')->group(function () {
   Route::put('/{recipe}/like', 'RecipeController@like')->name('like')->middleware('auth');

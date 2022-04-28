@@ -48,6 +48,11 @@ class AppServiceProvider extends ServiceProvider
                   'pageName' => $pageName,
               ]
           );
-      });
+        });
+
+        // 全てのリクエストをHTPPSとして処理するための処理
+        if ($this->app->environment() == 'production') {
+            URL::forceSchema('https');
+        }
     }
 }
