@@ -16,11 +16,15 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
+    // , $guard = null
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+        if (!$request->secure() && env('APP_ENV') === 'production') { // 本番環境のみ常時SSL化する
+            return redirect()->secure($request->getRequestUri());
         }
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
 
         return $next($request);
     }
