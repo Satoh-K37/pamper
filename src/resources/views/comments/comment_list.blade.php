@@ -10,10 +10,6 @@
           <p class="text-muted">
             コメントするには<a href="{{ route('login') }}">ログイン</a>が必要です。アカウントの登録がまだの方は<a href="{{ route('register') }}">アカウントの登録</a>をお願いします。
           </p>
-          <!-- <div class="my-3">
-            <a href="{{ route('login') }}">ログインはこちら</a>
-            <a href="{{ route('register') }}">ユーザー登録はこちら</a>
-          </div> -->
         @endauth
         </div>
         <hr>
