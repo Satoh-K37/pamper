@@ -33,7 +33,7 @@ Route::prefix('register')->name('register.')->group(function () {
 // レシピ一覧
 Route::get('/', 'RecipeController@index')->name('recipes.index');
 // 無限スクロールのルーティング設定
-Route::get('/recipe', 'RecipeController@fetch');
+// Route::get('/recipe', 'RecipeController@fetch');
 
 // 検索フォームを表示させるルート
 Route::get('/searchresult', 'RecipeController@search')->name('recipes.search_result');
