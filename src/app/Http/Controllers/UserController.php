@@ -26,7 +26,8 @@ class UserController extends Controller
     // ログインしているユーザーの情報を取得
     // $auth = Auth::user();
     $user = User::where('name', $name)->first();
-    // dd($user);    // $user = $this->user->selectUserFindById($id);
+    // dd($user);    
+    // $user = $this->user->selectUserFindById($id);
     // return view('users.edit', compact('user'));
 
     return view('users.edit',[ 'user' => $user ]);
