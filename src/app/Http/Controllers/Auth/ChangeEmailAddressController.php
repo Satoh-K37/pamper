@@ -64,19 +64,25 @@ class ChangeEmailAddressController extends Controller
       $change_email->user_id = $user->id;
       $change_email->new_email = $new_email;
       $change_email->update_token = $update_token;
-      // dd($change_email);
       $change_email->save();
-      // dd($change_email);
+      
+      // $url = url(config('app.url'));
       // メール送付
-      $domain = env('APP_URL');
-
-      // 第一引数でメールテンプレートを指定している。第二引数でリンクURLを生成してる？
-      Mail::send([ 'text' => 'emails/change_email'], 
-      ['emailchange_url' => "{$domain}/email/update/?token={$update_token}"],
-      function ($message) use ($change_email) {
-        $message->to($change_email->new_email)->subject('[重要]メールアドレス変更URLの送付');
-      });
-
+      if(app()->isLocal() || app()->runningUnitTests()){
+      // 開発環境
+        Mail::send([ 'text' => 'emails/change_email'], 
+        ['emailchange_url' => "http://localhost/email/update/?token={$update_token}"],
+        function ($message) use ($change_email) {
+          $message->to($change_email->new_email)->subject('[重要]メールアドレス変更URLの送付');
+        });
+      }else{
+        // 本番環境でのメールアドレス変更
+        Mail::send([ 'text' => 'emails/change_email'], 
+        ['emailchange_url' => "https://spoily.link/email/update/?token={$update_token}"],
+        function ($message) use ($change_email) {
+          $message->to($change_email->new_email)->subject('[重要]メールアドレス変更URLの送付');
+        });
+      }
       // マイページ遷移
       session()->flash('flash_message', 'メールアドレス変更の確認メールを送信しました。');
       return view('users.show', [
@@ -106,7 +112,15 @@ class ChangeEmailAddressController extends Controller
     DB::table('change_email')
     ->where('update_token', '=', $token)->delete();
 
-    return redirect()->route('recipes.index')->with('flash_message', 'メールアドレスの変更が完了しました。');
+    // マイページに遷移する際に必要になる
+    $recipes = $user->recipes->sortByDesc('created_at')->paginate(10);
+    // マイページ遷移
+    session()->flash('flash_message', 'メールアドレスの変更が完了しました。');
+    return view('users.show', [
+      'user' => $user,
+      'recipes' => $recipes,
+    ]);
+    // return redirect()->route('recipes.index')->with('flash_message', 'メールアドレスの変更が完了しました。');
 
     }else{
       // レコードが存在していた場合は対象レコードを削除
