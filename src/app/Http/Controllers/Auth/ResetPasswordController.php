@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -27,5 +28,15 @@ class ResetPasswordController extends Controller
      * @var string
      */
     
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    // ResetsPasswordsのメソッドを定義する
+    protected function resetPassword($user, $password) {
+      $user->forceFill([
+          'password' => bcrypt($password),
+          'remember_token' => Str::random(60),
+      ])->save();
+
+      session()->flash('flash_message', 'パスワードの再設定が完了しました。');
+      return redirect('/login');
+  }
 }
