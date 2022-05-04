@@ -27,7 +27,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    
+    // protected $redirectTo = RouteServiceProvider::HOME;
     // ResetsPasswordsのメソッドを定義する
     protected function resetPassword($user, $password) {
       $user->forceFill([
@@ -39,5 +39,5 @@ class ResetPasswordController extends Controller
       // return view('auth.login');
     }
   
-  protected $redirectTo = RouteServiceProvider::HOME;
+  protected $redirectTo = '/login';
 }
