@@ -37,6 +37,6 @@ class ResetPasswordController extends Controller
       ])->save();
 
       session()->flash('flash_message', 'パスワードの再設定が完了しました。');
-      return redirect('/login');
+      return view('auth.login');
   }
 }
