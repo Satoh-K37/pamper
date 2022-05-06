@@ -52,8 +52,7 @@ URL: https://spoily.link/login
   - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM, SES)
 
 ## AWS構成図
-![aws_diagram drawio](https://user-images.githubusercontent.com/36786134/163817739-e16ad22c-97af-45e4-9f5b-565ba5c6bd63.png)
-
+![aws_diagram](https://user-images.githubusercontent.com/36786134/167150616-39c4e8e8-a0cc-4783-be78-22c887c00014.png)
 
 ## 機能一覧
 - **アカウント登録関連**
@@ -109,7 +108,7 @@ URL: https://spoily.link/login
 | テーブル名 | 説明 |
 |:-:|:-:|
 | users  | 一般ユーザー情報  |
-| relationship | フォロー中/フォロワーのユーザー情報  |
+| follows | フォロー中/フォロワーのユーザー情報  |
 | recipes  | ユーザー投稿の情報  |
 | tags  | ユーザー投稿のタグ情報  |
 | recipes_tags  | recipeとtagsの中間テーブル  |
