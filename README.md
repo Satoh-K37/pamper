@@ -103,7 +103,7 @@ URL: https://spoily.link/login
 
 ## DB設計
 **ER図**
-![spoily_er drawio](https://user-images.githubusercontent.com/36786134/167128032-134e814e-bb6f-4575-bd9f-19a38bbf8e8f.png)
+![spoily_er](https://user-images.githubusercontent.com/36786134/167134734-ee947f9e-167a-4f96-8ccd-4a495679e036.png)
 
 ### 各テーブルについて
 | テーブル名 | 説明 |
