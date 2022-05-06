@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         // Laravelはある程度固まったデータを挿入できないのでセキュリティ解除
         // Model::unguard(); 
-        // $this->call(UsersTableSeeder::class);
+        // $this->call(UsersTableSeeder::class)
+        // User::factory(10)->create();
+        
         // db:seedでデータベースに登録される
         $this->call([
           CategoriesTableSeeder::class,
-          // UsersTableSeeder::class,
+          UsersTableSeeder::class,
           // RecipesTableSeeder::class,
         ]);
 

@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use Faker\Factory as Faker;
+// use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,8 +16,8 @@ class UsersTableSeeder extends Seeder
     {
       // Faker爆発問題で使えなくなってる説
       // //一括削除
-      // // User::truncate();
-      // // LaravelはDBに固まったデータを登録できないのでセキュリティを外す
+      // User::truncate();
+      // // // LaravelはDBに固まったデータを登録できないのでセキュリティを外す
       // User::unguard();
 
       // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -30,13 +31,13 @@ class UsersTableSeeder extends Seeder
       //   'remember_token' => Str::random(10),
       // ]);
 
-      // factory(App\User::class,100)->create()->each(function($user){
-      //     // $recipe = new App\Recipe();
-      //     // $recipe->user_id = $user->id;
-      //     // $recipe->recipe_title = 'デモ';
-      //     // $recipe->serving = 1;
-      //     // $recipe->cooking_time = 1;
-      //     // $recipe->save();
+      // factory(App\User::class,50)->create()->each(function($user){
+      //     $recipe = new App\Recipe();
+      //     $recipe->user_id = $user->id;
+      //     $recipe->recipe_title = 'デモ';
+      //     $recipe->serving = 1;
+      //     $recipe->cooking_time = 1;
+      //     $recipe->save();
       // });
       // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
       // // セキュリティの掛け直し
