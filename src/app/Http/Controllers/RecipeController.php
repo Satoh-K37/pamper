@@ -157,11 +157,9 @@ class RecipeController extends Controller
           $form['image_path'] = $filename_to_store;
           // ファイルディレクトリに保存する処理。
           Storage::put('public/images/'. $filename_to_store, $resized_image);
-          
         }
         // 本番環境での処理
         else{
-          // 成功
           // ユニークなファイル名をimage_pathカラムに代入
           $form['image_path'] = 'public/images/'. $filename_to_store;
           // S3にリサイズした画像をオリジナルのファイル名でアップロードする
@@ -169,22 +167,19 @@ class RecipeController extends Controller
         }
       }
       
-      // $recipe->categories()->sync($request->id);
       $recipe->user_id = $request->user()->id;
       $recipe->fill($form)->save();
+      // 二重送信対策
+      $request->session()->regenerateToken();
+
       // カテゴリーを追加
       $recipe->categories()->attach($request->category_id);
-
       $request->tags->each(function ($tagName) use ($recipe) {
         $tag = Tag::firstOrCreate(['name' => $tagName]);
         $recipe->tags()->attach($tag);
       });
 
-      // $request->categories->each(function ($categoryName) use ($recipe) {
-      //   $category = Category::firstOrCreate(['name' => $categoryName]);
-      //   $recipe->categories()->attach($category);
-      // });
-      // toastr.info('これはinfo型のトーストです');
+      $request->session()->regenerateToken();
       return redirect()->route('recipes.index')->with('flash_message', 'レシピの投稿が完了しました');
   }
 

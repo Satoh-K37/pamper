@@ -11,6 +11,7 @@
 
 
 import './bootstrap'
+import './disableButton'
 
 import Vue from 'vue'
 
