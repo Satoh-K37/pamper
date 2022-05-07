@@ -24,6 +24,7 @@ class CommentController extends Controller
   }
   public function store(Request $request)
   {
+      // $request->session()->regenerateToken();
       // Commentモデル作成
       $comment = new Comment;
       $comment->comment = $request->comment;
@@ -31,6 +32,8 @@ class CommentController extends Controller
       $comment->user_id = Auth::user()->id;
       $comment->save();
 
+      // 二重送信対策
+      $request->session()->regenerateToken();
       // 直前にリダイレクト
       return redirect()->back()->with('comment_flash_message', 'コメントを投稿しました');
   }  
