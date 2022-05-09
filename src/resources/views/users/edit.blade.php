@@ -91,6 +91,13 @@
                           </dl>
                           <div><i class="fas fa-chevron-right"></i></div>
                         </a>
+                        <a href="{{ route('email_change.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                          <dl class="mb-0">
+                            <dt>退会</dt>
+                            <dd class="mb-0"></dd>
+                          </dl>
+                          <div><i class="fas fa-chevron-right"></i></div>
+                        </a>
                       @endif
                     </div>
                   </div>
