@@ -10,7 +10,7 @@
         <h1 class="text-center"><a class="text-dark" href="/">SPOILY</a></h1>
         <div class="card mt-3">
           <div class="card-body text-center">
-            <h2 class="h3 card-title text-center mt-2">メールアドレス変更</h2>
+            <!-- <h2 class="h3 card-title text-center mt-2">メールアドレス変更</h2> -->
 
             @include('error_card_list')
             @include('flash_message')
