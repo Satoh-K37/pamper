@@ -57,7 +57,6 @@ Route::resource('/comments', 'CommentController')->only(['store','destroy']);
 // Route::resource('recipes.comments', 'CommentController', ['only' => ['store', 'update', 'destroy'],]);
 // タグ表示
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
-
 ## PW変更
 // 通常のアクセス（GET）の場合はshowChangePasswordFormメソッドを実行する
 Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
@@ -75,17 +74,21 @@ Route::post('/email', 'Auth\ChangeEmailAddressController@emailChange')->name('em
 Route::get('/email/update', 'Auth\ChangeEmailAddressController@emailUpdate')->name('email.update');
 
 // アカウントマイページ関連
+// Route::resource('/destroy', 'UserController')->only(['destroy']);
 Route::prefix('users')->name('users.')->group(function () {
   // Route::get('user/index', 'UserController@index');
   Route::get('/{name}', 'UserController@show')->name('show');
   Route::get('/{name}/edit', 'UserController@edit')->name('edit');
   Route::post('/{name}/update', 'UserController@update')->name('update');
+  Route::delete('/{name}/destroy','UserController@destroy')->name('destroy');
+  Route::get('/{name}/delete_confirm','UserController@delete_confirm')->name('delete_confirm');
+
   // いいね一覧
   Route::get('/{name}/likes', 'UserController@likes')->name('likes');
   // Route::get('/{name}/bookmarks', 'UserController@bookmarks')->name('bookmarks');
-  // フォロー一覧
+  // フォロー覧
   Route::get('/{name}/followings', 'UserController@followings')->name('followings');
-  // フォロワー一覧
+  // フォロワー覧
   Route::get('/{name}/followers', 'UserController@followers')->name('followers');
   Route::middleware('auth')->group(function () {
     // フォローをする

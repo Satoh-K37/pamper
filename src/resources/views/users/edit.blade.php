@@ -74,8 +74,17 @@
               <!-- </form> -->
                   <div class="card-body px-3 py-4">
                     <div class="row">
-                      @if(Auth::id() == 1 || $user->password == NULL)
-                          <!-- ゲストユーザーとGoogleログインの場合はパスワード変更とメールアドレス変更のリンクを表示させないようにする -->
+                      @if(Auth::id() == 1)
+                          <!-- ゲストユーザーログインの場合はパスワード変更とメールアドレス変更と退会のリンクを表示させないようにする -->
+                      @elseif($user->password == NULL)
+                          <!-- Googleログインの場合はパスワード変更とメールアドレス変更のリンクを表示させないようにする -->
+                        <a href="{{ route('users.delete_confirm', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                          <dl class="mb-0">
+                            <dt>退会</dt>
+                            <dd class="mb-0"></dd>
+                          </dl>
+                          <div><i class="fas fa-chevron-right"></i></div>
+                        </a>
                       @else
                         <a href="{{ route('password.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                           <dl class="mb-0">
@@ -91,7 +100,7 @@
                           </dl>
                           <div><i class="fas fa-chevron-right"></i></div>
                         </a>
-                        <a href="{{ route('email_change.form', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="{{ route('users.delete_confirm', ['name' => $user->name]) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                           <dl class="mb-0">
                             <dt>退会</dt>
                             <dd class="mb-0"></dd>
