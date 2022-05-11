@@ -13,6 +13,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +27,7 @@ class User extends Authenticatable
         'self_introduction',
         'profile_image',
     ];
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -34,6 +36,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast to native types.
