@@ -176,4 +176,29 @@ class UserController extends Controller
       return ['name' => $name];
   }
 
+  // アカウント退会機能
+  public function destroy(string $name)
+  {
+    // 退会させるアカウントを検索
+    $user = User::where('name', $name)->first();
+    // 対象のアカウントを論理削除
+    $user->delete();
+    // ログアウト処理の実行
+    Auth::logout();
+    // ログインページにリダイレクト
+    return redirect(route('login'));
+  }
+
+  // アカウント退会ページにアクセスするための画面
+  public function delete_confirm(string $name)
+  {
+    $user = User::where('name', $name)->first();
+    // $recipes = $user->likes->sortByDesc('created_at')->paginate(10);
+
+    return view('users.delete_confirm', [
+      'user' => $user,
+      // 'recipes' => $recipes,
+    ]);
+  }
+
 }
