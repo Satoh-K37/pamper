@@ -31,8 +31,7 @@ URL: https://spoily.link/login
 
 ### 使用技術
 - フロントエンド
-  - HTML 
-  - CSS
+  - HTML/CSS
   - Sass
   - MDBootstrap
   - Vue.js
