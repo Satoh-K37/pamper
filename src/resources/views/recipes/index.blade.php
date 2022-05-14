@@ -18,7 +18,8 @@
       <div class="d-flex my-box-light justify-content-end mr-3">
         @include('recipes.search')
       </div>
-    @endauth    
+    @endauth
+    
 
     <div class="d-flex my-box-light flex-wrap my-3">
       @foreach($recipes as $recipe)
