@@ -111,7 +111,7 @@
       </div>
 
       <div class="md-outline">
-        <textarea maxlength="100" v-model="recipeStep5Count" placeholder="Step5" rows="3" name="step_content5" class="form-control">{{ $recipe->step_content5 ?? old('step_content5') }}</textarea>
+        <textarea maxlength="100" placeholder="Step5" rows="3" name="step_content5" class="form-control">{{ $recipe->step_content5 ?? old('step_content5') }}</textarea>
         <!-- <textarea maxlength="100" v-model="recipeStep5Count" placeholder="Step5" rows="3" name="step_content5" class="form-control">{{ $recipe->step_content5 ?? old('step_content5') }}</textarea>
         <p class="text-right">@{{ recipeStep5Count.length }}/100</p> -->
       </div>
