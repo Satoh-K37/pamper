@@ -29,11 +29,14 @@ services:
       dockerfile: ./docker/nginx/Dockerfile
     # コンテナ間のポート番号の対応づけを設定{ローカル}:{Dockerコンテナ}
     ports:
-      - ${WEB_PORT}:80
+      - "8000:80"
+      # - ${WEB_PORT}:80
+      # 443に変えるべき？
     # コンテナ間の依存関係を設定。PHP→Nginxの順番でコンテナを起動する（appはPHPのDockerコンテナを指している）
     depends_on:
       - app
     volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       # ローカルとDockerコンテナ間のディレクトリ・ファイル等のリソースを関連付する設定(ローカルのリソース:Dockerコンテナ内のリソース）
       - ./src/:/var/www/html
       # 画像を表示させるためのシンボリックを貼る
