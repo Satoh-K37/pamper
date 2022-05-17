@@ -29,7 +29,8 @@ services:
       dockerfile: ./docker/nginx/Dockerfile
     # コンテナ間のポート番号の対応づけを設定{ローカル}:{Dockerコンテナ}
     ports:
-      - ${WEB_PORT}:80
+      # - ${WEB_PORT}:80
+      - 10080:443
     # コンテナ間の依存関係を設定。PHP→Nginxの順番でコンテナを起動する（appはPHPのDockerコンテナを指している）
     depends_on:
       - app
