@@ -41,9 +41,9 @@ services:
   db:
     image: mysql:5.7
     # ビルドするDockerfileの指定
-    build:
-      context: .
-      dockerfile: ./docker/mysql/Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/mysql/Dockerfile
     # ローカルのポート番号
     ports:
       - ${DB_PORT}:3306
