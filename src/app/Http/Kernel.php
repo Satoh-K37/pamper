@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\RedirectToHttps::class,
+        // \App\Http\Middleware\RedirectToHttps::class,
     ];
 
     /**
