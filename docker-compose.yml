@@ -35,7 +35,7 @@ services:
     depends_on:
       - app
     volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      # - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       # ローカルとDockerコンテナ間のディレクトリ・ファイル等のリソースを関連付する設定(ローカルのリソース:Dockerコンテナ内のリソース）
       - ./src/:/var/www/html
   db:
