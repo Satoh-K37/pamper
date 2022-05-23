@@ -26,7 +26,8 @@ class RecipeRequest extends FormRequest
         return [
           'recipe_title' => 'required|max:50',
           'content' => 'max:300',
-          'image_path' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
+          // 画像の最大サイズを10MBに設定
+          'image_path' => 'file|mimes:jpeg,png,jpg,gif|max:10240',
           'ingredient' => 'max:200',
           'seasoning' => 'max:200',
           'step_content' => 'max:100',

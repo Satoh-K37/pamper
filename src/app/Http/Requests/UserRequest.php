@@ -27,7 +27,8 @@ class UserRequest extends FormRequest
           'name' => 'required|max:20',
           // 'password' => '' ,
           'self_introduction' => 'max:200',
-          'profile_image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
+          // 画像の最大サイズを10MBに設定
+          'profile_image' => 'file|mimes:jpeg,png,jpg,gif|max:10240',
         ];
     }
 
