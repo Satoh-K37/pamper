@@ -3,7 +3,6 @@
 @section('title', $user->name . 'のいいねしたレシピ')
 
 @section('content')
-  @include('nav')
   <div class="container">
     
     @include('users.user')

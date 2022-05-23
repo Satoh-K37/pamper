@@ -3,7 +3,6 @@
 @section('title', 'パスワード変更')
 
 @section('content')
-@include('nav')
 
 
 <div class="container">

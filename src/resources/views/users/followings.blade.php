@@ -3,7 +3,6 @@
 @section('title', $user->name . 'のフォロー中')
 
 @section('content')
-  @include('nav')
   <div class="container">
     <div class="container mt-3">
       <div class="row">

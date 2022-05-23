@@ -3,7 +3,6 @@
 @section('title', $user->name . 'のフォロワー')
 
 @section('content')
-  @include('nav')
   <div class="container">
     <div class="container mt-3">
       <div class="row">

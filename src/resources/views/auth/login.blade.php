@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title', 'ログイン')
-@include('nav')
+
 @section('content')
   <div class="container my-5">
     <div class="row">

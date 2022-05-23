@@ -1,9 +1,8 @@
 @extends('app')
 
-@section('title', $user->name)
+@section('title', $user->name . 'の投稿')
 
 @section('content')
-  @include('nav')
   @include('error_card_list')
   @include('flash_message')
   <div class="container">
