@@ -2,7 +2,6 @@
 
 @section('title', 'レシピ更新')
 
-@include('nav')
 
 @section('content')
   <div class="container">

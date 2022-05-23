@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-  @include('nav')
     <div class="container my-3" id="profile-edit-form">
       @include('error_card_list')
       @include('flash_message')

@@ -1,6 +1,5 @@
 @extends('app')
 @section('title', 'ユーザー登録')
-@include('nav')
 @section('content')
 <div class="width-max container-fluid text-lg-left mw-100 p-0">
   <!--Section: Content-->

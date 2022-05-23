@@ -4,7 +4,7 @@
 @section('title')
 
 @section('content')
-  @include('nav')
+
   <div class="container">
     <div class="d-flex my-box-light justify-content-end mr-1 my-3">
       @include('recipes.search')
