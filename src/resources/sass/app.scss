@@ -1,6 +1,16 @@
-nav.navbar{
-  // background:#fe7c38;
+body,
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav.navbar {
   background:#fca326;
+}
+
+footer {
+  margin-top: auto;
 }
 
 // 投稿画面の材料・調味料の表示させるCSS
