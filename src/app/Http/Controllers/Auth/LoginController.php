@@ -87,7 +87,7 @@ class LoginController extends Controller
       // session()->flash('flash_message', 'ログアウトしました。');
       // return view('welcome');
       session()->flash('flash_message', 'ログアウトしました。');
-      return view('auth.register');
+      return view('auth.login');
       
     }
 }
