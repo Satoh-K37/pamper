@@ -16,6 +16,9 @@
 // });
 
 Auth::routes();
+// /Regulations プライバシーポリシー・利用規約
+Route::get('/privacy_policy', 'RegulationsController@privacyPolicyShow')->name('regulations.privacy_policy');
+Route::get('/terms_show', 'RegulationsController@termsShow')->name('regulations.terms_use');
 // Auth::routes(['verify' => true]);
 // ログイン
 Route::prefix('login')->name('login.')->group(function () {

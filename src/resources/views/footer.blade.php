@@ -41,9 +41,9 @@
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
     © 2022 Copyright
     ｜
-    <a class="text-white" href="{{ route('register') }}" >プライバシーポリシー</a>
+    <a class="text-white" href="{{ route('regulations.privacy_policy') }}" >プライバシーポリシー</a>
     ｜
-    <a class="text-white" href="{{ route('register') }}" >利用規約</a>
+    <a class="text-white" href="{{ route('regulations.terms_use') }}" >利用規約</a>
 
   </div>
   <!-- Copyright -->
