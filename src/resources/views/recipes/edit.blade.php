@@ -14,7 +14,7 @@
               <form method="POST" action="{{ route('recipes.update', ['recipe' => $recipe]) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @include('recipes.form')
-                <button type="submit" class="btn blue-gradient btn-block">更新する</button>
+                <button type="submit" class="orign-btn btn-block ">更新する</button>
               </form>
             </div>
           </div>

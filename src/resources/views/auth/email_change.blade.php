@@ -24,7 +24,7 @@
                   <input class="form-control" type="email" id="new_email" name = "new_email" required>
                 </div>
 
-                <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">メール送信</button>
+                <button class="orign-btn btn-block" type="submit">メール送信</button>
               </form>
 
             </div>

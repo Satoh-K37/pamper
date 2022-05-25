@@ -64,7 +64,7 @@
                     </div>
                     
                     <div class="form-group mx-2 text-center">
-                      <button type="submit" class="btn btn-outline-dark rounded w-75"  data-mdb-ripple-color="dark">
+                      <button type="submit" class="orign-btn w-75" data-mdb-ripple-color="dark">
                         保存
                       </button>
                     </div>

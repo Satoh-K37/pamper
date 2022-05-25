@@ -13,7 +13,7 @@
             <div class="card-text">
               <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
                 @include('recipes.form')
-                <button type="submit" class="btn blue-gradient btn-block">投稿する</button>
+                <button type="submit" class="orign-btn btn-block"> 投稿する</button>
               </form>
             </div>
           </div>

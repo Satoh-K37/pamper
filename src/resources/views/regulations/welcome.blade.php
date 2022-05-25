@@ -1,7 +1,6 @@
 @extends('app')
 @section('title', 'SPOILYについて')
 @section('content')
-
   <!--Main layout-->
   <main>
     <div class="container">
@@ -30,18 +29,17 @@
           </div>
           <!--Grid column-->
           <!--Grid column-->
-          <div class="col-md-6 mb-4">
+          <div class="col-md-6 my-5">
             <!-- Main heading -->
-            <h3 class="h3 mb-3">SPOILYは、あなたのご褒美ごはんを共有するサービスです</h3>
+            <h3 class="h3 my-1">SPOILYは、あなたのご褒美ごはんを共有するサービスです</h3>
 
-            <!-- CTA -->
-            <p>
-              <a target="_blank" href="{{ route('register') }}" class="btn btn-indigo btn-md">
-                SPOILYをはじめる
-                <i class="fas fa-download ml-1"></i>
-                
-              </a>
-            </p>
+            <div class="my-5 py-5 btn-flat-double-border">
+              <div class="text-center">
+                <a href="{{ route('register') }}" class="btn btn-outline-danger" data-mdb-ripple-color="#000000">
+                  SPOILYをはじめる
+                </a>
+              </div>
+            </div>
           </div>
           <!--Grid column-->
         </div>
@@ -84,16 +82,31 @@
             </div>
             <!--/Second row-->
 
+            <div style="height:30px"></div>
 
           </div>
           <!--/Grid column-->
 
           <!--Grid column-->
           <div class="col-lg-6 col-md-12">
-
-            <p class="h5 text-center mb-4"></p>
-            <div class="embed-responsive embed-responsive-16by9">
-              <!-- <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cXTThxoywNQ" allowfullscreen></iframe> -->
+            <div class="col-md flex-center">
+                            <!--Image-->
+              @if(app()->isLocal() || app()->runningUnitTests())
+                <div class="view overlay mw-100">
+                  <img src="/storage/logo.png" class="img-fluid h-100">
+                  <a>
+                    <div class="mask rgba-white-light"></div>
+                  </a>
+                </div>
+              @else
+                <div class="view overlay mw-100">
+                  <img src='{{ Storage::disk('s3')->url("logo.png")}}' class="img-fluid h-100">
+                  <a>
+                    <div class="mask rgba-white-light"></div>
+                  </a>
+                </div>
+              @endif
+              
             </div>
           </div>
           <!--/Grid column-->
@@ -116,7 +129,22 @@
 
           <!--Second column-->
           <div class="col-md-6 flex-center">
-            <!-- <img src="https://mdbootstrap.com/img/Others/screens.png" alt="MDB Magazine Template displayed on iPhone" class="z-depth-0 img-fluid"> -->
+                          <!--Image-->
+            @if(app()->isLocal() || app()->runningUnitTests())
+              <div class="view overlay mw-100">
+                <img src="/storage/logo.png" class="img-fluid h-100">
+                <a>
+                  <div class="mask rgba-white-light"></div>
+                </a>
+              </div>
+            @else
+              <div class="view overlay mw-100">
+                <img src='{{ Storage::disk('s3')->url("logo.png")}}' class="img-fluid h-100">
+                <a>
+                  <div class="mask rgba-white-light"></div>
+                </a>
+              </div>
+            @endif
           </div>
           <!--/Second column-->
 

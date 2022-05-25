@@ -47,7 +47,7 @@
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                   </div>
 
-                  <button type="submit" class="btn btn-block blue-gradient mt-2 mb-2">
+                  <button type="submit" class="orign-btn btn-block mt-2 mb-2">
                       パスワードの変更
                   </button>
                       

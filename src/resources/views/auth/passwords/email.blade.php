@@ -3,7 +3,6 @@
 @section('title', 'パスワード再設定')
 
 @section('content')
-
   <div class="container">
     <div class="row">
       <div class="mx-auto col col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
@@ -30,7 +29,7 @@
                   <input class="form-control" type="text" id="email" name="email" required>
                 </div>
 
-                <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">メール送信</button>
+                <button class="orign-btn btn-block" type="submit">メール送信</button>
 
               </form>
 

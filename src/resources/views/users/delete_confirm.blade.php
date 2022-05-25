@@ -13,12 +13,11 @@
             @include('error_card_list')
             @include('flash_message')
 
-            <div class="card-text">
-              <div>
-                <a class="font-weight-normal ml-3">{{ $user->name }}さん、SPOILYを退会しますか？</a>
+            <div class="card-text my-5">
+              <div class="m-5">
+                <a class="font-weight-normal">{{ $user->name }}さん、SPOILYを退会しますか？</a>
                   @if( Auth::id() === $user->id )
-                      <button class="btn btn-block blue-gradient mt-2 mb-2" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}">退会する</button>
-
+                      <button class="orign-btn btn-block mt-5" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}">退会する</button>
                       <!-- modal -->
                       <div id="modal-delete-{{ $user->id }}" class="modal fade" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">

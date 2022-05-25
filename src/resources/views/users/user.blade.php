@@ -42,13 +42,13 @@
               @else
                 <div class="ml-auto">
                   <a href="{{ route('users.edit', ['name' => $user->name] )}}">
-                    <button type="button" class="btn btn-outline-warning" style="#8a8a89"> 編集 </button>
+                    <button type="button" class="orign-btn px-5"> 編集 </button>
                   </a>
                 </div>
               @endif
             </div>
             <!-- </div> -->
-            <p class="fw-bold mb-2 h5">
+            <p class="fw-bold m-3 h5">
               <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
                 {{ $user->name }}
               </a>
