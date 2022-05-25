@@ -57,7 +57,9 @@
             <!--First row-->
             <div class="row">
               <div class="col-1 mr-3">
-                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+                <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
+                <!-- <i class="fas fa-check-circle"></i> -->
+
               </div>
               <div class="col-10">
                 <h5 class="feature-title">ご褒美ごはんの写真を共有しよう</h5>
@@ -71,7 +73,7 @@
             <!--Second row-->
             <div class="row">
               <div class="col-1 mr-3">
-                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+                <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
               </div>
               <div class="col-10">
                 <h5 class="feature-title">タイトルや作り方をみんなに共有しよう</h5>
@@ -151,7 +153,7 @@
             <!--First row-->
             <div class="row">
               <div class="col-1 mr-2">
-                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+                <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
               </div>
               <div class="col-10">
                 <h5 class="feature-title">検索機能で、きになるご褒美ごはんをみつけよう！</h5>
@@ -165,7 +167,7 @@
             <!--Second row-->
             <div class="row">
               <div class="col-1 mr-2">
-                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+                <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
               </div>
               <div class="col-10">
                 <h5 class="feature-title">みんなの投稿をみてご褒美ごはんのレパートリを増やそう！</h5>
@@ -178,7 +180,7 @@
             <!--Third row-->
             <div class="row">
               <div class="col-1 mr-2">
-                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+                <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
               </div>
               <div class="col-10">
                 <h5 class="feature-title">気に入った投稿は「いいね」しよう</h5>

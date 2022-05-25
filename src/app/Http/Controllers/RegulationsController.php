@@ -22,6 +22,6 @@ class RegulationsController extends Controller
   public function about(Request $request)
   {
     // 利用規約のページに遷移
-      return view('regulations.welcome');
+      return view('regulations.about');
   }
 }
