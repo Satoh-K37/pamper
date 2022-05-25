@@ -13,14 +13,14 @@
             <!--Image-->
             @if(app()->isLocal() || app()->runningUnitTests())
               <div class="view overlay mw-100">
-                <img src="/storage/logo.png" class="img-fluid h-100">
+                <img src="/storage/about_recipes_search.png" class="img-fluid h-100">
                 <a>
                   <div class="mask rgba-white-light"></div>
                 </a>
               </div>
             @else
               <div class="view overlay mw-100">
-                <img src='{{ Storage::disk('s3')->url("logo.png")}}' class="img-fluid h-100">
+                <img src='{{ Storage::disk('s3')->url("about_recipes_search.png")}}' class="img-fluid h-100">
                 <a>
                   <div class="mask rgba-white-light"></div>
                 </a>
@@ -31,7 +31,7 @@
           <!--Grid column-->
           <div class="col-md-6 my-5">
             <!-- Main heading -->
-            <h3 class="h3 my-1">SPOILYは、あなたのご褒美ごはんを共有するサービスです</h3>
+            <h3 class="h3 font-weight-bold my-1">SPOILYは、あなたのご褒美ごはんを共有するサービスです</h3>
 
             <div class="my-5 py-5 btn-flat-double-border">
               <div class="text-center">
@@ -49,11 +49,11 @@
       <hr class="my-5">
       <!--Section: Main features & Quick Start-->
       <section>
-        <h3 class="h3 text-center mb-5">頑張った自分へのご褒美をみんなにシェアしよう</h3>
+        <h3 class="h3 font-weight-bold text-center my-5">頑張った自分へのご褒美をみんなにシェアしよう</h3>
         <!--Grid row-->
         <div class="row wow fadeIn">
           <!--Grid column-->
-          <div class="col-lg-6 col-md-12 px-4">
+          <div class="col-lg-6 col-md-12 px-4 my-5">
             <!--First row-->
             <div class="row">
               <div class="col-1 mr-3">
@@ -93,14 +93,14 @@
                             <!--Image-->
               @if(app()->isLocal() || app()->runningUnitTests())
                 <div class="view overlay mw-100">
-                  <img src="/storage/logo.png" class="img-fluid h-100">
+                  <img src="/storage/about_share.png" class="img-fluid h-100">
                   <a>
                     <div class="mask rgba-white-light"></div>
                   </a>
                 </div>
               @else
                 <div class="view overlay mw-100">
-                  <img src='{{ Storage::disk('s3')->url("logo.png")}}' class="img-fluid h-100">
+                  <img src='{{ Storage::disk('s3')->url("about_share.png")}}' class="img-fluid h-100">
                   <a>
                     <div class="mask rgba-white-light"></div>
                   </a>
@@ -110,10 +110,8 @@
             </div>
           </div>
           <!--/Grid column-->
-
         </div>
         <!--/Grid row-->
-
       </section>
       <!--Section: Main features & Quick Start-->
 
@@ -122,7 +120,7 @@
       <!--Section: Not enough-->
       <section>
 
-        <h2 class="my-5 h3 text-center">SPOILYを使って、マンネリにさようなら</h2>
+        <h2 class="my-5 h3 font-weight-bold text-center">SPOILYを使って、マンネリにさようなら</h2>
 
         <!--First row-->
         <div class="row features-small mb-5 mt-3 wow fadeIn">
@@ -132,14 +130,14 @@
                           <!--Image-->
             @if(app()->isLocal() || app()->runningUnitTests())
               <div class="view overlay mw-100">
-                <img src="/storage/logo.png" class="img-fluid h-100">
+                <img src="/storage/about_likes.png" class="img-fluid h-100">
                 <a>
                   <div class="mask rgba-white-light"></div>
                 </a>
               </div>
             @else
               <div class="view overlay mw-100">
-                <img src='{{ Storage::disk('s3')->url("logo.png")}}' class="img-fluid h-100">
+                <img src='{{ Storage::disk('s3')->url("about_likes.png")}}' class="img-fluid h-100">
                 <a>
                   <div class="mask rgba-white-light"></div>
                 </a>
@@ -149,44 +147,44 @@
           <!--/Second column-->
 
           <!--Third column-->
-          <div class="col-md-6 mt-2">
+          <div class="col-md-6 mt-2 my-5">
             <!--First row-->
             <div class="row">
-              <div class="col-2">
+              <div class="col-1 mr-2">
                 <i class="fas fa-check-circle fa-2x indigo-text"></i>
               </div>
               <div class="col-10">
-                <h6 class="feature-title">検索機能で、きになるご褒美ごはんをみつけよう！</h6>
+                <h5 class="feature-title">検索機能で、きになるご褒美ごはんをみつけよう！</h5>
                 <p class="grey-text">カテゴリやキーワードからきになるご褒美ごはんを見つけることができます
                 </p>
-                <div style="height:15px"></div>
+                <div style="height:30px"></div>
               </div>
             </div>
             <!--/First row-->
 
             <!--Second row-->
             <div class="row">
-              <div class="col-2">
+              <div class="col-1 mr-2">
                 <i class="fas fa-check-circle fa-2x indigo-text"></i>
               </div>
               <div class="col-10">
-                <h6 class="feature-title">みんなの投稿をみてご褒美ごはんのレパートリを増やそう！</h6>
-                <p class="grey-text">みんなのご褒美ごはんがいつでも見ることができます！</p>
-                <div style="height:15px"></div>
+                <h5 class="feature-title">みんなの投稿をみてご褒美ごはんのレパートリを増やそう！</h5>
+                <p class="grey-text">みんなのご褒美ごはんがいつでも見ることができます</p>
+                <div style="height:30px"></div>
               </div>
             </div>
             <!--/Second row-->
 
             <!--Third row-->
             <div class="row">
-              <div class="col-2">
+              <div class="col-1 mr-2">
                 <i class="fas fa-check-circle fa-2x indigo-text"></i>
               </div>
               <div class="col-10">
-                <h6 class="feature-title">気に入った投稿はいいね！しよう</h6>
-                <p class="grey-text">気に入ったご褒美ごはんがあった場合はいいね！しておきましょう。いいねした投稿はマイページから見返すことができます
+                <h5 class="feature-title">気に入った投稿は「いいね」しよう</h5>
+                <p class="grey-text">気に入ったご褒美ごはんがあった場合は「いいね」しておきましょう。いいねした投稿はマイページから見返すことができます
                 </p>
-                <div style="height:15px"></div>
+                <div style="height:30px"></div>
               </div>
             </div>
             <!--/Third row-->
