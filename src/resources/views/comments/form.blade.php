@@ -13,7 +13,7 @@
         <label for="comment">コメント</label>
       </div>
         <p>@{{ commentCount.length }}/100</p>
-      <button type="submit" class="btn btn-outline-warning waves-effect">コメントする</button>
+      <button type="submit" class="orign-btn px-5">コメントする</button>
     </form>
   </div>
 
