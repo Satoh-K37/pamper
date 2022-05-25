@@ -34,7 +34,7 @@
                               <label for="profile_image" class="d-inline-block">
                               @if(app()->isLocal() || app()->runningUnitTests())
                                 @if($user->profile_image !== NULL)
-                                  <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                                  <img src="/storage/icons/{{$user->profile_image}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;" />
                                 @else
                                   <img src="/storage/default_icon.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
                                 @endif
@@ -48,6 +48,7 @@
                               </label>
                           </span>
                     </div>
+
                     <div class="form-group mx-3 my-2">
                         <div class="md-form">
                           <input maxlength="50" type="text" id="name" class="form-control" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>

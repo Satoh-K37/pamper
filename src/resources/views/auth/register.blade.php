@@ -26,17 +26,14 @@
             </a>
           </div>
         @endif
-
       </div>
       <!--Grid column-->
       <!--Grid column-->
       <div class="col-lg-6 mt-5 px-3 w-auto bordered">
-        <!-- <img src="/storage/logo_transparent.png" class="img-fluid mb-2"> -->
-        <h2 class="font-weight-bold">あなたを甘やかす、<p>ご褒美ごはんをここでみつけよう。</p></h2>
-
-        <div class="container mt-5">
-          <div class="mx-auto">
-            <h4 class="text-muted">SPOILYをはじめよう</h4>
+        <div class="card mt-3">
+          <div class="card-body">
+          <h2 class="font-weight-bold">あなたを甘やかす、<p>ご褒美ごはんをここでみつけよう。</p></h2>
+            <h4 class="text-muted text-center">SPOILYをはじめよう</h4>
             <!-- <h1 class="text-center"><a class="text-dark" href="/">SPOILY</a></h1> -->
             <div class="mt-3">
               <div class="text-center">
@@ -80,7 +77,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <!--Grid column-->
 

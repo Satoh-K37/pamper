@@ -42,20 +42,19 @@
               @else
                 <div class="ml-auto">
                   <a href="{{ route('users.edit', ['name' => $user->name] )}}">
-                    <button class="btn btn-outline-dark btn-rounded p-2" id="btn-radius">
-                      プロフィール編集
-                    </button>
+                    <button type="button" class="btn btn-outline-warning" style="#8a8a89"> 編集 </button>
                   </a>
                 </div>
               @endif
             </div>
             <!-- </div> -->
-            <h2 class="h5 card-title ml-3">
+            <p class="fw-bold mb-2 h5">
               <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
                 {{ $user->name }}
               </a>
+            </p>
             </h2>
-            <p class="text-dark mx-3">
+            <p class="text-muted mx-3">
                 {{ $user->self_introduction }}
             </p>
 

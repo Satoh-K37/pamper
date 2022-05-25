@@ -18,6 +18,5 @@
         </li>
       </ul>
     </nav>
-
   </div>
 @endsection

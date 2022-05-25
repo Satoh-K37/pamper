@@ -40,10 +40,12 @@
       <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
         <button class="dropdown-item" type="button"
                 onclick="location.href='{{ route("users.show", ["name" => Auth::user()->name]) }}'">
+          <i class="fas fa-user-circle"></i>
           マイページ
         </button>
         <div class="dropdown-divider"></div>
         <button form="logout-button" class="dropdown-item" type="submit">
+          <i class="fas fa-sign-out-alt"></i>
           ログアウト
         </button>
       </div>
@@ -57,3 +59,4 @@
   </ul>
 
 </nav>
+
