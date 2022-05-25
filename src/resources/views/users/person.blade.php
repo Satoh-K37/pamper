@@ -20,6 +20,9 @@
           </a>
         @endif
       </a>
+    <div class="font-weight-bold ml-2 my-auto">
+      <a href="{{ route('users.show', ['name' => $person->name]) }}" class="text-dark">{{ $person->name }}</a>
+    </div>
 
       @if( Auth::id() !== $person->id )
         <follow-button
@@ -31,8 +34,5 @@
         </follow-button>
       @endif
     </div>
-    <h2 class="h5 card-title m-0">
-      <a href="{{ route('users.show', ['name' => $person->name]) }}" class="text-dark">{{ $person->name }}</a>
-    </h2>
   </div>
 </div>
