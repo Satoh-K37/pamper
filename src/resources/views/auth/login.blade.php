@@ -48,9 +48,6 @@
                   ゲストログイン
                 </a>
                 <!-- </button> -->
-                
-
-
               </form>
 
               <div class="my-2">

@@ -18,4 +18,10 @@ class RegulationsController extends Controller
     // 利用規約のページに遷移
       return view('regulations.terms_use');
   }
+
+  public function about(Request $request)
+  {
+    // 利用規約のページに遷移
+      return view('regulations.welcome');
+  }
 }

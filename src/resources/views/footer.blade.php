@@ -44,7 +44,8 @@
     <a class="text-white" href="{{ route('regulations.privacy_policy') }}" >プライバシーポリシー</a>
     ｜
     <a class="text-white" href="{{ route('regulations.terms_use') }}" >利用規約</a>
-
+    ｜
+    <a class="text-white" href="{{ route('regulations.about') }}" >SPOILYについて</a>
   </div>
   <!-- Copyright -->
 </footer>
