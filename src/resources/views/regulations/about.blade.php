@@ -49,7 +49,7 @@
       <hr class="my-5">
       <!--Section: Main features & Quick Start-->
       <section>
-        <h3 class="h3 font-weight-bold text-center my-5">頑張った自分へのご褒美をみんなにシェアしよう</h3>
+        <h3 class="h3 font-weight-bold text-center my-5">頑張った自分へのご褒美をみんなにシェアしよう！</h3>
         <!--Grid row-->
         <div class="row wow fadeIn">
           <!--Grid column-->
@@ -62,8 +62,8 @@
 
               </div>
               <div class="col-10">
-                <h5 class="feature-title">ご褒美ごはんの写真を共有しよう</h5>
-                <p class="grey-text">一番美味しそうな角度で撮ってみんなにシェア！</p>
+                <h5 class="feature-title">ご褒美ごはんの写真を共有しよう！</h5>
+                <p class="grey-text">一番美味しそうな角度で撮ってみんなにシェアしましょう</p>
               </div>
             </div>
             <!--/First row-->
@@ -76,9 +76,9 @@
                 <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
               </div>
               <div class="col-10">
-                <h5 class="feature-title">タイトルや作り方をみんなに共有しよう</h5>
+                <h5 class="feature-title">タイトルや作り方をみんなに共有しよう！</h5>
                 <p class="grey-text">
-                  ご褒美がどんなものなのかすぐにわかるタイトルや作り方をみんなにシェア！
+                  ご褒美がどんなものなのかすぐにわかるタイトルや作り方をみんなにしましょう
                 </p>
               </div>
             </div>
@@ -183,7 +183,7 @@
                 <i class="far fa-check-circle fa-2x" style="color: #F9A826"></i>
               </div>
               <div class="col-10">
-                <h5 class="feature-title">気に入った投稿は「いいね」しよう</h5>
+                <h5 class="feature-title">気に入った投稿は「いいね」しよう！</h5>
                 <p class="grey-text">気に入ったご褒美ごはんがあった場合は「いいね」しておきましょう。いいねした投稿はマイページから見返すことができます
                 </p>
                 <div style="height:30px"></div>
