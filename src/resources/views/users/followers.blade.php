@@ -20,6 +20,10 @@
             @foreach($followers as $person)
               @include('users.person')
             @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 @endsection
