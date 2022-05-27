@@ -14,34 +14,60 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-      // Faker爆発問題で使えなくなってる説
-      // //一括削除
+      //一括削除
       // User::truncate();
-      // // // LaravelはDBに固まったデータを登録できないのでセキュリティを外す
-      // User::unguard();
+      DB::table('users')->truncate();
 
       // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-      // static $password;
-      // $guest_user = User::create([
-      //   'name' => 'ゲストユーザー',
-      //   'email' => 'guestuser@test.com',
-      //   'email_verified_at' => now(),
-      //   'password' => $password ?: $password = bcrypt('secret'),
-      //   'remember_token' => Str::random(10),
-      // ]);
+      static $password;
+      $guest_user = User::create([
+        'name' => 'ゲストユーザー',
+        'email' => 'guestuser@test.com',
+        'password' => $password ?: $password = bcrypt('secret'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+      ]);
+      
+      DB::table('users')->insert([
+        'name' => 'UserName1',
+        'email' => 'User1@mailaddress.com',
+        'password' => bcrypt('password'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+      ]);
 
-      // factory(App\User::class,50)->create()->each(function($user){
-      //     $recipe = new App\Recipe();
-      //     $recipe->user_id = $user->id;
-      //     $recipe->recipe_title = 'デモ';
-      //     $recipe->serving = 1;
-      //     $recipe->cooking_time = 1;
-      //     $recipe->save();
-      // });
-      // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-      // // セキュリティの掛け直し
-      // User::reguard();
+      DB::table('users')->insert([
+        'name' => 'UserName2',
+        'email' => 'User2@mailaddress.com',
+        'password' => bcrypt('password'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+      ]);
+
+      DB::table('users')->insert([
+        'name' => 'UserName3',
+        'email' => 'User3@mailaddress.com',
+        'password' => bcrypt('password'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+      ]);
+
+      DB::table('users')->insert([
+        'name' => 'UserName4',
+        'email' => 'User4@mailaddress.com',
+        'password' => bcrypt('password'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+      ]);
+
+      DB::table('users')->insert([
+        'name' => 'UserName5',
+        'email' => 'User5@mailaddress.com',
+        'password' => bcrypt('password'),
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+      ]);
 
     }
 }
