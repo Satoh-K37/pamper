@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(Recipe::class, function (Faker $faker) {
     return [
       'recipe_title' => $faker->text(50),
-      // 'body' => $faker->text(500),
+      'content' => $faker->text(500),
       'serving' => $faker->randomDigit(5),
       'cooking_time' => $faker->randomDigit(5),
       'user_id' => function() {

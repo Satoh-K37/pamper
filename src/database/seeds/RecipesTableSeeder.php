@@ -11,8 +11,8 @@ class RecipesTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('recipes')->insert([
-
-      ]);
+      //一括削除
+      // DB::table('recipes')->truncate();
+      // $recipes = factory(App\Recipe::class, 10)->create();
     }
 }
