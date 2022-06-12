@@ -4,9 +4,11 @@
 
 @section('content')
   <div class="container">
-    <div class="d-flex my-box-light justify-content-end mr-1 my-3">
-      @include('recipes.search')
-    </div>
+    @auth
+      <div class="d-flex my-box-light justify-content-end mr-1 my-3">
+        @include('recipes.search')
+      </div>
+    @endauth
     <div class="card mt-3">
       <div class="card-body">
         <h2 class="h4 card-title m-0">{{ $tag->hashtag }}</h2>
