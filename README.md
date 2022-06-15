@@ -30,8 +30,6 @@ URL: https://spoily.link/login
 
 ### 使用画面イメージ
 ![使用画面イメージimage 001](https://user-images.githubusercontent.com/36786134/173781060-be94a1ba-6493-4358-969c-7cd0b5dd247e.png)
-
-
 ### 使用技術
 - フロントエンド
   - HTML/CSS
