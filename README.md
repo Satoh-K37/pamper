@@ -29,7 +29,7 @@ URL: https://spoily.link/login
 そんな問題を解決するために、ご褒美ごはんだけを共有するサイトがあればいいのでは？と考えたことが背景となっています。
 
 ### 使用画面イメージ
-![使用画面イメージimage 001](https://user-images.githubusercontent.com/36786134/173781060-be94a1ba-6493-4358-969c-7cd0b5dd247e.png)
+![使用イメージ一覧](https://user-images.githubusercontent.com/36786134/173781817-fd6361cb-08d4-4726-b0ad-b4ad78c340e8.png)
 
 
 ### 使用技術
