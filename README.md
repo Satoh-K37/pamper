@@ -29,7 +29,7 @@ URL: https://spoily.link/login
 そんな問題を解決するために、ご褒美ごはんだけを共有するサイトがあればいいのでは？と考えたことが背景となっています。
 
 ### 使用画面イメージ
-![使用画面イメージimage 001](https://user-images.githubusercontent.com/36786134/173779270-8c9567b3-d03b-4800-9257-1da28d84e1bf.jpeg)
+![使用画面イメージimage 001](https://user-images.githubusercontent.com/36786134/173781060-be94a1ba-6493-4358-969c-7cd0b5dd247e.png)
 
 
 ### 使用技術
@@ -52,6 +52,10 @@ URL: https://spoily.link/login
   - nginx 1.18-alpine
   - MySQL 5.7
   - AWS(EC2, ALB, ACM, S3, RDS, CodeDeploy, SNS, Chatbot, CloudFormation, Route53, VPC, EIP, IAM, SES)
+
+- ツール
+  - Visual Studio Code
+  - draw.io
 
 ## AWS構成図
 ![aws_diagram](https://user-images.githubusercontent.com/36786134/167150616-39c4e8e8-a0cc-4783-be78-22c887c00014.png)
