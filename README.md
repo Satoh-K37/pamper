@@ -36,7 +36,7 @@ URL: https://spoily.link/login
   - HTML/CSS
   - Sass
   - MDBootstrap
-  - Vue.js
+  - Vue.js　
   - jQuery
 
 - バックエンド
